@@ -8,4 +8,4 @@ weapon_string.split()
 
 def loot():
     new_gold_loot = print(gold_string)
-    new_resource_loot = 
+    new_resource_loot = ("")
