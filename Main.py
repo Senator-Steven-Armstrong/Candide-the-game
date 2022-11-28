@@ -1,14 +1,10 @@
 import Art
 from time import sleep
 import sys,time
+import P
 
-gold=0
-xp=0
-hp=0
-attack=0
-speed=0
 
-print(Art.start)
+
 
 TEST = 0.000000000000000000000000000000000001
 
@@ -23,14 +19,17 @@ def start():
             print("Försök igen.")
             continue
 
+
+
 def Travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
     #VI MÅSTE RÄKNA HUR MÅNGA RUM MAN HAR VARIT I
     print()
 
 def Fight():
-    #HÄR UTFÖR VI STRIDEN, EN FIENDE SOM SKA GE OCH TA SKADA, SKA GE EXPERIENCE OCH GULD EFTER FIGHTEN, 
     
+    
+
     print("")
 
 def Inventory():
@@ -44,4 +43,44 @@ def print_slow(str, timee):
         sys.stdout.flush()
         time.sleep(timee)
 
+def intro():
+    print(Art.start)
 
+    print_slow("Välj din spelare!", 0.01)
+    sleep(0.5)
+    spelare = int(input('''
+
+    1. Cacambo! (Easy)
+        HP  :  200
+        STR :  
+        SPD :
+        Gold:  15
+
+
+    2. Candide! (Medium)
+        HP  :  100
+        STR :
+        SPD :
+        Gold:  
+
+
+    3. Pangloss! (Hard) 
+        HP  :  50
+        STR :
+        SPD :
+        Gold:  20
+        (syfilis)
+
+    Ditt val --> '''))
+    
+    if spelare == 1:       
+        cacambo = P.Player()
+        cacambo.hp = 200
+    elif spelare == 2:
+        candide = P.Player()
+        candide.hp = 100
+    elif spelare == 3:
+        pangloss = P.Player()
+        pangloss = 50
+
+intro()
