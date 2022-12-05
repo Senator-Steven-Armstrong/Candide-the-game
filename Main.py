@@ -8,6 +8,8 @@ import P
 
 TEST = 0.000000000000000000000000000000000001
 
+total_turns = 0
+
 def start():
     startbutton = input("Välkommen! Tryck Y för att starta spelet, och tryck N för att avsluta det.")
     while True:
@@ -24,6 +26,17 @@ def start():
 def Travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
     #VI MÅSTE RÄKNA HUR MÅNGA RUM MAN HAR VARIT I
+
+    if total_turns == 10:
+        print("Bossfight")
+    elif total_turns == 20:
+        print("Bossfight")
+    elif total_turns == 30:
+        print("Bossfight")
+
+    #Väljer vilken plats att resa till
+    
+
     print()
 
 def Fight():
@@ -76,11 +89,17 @@ def intro():
     if spelare == 1:       
         cacambo = P.Player()
         cacambo.hp = 200
+        cacambo.str = 20
+        cacambo.spd = 20
     elif spelare == 2:
         candide = P.Player()
         candide.hp = 100
+        candide.str = 10
+        candide.spd = 15
     elif spelare == 3:
         pangloss = P.Player()
-        pangloss = 50
+        pangloss.hp = 50
+        pangloss.str = 15
+        pangloss.spd = 5
 
 intro()
