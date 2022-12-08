@@ -5,6 +5,7 @@ class Player():
     str = 0
     exp = 0
     gold = 0
+    level = 0
 
 
 

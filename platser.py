@@ -1,1 +1,0 @@
-platser=["skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afrika","england","skepp","fält","tibble",""]

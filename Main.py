@@ -2,11 +2,14 @@ import Art
 from time import sleep
 import sys,time
 import P
+import L
+import E
+import random as rand
 
 
 
 
-TEST = 0.000000000000000000000000000000000001
+TEST = 0.0000000000000000000000000000000000000000001
 
 total_turns = 0
 
@@ -23,9 +26,43 @@ def start():
 
 
 
-def Travel():
+def travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
     #VI MÅSTE RÄKNA HUR MÅNGA RUM MAN HAR VARIT I
+
+    print_slow("Would you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
+    choice = int(input("Choice: "))
+
+    if choice == 1:
+        Inventory()
+    elif choice == 2:
+        #travel
+
+        print_slow("Where would you like to travel?", TEST)
+        sleep(1)
+
+        temporary_locations = list(L.locations)
+
+        location1 = rand.choice(temporary_locations)
+        temporary_locations.remove(location1)
+        location2 = rand.choice(temporary_locations)
+        temporary_locations.remove(location2)
+        location3 = rand.choice(temporary_locations)
+
+        print(f"\n1: {location1} \n2: {location2}\n3: {location3}")
+
+        location_choice = int(input())
+        if location_choice == 1:
+            print_slow(f"you travel to {location1}", TEST)
+        elif location_choice == 2:
+            print_slow(f"you travel to {location2}", TEST)
+        elif location_choice == 3:
+            print_slow(f"you travel to {location3}", TEST)
+
+
+
+    else:
+        print("please enter 1 or 2.")
 
     if total_turns == 10:
         print("Bossfight")
@@ -33,8 +70,6 @@ def Travel():
         print("Bossfight")
     elif total_turns == 30:
         print("Bossfight")
-
-    #Väljer vilken plats att resa till
     
 
     print()
@@ -47,7 +82,8 @@ def Fight():
 
 def Inventory():
     #FUNKTIONEN ÖPPNAR ENS INVENTORY OCH VISAR ENS STATS, SAMT HUR MÅNGA RUM MAN HAR VARIT I
-    ASD
+    print("uuh")
+
 
 
 def print_slow(str, timee):
@@ -56,50 +92,98 @@ def print_slow(str, timee):
         sys.stdout.flush()
         time.sleep(timee)
 
+#Cacambo
+cacambo = P.Player()
+cacambo.hp = 200
+cacambo.str = 20
+cacambo.spd = 20
+cacambo.gold = 40
+cacambo.exp = 0
+
+#Candide
+candide = P.Player()
+candide.hp = 100
+candide.str = 10
+candide.spd = 15
+candide.gold = 10
+candide.exp = 0
+
+#Pangloss
+pangloss = P.Player()
+pangloss.hp = 50
+pangloss.str = 15
+pangloss.spd = 5
+pangloss.gold = 1
+pangloss.exp = 10
+
+
+
 def intro():
     print(Art.start)
 
-    print_slow("Välj din spelare!", 0.01)
-    sleep(0.5)
-    spelare = int(input('''
+print_slow("Välj din spelare!", 0.01)
+sleep(0.5)
+player_choice = int(input(f'''
 
-    1. Cacambo! (Easy)
-        HP  :  200
-        STR :  
-        SPD :
-        Gold:  15
-
-
-    2. Candide! (Medium)
-        HP  :  100
-        STR :
-        SPD :
-        Gold:  
+1. Cacambo! (Easy)
+    HP  :  {cacambo.hp}
+    STR :  {cacambo.str}
+    SPD :  {cacambo.spd}
+    Gold:  {cacambo.gold}
 
 
-    3. Pangloss! (Hard) 
-        HP  :  50
-        STR :
-        SPD :
-        Gold:  20
-        (syfilis)
+2. Candide! (Medium)
+    HP  :   {candide.hp}
+    STR :   {candide.str}
+    SPD :   {candide.spd}
+    Gold:   {candide.gold}
 
-    Ditt val --> '''))
-    
-    if spelare == 1:       
-        cacambo = P.Player()
-        cacambo.hp = 200
-        cacambo.str = 20
-        cacambo.spd = 20
-    elif spelare == 2:
-        candide = P.Player()
-        candide.hp = 100
-        candide.str = 10
-        candide.spd = 15
-    elif spelare == 3:
-        pangloss = P.Player()
-        pangloss.hp = 50
-        pangloss.str = 15
-        pangloss.spd = 5
+
+3. Pangloss! (Hard) 
+    HP  :  {pangloss.hp}
+    STR :  {pangloss.str}
+    SPD :  {pangloss.spd}
+    Gold:  {pangloss.gold}
+    Debuffs: Syfilis, statiskt mindset
+
+Ditt val --> '''))
+
+if player_choice == 1:       
+    player = cacambo
+    player.hp = cacambo.hp
+    player.str = cacambo.str
+    player.spd = cacambo.spd
+    player.gold = cacambo.gold
+    player.exp = cacambo.exp
+    print("Du valde Cacambo, bra val!")
+elif player_choice == 2:
+    player = candide
+    player.hp = candide.hp
+    player.st = candide.str
+    player.spd = candide.spd
+    player.gold = candide.gold
+    player.exp = candide.exp
+    print("Du valde Candide lycka till!")
+elif player_choice == 3:
+    player = pangloss
+    player.hp = pangloss.hp
+    player.str = pangloss.str
+    player.spd = pangloss.spd
+    player.gold = pangloss.gold
+    player.exp = pangloss.exp
+    print("Du valde Panglos, ha ha ha😬.")
+
+
+# player_choice = player 
+# # player.level.limit = required xp to level up
+# player.level.limit = 500
+
+
+# def level_up():
+#     if player.exp >= player.level.limit:
+#         player.level += 1
+#     player.level.limit += (player.level.limit*0.5)
 
 intro()
+
+travel()
