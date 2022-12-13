@@ -1,9 +1,9 @@
 import Art
 from time import sleep
 import sys,time
-import P
-import L
-import E
+import Player_module as P
+import Location_storage as L
+import Enemy_module as E
 import random as rand
 
 
