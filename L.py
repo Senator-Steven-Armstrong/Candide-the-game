@@ -7,13 +7,18 @@ locations=["skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afr
 
 #SKOGEN
 skogen_travel_description1 = '''
-Du åker till ksog
+You decide to enter a great forest just beyond the horizon. You think nothing of it, but little do you know
+it's part of Rimbo, a deep and crazed hellhole. Upon entering a subtle heat and a disgusting stank fills your
+entire body. It only gets worse, until you find a small opening in the trees. Nothing but beautiful grass with
+rays of light shining through. However you quickly find yourself in panic as nearby bushes violently shake. 
 '''
 skogen_travel_description2 = '''
-ksokg nu bor du skogen för alltid
+You decide to wander into a small, nearby forest. It's hard to even call it a forest, it's pretty much just one tree.
+You walk around the forest for while, pretty much just circuling around the single tree until you realize that you
+are standing in someones backyard. The front door of their house slams open.
 '''
 skogen_travel_description3 = '''
-uhhushudh skogen
+
 '''
 skogen_travel_description_list = [skogen_travel_description1, skogen_travel_description2, skogen_travel_description3]
 
@@ -21,7 +26,9 @@ skogen_travel_description_list = [skogen_travel_description1, skogen_travel_desc
 
 #BULGARIEN
 bulgarien_travel_description1 = '''
-ububugbug
+You decide to enter Bulgaria, or rather, Bulgaria enters you as you are quickly busted up by their entire population.
+I dont know why you wanted to enter Bulgaria, but here we are. Being kept in a horrible prison cell
+
 '''
 bulgarien_travel_description2 = '''
 du blev våldtagen
@@ -35,7 +42,9 @@ bulgarien_travel_description_list = [bulgarien_travel_description1, bulgarien_tr
 
 #LISSABON
 lissabon_travel_description1 = '''
-lissaboin mer som pissabon
+You decide to enter lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
+It was probably a good idea that you didn't pick him at the start of the game. Oh wait you did? Your'e Pangloss
+Aren't you? A rip in space and time opened. 
 '''
 lissabon_travel_description2 = '''
 pissabon go brrr

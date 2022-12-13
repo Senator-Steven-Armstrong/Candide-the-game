@@ -10,13 +10,15 @@ import random as rand
 
 
 TEST = 0.0000000000000000000000000000000000000000001
+PUNCTUATION_PAUSE_TIME = 0.4
+COMMA_PAUSE_TIME = 0.15
 
 total_turns = 0
 
 
 
 def start():
-    startbutton = input("Välkommen! Tryck Y för att starta spelet, och tryck N för att avsluta det.")
+    startbutton = input("Welcome! Press Y to start, or N to quit.")
     while True:
         if startbutton == "Y" or "y":
             break
@@ -45,7 +47,7 @@ def travel():
         #travel
 
         print_slow("Where would you like to travel?", TEST)
-        sleep(1)
+        sleep(0.5)
 
         temporary_locations = list(L.locations)
 
@@ -55,19 +57,16 @@ def travel():
         temporary_locations.remove(location2)
         location3 = rand.choice(temporary_locations)
 
-        print(f"\n1: {location1} \n2: {location2}\n3: {location3}")
+        print(f"\n1: {location1} \n2: {location2}\n3: {location3}\n")
         
 
-        location_choice = int(input())
+        location_choice = int(input("Val: "))
         
         if location_choice == 1:
-            print_slow(f"you travel to {location1}", TEST)
             current_location = location1
         elif location_choice == 2:
-            print_slow(f"you travel to {location2}", TEST)
             current_location = location2
         elif location_choice == 3:
-            print_slow(f"you travel to {location3}", TEST)
             current_location = location3
 
         print_slow(L.TravelDescription(current_location), TEST)
@@ -97,11 +96,15 @@ def Inventory():
 
 
 
-def print_slow(str, timee):
+def print_slow(str, write_speed):
     for letter in str:
         sys.stdout.write(letter)
         sys.stdout.flush()
-        time.sleep(timee)
+        time.sleep(write_speed)
+        if letter == "." or letter == "?" or letter == "!":
+            sleep(PUNCTUATION_PAUSE_TIME)
+        elif letter == ",":
+            sleep(COMMA_PAUSE_TIME)
 
 #Cacambo
 cacambo = P.Player()
@@ -132,7 +135,7 @@ pangloss.exp = 10
 def intro():
     print(Art.start)
 
-print_slow("Välj din spelare!", 0.01)
+print_slow("Choose your character!", 0.01)
 sleep(0.5)
 player_choice = int(input(f'''
 
@@ -155,9 +158,9 @@ player_choice = int(input(f'''
     STR :  {pangloss.str}
     SPD :  {pangloss.spd}
     Gold:  {pangloss.gold}
-    Debuffs: Syfilis, statiskt mindset
+    Debuffs: Syphilis, Static mindset
 
-Ditt val --> '''))
+Your choice --> '''))
 
 if player_choice == 1:       
     player = cacambo
@@ -166,7 +169,7 @@ if player_choice == 1:
     player.spd = cacambo.spd
     player.gold = cacambo.gold
     player.exp = cacambo.exp
-    print("Du valde Cacambo, bra val!")
+    print("You chose Cacambo, good choice!")
 elif player_choice == 2:
     player = candide
     player.hp = candide.hp
@@ -174,7 +177,7 @@ elif player_choice == 2:
     player.spd = candide.spd
     player.gold = candide.gold
     player.exp = candide.exp
-    print("Du valde Candide lycka till!")
+    print("You chose Candide, good luck!")
 elif player_choice == 3:
     player = pangloss
     player.hp = pangloss.hp
@@ -182,7 +185,7 @@ elif player_choice == 3:
     player.spd = pangloss.spd
     player.gold = pangloss.gold
     player.exp = pangloss.exp
-    print("Du valde Panglos, ha ha ha😬.")
+    print("You chose Pangloss, ha ha ha😬.")
 
 
 # player_choice = player 
