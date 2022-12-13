@@ -13,6 +13,8 @@ TEST = 0.0000000000000000000000000000000000000000001
 
 total_turns = 0
 
+
+
 def start():
     startbutton = input("Välkommen! Tryck Y för att starta spelet, och tryck N för att avsluta det.")
     while True:
@@ -30,8 +32,12 @@ def travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
     #VI MÅSTE RÄKNA HUR MÅNGA RUM MAN HAR VARIT I
 
+    current_location = ""
+
+
     print_slow("Would you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
     choice = int(input("Choice: "))
+     
 
     if choice == 1:
         Inventory()
@@ -50,16 +56,21 @@ def travel():
         location3 = rand.choice(temporary_locations)
 
         print(f"\n1: {location1} \n2: {location2}\n3: {location3}")
+        
 
         location_choice = int(input())
+        
         if location_choice == 1:
             print_slow(f"you travel to {location1}", TEST)
+            current_location = location1
         elif location_choice == 2:
             print_slow(f"you travel to {location2}", TEST)
+            current_location = location2
         elif location_choice == 3:
             print_slow(f"you travel to {location3}", TEST)
+            current_location = location3
 
-
+        print_slow(L.TravelDescription(current_location), TEST)
 
     else:
         print("please enter 1 or 2.")
