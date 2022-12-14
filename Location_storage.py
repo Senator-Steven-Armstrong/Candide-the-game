@@ -1,9 +1,34 @@
 import random as rand
 
 #LISTANS LÄNGD ÄR 12
-locations=["eldorado", "skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afrika","england","havet","fältet","tibble"]
+locations=["shop", "eldorado", "skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afrika","england","havet","fältet","tibble"]
 
 #TEXTER OCH DESCRIPTIONER OM VAR MAN ÅKER
+
+#SHOP
+shop_travel_description1 = '''
+ooga boooga bo
+'''
+shop_travel_description2 = '''
+ooga afrika ooga
+'''
+shop_travel_description3 = '''
+välkommen till afrika uhmmm
+'''
+shop_travel_description_list = [shop_travel_description1, shop_travel_description2, shop_travel_description3]
+
+
+
+#ELDORADO
+eldorado_travel_description1 = '''
+ooga boooga bo
+'''
+eldorado_travel_description2 = '''
+ooga afrika ooga
+'''
+eldorado_travel_description_list = [eldorado_travel_description1, eldorado_travel_description2]
+
+
 
 #SKOGEN
 skogen_travel_description1 = '''
@@ -36,34 +61,34 @@ The only thing blocking you from freedom is a small creature at the end of the h
 
 '''
 bulgarien_travel_description2 = '''
-Du blev våldtagen
+You decide to walk to Bulgaria. 
 '''
 bulgarien_travel_description3 = '''
-You start to wander to the border of Bulgaria. A large wall streches as far as you can see, and smoke rises from the city inside.
-With fear and some sense of wonder you walk until you find some sort of entrance. You knew the Bulgarians wouldn't let you in easy,
-so you prepared for a fight. Bulgarian borderguards patrol the entrance. One of them spots, and the armored creature 
-quickly rushes toward you.
+You start to wander to the border of Bulgaria. A large wall streches as far as you can see, 
+and smoke rises from the city inside.With fear and some sense of wonder you walk until you find 
+some sort of entrance. You knew the Bulgarians wouldn't let you in easy, so you prepared for a fight. 
+Bulgarian borderguards patrol the entrance. One of them spots, and the armored creature quickly rushes toward you.
 '''
 bulgarien_travel_description_list = [bulgarien_travel_description1, bulgarien_travel_description2, bulgarien_travel_description3]
 
 
 
 #LISSABON
-lissabon_travel_description1 = ''' '''
 
 lissabon_travel_description1_pangloss = '''
 You decide to enter Lissabon. Pangloss's heresy echoes through the country as he's being hanged once again.
-It was probably a good idea that you didn't pick him at the start of the game. Oh wait you did? You're Pangloss
-aren't you? Fuck, shit, this is bad. This will dislodge reality from itself, 
+It was probably a good idea that you didn't pick him at the start of the game. Oh wait you did? 
+You're Pangloss aren't you? Fuck, shit, this is bad. This will dislodge reality from itself, 
 eventually breaking existence as we know it! 
 [A rip in space and time opened, and you were sucked in by unimaginable gravitational forces]
-I' m  not in contro--l anymo-r_e, all y ou have t-o do is kil--l the e_n t i-t y  re-siding inside and e-v_e- r--y_t h_i/n-g   w-//i-l_l...
+I' m  not in contro--l anymo-r_e, all y ou have t-o do is kil--l the e_n t i-t y  re-siding inside and 
+e-v_e- r--y_t h_i/n-g   w-//i-l_l...
 '''
 
 lissabon_travel_description1 = '''
 You decide to enter Lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
 It was probably a good idea that you didn't pick him at the start of the game. You follow the sounds of pangloss,
-eventually walking into a large crowd of people watching 'the hanging of Pangloss for the fifth time this day'. You call
+eventually walking into a large crowd of people watching 'the hanging of Pangloss' for the fifth time this day. You call
 out for Pangloss, but he can't hear you. However someone else does, and they really don't like Pangloss. 
 This someone pushes through the crowd until eventually putting their hand on your shoulder. 
     '''
@@ -80,7 +105,10 @@ lissabon_travel_description_list_pangloss = [lissabon_travel_description1_panglo
 
 #VENEDIG
 venedig_travel_description1 = '''
-bubuebuab venedig
+The smell of fresh pizza leads you to Venedig. Following the smell, you walk into a local resturant. 
+However you are in distraught as you realize there is no kebabpizza. This eternal pain fuels you,
+you stare down the head chef, and with wrath in your veins you jump over the kitchen counter.
+The chef grips his rolling pin with might. It's time.
 '''
 venedig_travel_description2 = '''
 pizza pasta put it on my cock
@@ -196,7 +224,11 @@ def TravelDescription(chosen_location, is_pangloss):
     #FÖR ATT LÄGGA TILL FLER PLATSER, LÄGG TILL I LISTAN LOCATIONS ÖVER, OCH SEDAN KOPIERA EN RAD HÄR
     #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA mist 2 plats_tavel_text OCH 1 plats_travel_description_list.
 
-    if chosen_location == locations[locations.index("skogen")]:
+    if chosen_location == locations[locations.index("shop")]:
+        return rand.choice(shop_travel_description_list)
+    elif chosen_location == locations[locations.index("eldorado")]:
+        return rand.choice(eldorado_travel_description_list)
+    elif chosen_location == locations[locations.index("skogen")]:
         return rand.choice(skogen_travel_description_list)
     elif chosen_location == locations[locations.index("bulgarien")]:
         return rand.choice(bulgarien_travel_description_list)

@@ -54,17 +54,19 @@ def travel():
         if current_location != "":
             temporary_locations.pop(L.locations.index(current_location))
 
-            location1 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop() #WEIGHTS MÅSTE VARA AV 1 MINDRE I LÄNGD SOM L.locations
+            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
+            location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
             temporary_locations.remove(location1)
-            location2 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location2)
-            location3 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
         else:
-            location1 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop() #WEIGHTS MÅSTE VARA AV 1 MINDRE I LÄNGD SOM L.locations
+            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 40 = shop, 10 = eldorado, 100 = resten
+            location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location1)
-            location2 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location2 = rand.choices(temporary_locations, weights=[40, 10, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location2)
-            location3 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location3 = rand.choices(temporary_locations, weights=[40, 10, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
 
         print(f"\n1: {location1} \n2: {location2}\n3: {location3}\n")
 
@@ -78,14 +80,18 @@ def travel():
         elif location_choice == 3:
             current_location = location3
         
-        if current_location == "eldorado":
-            #ELDORADO
-            print("eldorado")
-
         if player == pangloss:
             print_slow(L.TravelDescription(current_location, True), TEST)
         else:
             print_slow(L.TravelDescription(current_location, False), TEST)
+
+        if current_location == "eldorado":
+            #ELDORADO
+            print("eldorado")
+        elif current_location == "shop":
+            #SHOP
+            print("")
+
 
     else:
         print("please enter 1 or 2.")
