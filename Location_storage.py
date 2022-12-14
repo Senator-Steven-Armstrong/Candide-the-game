@@ -1,9 +1,7 @@
 import random as rand
 
-
-locations=["skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afrika","england","havet","fältet","tibble"]
-
-location_2=["eldorado"]
+#LISTANS LÄNGD ÄR 12
+locations=["eldorado", "skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afrika","england","havet","fältet","tibble"]
 
 #TEXTER OCH DESCRIPTIONER OM VAR MAN ÅKER
 

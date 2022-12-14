@@ -41,7 +41,9 @@ def travel():
      
 
     if choice == 1:
-        Inventory()
+        #INVENTORY
+
+        print("inventory")
     elif choice == 2:
         #TRAVEL
 
@@ -52,17 +54,19 @@ def travel():
         if current_location != "":
             temporary_locations.pop(L.locations.index(current_location))
 
-
-        location1 = rand.choice(temporary_locations)
-        temporary_locations.remove(location1)
-        location2 = rand.choice(temporary_locations)
-        temporary_locations.remove(location2)
-        location3 = rand.choice(temporary_locations)
+            location1 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop() #WEIGHTS MÅSTE VARA AV 1 MINDRE I LÄNGD SOM L.locations
+            temporary_locations.remove(location1)
+            location2 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            temporary_locations.remove(location2)
+            location3 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+        else:
+            location1 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop() #WEIGHTS MÅSTE VARA AV 1 MINDRE I LÄNGD SOM L.locations
+            temporary_locations.remove(location1)
+            location2 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            temporary_locations.remove(location2)
+            location3 = rand.choices(temporary_locations, weights=[10000, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
 
         print(f"\n1: {location1} \n2: {location2}\n3: {location3}\n")
-        
-        L = rand.randint (1,10)
-            if L = 5 print(f"\n1: {location1})
 
 
         location_choice = int(input("Choice: "))
@@ -75,6 +79,7 @@ def travel():
             current_location = location3
         
         if current_location == "eldorado":
+            #ELDORADO
             print("eldorado")
 
         if player == pangloss:
