@@ -87,9 +87,10 @@ e-v_e- r--y_t h_i/n-g   w-//i-l_l...
 
 lissabon_travel_description1 = '''
 You decide to enter Lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
-It was probably a good idea that you didn't pick him at the start of the game. You follow the sounds of pangloss,
-eventually walking into a large crowd of people watching 'the hanging of Pangloss' for the fifth time this day. You call
-out for Pangloss, but he can't hear you. However someone else does, and they really don't like Pangloss. 
+It was probably a good idea that you didn't pick him at the start of the game. 
+You follow the sounds of pangloss, eventually walking into a large crowd of people watching 
+'the hanging of Pangloss' for the fifth time this day. You callout for Pangloss, but he can't hear you. 
+However someone else does, and they really don't like Pangloss. 
 This someone pushes through the crowd until eventually putting their hand on your shoulder. 
     '''
 
@@ -206,10 +207,16 @@ fältet_travel_description_list = [fältet_travel_description1, fältet_travel_d
 
 #TIBBLE
 tibble_travel_description1 = '''
-du kliver in i de mörka korridorerna, rädlsa sprids över hela din kropp.
+The broken walls of Tibble tower high above the horizon. With a looming sense of dread,
+you stride through the main entrance. It smells musty, you see shadowy creatures roaming the halls
+presumably teknikelever, and you can barely make out the sunlight peeking through the holes in the walls.
+You pass through a ray of sunlight, briefly blinding you, and feel a moldy hand grab your head.
 '''
 tibble_travel_description2 = '''
-tibble elever go brrrr
+You see a small shack a few miles away. Not realizing its Tibble matsal, you bust through one of the
+many moldy walls. You briefly die due to the stench, but are quickly dragged back to life thanks to
+the same smell. You quickly stand up, nachochips crunching below your feet, and stare face to face
+with a hollow husk of a man. 
 '''
 tibble_travel_description3 = '''
 du dog (du gick in i tibble.)
