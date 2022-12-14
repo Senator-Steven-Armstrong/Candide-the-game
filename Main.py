@@ -14,7 +14,7 @@ PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
 
 total_turns = 0
-
+current_location = ""
 
 
 def start():
@@ -33,8 +33,7 @@ def start():
 def travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
     #VI MÅSTE RÄKNA HUR MÅNGA RUM MAN HAR VARIT I
-
-    current_location = ""
+    global current_location
 
 
     print_slow("Would you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
@@ -44,12 +43,15 @@ def travel():
     if choice == 1:
         Inventory()
     elif choice == 2:
-        #travel
+        #TRAVEL
 
         print_slow("Where would you like to travel?", TEST)
         sleep(0.5)
 
         temporary_locations = list(L.locations)
+        if current_location != "":
+            temporary_locations.pop(L.locations.index(current_location))
+
 
         location1 = rand.choice(temporary_locations)
         temporary_locations.remove(location1)
@@ -59,8 +61,11 @@ def travel():
 
         print(f"\n1: {location1} \n2: {location2}\n3: {location3}\n")
         
+        L = rand.randint (1,10)
+            if L = 5 print(f"\n1: {location1})
 
-        location_choice = int(input("Val: "))
+
+        location_choice = int(input("Choice: "))
         
         if location_choice == 1:
             current_location = location1
@@ -68,8 +73,14 @@ def travel():
             current_location = location2
         elif location_choice == 3:
             current_location = location3
+        
+        if current_location == "eldorado":
+            print("eldorado")
 
-        print_slow(L.TravelDescription(current_location), TEST)
+        if player == pangloss:
+            print_slow(L.TravelDescription(current_location, True), TEST)
+        else:
+            print_slow(L.TravelDescription(current_location, False), TEST)
 
     else:
         print("please enter 1 or 2.")
@@ -108,7 +119,7 @@ def print_slow(str, write_speed):
 
 #Cacambo
 cacambo = P.Player()
-cacambo.hp = 200
+cacambo.hp = 500
 cacambo.str = 20
 cacambo.spd = 20
 cacambo.gold = 40
@@ -116,16 +127,16 @@ cacambo.exp = 0
 
 #Candide
 candide = P.Player()
-candide.hp = 100
-candide.str = 10
+candide.hp = 300
+candide.str = 15
 candide.spd = 15
 candide.gold = 10
 candide.exp = 0
 
 #Pangloss
 pangloss = P.Player()
-pangloss.hp = 50
-pangloss.str = 15
+pangloss.hp = 100
+pangloss.str = 10
 pangloss.spd = 5
 pangloss.gold = 1
 pangloss.exp = 10
@@ -173,7 +184,7 @@ if player_choice == 1:
 elif player_choice == 2:
     player = candide
     player.hp = candide.hp
-    player.st = candide.str
+    player.str = candide.str
     player.spd = candide.spd
     player.gold = candide.gold
     player.exp = candide.exp
@@ -188,16 +199,22 @@ elif player_choice == 3:
     print("You chose Pangloss, ha ha ha😬.")
 
 
-# player_choice = player 
-# # player.level.limit = required xp to level up
-# player.level.limit = 500
+# player.level.limit = required EXP to level up, base value = 500 EXP
+
+def level_up():
+    if player.exp >= player.level_limit:
+        player.level += 1
+    player.level_limit += (player.level_limit*0.5)
+    player.hp = player.hp*1.25
+    player.str = player.str*1.25
+    player.spd = player.spd*1.25
+    player.gold = player.gold*1.25
+    player.exp = player.exp
+    E.Enemy_levelup()
 
 
-# def level_up():
-#     if player.exp >= player.level.limit:
-#         player.level += 1
-#     player.level.limit += (player.level.limit*0.5)
-
+# End arguments to call upon functions
 intro()
 
-travel()
+while True:
+    travel()

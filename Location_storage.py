@@ -3,6 +3,7 @@ import random as rand
 
 locations=["skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afrika","england","havet","fältet","tibble"]
 
+location_2=["eldorado"]
 
 #TEXTER OCH DESCRIPTIONER OM VAR MAN ÅKER
 
@@ -31,8 +32,8 @@ skogen_travel_description_list = [skogen_travel_description1, skogen_travel_desc
 #BULGARIEN
 bulgarien_travel_description1 = '''
 You decide to enter Bulgaria, or rather, Bulgaria enters you as you are quickly busted up by their entire population.
-I dont know why you wanted to enter Bulgaria, but here we are. Being kept in a horrible prison cell and starved for years,
-you evetually make up a plan to escape. The perfect moment revealed itself and you struck, escaping from the cell.
+I dont know why you wanted to enter Bulgaria, but here we are. Being kept in a horrible prison cell and starved for 
+years, you evetually make up a plan to escape. The perfect moment revealed itself and you struck, escaping from the cell.
 The only thing blocking you from freedom is a small creature at the end of the hallway, you decide to take it on.
 
 '''
@@ -52,20 +53,20 @@ bulgarien_travel_description_list = [bulgarien_travel_description1, bulgarien_tr
 #LISSABON
 lissabon_travel_description1 = ''' '''
 
-if player_choice == 3:
-    lissabon_travel_description1 = '''
-You decide to enter lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
-It was probably a good idea that you didn't pick him at the start of the game. Oh wait you did? Your'e Pangloss
-aren't you? Fuck shit this is bad. This will dislodge reality from itself, eventually breaking existence as we know it! 
+lissabon_travel_description1_pangloss = '''
+You decide to enter Lissabon. Pangloss's heresy echoes through the country as he's being hanged once again.
+It was probably a good idea that you didn't pick him at the start of the game. Oh wait you did? You're Pangloss
+aren't you? Fuck, shit, this is bad. This will dislodge reality from itself, 
+eventually breaking existence as we know it! 
 [A rip in space and time opened, and you were sucked in by unimaginable gravitational forces]
 I' m  not in contro--l anymo-r_e, all y ou have t-o do is kil--l the e_n t i-t y  re-siding inside and e-v_e- r--y_t h_i/n-g   w-//i-l_l...
 '''
-else:
-    lissabon_travel_description1 = '''
-You decide to enter lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
+
+lissabon_travel_description1 = '''
+You decide to enter Lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
 It was probably a good idea that you didn't pick him at the start of the game. You follow the sounds of pangloss,
-eventually walking into a large crowd of people waching 'the hanging of Pangloss for the fifth time this day'. You call
-out for pangloss, but he can't hear you. However someone else does, and they really don't like Pangloss. 
+eventually walking into a large crowd of people watching 'the hanging of Pangloss for the fifth time this day'. You call
+out for Pangloss, but he can't hear you. However someone else does, and they really don't like Pangloss. 
 This someone pushes through the crowd until eventually putting their hand on your shoulder. 
     '''
 
@@ -76,7 +77,7 @@ lissabon_travel_description3 = '''
 guh inte lissbon buruh
 '''
 lissabon_travel_description_list = [lissabon_travel_description1, lissabon_travel_description2, lissabon_travel_description3]
-
+lissabon_travel_description_list_pangloss = [lissabon_travel_description1_pangloss, lissabon_travel_description2, lissabon_travel_description3]
 
 
 #VENEDIG
@@ -192,7 +193,7 @@ tibble_travel_description_list = [tibble_travel_description1, tibble_travel_desc
 
 
 
-def TravelDescription(chosen_location):
+def TravelDescription(chosen_location, is_pangloss):
 
     #FÖR ATT LÄGGA TILL FLER PLATSER, LÄGG TILL I LISTAN LOCATIONS ÖVER, OCH SEDAN KOPIERA EN RAD HÄR
     #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA mist 2 plats_tavel_text OCH 1 plats_travel_description_list.
@@ -202,7 +203,10 @@ def TravelDescription(chosen_location):
     elif chosen_location == locations[locations.index("bulgarien")]:
         return rand.choice(bulgarien_travel_description_list)
     elif chosen_location == locations[locations.index("lissabon")]:
-        return rand.choice(lissabon_travel_description_list) 
+        if is_pangloss == True:
+            return rand.choice(lissabon_travel_description_list_pangloss)
+        else:
+            return rand.choice(lissabon_travel_description_list)
     elif chosen_location == locations[locations.index("venedig")]:
         return rand.choice(venedig_travel_description_list)
     elif chosen_location == locations[locations.index("turkiet")]:
