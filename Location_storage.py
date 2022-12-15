@@ -46,7 +46,8 @@ skogen_travel_description3 = '''
 You decide to enter a normal-sized forest just a few miles away. Walking through you can't stop thinking about how 
 normal it is. You hear completely normal sounds, and see completely normal animals running around.
 It's so not out of the ordinary that you start to questions yourself, it's uncanny, but in a normal way. Eventually
-a completely normal creature emerges from a brush beside you. You decide to take it on in a normal fight, just like any other.
+a completely normal creature emerges from a brush beside you. You decide to take it on in a normal fight, 
+just like any other.
 '''
 skogen_travel_description_list = [skogen_travel_description1, skogen_travel_description2, skogen_travel_description3]
 
@@ -54,10 +55,11 @@ skogen_travel_description_list = [skogen_travel_description1, skogen_travel_desc
 
 #BULGARIEN
 bulgarien_travel_description1 = '''
-You decide to enter Bulgaria, or rather, Bulgaria enters you as you are quickly busted up by their entire population.
-I dont know why you wanted to enter Bulgaria, but here we are. Being kept in a horrible prison cell and starved for 
-years, you evetually make up a plan to escape. The perfect moment revealed itself and you struck, escaping from the cell.
-The only thing blocking you from freedom is a small creature at the end of the hallway, you decide to take it on.
+You decide to enter Bulgaria, or rather, Bulgaria enters you as you are quickly busted up by 
+their entire population. I dont know why you wanted to enter Bulgaria, but here we are. 
+Being kept in a horrible prison cell and starved for years, you evetually make up a plan to escape. 
+The perfect moment revealed itself and you struck, escaping from the cell. The only thing blocking you 
+from freedom is a small creature at the end of the hallway, you decide to take it on.
 
 '''
 bulgarien_travel_description2 = '''
@@ -67,7 +69,8 @@ bulgarien_travel_description3 = '''
 You start to wander to the border of Bulgaria. A large wall streches as far as you can see, 
 and smoke rises from the city inside.With fear and some sense of wonder you walk until you find 
 some sort of entrance. You knew the Bulgarians wouldn't let you in easy, so you prepared for a fight. 
-Bulgarian borderguards patrol the entrance. One of them spots, and the armored creature quickly rushes toward you.
+Bulgarian borderguards patrol the entrance. One of them spots, and the armored creature 
+quickly rushes toward you.
 '''
 bulgarien_travel_description_list = [bulgarien_travel_description1, bulgarien_travel_description2, bulgarien_travel_description3]
 
@@ -210,7 +213,7 @@ tibble_travel_description1 = '''
 The broken walls of Tibble tower high above the horizon. With a looming sense of dread,
 you stride through the main entrance. It smells musty, you see shadowy creatures roaming the halls
 presumably teknikelever, and you can barely make out the sunlight peeking through the holes in the walls.
-You pass through a ray of sunlight, briefly blinding you, and feel a moldy hand grab your head.
+You pass through a ray of sunlight, briefly blinding you, and you feel a moldy hand grab your head.
 '''
 tibble_travel_description2 = '''
 You see a small shack a few miles away. Not realizing its Tibble matsal, you bust through one of the

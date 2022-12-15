@@ -14,7 +14,7 @@ PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
 
 total_turns = 0
-current_location = ""
+
 
 
 def start():
@@ -61,12 +61,12 @@ def travel():
             temporary_locations.remove(location2)
             location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
         else:
-            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 40 = shop, 10 = eldorado, 100 = resten
+            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten
             location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location1)
-            location2 = rand.choices(temporary_locations, weights=[40, 10, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location2)
-            location3 = rand.choices(temporary_locations, weights=[40, 10, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
 
         print(f"\n1: {location1} \n2: {location2}\n3: {location3}\n")
 
@@ -91,6 +91,8 @@ def travel():
         elif current_location == "shop":
             #SHOP
             print("")
+        else:
+            Fight()
 
 
     else:
@@ -107,8 +109,12 @@ def travel():
     print()
 
 def Fight():
-    
-    
+    #FIGHT
+
+    #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
+    chosen_enemy = E.Enemy_list.pop(E.Enemy_list.index(E.Enemy_list.pop(rand.choices(E.Enemy_list, weights=[100, 100, 90, 110, 70, 100, 50] , k=1)))) 
+
+    print(E.fight_begin_description(chosen_enemy))
 
     print("")
 
@@ -130,7 +136,7 @@ def print_slow(str, write_speed):
 
 #Cacambo
 cacambo = P.Player()
-cacambo.hp = 500
+cacambo.hp = 800
 cacambo.str = 20
 cacambo.spd = 20
 cacambo.gold = 40
@@ -138,7 +144,7 @@ cacambo.exp = 0
 
 #Candide
 candide = P.Player()
-candide.hp = 300
+candide.hp = 500
 candide.str = 15
 candide.spd = 15
 candide.gold = 10
@@ -146,7 +152,7 @@ candide.exp = 0
 
 #Pangloss
 pangloss = P.Player()
-pangloss.hp = 100
+pangloss.hp = 300
 pangloss.str = 10
 pangloss.spd = 5
 pangloss.gold = 1
@@ -209,23 +215,25 @@ elif player_choice == 3:
     player.exp = pangloss.exp
     print("You chose Pangloss, ha ha ha😬.")
 
+player.level = 0
 
 # player.level.limit = required EXP to level up, base value = 500 EXP
-
 def level_up():
-    if player.exp >= player.level_limit:
-        player.level += 1
+    player.level += 1
     player.level_limit += (player.level_limit*0.5)
     player.hp = player.hp*1.25
     player.str = player.str*1.25
     player.spd = player.spd*1.25
-    player.gold = player.gold*1.25
-    player.exp = player.exp
+    player.exp = 0
     E.Enemy_levelup()
 
 
+if player.exp >= player.level_limit:
+    level_up()
+
 # End arguments to call upon functions
 intro()
+current_location = ""
 
 while True:
     travel()
