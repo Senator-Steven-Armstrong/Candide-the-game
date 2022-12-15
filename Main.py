@@ -112,11 +112,17 @@ def Fight():
     #FIGHT
 
     #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
-    chosen_enemy = E.Enemy_list.pop(E.Enemy_list.index(E.Enemy_list.pop(rand.choices(E.Enemy_list, weights=[100, 100, 90, 110, 70, 100, 50] , k=1)))) 
+    chosen_enemy = E.enemy_list.pop(E.enemy_list.index(rand.choices(E.enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
 
     print(E.fight_begin_description(chosen_enemy))
 
-    print("")
+    E.create_enemy(chosen_enemy)
+
+    while player.hp > 0: #or E.Enemy.hp > 0:
+        
+        damage = rand.randint(player.str - 5, player.str + 5)
+
+
 
 def Inventory():
     #FUNKTIONEN ÖPPNAR ENS INVENTORY OCH VISAR ENS STATS, SAMT HUR MÅNGA RUM MAN HAR VARIT I
