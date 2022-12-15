@@ -2,6 +2,7 @@ import random as rand
 
 class Enemy():
     
+    name = ""
     hp = 0
     spd = 0
     str = 0
@@ -56,7 +57,7 @@ def create_enemy(enemy_name):
 
     if enemy_name == "bandit":
         # Bandit stats
-        
+        bandit.name = "bandit"
         bandit.hp = rand.randint(80, 120)
         bandit.spd = rand.randint(5, 15)
         bandit.str = rand.randint(5, 15)
@@ -64,7 +65,7 @@ def create_enemy(enemy_name):
         bandit.gold_dropped = rand.randint(40, 70)
     elif enemy_name == "cannibal":
         # Cannibal stats
-        
+        cannibal.name = "cannibal"
         cannibal.hp = rand.randint(50, 90)
         cannibal.spd = rand.randint(10, 20)
         cannibal.str = rand.randint(10, 20)
@@ -72,7 +73,7 @@ def create_enemy(enemy_name):
         cannibal.gold_dropped = rand.randint(10, 30)
     elif enemy_name == "långöron":
         # Långöron
-        
+        långöron.name = "långöron"
         långöron.hp = rand.randint(90, 130)
         långöron.spd = rand.randint(15, 25)
         långöron.str = rand.randint(15, 30)
@@ -80,7 +81,7 @@ def create_enemy(enemy_name):
         långöron.gold_dropped = rand.randint(20, 40)
     elif enemy_name == "goblin":
         # Goblin
-        
+        goblin.name = "goblin"
         goblin.hp = rand.randint(40, 80)
         goblin.spd = rand.randint(27, 40)
         goblin.str = rand.randint(4, 10)
@@ -88,7 +89,7 @@ def create_enemy(enemy_name):
         goblin.gold_dropped = rand.randint(40, 70)
     elif enemy_name == "bulgar":
         # Bulgar
-        
+        bulgar.name = "bulgar"
         bulgar.hp = rand.randint(120, 160)
         bulgar.spd = rand.randint(10, 14)
         bulgar.str = rand.randint(25, 32)
@@ -96,7 +97,7 @@ def create_enemy(enemy_name):
         bulgar.gold_dropped = rand.randint(45, 75)
     elif enemy_name == "råtta":   
         # Råtta
-       
+        råtta
         råtta.hp = rand.randint(1, 50)
         råtta.spd = rand.randint(20, 30)
         råtta.str = rand.randint(20, 25)
@@ -111,9 +112,10 @@ def create_enemy(enemy_name):
         traveler.exp_dropped = rand.randint(150, 350)
         traveler.gold_dropped = rand.randint(85, 150)
 
-enemy_list = ["bandit", "cannibal", "långöron", "goblin", "bulgar", "råtta", "traveler"]
+enemy_list = [bandit, cannibal, långöron, goblin, bulgar, råtta, traveler]
 
 def Enemy_levelup():
+    
     hp = hp*1.125
     spd = spd*1.125
 
