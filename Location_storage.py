@@ -235,31 +235,34 @@ def TravelDescription(chosen_location, is_pangloss):
     #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA mist 2 plats_tavel_text OCH 1 plats_travel_description_list.
 
     if chosen_location == locations[locations.index("shop")]:
-        return rand.choice(shop_travel_description_list)
+        returned_location = rand.choice(shop_travel_description_list)
     elif chosen_location == locations[locations.index("eldorado")]:
-        return rand.choice(eldorado_travel_description_list)
+        returned_location = rand.choice(eldorado_travel_description_list)
     elif chosen_location == locations[locations.index("skogen")]:
-        return rand.choice(skogen_travel_description_list)
+        returned_location = rand.choice(skogen_travel_description_list)
     elif chosen_location == locations[locations.index("bulgarien")]:
-        return rand.choice(bulgarien_travel_description_list)
+        returned_location = rand.choice(bulgarien_travel_description_list)
     elif chosen_location == locations[locations.index("lissabon")]:
         if is_pangloss == True:
-            return rand.choice(lissabon_travel_description_list_pangloss)
+            returned_location = rand.choice(lissabon_travel_description_list_pangloss)
         else:
-            return rand.choice(lissabon_travel_description_list)
+            returned_location = rand.choice(lissabon_travel_description_list)
     elif chosen_location == locations[locations.index("venedig")]:
-        return rand.choice(venedig_travel_description_list)
+        returned_location =  rand.choice(venedig_travel_description_list)
     elif chosen_location == locations[locations.index("turkiet")]:
-        return rand.choice(turkiet_travel_description_list)
+        returned_location =  rand.choice(turkiet_travel_description_list)
     elif chosen_location == locations[locations.index("sydamerika")]:
-        return rand.choice(sydamerika_travel_description_list) 
+        returned_location =  rand.choice(sydamerika_travel_description_list) 
     elif chosen_location == locations[locations.index("afrika")]:
-        return rand.choice(afrika_travel_description_list)
+        returned_location =  rand.choice(afrika_travel_description_list)
     elif chosen_location == locations[locations.index("england")]:
-        return rand.choice(england_travel_description_list) 
+        returned_location =  rand.choice(england_travel_description_list) 
     elif chosen_location == locations[locations.index("havet")]:
-        return rand.choice(havet_travel_description_list)
+        returned_location =  rand.choice(havet_travel_description_list)
     elif chosen_location == locations[locations.index("fältet")]:
-        return rand.choice(fältet_travel_description_list)
+        returned_location =  rand.choice(fältet_travel_description_list)
     elif chosen_location == locations[locations.index("tibble")]:
-        return rand.choice(tibble_travel_description_list) 
+        returned_location = rand.choice(tibble_travel_description_list) 
+    
+    # locations.pop(locations.index(returned_location))
+    return returned_location

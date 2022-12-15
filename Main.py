@@ -80,6 +80,8 @@ def travel():
         elif location_choice == 3:
             current_location = location3
         
+        
+
         if player == pangloss:
             print_slow(L.TravelDescription(current_location, True), TEST)
         else:
@@ -111,16 +113,19 @@ def travel():
 def Fight():
     #FIGHT
 
-    #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
-    chosen_enemy = E.enemy_list.pop(E.enemy_list.index(rand.choices(E.enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
+    temp_enemy_list = [E.bandit, E.cannibal, E.långöron, E.goblin, E.bulgar, E.råtta, E.traveler]
 
-    print(E.fight_begin_description(chosen_enemy))
+    #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
+    chosen_enemy = temp_enemy_list.pop(temp_enemy_list.index(rand.choices(temp_enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
 
     E.create_enemy(chosen_enemy)
 
-    while player.hp > 0: #or E.Enemy.hp > 0:
+    print(E.fight_begin_description(chosen_enemy))
+
+
+    # while player.hp > 0: #or E.Enemy.hp > 0:
         
-        damage = rand.randint(player.str - 5, player.str + 5)
+    #     damage = rand.randint(player.str - 5, player.str + 5)
 
 
 
