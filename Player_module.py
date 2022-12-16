@@ -18,7 +18,7 @@ attack_move_name_6 = "Gun"
 attack_move_name_7 = "Cum"
 attack_move_name_8 = "Cannibalism"
 
-attack_move_name_list = [attack_move_name_1, attack_move_name_2, attack_move_name_3, attack_move_name_4, attack_move_name_5, attack_move_name_6, attack_move_name_7, attack_move_name_8]
+ATTACK_MOVE_NAME_LIST = [attack_move_name_1, attack_move_name_2, attack_move_name_3, attack_move_name_4, attack_move_name_5, attack_move_name_6, attack_move_name_7, attack_move_name_8]
 
 
 def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name):

@@ -130,7 +130,7 @@ def Fight():
 
     while player.hp > 0 or chosen_enemy.hp > 0:
 
-        temp_attack_list = P.attack_move_name_list
+        temp_attack_list = [P.attack_move_name_1, P.attack_move_name_2, P.attack_move_name_3, P.attack_move_name_4, P.attack_move_name_5, P.attack_move_name_6, P.attack_move_name_7, P.attack_move_name_8]
 
         player_damage = rand.randint(player.str - 5, player.str + 5)
         enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
