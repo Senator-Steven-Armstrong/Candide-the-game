@@ -54,21 +54,25 @@ def travel():
         if current_location != "":
             temporary_locations.pop(L.locations.index(current_location))
 
-            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-            location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
+            location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
             temporary_locations.remove(location1)
-            location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location2)
-            location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
         else:
-            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten
-            location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten
+            location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location1)
-            location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             temporary_locations.remove(location2)
-            location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
 
-        print(f"\n1: {location1} \n2: {location2}\n3: {location3}\n")
+        print(f'''
+        1: {location1} 
+        2: {location2}
+        3: {location3}
+        ''')
 
 
         location_choice = int(input("Choice: "))
@@ -113,19 +117,49 @@ def travel():
 def Fight():
     #FIGHT
 
-    temp_enemy_list = [E.bandit, E.cannibal, E.långöron, E.goblin, E.bulgar, E.råtta, E.traveler]
+    temp_enemy_list = [E.bandit, E.cannibal, E.långöron, E.goblin, E.bulgar, E.råtta, E.traveler] #FIXA DET HÄR, VARFÖR ÄNDRAS TEMP MEN OCKSÅ DEN I ENEMY MODULE??? temporär lösning atm
+
 
     #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
     chosen_enemy = temp_enemy_list.pop(temp_enemy_list.index(rand.choices(temp_enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
 
     E.create_enemy(chosen_enemy)
 
-    print(E.fight_begin_description(chosen_enemy))
+    print_slow(E.fight_begin_description(chosen_enemy), TEST)
 
 
-    # while player.hp > 0: #or E.Enemy.hp > 0:
+    while player.hp > 0 or chosen_enemy.hp > 0:
+
+        temp_attack_list = P.attack_move_name_list
+
+        player_damage = rand.randint(player.str - 5, player.str + 5)
+        enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
+
+        attack_1 = rand.choice(temp_attack_list)
+        temp_attack_list.remove(attack_1)
+        attack_2 = rand.choice(temp_attack_list)
+        temp_attack_list.remove(attack_2)
+        attack_3 = rand.choice(temp_attack_list)
+
+        print_slow("What will you do?", TEST)
+        print(f'''
+
+        1: {attack_1}
+        2: {attack_2}
+        3: {attack_3}
+        ''')
+
+        attack_choice = int(input("Choice: "))
+
+        if attack_choice == 1:
+            chosen_attack = attack_1
+        elif attack_choice == 2:
+            chosen_attack = attack_2
+        elif attack_choice == 3:
+            chosen_attack = attack_3
+
+        print_slow(P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name) + "\n", TEST)
         
-    #     damage = rand.randint(player.str - 5, player.str + 5)
 
 
 
@@ -147,6 +181,7 @@ def print_slow(str, write_speed):
 
 #Cacambo
 cacambo = P.Player()
+cacambo.name = "Cacambo"
 cacambo.hp = 800
 cacambo.str = 20
 cacambo.spd = 20
@@ -155,6 +190,7 @@ cacambo.exp = 0
 
 #Candide
 candide = P.Player()
+candide.name = "Candide"
 candide.hp = 500
 candide.str = 15
 candide.spd = 15
@@ -163,6 +199,7 @@ candide.exp = 0
 
 #Pangloss
 pangloss = P.Player()
+pangloss.name = "Pangloss"
 pangloss.hp = 300
 pangloss.str = 10
 pangloss.spd = 5
@@ -201,24 +238,27 @@ player_choice = int(input(f'''
 
 Your choice --> '''))
 
-if player_choice == 1:       
+if player_choice == 1: #CACAMBO   
     player = cacambo
+    player.name = cacambo.name
     player.hp = cacambo.hp
     player.str = cacambo.str
     player.spd = cacambo.spd
     player.gold = cacambo.gold
     player.exp = cacambo.exp
     print("You chose Cacambo, good choice!")
-elif player_choice == 2:
+elif player_choice == 2: #CANDIDE
     player = candide
+    player.name = candide.name
     player.hp = candide.hp
     player.str = candide.str
     player.spd = candide.spd
     player.gold = candide.gold
     player.exp = candide.exp
     print("You chose Candide, good luck!")
-elif player_choice == 3:
+elif player_choice == 3: #PANGLOSS
     player = pangloss
+    player.name = pangloss.name
     player.hp = pangloss.hp
     player.str = pangloss.str
     player.spd = pangloss.spd
