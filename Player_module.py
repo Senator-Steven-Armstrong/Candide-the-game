@@ -25,37 +25,29 @@ def attack_move_description(chosen_attack, player_name, player_weapon, enemy_nam
     
     #DROPKICK
     attack_description_1 = f''' 
-    You droppkicked {enemy_name}!
-    '''
+You droppkicked {enemy_name}!'''
     #WORDS
     attack_description_2 = f''' 
-    "Candide balls fit in your mouth?" Uttered {player_name}, {enemy_name} is in distraught!
-    '''
+"Candide balls fit in your mouth?" Uttered {player_name}, {enemy_name} is in distraught!'''
     #ARMOR BREAKER
     attack_description_3 = f''' 
-    You took a fast grip around your {player_weapon} and crushed the enemy's armor!
-    '''
+You took a fast grip around your {player_weapon} and crushed through the enemy's armor!'''
     #HEAD CLEAVER
     attack_description_4 = f''' 
-    Using your {player_weapon}, with a swift strike you split {enemy_name} in two!
-    '''
+Using your {player_weapon}, with a swift strike you split {enemy_name} in two!'''
     #ROUNDHOUSE KICK
     attack_description_5 = f''' 
-    You charged up and roundhouse kicked the {enemy_name}!
-    '''
+You charged up and roundhouse kicked the {enemy_name}!'''
     #GUN
     attack_description_6 = f''' 
-    {player_name} pulled out a gun and shot {enemy_name}!
-    '''
+{player_name} pulled out a gun and shot {enemy_name}!'''
     #CUM
     attack_description_7 = f''' 
-    {player_name} came all over the enemy!
-    '''
+{player_name} came all over the enemy!'''
     #DROPKICK
     attack_description_8 = f''' 
-    "Woah is that fucking blackface dude?" said {player_name}.
-    {player_name} ate {enemy_name} alive!
-    '''
+"Woah is that fucking blackface dude?" said {player_name}.
+    {player_name} ate {enemy_name} alive!'''
 
 
     if chosen_attack == attack_move_name_1:

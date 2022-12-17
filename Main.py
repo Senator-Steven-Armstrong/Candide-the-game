@@ -69,9 +69,10 @@ def travel():
             location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
 
         print(f'''
-        1: {location1} 
-        2: {location2}
-        3: {location3}
+    
+    1: {location1} 
+    2: {location2}
+    3: {location3}
         ''')
 
 
@@ -127,8 +128,9 @@ def Fight():
 
     print_slow(E.fight_begin_description(chosen_enemy), TEST)
 
+    current_enemy_hp = chosen_enemy.hp
 
-    while player.hp > 0 or chosen_enemy.hp > 0:
+    while player.hp > 0 or current_enemy_hp > 0:
 
         temp_attack_list = [P.attack_move_name_1, P.attack_move_name_2, P.attack_move_name_3, P.attack_move_name_4, P.attack_move_name_5, P.attack_move_name_6, P.attack_move_name_7, P.attack_move_name_8]
 
@@ -141,12 +143,12 @@ def Fight():
         temp_attack_list.remove(attack_2)
         attack_3 = rand.choice(temp_attack_list)
 
-        print_slow("What will you do?", TEST)
+        print_slow("What attack will you use?", TEST)
         print(f'''
 
-        1: {attack_1}
-        2: {attack_2}
-        3: {attack_3}
+    1: {attack_1}
+    2: {attack_2}
+    3: {attack_3}
         ''')
 
         attack_choice = int(input("Choice: "))
@@ -159,6 +161,19 @@ def Fight():
             chosen_attack = attack_3
 
         print_slow(P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name) + "\n", TEST)
+
+        current_enemy_hp -= player_damage
+
+        print_slow(f"   - You dealt {player_damage} damage!\n", TEST)
+        if current_enemy_hp > 0:
+            print_slow(f"   - Enemy health: {current_enemy_hp} / {chosen_enemy.hp}", TEST)
+        else:
+            print_slow(f"   - Enemy health: 0 / {chosen_enemy.hp}", TEST)
+            break
+        sleep(0.5)
+        print("\n")
+
+    print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
         
 
 

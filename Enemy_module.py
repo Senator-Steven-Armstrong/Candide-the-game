@@ -99,23 +99,23 @@ def fight_begin_description(chosen_enemy):
 
     fight_begins_1 = f'''
 {enemy_name.capitalize()} blocks your way!
-    '''
+'''
 
     fight_begins_2 = f'''
 {enemy_name.capitalize()} stands in your way!
-    '''
+'''
 
     fight_begins_3 = f'''
 {enemy_name.capitalize()} has appeared!
-    '''
+'''
 
     fight_begins_4 = f'''
 {enemy_name.capitalize()} breaks down on the dancefloor!
-    '''
+'''
 
     fight_begins_5 = f'''
 It's time to fucking eradicate {enemy_name}!
-    '''
+'''
 
     fight_description_list = [fight_begins_1, fight_begins_2, fight_begins_3, fight_begins_4, fight_begins_5]
 
