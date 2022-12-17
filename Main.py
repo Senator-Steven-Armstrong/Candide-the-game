@@ -128,20 +128,31 @@ def Fight():
 
     print_slow(E.fight_begin_description(chosen_enemy), TEST)
 
-    current_enemy_hp = chosen_enemy.hp
+    chosen_enemy.hp = chosen_enemy.max_hp
 
-    while player.hp > 0 or current_enemy_hp > 0:
+    print_slow("\nEnemy stats: ", TEST)
+    sleep(PUNCTUATION_PAUSE_TIME)
+    print(f'''
+HP: {chosen_enemy.hp} / {chosen_enemy.max_hp}
+STR: {chosen_enemy.str}
+SPD: {chosen_enemy.spd}
+''')
+    sleep(3)
 
-        temp_attack_list = [P.attack_move_name_1, P.attack_move_name_2, P.attack_move_name_3, P.attack_move_name_4, P.attack_move_name_5, P.attack_move_name_6, P.attack_move_name_7, P.attack_move_name_8]
+    while player.hp > 0 or chosen_enemy.hp > 0:
+
+        temp_player_attack_list = [P.attack_move_name_1, P.attack_move_name_2, P.attack_move_name_3, P.attack_move_name_4, P.attack_move_name_5, P.attack_move_name_6, P.attack_move_name_7, P.attack_move_name_8]
 
         player_damage = rand.randint(player.str - 5, player.str + 5)
         enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
 
-        attack_1 = rand.choice(temp_attack_list)
-        temp_attack_list.remove(attack_1)
-        attack_2 = rand.choice(temp_attack_list)
-        temp_attack_list.remove(attack_2)
-        attack_3 = rand.choice(temp_attack_list)
+        first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, chosen_enemy.spd, 100, 100], k=1).pop()
+
+        attack_1 = rand.choice(temp_player_attack_list)
+        temp_player_attack_list.remove(attack_1)
+        attack_2 = rand.choice(temp_player_attack_list)
+        temp_player_attack_list.remove(attack_2)
+        attack_3 = rand.choice(temp_player_attack_list)
 
         print_slow("What attack will you use?", TEST)
         print(f'''
@@ -160,17 +171,37 @@ def Fight():
         elif attack_choice == 3:
             chosen_attack = attack_3
 
-        print_slow(P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name) + "\n", TEST)
+        chosen_enemy.hp -= player_damage
+        player.hp -= enemy_damage
 
-        current_enemy_hp -= player_damage
+        if first_attack_move == "player":
+            print_slow(P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name), TEST)
 
-        print_slow(f"   - You dealt {player_damage} damage!\n", TEST)
-        if current_enemy_hp > 0:
-            print_slow(f"   - Enemy health: {current_enemy_hp} / {chosen_enemy.hp}", TEST)
-        else:
-            print_slow(f"   - Enemy health: 0 / {chosen_enemy.hp}", TEST)
-            break
-        sleep(0.5)
+            print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+            if chosen_enemy.hp > 0:
+                print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
+            else:
+                print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}", TEST)
+                break
+            
+            print_slow("\n\nEnemy whipped out the AK and started blasting!", TEST)
+            print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
+            print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+
+        elif first_attack_move == "enemy":
+            print_slow(f"\nEnemy struck first!", TEST)
+            print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
+            print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}.\n", TEST)
+            print_slow(P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name), TEST)
+            
+            print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+            if chosen_enemy.hp > 0:
+                print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
+            else:
+                print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}.", TEST)
+                break
+
+        sleep(0.8)
         print("\n")
 
     print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
@@ -197,8 +228,8 @@ def print_slow(str, write_speed):
 #Cacambo
 cacambo = P.Player()
 cacambo.name = "Cacambo"
-cacambo.hp = 800
-cacambo.str = 20
+cacambo.max_hp = 800
+cacambo.str = 60
 cacambo.spd = 20
 cacambo.gold = 40
 cacambo.exp = 0
@@ -206,8 +237,8 @@ cacambo.exp = 0
 #Candide
 candide = P.Player()
 candide.name = "Candide"
-candide.hp = 500
-candide.str = 15
+candide.max_hp = 500
+candide.str = 35
 candide.spd = 15
 candide.gold = 10
 candide.exp = 0
@@ -215,8 +246,8 @@ candide.exp = 0
 #Pangloss
 pangloss = P.Player()
 pangloss.name = "Pangloss"
-pangloss.hp = 300
-pangloss.str = 10
+pangloss.max_hp = 300
+pangloss.str = 20
 pangloss.spd = 5
 pangloss.gold = 1
 pangloss.exp = 10
@@ -282,6 +313,7 @@ elif player_choice == 3: #PANGLOSS
     print("You chose Pangloss, ha ha ha😬.")
 
 player.level = 0
+player.hp = player.max_hp
 
 # player.level.limit = required EXP to level up, base value = 500 EXP
 def level_up():

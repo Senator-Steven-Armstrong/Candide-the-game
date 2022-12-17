@@ -3,6 +3,7 @@ import random as rand
 class Enemy():
     
     name = ""
+    max_hp = 0
     hp = 0
     spd = 0
     str = 0
@@ -39,7 +40,7 @@ def create_enemy(enemy_name):
     if enemy_name == bandit:
         # Bandit stats
         bandit.name = "bandit"
-        bandit.hp = rand.randint(80, 120)
+        bandit.max_hp = rand.randint(80, 120)
         bandit.spd = rand.randint(5, 15)
         bandit.str = rand.randint(5, 15)
         bandit.exp_dropped = rand.randint(100, 150)
@@ -47,7 +48,7 @@ def create_enemy(enemy_name):
     elif enemy_name == cannibal:
         # Cannibal stats
         cannibal.name = "cannibal"
-        cannibal.hp = rand.randint(50, 90)
+        cannibal.max_hp = rand.randint(50, 90)
         cannibal.spd = rand.randint(10, 20)
         cannibal.str = rand.randint(10, 20)
         cannibal.exp_dropped = rand.randint(120, 190)
@@ -55,7 +56,7 @@ def create_enemy(enemy_name):
     elif enemy_name == långöron:
         # Långöron
         långöron.name = "långöron"
-        långöron.hp = rand.randint(90, 130)
+        långöron.max_hp = rand.randint(90, 130)
         långöron.spd = rand.randint(15, 25)
         långöron.str = rand.randint(15, 30)
         långöron.exp_dropped = rand.randint(150, 220)
@@ -63,7 +64,7 @@ def create_enemy(enemy_name):
     elif enemy_name == goblin:
         # Goblin
         goblin.name = "goblin"
-        goblin.hp = rand.randint(40, 80)
+        goblin.max_hp = rand.randint(40, 80)
         goblin.spd = rand.randint(27, 40)
         goblin.str = rand.randint(4, 10)
         goblin.exp_dropped = rand.randint(100, 140)
@@ -71,7 +72,7 @@ def create_enemy(enemy_name):
     elif enemy_name == bulgar:
         # Bulgar
         bulgar.name = "bulgar"
-        bulgar.hp = rand.randint(120, 160)
+        bulgar.max_hp = rand.randint(120, 160)
         bulgar.spd = rand.randint(10, 14)
         bulgar.str = rand.randint(25, 32)
         bulgar.exp_dropped = rand.randint(120, 300)
@@ -79,7 +80,7 @@ def create_enemy(enemy_name):
     elif enemy_name == råtta:   
         # Råtta
         råtta.name = "råtta"
-        råtta.hp = rand.randint(1, 50)
+        råtta.max_hp = rand.randint(1, 50)
         råtta.spd = rand.randint(20, 30)
         råtta.str = rand.randint(20, 25)
         råtta.exp_dropped = rand.randint(40, 100)
@@ -87,7 +88,7 @@ def create_enemy(enemy_name):
     elif enemy_name == traveler:
         # traveler
         traveler.name = "traveler"
-        traveler.hp = rand.randint(160, 220)
+        traveler.max_hp = rand.randint(160, 220)
         traveler.spd = rand.randint(5, 10)
         traveler.str = rand.randint(35, 45)
         traveler.exp_dropped = rand.randint(150, 350)

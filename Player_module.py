@@ -2,6 +2,7 @@ class Player():
     
     name = ""
     hp = 0
+    max_hp = 0
     spd = 0
     str = 0
     exp = 0
@@ -24,7 +25,7 @@ ATTACK_MOVE_NAME_LIST = [attack_move_name_1, attack_move_name_2, attack_move_nam
 def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name):
     
     #DROPKICK
-    attack_description_1 = f''' 
+    attack_description_1 = f'''
 You droppkicked {enemy_name}!'''
     #WORDS
     attack_description_2 = f''' 
