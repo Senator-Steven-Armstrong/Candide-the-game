@@ -231,7 +231,7 @@ tibble_travel_description_list = [tibble_travel_description1, tibble_travel_desc
 def TravelDescription(chosen_location, is_pangloss):
 
     #FÖR ATT LÄGGA TILL FLER PLATSER, LÄGG TILL I LISTAN LOCATIONS ÖVER, OCH SEDAN KOPIERA EN RAD HÄR
-    #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA mist 2 plats_tavel_text OCH 1 plats_travel_description_list.
+    #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA minst 2 plats_tavel_text OCH 1 plats_travel_description_list.
 
     if chosen_location == locations[locations.index("shop")]:
         returned_location = rand.choice(shop_travel_description_list)
