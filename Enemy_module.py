@@ -127,12 +127,22 @@ def enemy_attack_description(chosen_enemy, player_name):
     enemy_name = chosen_enemy.name
 
     enemy_attack_1 = f'''
-{enemy_name.capitalize()} whipped out the AK and started blasting!
-    '''
+{enemy_name.capitalize()} whipped out the AK and started blasting!'''
     
     enemy_attack_2 = f'''
-{enemy_name.capitalize()} threw down some sick moves, {player_name} is in absolute awe!
-    '''
+{enemy_name.capitalize()} threw down some sick moves, {player_name} is in absolute awe!'''
+
+    enemy_attack_3 = f'''
+Enemy engaged in small talk, you couldn't handle the pressure!'''
+
+    enemy_attack_4 = f'''
+Enemy hit you in the face!'''
+
+    enemy_attack_5 = f'''
+Enemy threw some pebbles at you!'''
+
+    enemy_attack_list = [enemy_attack_1, enemy_attack_2, enemy_attack_3, enemy_attack_4, enemy_attack_5]
+    return rand.choice(enemy_attack_list)
 
 enemy_list = [bandit, cannibal, långöron, goblin, bulgar, råtta, traveler]
 print(type(bandit))
