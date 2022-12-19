@@ -14,10 +14,12 @@ but that does not mean they should be underestimated.
 cannibal_lore = """
 Cannibals are the subordinates of the Långöron. They are generally weaker than them,
 but there are stronger individuals among them that can rival their superiors in strength.
-They are ferocious when they've got your scent and will not cease their hunt until stopped.
+They are ferocious and when they've got your scent they will not cease their hunt until stopped.
+Some cannibals have left their original tribe to start their own in other 
 """
 
 långöron_lore = """
+The Långöron are the leaders of the cannibal tribes are the physical peak of mankind. They are 
 """
 
 traveler_lore = """

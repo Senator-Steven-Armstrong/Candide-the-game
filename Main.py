@@ -101,7 +101,6 @@ def travel():
         else:
             Fight()
 
-
     else:
         print("please enter 1 or 2.")
 
@@ -146,7 +145,7 @@ SPD: {chosen_enemy.spd}
         player_damage = rand.randint(player.str - 5, player.str + 5)
         enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
 
-        first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, chosen_enemy.spd, 100, 100], k=1).pop()
+        first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, chosen_enemy.spd, 140, 140], k=1).pop()
 
         attack_1 = rand.choice(temp_player_attack_list)
         temp_player_attack_list.remove(attack_1)
@@ -205,7 +204,6 @@ SPD: {chosen_enemy.spd}
         print("\n")
 
     print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
-        
 
 
 
@@ -224,6 +222,21 @@ def print_slow(str, write_speed):
             sleep(PUNCTUATION_PAUSE_TIME)
         elif letter == ",":
             sleep(COMMA_PAUSE_TIME)
+
+
+def intro():
+    print(Art.start)
+
+
+# player.level.limit = required EXP to level up, base value = 500 EXP
+def level_up():
+    player.level += 1
+    player.level_limit += (player.level_limit*0.5)
+    player.hp = player.hp*1.25
+    player.str = player.str*1.25
+    player.spd = player.spd*1.25
+    player.exp = 0
+    E.enemy_levelup()
 
 #Cacambo
 cacambo = P.Player()
@@ -254,8 +267,7 @@ pangloss.exp = 10
 
 
 
-def intro():
-    print(Art.start)
+
 
 print_slow("Choose your character!", 0.01)
 sleep(0.5)
@@ -314,17 +326,6 @@ elif player_choice == 3: #PANGLOSS
 
 player.level = 0
 player.hp = player.max_hp
-
-# player.level.limit = required EXP to level up, base value = 500 EXP
-def level_up():
-    player.level += 1
-    player.level_limit += (player.level_limit*0.5)
-    player.hp = player.hp*1.25
-    player.str = player.str*1.25
-    player.spd = player.spd*1.25
-    player.exp = 0
-    E.Enemy_levelup()
-
 
 if player.exp >= player.level_limit:
     level_up()

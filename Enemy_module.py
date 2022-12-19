@@ -115,18 +115,29 @@ def fight_begin_description(chosen_enemy):
 '''
 
     fight_begins_5 = f'''
-It's time to fucking eradicate {enemy_name}!
+You engage in combat with {enemy_name.capitalize()}, lets kill it!
 '''
 
     fight_description_list = [fight_begins_1, fight_begins_2, fight_begins_3, fight_begins_4, fight_begins_5]
 
     return rand.choice(fight_description_list)
 
+def enemy_attack_description(chosen_enemy, player_name):
+   
+    enemy_name = chosen_enemy.name
+
+    enemy_attack_1 = f'''
+{enemy_name.capitalize()} whipped out the AK and started blasting!
+    '''
+    
+    enemy_attack_2 = f'''
+{enemy_name.capitalize()} threw down some sick moves, {player_name} is in absolute awe!
+    '''
 
 enemy_list = [bandit, cannibal, långöron, goblin, bulgar, råtta, traveler]
 print(type(bandit))
 
-def Enemy_levelup():
+def enemy_levelup():
     
     hp = hp*1.125
     spd = spd*1.125

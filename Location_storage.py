@@ -217,8 +217,8 @@ You pass through a ray of sunlight, briefly blinding you, and you feel a moldy h
 '''
 tibble_travel_description2 = '''
 You see a small shack a few miles away. Not realizing its Tibble matsal, you bust through one of the
-many moldy walls. You briefly die due to the stench, but are quickly dragged back to life by an unknown entity. 
-You quickly stand up, nachochips crunching below your feet, and stare face to face with a hollow husk of a man. 
+many moldy walls. You briefly die as the horrid stench covers your lungs, but are quickly dragged back to life by an unknown entity. 
+It grabs you and you quickly stand up, nachochips crunching below your feet, staring face to face with a hollow husk of a man. 
 '''
 tibble_travel_description3 = '''
 du dog (du gick in i tibble.)
