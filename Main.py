@@ -43,6 +43,43 @@ def travel():
     if choice == 1:
         #INVENTORY
 
+        print_slow("You opened your backpack.", TEST)
+
+        print(f'''
+
+--------------------------------------------------------------------------------------------------------------------------
+
+PLAYER STATS:
+
+{player.name} level {player.level}
+EXP: {player.exp} / {player.level_limit}
+
+HP: {player.hp} / {player.max_hp}
+STR: {player.str}
+SPD: {player.spd}
+
+Gold: {player.gold}
+
+Debuffs: {player.debuffs}
+
+
+
+INVENTORY:
+{player.inventory}
+
+
+
+EQUIPPED ITEM:
+{player.equipped_item}
+
+--------------------------------------------------------------------------------------------------------------------------
+        ''')
+
+
+
+        print_slow("Would you like to leave?", TEST)
+        input()
+
         print("inventory")
     elif choice == 2:
         #TRAVEL
@@ -194,6 +231,9 @@ SPD: {chosen_enemy.spd}
             print_slow(E.enemy_attack_description(chosen_enemy, player.name), TEST)
             print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
             print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}.\n", TEST)
+            
+            #IF STATEMENT HÄR OM DU DOG ELLER INTE
+
             print_slow(P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name), TEST)
             
             print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
@@ -248,7 +288,6 @@ cacambo.max_hp = 800
 cacambo.str = 60
 cacambo.spd = 20
 cacambo.gold = 40
-cacambo.exp = 0
 
 #Candide
 candide = P.Player()
@@ -257,7 +296,6 @@ candide.max_hp = 500
 candide.str = 35
 candide.spd = 15
 candide.gold = 10
-candide.exp = 0
 
 #Pangloss
 pangloss = P.Player()
@@ -266,7 +304,6 @@ pangloss.max_hp = 300
 pangloss.str = 20
 pangloss.spd = 5
 pangloss.gold = 1
-pangloss.exp = 10
 
 
 
@@ -277,21 +314,21 @@ sleep(0.5)
 player_choice = int(input(f'''
 
 1. Cacambo! (Easy)
-    HP  :  {cacambo.hp}
+    HP  :  {cacambo.max_hp}
     STR :  {cacambo.str}
     SPD :  {cacambo.spd}
     Gold:  {cacambo.gold}
 
 
 2. Candide! (Medium)
-    HP  :   {candide.hp}
+    HP  :   {candide.max_hp}
     STR :   {candide.str}
     SPD :   {candide.spd}
     Gold:   {candide.gold}
 
 
 3. Pangloss! (Hard) 
-    HP  :  {pangloss.hp}
+    HP  :  {pangloss.max_hp}
     STR :  {pangloss.str}
     SPD :  {pangloss.spd}
     Gold:  {pangloss.gold}
@@ -327,8 +364,9 @@ elif player_choice == 3: #PANGLOSS
     player.exp = pangloss.exp
     print("You chose Pangloss, ha ha ha😬.")
 
-player.level = 0
+player.level = 1
 player.hp = player.max_hp
+player.inventory = []
 
 if player.exp >= player.level_limit:
     level_up()

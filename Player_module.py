@@ -9,6 +9,10 @@ class Player():
     gold = 0
     level = 0
     level_limit = 500
+    inventory = []
+    debuffs = []
+    equipped_item = ""
+    
 
 attack_move_name_1 = "Dropkick"
 attack_move_name_2 = "Words"
