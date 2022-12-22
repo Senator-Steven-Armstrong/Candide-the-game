@@ -1,3 +1,5 @@
+import Item_module as I
+
 class Player():
     
     name = ""
@@ -11,7 +13,8 @@ class Player():
     level_limit = 500
     inventory = []
     debuffs = []
-    equipped_item = ""
+    equipped_weapon = object()
+    equipped_weapon_name = "None"
     
 
 attack_move_name_1 = "Dropkick"

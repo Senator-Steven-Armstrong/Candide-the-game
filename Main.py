@@ -4,6 +4,7 @@ import sys,time
 import Player_module as P
 import Location_storage as L
 import Enemy_module as E
+import Item_module as I
 import random as rand
 
 
@@ -36,51 +37,15 @@ def travel():
     global current_location
 
 
-    print_slow("Would you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
+    print_slow("\nWould you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
     choice = int(input("Choice: "))
      
 
     if choice == 1:
         #INVENTORY
 
-        print_slow("You opened your backpack.", TEST)
+        inventory()
 
-        print(f'''
-
---------------------------------------------------------------------------------------------------------------------------
-
-PLAYER STATS:
-
-{player.name} level {player.level}
-EXP: {player.exp} / {player.level_limit}
-
-HP: {player.hp} / {player.max_hp}
-STR: {player.str}
-SPD: {player.spd}
-
-Gold: {player.gold}
-
-Debuffs: {player.debuffs}
-
-
-
-INVENTORY:
-{player.inventory}
-
-
-
-EQUIPPED ITEM:
-{player.equipped_item}
-
---------------------------------------------------------------------------------------------------------------------------
-        ''')
-
-
-
-        print_slow("Would you like to leave?", TEST)
-        input()
-
-        print("inventory")
     elif choice == 2:
         #TRAVEL
 
@@ -136,7 +101,7 @@ EQUIPPED ITEM:
             #SHOP
             print("")
         else:
-            Fight()
+            fight()
 
     else:
         print("please enter 1 or 2.")
@@ -149,9 +114,95 @@ EQUIPPED ITEM:
         print("Bossfight")
     
 
-    print()
 
-def Fight():
+def inventory():
+    print_slow("\nYou opened your backpack.", TEST)
+
+    print(f'''
+
+--------------------------------------------------------------------------------------------------------------------------
+
+PLAYER STATS:
+
+{player.name} level {player.level}
+EXP: {player.exp} / {player.level_limit}
+
+HP: {player.hp} / {player.max_hp}
+STR: {player.str}
+SPD: {player.spd}
+Gold: {player.gold}
+Debuffs: {player.debuffs}
+
+INVENTORY:''')
+
+
+    print(f'''
+
+EQUIPPED ITEMS:
+Weapon: {player.equipped_weapon_name}
+
+--------------------------------------------------------------------------------------------------------------------------
+    ''')
+
+
+
+    print_slow("\nWhat would you like to do?", TEST)
+
+    print('''
+1. Change Equipment
+2. Go back
+        ''')
+        
+    inventory_choice = int(input("Choice: "))
+    sleep(0.5)
+    if inventory_choice == 1:
+    #CHANGE EQUIPMENT
+        print('''
+Pick an equipment to change:
+1. Weapon
+2. Armor
+3. Accessory
+''')
+        item_change_choice = int(input("Choice: "))
+        sleep(0.4)
+        if item_change_choice == 1:
+            
+            print(f"\nCurrent weapon: {player.equipped_weapon_name}")
+
+            print_slow("\nWhat weapon would you like to equip?\n", TEST)
+
+            #HÄR PRINTAS LISTAN MED ALLA VAPEN I ENS INVENTORY
+            j = 1
+            for i in I.weapon_list:
+                if i != player.equipped_weapon:
+                    print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
+                    j += 1
+                if j-1 == len(I.weapon_list):
+                    print(j, ". Change nothing / Go back", sep='')
+                
+            weapon_equip_choice = int(input("\nChoice: "))
+            
+            if weapon_equip_choice != len(I.weapon_list) + 1:
+                for i in range(len(I.weapon_list)):
+                    if weapon_equip_choice == i + 1:
+                        player.equipped_weapon = I.weapon_list[i]
+                        player.equipped_weapon_name = player.equipped_weapon.name
+            
+                print_slow(f"\nYou equipped {player.equipped_weapon_name}.\n", TEST)
+
+                #HÄR LÄGGS ALLA STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
+
+                player.max_hp += player.equipped_weapon.max_hp_bonus
+                player.str += player.equipped_weapon.str_bonus
+                player.spd += player.equipped_weapon.spd_bonus
+                
+                
+                    
+    elif inventory_choice != 2:
+        print("eat my shorts")
+
+
+def fight():
     #FIGHT
 
     temp_enemy_list = [E.bandit, E.cannibal, E.långöron, E.goblin, E.bulgar, E.råtta, E.traveler] #FIXA DET HÄR, VARFÖR ÄNDRAS TEMP MEN OCKSÅ DEN I ENEMY MODULE??? temporär lösning atm
