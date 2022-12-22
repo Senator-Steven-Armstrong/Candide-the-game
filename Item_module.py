@@ -23,21 +23,27 @@ bow.type = "weapon"
 bow.name = "Longbow"
 bow.str_bonus = 6
 bow.spd_bonus = 3
-bow.cost = 65
-
+bow.cost = 80
 
 sword = Item()
 sword.type = "weapon"
 sword.name = "Shortsword"
 sword.str_bonus = 8
-sword.cost = 70
+sword.cost = 90
 
 explosive = Item()
 explosive.type = "weapon"
 explosive.name = "Highly volatile explosive"
 explosive.str_bonus = 20
 explosive.rarity = 70
-explosive.cost = 120
+explosive.cost = 220
+
+ultra_greatsword = Item()
+ultra_greatsword.type = "weapon"
+ultra_greatsword.name = "Fume's Ultra Greatsword"
+ultra_greatsword.str_bonus = 24
+ultra_greatsword.spd_bonus = -8
+ultra_greatsword.cost = 420
 
 
 item_list = [dagger, bow, sword, explosive]

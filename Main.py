@@ -182,6 +182,7 @@ Pick an equipment to change:
                 
             weapon_equip_choice = int(input("\nChoice: "))
             
+            #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
             if weapon_equip_choice != len(I.weapon_list) + 1:
                 for i in range(len(I.weapon_list)):
                     if weapon_equip_choice == i + 1:
