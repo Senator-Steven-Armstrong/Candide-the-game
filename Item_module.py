@@ -10,15 +10,22 @@ class Item:
     rarity = 100 #100 ÄR DEFAULT, DET KOMMER SKRIVAS IN I "weights" I rand.choices()
     cost = 0
 
-#DEFAULT ÄR BARE FISTS:
+#DEFAULT WEAPON ÄR FISTS:
 fists = Item()
 fists.type = "weapon"
 fists.name = "Fists"
 
-weapon_list=["dagger", "bow", "sword", "explosive", "ultra_greatsword"]
-weapon_rarity_list = [100, 100, 100, 60, 20]
+#DEFAULT ARMOR ÄR NONE
+empty_armor = Item()
+empty_armor.type = "armor"
+empty_armor.name = "None"
 
-def create_weapon(choice):
+item_list=["dagger", "bow", "sword", "explosive", "ultra_greatsword", "crusader helm", "leather boots"]
+item_rarity_list = [100, 100, 100, 60, 20, 100, 100]
+
+
+
+def create_item(choice):
 
 
     #WEAPONS------------------------------------------------
@@ -58,8 +65,26 @@ def create_weapon(choice):
         ultra_greatsword.name = "Voltaire's Ultra Greatsword"
         ultra_greatsword.str_bonus = rand.randint(25,30)
         ultra_greatsword.spd_bonus = rand.randint(-9, -6)
-        ultra_greatsword.cost = rand.randint(420,460) 
+        ultra_greatsword.cost = rand.randint(420,480) 
         return ultra_greatsword
+    
+    #ARMOR-----------------------------------------------------
+    elif choice == "crusader helm":
+        crusader_helm = Item()
+        crusader_helm.type = "armor"
+        crusader_helm.name = "Crusader helm"
+        crusader_helm.max_hp_bonus = rand.randint(50,70)
+        crusader_helm.cost = rand.randint(70, 80)
+        return crusader_helm
+    elif choice == "Leather boots":
+        boots = Item()
+        boots.type = "armor"
+        boots.name = "Leather boots"
+        boots.max_hp_bonus = rand.randint(40, 50)
+        boots.spd_bonus = rand.randint(3, 6)
+        boots.cost = rand.randint(60, 70)
+        return boots
+
 
 
     

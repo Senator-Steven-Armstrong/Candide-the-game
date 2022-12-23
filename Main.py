@@ -140,6 +140,7 @@ INVENTORY:''')
 
 EQUIPPED ITEMS:
 Weapon: {player.equipped_weapon.name}
+Armor: {player.equipped_armor.name}
 
 --------------------------------------------------------------------------------------------------------------------------
     ''')
@@ -166,7 +167,7 @@ Pick an equipment to change:
         item_change_choice = int(input("Choice: "))
         sleep(0.4)
         if item_change_choice == 1:
-            #ÄNDRAR VAPEN
+            #ÄNDRAR VAPEN-------------------------------------------------------------------------------------------------------
             
             temp_weapon_inventory = []
             for i in player.inventory:
@@ -204,7 +205,7 @@ Pick an equipment to change:
                             player.equipped_weapon = temp_weapon_inventory[i]
                             player.equipped_weapon.name = player.equipped_weapon.name
                             player.inventory.pop(player.inventory.index(player.equipped_weapon))
-                
+
                             print_slow(f"\nYou equipped {player.equipped_weapon.name}.\n", TEST)
 
                     #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
@@ -215,7 +216,61 @@ Pick an equipment to change:
                     player.spd += player.equipped_weapon.spd_bonus
             else:
                 print_slow("\nNo weapons in inventory to equip\n", TEST)
+        
+        
+        
+        elif item_change_choice == 2:
+            #ÄNDRAR ARMOR----------------------------------------------------------------------------------------------------
+            temp_armor_inventory = []
+            for i in player.inventory:
+                if i.type == "armor":
+                    temp_armor_inventory.append(i)
+
+            if len(temp_armor_inventory) > 0:
+
+                print(f"\nCurrent armor: {player.equipped_armor.name}")
+
+                print_slow("\nWhat armor would you like to equip?\n", TEST)
+
+                #HÄR PRINTAS LISTAN MED ALLA VAPEN I ENS INVENTORY
+                j = 1
+                for i in temp_armor_inventory:
+                    if i != player.equipped_armor:
+                        print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
+                        j += 1
+                    if j-1 == len(temp_armor_inventory):
+                        print(j, ". Change nothing / Go back", sep='')
+                    
+                armor_equip_choice = int(input("\nChoice: "))
+
+                #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
+                if armor_equip_choice != len(temp_armor_inventory) + 1:
+                    for i in range(len(temp_armor_inventory)):
+                        if armor_equip_choice == i + 1:
+                            #HÄR TAS GAMLA armorSTATS BORT
+                            player.max_hp -= player.equipped_armor.max_hp_bonus
+                            player.hp -= player.equipped_armor.hp_bonus
+                            player.str -= player.equipped_armor.str_bonus
+                            player.spd -= player.equipped_armor.spd_bonus
+                            player.inventory.append(player.equipped_armor)
+
+                            player.equipped_armor = temp_armor_inventory[i]
+                            player.equipped_armor.name = player.equipped_armor.name
+                            player.inventory.pop(player.inventory.index(player.equipped_armor))
                 
+                            if player.equipped_armor == I.empty_armor:
+                                print_slow("You unequipped your armor", TEST)
+                            else:
+                                print_slow(f"\nYou equipped {player.equipped_armor.name}.\n", TEST)
+
+                    #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
+
+                    player.max_hp += player.equipped_armor.max_hp_bonus
+                    player.hp += player.equipped_armor.hp_bonus
+                    player.str += player.equipped_armor.str_bonus
+                    player.spd += player.equipped_armor.spd_bonus
+            else:
+                print_slow("\nNo armor in inventory to equip\n", TEST)                
                 
                     
     elif inventory_choice != 2:
@@ -337,8 +392,8 @@ def loot(type):
         if weapon_drop_chance == 1:
             print_slow("\nThe enemy dropped an item!", TEST)
 
-            dropped_weapon_index = rand.choices(I.weapon_list, weights=[100, 100, 100, 60, 20], k=1).pop()
-            dropped_weapon = I.create_weapon(dropped_weapon_index)
+            dropped_weapon_index = rand.choices(I.item_list, weights=I.item_rarity_list, k=1).pop()
+            dropped_weapon = I.create_item(dropped_weapon_index)
             print_slow(f"\nYou picked up {dropped_weapon.name}.\n", TEST)
             player.inventory.append(dropped_weapon)
             player.shown_inventory.append(dropped_weapon.name)
