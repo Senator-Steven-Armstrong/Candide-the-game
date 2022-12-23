@@ -16,6 +16,7 @@ class Player():
     debuffs = []
     equipped_weapon = I.fists
     equipped_armor = I.empty_armor
+    equipped_accessory = I.empty_accessory
     
 
 attack_move_name_1 = "Dropkick"

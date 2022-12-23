@@ -7,7 +7,6 @@ class Item:
     spd_bonus = 0
     name = ""
     type = ""
-    rarity = 100 #100 ÄR DEFAULT, DET KOMMER SKRIVAS IN I "weights" I rand.choices()
     cost = 0
 
 #DEFAULT WEAPON ÄR FISTS:
@@ -15,13 +14,18 @@ fists = Item()
 fists.type = "weapon"
 fists.name = "Fists"
 
-#DEFAULT ARMOR ÄR NONE
+#DEFAULT ARMOR ÄR NONE:
 empty_armor = Item()
 empty_armor.type = "armor"
 empty_armor.name = "None"
 
-item_list=["dagger", "bow", "sword", "explosive", "ultra_greatsword", "crusader helm", "leather boots"]
-item_rarity_list = [100, 100, 100, 60, 20, 100, 100]
+#DEFAULT ACCESSORY ÄR NONE:
+empty_accessory = Item()
+empty_accessory.type = "accessory"
+empty_accessory.name = "None"
+
+item_list=          ["dagger", "bow", "sword", "explosive", "ultra_greatsword", "crusader helm", "leather boots", "philosophy book", "Voltaire's pencil"]
+item_rarity_list =  [100,       100,   100,     60,          20,                 100,             100,             100,               100]
 
 
 
@@ -76,7 +80,7 @@ def create_item(choice):
         crusader_helm.max_hp_bonus = rand.randint(50,70)
         crusader_helm.cost = rand.randint(70, 80)
         return crusader_helm
-    elif choice == "Leather boots":
+    elif choice == "leather boots":
         boots = Item()
         boots.type = "armor"
         boots.name = "Leather boots"
@@ -84,6 +88,26 @@ def create_item(choice):
         boots.spd_bonus = rand.randint(3, 6)
         boots.cost = rand.randint(60, 70)
         return boots
+
+    #ACCESSORY------------------------------------------------------
+    elif choice == "philosophy book":
+        philosophy_book = Item()
+        philosophy_book.type = "accessory"
+        philosophy_book.name = '''Pangloss' "Metaphysiology collection" book'''
+        philosophy_book.max_hp_bonus = rand.randint(30, 40)
+        philosophy_book.str_bonus = rand.randint(-8, -2)
+        philosophy_book.spd_bonus = rand.randint(5, 8)
+        philosophy_book.cost = rand.randint(1, 5)
+        return philosophy_book
+    elif choice == "Voltaire's pencil":
+        pencil = Item()
+        pencil.type = "accessory"
+        pencil.name = "Voltaire's pencil"
+        pencil.str_bonus = rand.randint(8, 14)
+        pencil.spd_bonus = rand.randint(6, 10)
+        pencil.cost = rand.randint(90, 100)
+        return pencil
+        
 
 
 
