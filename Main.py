@@ -10,7 +10,7 @@ import random as rand
 
 
 
-TEST = 0.0000000000000000000000000000000000000000001
+TEST = 0.00000000000000000000000000000000000000000000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
 
@@ -134,12 +134,12 @@ Gold: {player.gold}
 Debuffs: {player.debuffs}
 
 INVENTORY:''')
-
+    print(player.shown_inventory)
 
     print(f'''
 
 EQUIPPED ITEMS:
-Weapon: {player.equipped_weapon_name}
+Weapon: {player.equipped_weapon.name}
 
 --------------------------------------------------------------------------------------------------------------------------
     ''')
@@ -166,36 +166,55 @@ Pick an equipment to change:
         item_change_choice = int(input("Choice: "))
         sleep(0.4)
         if item_change_choice == 1:
+            #ÄNDRAR VAPEN
             
-            print(f"\nCurrent weapon: {player.equipped_weapon_name}")
+            temp_weapon_inventory = []
+            for i in player.inventory:
+                if i.type == "weapon":
+                    temp_weapon_inventory.append(i)
 
-            print_slow("\nWhat weapon would you like to equip?\n", TEST)
+            if len(temp_weapon_inventory) > 0:
 
-            #HÄR PRINTAS LISTAN MED ALLA VAPEN I ENS INVENTORY
-            j = 1
-            for i in I.weapon_list:
-                if i != player.equipped_weapon:
-                    print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
-                    j += 1
-                if j-1 == len(I.weapon_list):
-                    print(j, ". Change nothing / Go back", sep='')
+                print(f"\nCurrent weapon: {player.equipped_weapon.name}")
+
+                print_slow("\nWhat weapon would you like to equip?\n", TEST)
+
+                #HÄR PRINTAS LISTAN MED ALLA VAPEN I ENS INVENTORY
+                j = 1
+                for i in temp_weapon_inventory:
+                    if i != player.equipped_weapon:
+                        print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
+                        j += 1
+                    if j-1 == len(temp_weapon_inventory):
+                        print(j, ". Change nothing / Go back", sep='')
+                    
+                weapon_equip_choice = int(input("\nChoice: "))
+
+                #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
+                if weapon_equip_choice != len(temp_weapon_inventory) + 1:
+                    for i in range(len(temp_weapon_inventory)):
+                        if weapon_equip_choice == i + 1:
+                            #HÄR TAS GAMLA WEAPONSTATS BORT
+                            player.max_hp -= player.equipped_weapon.max_hp_bonus
+                            player.hp -= player.equipped_weapon.hp_bonus
+                            player.str -= player.equipped_weapon.str_bonus
+                            player.spd -= player.equipped_weapon.spd_bonus
+                            player.inventory.append(player.equipped_weapon)
+
+                            player.equipped_weapon = temp_weapon_inventory[i]
+                            player.equipped_weapon.name = player.equipped_weapon.name
+                            player.inventory.pop(player.inventory.index(player.equipped_weapon))
                 
-            weapon_equip_choice = int(input("\nChoice: "))
-            
-            #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
-            if weapon_equip_choice != len(I.weapon_list) + 1:
-                for i in range(len(I.weapon_list)):
-                    if weapon_equip_choice == i + 1:
-                        player.equipped_weapon = I.weapon_list[i]
-                        player.equipped_weapon_name = player.equipped_weapon.name
-            
-                print_slow(f"\nYou equipped {player.equipped_weapon_name}.\n", TEST)
+                            print_slow(f"\nYou equipped {player.equipped_weapon.name}.\n", TEST)
 
-                #HÄR LÄGGS ALLA STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
+                    #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
 
-                player.max_hp += player.equipped_weapon.max_hp_bonus
-                player.str += player.equipped_weapon.str_bonus
-                player.spd += player.equipped_weapon.spd_bonus
+                    player.max_hp += player.equipped_weapon.max_hp_bonus
+                    player.hp += player.equipped_weapon.hp_bonus
+                    player.str += player.equipped_weapon.str_bonus
+                    player.spd += player.equipped_weapon.spd_bonus
+            else:
+                print_slow("\nNo weapons in inventory to equip\n", TEST)
                 
                 
                     
@@ -225,7 +244,7 @@ HP: {chosen_enemy.hp} / {chosen_enemy.max_hp}
 STR: {chosen_enemy.str}
 SPD: {chosen_enemy.spd}
 ''')
-    sleep(3)
+    sleep(2)
 
     while player.hp > 0 or chosen_enemy.hp > 0:
 
@@ -265,7 +284,7 @@ SPD: {chosen_enemy.spd}
         player.hp -= enemy_damage
 
         if first_attack_move == "player":
-            print_slow("\n" + P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name), TEST)
+            print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
 
             print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
             if chosen_enemy.hp > 0:
@@ -286,7 +305,7 @@ SPD: {chosen_enemy.spd}
             
             #IF STATEMENT HÄR OM DU DOG ELLER INTE
 
-            print_slow(P.attack_move_description(chosen_attack, player.name, "Excalibur", chosen_enemy.name), TEST)
+            print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
             
             print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
             if chosen_enemy.hp > 0:
@@ -300,13 +319,7 @@ SPD: {chosen_enemy.spd}
 
     print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
 
-
-
-def Inventory():
-    #FUNKTIONEN ÖPPNAR ENS INVENTORY OCH VISAR ENS STATS, SAMT HUR MÅNGA RUM MAN HAR VARIT I
-    print("uuh")
-
-
+    loot("enemy drop")
 
 def print_slow(str, write_speed):
     for letter in str:
@@ -317,6 +330,20 @@ def print_slow(str, write_speed):
             sleep(PUNCTUATION_PAUSE_TIME)
         elif letter == ",":
             sleep(COMMA_PAUSE_TIME)
+
+def loot(type):
+    if type == "enemy drop":
+        weapon_drop_chance = rand.randint(1, 1)
+        if weapon_drop_chance == 1:
+            print_slow("\nThe enemy dropped an item!", TEST)
+
+            dropped_weapon_index = rand.choices(I.weapon_list, weights=[100, 100, 100, 60, 20], k=1).pop()
+            dropped_weapon = I.create_weapon(dropped_weapon_index)
+            print_slow(f"\nYou picked up {dropped_weapon.name}.\n", TEST)
+            player.inventory.append(dropped_weapon)
+            player.shown_inventory.append(dropped_weapon.name)
+             
+
 
 
 def intro():
@@ -337,8 +364,8 @@ def level_up():
 cacambo = P.Player()
 cacambo.name = "Cacambo"
 cacambo.max_hp = 800
-cacambo.str = 60
-cacambo.spd = 20
+cacambo.str = 600
+cacambo.spd = 200
 cacambo.gold = 40
 
 #Candide
@@ -356,8 +383,6 @@ pangloss.max_hp = 300
 pangloss.str = 20
 pangloss.spd = 5
 pangloss.gold = 1
-
-
 
 
 
@@ -419,6 +444,7 @@ elif player_choice == 3: #PANGLOSS
 player.level = 1
 player.hp = player.max_hp
 player.inventory = []
+player.shown_inventory = []
 
 if player.exp >= player.level_limit:
     level_up()

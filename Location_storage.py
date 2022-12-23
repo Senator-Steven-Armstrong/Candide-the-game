@@ -35,7 +35,8 @@ skogen_travel_description1 = '''
 You decide to enter a great forest just beyond the horizon. You think nothing of it, but little do you know
 it's part of Rimbo, a deep and crazed hellhole. Upon entering a subtle heat and a disgusting stank fills your
 entire body. It only gets worse, until you find a small opening in the trees. Nothing but beautiful grass with
-rays of light shining through. However you quickly find yourself in panic as nearby bushes violently shake. 
+rays of light shining through. However you quickly find yourself in panic aiagin as nearby bushes violently shake
+and something jumps out at you. 
 '''
 skogen_travel_description2 = '''
 You decide to wander into a small, nearby forest. It's hard to even call it a forest, it's pretty much just one tree.

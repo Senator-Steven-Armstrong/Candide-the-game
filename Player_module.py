@@ -12,9 +12,9 @@ class Player():
     level = 0
     level_limit = 500
     inventory = []
+    shown_inventory = []
     debuffs = []
-    equipped_weapon = object()
-    equipped_weapon_name = "None"
+    equipped_weapon = I.fists
     
 
 attack_move_name_1 = "Dropkick"
