@@ -9,7 +9,6 @@ import random as rand
 
 
 
-
 TEST = 0.00000000000000000000000000000000000000000000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
@@ -95,8 +94,13 @@ def travel():
                 else:
                     print(f"\n[Please enter correct input; 1. {location1}, 2. {location2}, 3. {location3}]")   
             
-            
+            #HÄR KAN EN FÄLLA SKE------------------------------------------------------------------------
+            trap_chance = rand.randint(1, 1)
+            if trap_chance == 1:
+                trap(current_location)
 
+
+            #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
             if player == pangloss:
                 print_slow(L.TravelDescription(current_location, True), TEST)
             else:
@@ -442,9 +446,6 @@ Pick an equipment to change:
             print("\n[Please enter correct input; 1. Change equipment, 2. Go back]")
         
 
-        
-    
-
     
 
 
@@ -497,14 +498,26 @@ SPD: {chosen_enemy.spd}
     3: {attack_3}
         ''')
 
-        attack_choice = int(input("Choice: "))
+        while True:
+            while True:
+                try:
+                    attack_choice = int(input("Choice: "))
+                except:
+                    print("\n[Please enter a number]")
+                else:
+                    break
 
-        if attack_choice == 1:
-            chosen_attack = attack_1
-        elif attack_choice == 2:
-            chosen_attack = attack_2
-        elif attack_choice == 3:
-            chosen_attack = attack_3
+            if attack_choice == 1:
+                chosen_attack = attack_1
+                break
+            elif attack_choice == 2:
+                chosen_attack = attack_2
+                break
+            elif attack_choice == 3:
+                chosen_attack = attack_3
+                break
+            else:
+                print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
 
         chosen_enemy.hp -= player_damage
         player.hp -= enemy_damage
@@ -570,7 +583,34 @@ def loot(type):
             player.shown_inventory.append(dropped_weapon.name)
              
 
+def trap(location):
+    trap_type = rand.choice(["gold", "damage"])
 
+    gold_lost = rand.randint(20, 80)
+    player.gold -= gold_lost
+
+    if player.gold == 0 or player.gold - gold_lost < 0:
+        trap_type = "damage"
+
+    print_slow(L.trap_description(player.name, location, trap_type), TEST)
+
+    damage = rand.randint(15, 45)
+    player.hp -= damage
+
+    if trap_type == "gold":
+
+
+        print_slow(f"   - You lost {gold_lost} gold!  Gold: {player.gold}", TEST)
+        print_slow(f"\n   - You took {damage} damage!  HP: {player.hp} / {player.max_hp}\n", TEST)
+
+    elif trap_type == "damage":
+        
+        print_slow(f"   - You took {damage} damage!  HP: {player.hp} / {player.max_hp}\n", TEST)
+    
+    sleep(0.8)
+
+
+    
 
 def intro():
     print(Art.start)
@@ -610,7 +650,7 @@ pangloss.str = 20
 pangloss.spd = 5
 pangloss.gold = 1
 
-
+#------------------------------------------------------HÄR KÖRS HUVUDDELEN AV PROGRAMMET-------------------------------------------------------------------------------------------------------
 
 print_slow("Choose your character!", 0.01)
 sleep(0.5)
@@ -687,25 +727,22 @@ while True:
 #     level_up()
 
 # End arguments to call upon functions
+
+
+
 intro()
 
 current_location = ""
-
 
 for i in range(10):
     weapon_choice = rand.choice(I.item_list)
     player.inventory.append(I.create_item(weapon_choice))
 
-#HÄR KÖRS HuVUDDELEN AV PROGRAMMET-------------------------------------------------------------------------------------------------------
+
+for i in player.inventory:
+    player.shown_inventory.append(i.name)
 
 
 while True:
 
-    for i in player.inventory:
-        player.shown_inventory.append(i.name)
-
     travel()
-
-    for i in player.inventory:
-        player.shown_inventory.pop(player.inventory.index(i.name))
-

@@ -1,7 +1,7 @@
 import random as rand
 
 #LISTANS LÄNGD ÄR 12
-locations=["shop", "eldorado", "skogen","bulgarien","lissabon","venedig","turkiet","sydamerika","afrika","england","havet","fältet","tibble"]
+locations=["Shop", "Eldorado", "Forest","Bulgarien","Lissabon","Venedig","Turkey","South America","Africa","England","The Ocean","Great field","Tibble"]
 
 #TEXTER OCH DESCRIPTIONER OM VAR MAN ÅKER
 
@@ -234,35 +234,85 @@ def TravelDescription(chosen_location, is_pangloss):
     #FÖR ATT LÄGGA TILL FLER PLATSER, LÄGG TILL I LISTAN LOCATIONS ÖVER, OCH SEDAN KOPIERA EN RAD HÄR
     #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA minst 2 plats_tavel_text OCH 1 plats_travel_description_list.
 
-    if chosen_location == locations[locations.index("shop")]:
+    if chosen_location == locations[locations.index("Shop")]:
         returned_location = rand.choice(shop_travel_description_list)
-    elif chosen_location == locations[locations.index("eldorado")]:
+    elif chosen_location == locations[locations.index("Eldorado")]:
         returned_location = rand.choice(eldorado_travel_description_list)
-    elif chosen_location == locations[locations.index("skogen")]:
+    elif chosen_location == locations[locations.index("Forest")]:
         returned_location = rand.choice(skogen_travel_description_list)
-    elif chosen_location == locations[locations.index("bulgarien")]:
+    elif chosen_location == locations[locations.index("Bulgarien")]:
         returned_location = rand.choice(bulgarien_travel_description_list)
-    elif chosen_location == locations[locations.index("lissabon")]:
+    elif chosen_location == locations[locations.index("Lissabon")]:
         if is_pangloss == True:
             returned_location = rand.choice(lissabon_travel_description_list_pangloss)
         else:
             returned_location = rand.choice(lissabon_travel_description_list)
-    elif chosen_location == locations[locations.index("venedig")]:
+    elif chosen_location == locations[locations.index("Venedig")]:
         returned_location =  rand.choice(venedig_travel_description_list)
-    elif chosen_location == locations[locations.index("turkiet")]:
+    elif chosen_location == locations[locations.index("Turkey")]:
         returned_location =  rand.choice(turkiet_travel_description_list)
-    elif chosen_location == locations[locations.index("sydamerika")]:
+    elif chosen_location == locations[locations.index("South America")]:
         returned_location =  rand.choice(sydamerika_travel_description_list) 
-    elif chosen_location == locations[locations.index("afrika")]:
+    elif chosen_location == locations[locations.index("Africa")]:
         returned_location =  rand.choice(afrika_travel_description_list)
-    elif chosen_location == locations[locations.index("england")]:
+    elif chosen_location == locations[locations.index("England")]:
         returned_location =  rand.choice(england_travel_description_list) 
-    elif chosen_location == locations[locations.index("havet")]:
+    elif chosen_location == locations[locations.index("The Ocean")]:
         returned_location =  rand.choice(havet_travel_description_list)
-    elif chosen_location == locations[locations.index("fältet")]:
+    elif chosen_location == locations[locations.index("Great field")]:
         returned_location =  rand.choice(fältet_travel_description_list)
-    elif chosen_location == locations[locations.index("tibble")]:
+    elif chosen_location == locations[locations.index("Tibble")]:
         returned_location = rand.choice(tibble_travel_description_list) 
     
     # locations.pop(locations.index(returned_location))
     return returned_location
+
+#----------------------------------------------------------FÄLLOR-----------------------------------------------------------------
+
+def trap_description(player_name, location, trap_type):
+    
+    #HÄR INITIALISERAS BARA LISTORNA, SKRIV INGET I DE
+    gold_trap_description_list = []
+    damage_trap_description_list = []
+    
+
+    trap_description_1 = f'''On your way to {location}, you tripped on a small rock
+and scraped your knee, poor {player_name}.
+'''
+    damage_trap_description_list.append(trap_description_1)
+
+    trap_description_2 = f'''
+While crossing a huge field you accidentally stepped
+on an active landmine!
+    '''
+    damage_trap_description_list.append(trap_description_2)
+    
+    if location == "Lissabon":
+        trap_description_3 = f'''
+As you enter Lissabon a violent earthquake erupts
+and you are flunged into the air!
+        '''
+        damage_trap_description_list.append(trap_description_3)
+    else:
+        trap_description_3 = f'''
+Just as you start to wander a roving band of scammers
+emerge, they manage to convince you to drop some of your money! One of them also
+stabs you with a teeny tiny dagger.
+        '''
+        gold_trap_description_list.append(trap_description_3)
+    
+    trap_description_4 = f'''
+On your journey to {location}, you walked through a small city.
+Just as you are about to leave you trip over a small crack in the road. You hit your arm and
+some of your money falls out of your pocket and into the hole. Unfortunate.
+    '''
+    gold_trap_description_list.append(trap_description_4)
+
+
+    if trap_type == "gold":
+        returned_text = rand.choice(gold_trap_description_list)
+    elif trap_type == "damage":
+        returned_text = rand.choice(damage_trap_description_list)
+
+    return returned_text
+
