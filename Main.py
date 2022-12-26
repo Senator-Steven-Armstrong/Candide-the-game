@@ -128,6 +128,8 @@ def travel():
 
 
 def inventory():
+    is_equipped_item = False
+
     print_slow("\nYou opened your backpack.", TEST)
 
     print(f'''
@@ -167,8 +169,8 @@ Accessory: {player.equipped_accessory.name}
 2. Go back
         ''')
 
-    while True:    
-        inventory_choice = input("Choiceeee: ")
+    while is_equipped_item == False:    
+        inventory_choice = input("Choice: ")
         
         if inventory_choice == "1":
             #CHANGE EQUIPMENT
@@ -179,10 +181,12 @@ Pick an equipment to change:
 1. Weapon
 2. Armor
 3. Accessory
-''')    
-            while True:
 
-                item_change_choice = input("Choiaaace: ")
+4. Exit inventory
+''')    
+            while is_equipped_item == False:
+
+                item_change_choice = input("Choice: ")
 
                 if item_change_choice == "1":
                     #ÄNDRAR VAPEN-------------------------------------------------------------------------------------------------------
@@ -205,63 +209,67 @@ Pick an equipment to change:
                                 print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
                                 j += 1
                             if j-1 == len(temp_weapon_inventory):
-                                print(j, ". Change nothing / Go back", sep='')
+                                print(j, ". Change nothing / Exit inventory", sep='')
                             
                         
-                        while True:
+
+                        while is_equipped_item == False:
+
+                            while True:
                             
-                            try:
-                                weapon_equip_choice = int(input("\nChoice: "))
-                                
-                                #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
-                                if weapon_equip_choice != len(temp_weapon_inventory) + 1:
-                                    
-                                    for i in range(len(temp_weapon_inventory)):
-                                        
-                                        if weapon_equip_choice == i + 1:
-                                            #HÄR TAS GAMLA WEAPONSTATS BORT
-                                            player.max_hp -= player.equipped_weapon.max_hp_bonus
-                                            player.hp -= player.equipped_weapon.hp_bonus
-                                            player.str -= player.equipped_weapon.str_bonus
-                                            player.spd -= player.equipped_weapon.spd_bonus
-                                            player.inventory.append(player.equipped_weapon)
-
-                                            player.equipped_weapon = temp_weapon_inventory[i]
-                                            player.equipped_weapon.name = player.equipped_weapon.name
-                                            player.inventory.pop(player.inventory.index(player.equipped_weapon))
-
-                                            if player.equipped_weapon == I.fists:
-                                                print_slow("You holstered your weapon.", TEST)
-                                            else:
-                                                print_slow(f"\nYou equipped {player.equipped_weapon.name}.\n", TEST)
-                                                                            
-                                                
-                                            #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
-                                            player.max_hp += player.equipped_weapon.max_hp_bonus
-                                            player.hp += player.equipped_weapon.hp_bonus
-                                            player.str += player.equipped_weapon.str_bonus
-                                            player.spd += player.equipped_weapon.spd_bonus
-                                            break
-                                        else:
-                                            print("[Please enter correct input] 1")
-
-                                elif weapon_equip_choice == len(temp_weapon_inventory) + 1:
-                                    break
+                                try:
+                                    weapon_equip_choice = int(input("\nChoice: "))
+                                except:
+                                    print("[Please enter a number]")
                                 else:
-                                    print("[Please enter correct input] 2")
-                            except:
-                                print("[Please enter correct input] 3")
-                            else:
+                                    break
+
+                            #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
+                            if weapon_equip_choice == len(temp_weapon_inventory) + 1:
                                 break
+                            else:
+                                for i in range(len(temp_weapon_inventory)):
+                                    
+                                    if weapon_equip_choice == i + 1:
+                                        #HÄR TAS GAMLA WEAPONSTATS BORT
+                                        player.max_hp -= player.equipped_weapon.max_hp_bonus
+                                        player.hp -= player.equipped_weapon.hp_bonus
+                                        player.str -= player.equipped_weapon.str_bonus
+                                        player.spd -= player.equipped_weapon.spd_bonus
+                                        player.inventory.append(player.equipped_weapon)
+
+                                        player.equipped_weapon = temp_weapon_inventory[i]
+                                        player.equipped_weapon.name = player.equipped_weapon.name
+                                        player.inventory.pop(player.inventory.index(player.equipped_weapon))
+
+                                        if player.equipped_weapon == I.fists:
+                                            print_slow("You holstered your weapon.\n", TEST)
+                                        else:
+                                            print_slow(f"\nYou equipped {player.equipped_weapon.name}.\n", TEST)
+                                                                        
+                                            
+                                        #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
+                                        player.max_hp += player.equipped_weapon.max_hp_bonus
+                                        player.hp += player.equipped_weapon.hp_bonus
+                                        player.str += player.equipped_weapon.str_bonus
+                                        player.spd += player.equipped_weapon.spd_bonus
+
+                                        is_equipped_item = True
+                                        break
+                                    else:
+                                        if i == len(temp_weapon_inventory) - 1:
+                                            print("[Please choose a weapon to equip, or exit inventory]")
+ 
+
                     else:
                         print_slow("\nNo weapons in inventory to equip\n", TEST)
                         break
-                    break
-            
-                        
+                    
+                    
                 
                 elif item_change_choice == "2":
                     #ÄNDRAR ARMOR----------------------------------------------------------------------------------------------------
+                 
                     temp_armor_inventory = []
                     for i in player.inventory:
                         if i.type == "armor":
@@ -273,49 +281,73 @@ Pick an equipment to change:
 
                         print_slow("\nWhat armor would you like to equip?\n", TEST)
 
-                        #HÄR PRINTAS LISTAN MED ALLA VAPEN I ENS INVENTORY
+                        #HÄR PRINTAS LISTAN MED ALLA ARMORPIECES I ENS INVENTORY
                         j = 1
                         for i in temp_armor_inventory:
                             if i != player.equipped_armor:
                                 print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
                                 j += 1
                             if j-1 == len(temp_armor_inventory):
-                                print(j, ". Change nothing / Go back", sep='')
+                                print(j, ". Change nothing / Exit inventory", sep='')
                             
-                        armor_equip_choice = int(input("\nChoice: "))
-
-                        #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
-                        if armor_equip_choice != len(temp_armor_inventory) + 1:
-                            for i in range(len(temp_armor_inventory)):
-                                if armor_equip_choice == i + 1:
-                                    #HÄR TAS GAMLA armorSTATS BORT
-                                    player.max_hp -= player.equipped_armor.max_hp_bonus
-                                    player.hp -= player.equipped_armor.hp_bonus
-                                    player.str -= player.equipped_armor.str_bonus
-                                    player.spd -= player.equipped_armor.spd_bonus
-                                    player.inventory.append(player.equipped_armor)
-
-                                    player.equipped_armor = temp_armor_inventory[i]
-                                    player.equipped_armor.name = player.equipped_armor.name
-                                    player.inventory.pop(player.inventory.index(player.equipped_armor))
                         
-                                    if player.equipped_armor == I.empty_armor:
-                                        print_slow("You unequipped your armor.", TEST)
+
+                        while is_equipped_item == False:
+
+                            while True:
+                            
+                                try:
+                                    armor_equip_choice = int(input("\nChoice: "))
+                                except:
+                                    print("[Please enter a number]")
+                                else:
+                                    break
+
+                            #HÄR KOLLAR DEN VILKEN ARMOR MAN EQUIPAR
+                            if armor_equip_choice == len(temp_armor_inventory) + 1:
+                                break
+                            else:
+                                for i in range(len(temp_armor_inventory)):
+                                    
+                                    if armor_equip_choice == i + 1:
+                                        #HÄR TAS GAMLA armorSTATS BORT
+                                        player.max_hp -= player.equipped_armor.max_hp_bonus
+                                        player.hp -= player.equipped_armor.hp_bonus
+                                        player.str -= player.equipped_armor.str_bonus
+                                        player.spd -= player.equipped_armor.spd_bonus
+                                        player.inventory.append(player.equipped_armor)
+
+                                        player.equipped_armor = temp_armor_inventory[i]
+                                        player.equipped_armor.name = player.equipped_armor.name
+                                        player.inventory.pop(player.inventory.index(player.equipped_armor))
+
+                                        if player.equipped_armor == I.fists:
+                                            print_slow("You took off your armor.\n", TEST)
+                                        else:
+                                            print_slow(f"\nYou equipped {player.equipped_armor.name}.\n", TEST)
+                                                                        
+                                            
+                                        #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT EN ARMORPIECE
+                                        player.max_hp += player.equipped_armor.max_hp_bonus
+                                        player.hp += player.equipped_armor.hp_bonus
+                                        player.str += player.equipped_armor.str_bonus
+                                        player.spd += player.equipped_armor.spd_bonus
+
+                                        is_equipped_item = True
+                                        break
                                     else:
-                                        print_slow(f"\nYou equipped {player.equipped_armor.name}.\n", TEST)
+                                        if i == len(temp_armor_inventory) - 1:
+                                            print("[Please choose an armorpiece to equip, or exit inventory]")
 
-                            #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
+                            if is_equipped_item == True:
+                                break  
 
-                            player.max_hp += player.equipped_armor.max_hp_bonus
-                            player.hp += player.equipped_armor.hp_bonus
-                            player.str += player.equipped_armor.str_bonus
-                            player.spd += player.equipped_armor.spd_bonus
                     else:
-                        print_slow("\nNo armor in inventory to equip.\n", TEST)
-                        break    
-            
-
-
+                        print_slow("\nNo armorpieces in inventory to equip\n", TEST)
+                        break
+                    
+                    
+                
                 elif item_change_choice == "3":
                     #ÄNDRAR ACCESSORY----------------------------------------------------------------------------------------------------
                     temp_accessory_inventory = []
@@ -329,56 +361,86 @@ Pick an equipment to change:
 
                         print_slow("\nWhich accessory would you like to equip?\n", TEST)
 
-                        #HÄR PRINTAS LISTAN MED ALLA VAPEN I ENS INVENTORY
+                        #HÄR PRINTAS LISTAN MED ALLA ACCESSORIES I ENS INVENTORY
                         j = 1
                         for i in temp_accessory_inventory:
                             if i != player.equipped_accessory:
                                 print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
                                 j += 1
                             if j-1 == len(temp_accessory_inventory):
-                                print(j, ". Change nothing / Go back", sep='')
+                                print(j, ". Change nothing / Exit inventory", sep='')
                             
-                        accessory_equip_choice = int(input("\nChoice: "))
-
-                        #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
-                        if accessory_equip_choice != len(temp_accessory_inventory) + 1:
-                            for i in range(len(temp_accessory_inventory)):
-                                if accessory_equip_choice == i + 1:
-                                    #HÄR TAS GAMLA accessorySTATS BORT
-                                    player.max_hp -= player.equipped_accessory.max_hp_bonus
-                                    player.hp -= player.equipped_accessory.hp_bonus
-                                    player.str -= player.equipped_accessory.str_bonus
-                                    player.spd -= player.equipped_accessory.spd_bonus
-                                    player.inventory.append(player.equipped_accessory)
-
-                                    player.equipped_accessory = temp_accessory_inventory[i]
-                                    player.equipped_accessory.name = player.equipped_accessory.name
-                                    player.inventory.pop(player.inventory.index(player.equipped_accessory))
                         
-                                    if player.equipped_accessory == I.empty_accessory:
-                                        print_slow("You put your accessory back in the bag.", TEST)
+
+                        while is_equipped_item == False:
+
+                            while True:
+                            
+                                try:
+                                    accessory_equip_choice = int(input("\nChoice: "))
+                                except:
+                                    print("[Please enter a number]")
+                                else:
+                                    break
+
+                            #HÄR KOLLAR DEN VILKEN ACCESSORY MAN EQUIPAR
+                            if accessory_equip_choice == len(temp_accessory_inventory) + 1:
+                                break
+                            else:
+                                for i in range(len(temp_accessory_inventory)):
+                                    
+                                    if accessory_equip_choice == i + 1:
+                                        #HÄR TAS GAMLA accessorySTATS BORT
+                                        player.max_hp -= player.equipped_accessory.max_hp_bonus
+                                        player.hp -= player.equipped_accessory.hp_bonus
+                                        player.str -= player.equipped_accessory.str_bonus
+                                        player.spd -= player.equipped_accessory.spd_bonus
+                                        player.inventory.append(player.equipped_accessory)
+
+                                        player.equipped_accessory = temp_accessory_inventory[i]
+                                        player.equipped_accessory.name = player.equipped_accessory.name
+                                        player.inventory.pop(player.inventory.index(player.equipped_accessory))
+
+                                        if player.equipped_accessory == I.fists:
+                                            print_slow("You put your accessory back in your backpack.\n", TEST)
+                                        else:
+                                            print_slow(f"\nYou equipped {player.equipped_accessory.name}.\n", TEST)
+                                                                        
+                                            
+                                        #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT EN ACCESSORY
+                                        player.max_hp += player.equipped_accessory.max_hp_bonus
+                                        player.hp += player.equipped_accessory.hp_bonus
+                                        player.str += player.equipped_accessory.str_bonus
+                                        player.spd += player.equipped_accessory.spd_bonus
+
+                                        is_equipped_item = True
+                                        break
                                     else:
-                                        print_slow(f"\nYou equipped {player.equipped_accessory.name}.\n", TEST)
+                                        if i == len(temp_accessory_inventory) - 1:
+                                            print("[Please choose an accessory to equip, or exit inventory]")
 
-                            #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
+                            if is_equipped_item == True:
+                                break  
 
-                            player.max_hp += player.equipped_accessory.max_hp_bonus
-                            player.hp += player.equipped_accessory.hp_bonus
-                            player.str += player.equipped_accessory.str_bonus
-                            player.spd += player.equipped_accessory.spd_bonus
                     else:
-                        print_slow("\nNo accessory in inventory to equip.\n", TEST)
+                        print_slow("\nNo accessories in inventory to equip\n", TEST)
+                        break
+                
+                elif item_change_choice == 4:
                     break
-        
                 else:
-                    print("\n[Please enter correct input; 1. Weapon, 2. Armor, 3. Accessory]") 
+                    print("\n[Please enter correct input; 1. Armor, 2. Weapon, 3. Accessory, 4. Exit]")    
+                    
+                 
+                
+            break
             
 
         elif inventory_choice == "2":
             break
         else:
             print("\n[Please enter correct input; 1. Change equipment, 2. Go back]")
-        break
+        
 
         
     
@@ -629,12 +691,21 @@ intro()
 
 current_location = ""
 
+
 for i in range(10):
     weapon_choice = rand.choice(I.item_list)
     player.inventory.append(I.create_item(weapon_choice))
 
+#HÄR KÖRS HuVUDDELEN AV PROGRAMMET-------------------------------------------------------------------------------------------------------
+
+
 while True:
+
     for i in player.inventory:
         player.shown_inventory.append(i.name)
 
     travel()
+
+    for i in player.inventory:
+        player.shown_inventory.pop(player.inventory.index(i.name))
+
