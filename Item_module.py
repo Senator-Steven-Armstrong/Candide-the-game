@@ -24,7 +24,7 @@ empty_accessory = Item()
 empty_accessory.type = "accessory"
 empty_accessory.name = "None"
 
-item_list=          ["dagger", "bow", "sword", "explosive", "ultra_greatsword", "crusader helm", "leather boots", "philosophy book", "Voltaire's pencil"]
+item_list=          ["dagger", "bow", "sword", "explosive", "ultra_greatsword", "crusader helm", "leather boots", "philosophy book", "voltaire's pencil"]
 item_rarity_list =  [100,       100,   100,     60,          20,                 100,             100,             100,               100]
 
 
@@ -99,7 +99,7 @@ def create_item(choice):
         philosophy_book.spd_bonus = rand.randint(5, 8)
         philosophy_book.cost = rand.randint(1, 5)
         return philosophy_book
-    elif choice == "Voltaire's pencil":
+    elif choice == "voltaire's pencil":
         pencil = Item()
         pencil.type = "accessory"
         pencil.name = "Voltaire's pencil"
