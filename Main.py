@@ -2,7 +2,7 @@ import Art
 from time import sleep
 import sys,time
 import Player_module as P
-import Location_storage as L
+import Location_and_description_storage as L
 import Enemy_module as E
 import Item_module as I
 import random as rand
@@ -57,22 +57,31 @@ def travel():
             sleep(0.5)
 
             temporary_locations = list(L.locations)
-            if current_location != "":
-                temporary_locations.pop(L.locations.index(current_location))
 
-                #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-                location1 = rand.choices(temporary_locations, weights=[60, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+            #ELDORADO KAN BARA BESÖKAS EN GÅNG, OM DEN BESÖKS KOMMER DEN INTE LÄNGRE VARA MED I LISTAN L.Locations OCH DÄRMED KÖRS KODEN:
+            if L.locations.count("Eldorado") == 0:
+                location1 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
                 temporary_locations.remove(location1)
-                location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                location2 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                 temporary_locations.remove(location2)
-                location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                location3 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             else:
-                #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten
-                location1 = rand.choices(temporary_locations, weights=[0, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                temporary_locations.remove(location1)
-                location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                temporary_locations.remove(location2)
-                location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                if current_location != "":
+                    temporary_locations.pop(L.locations.index(current_location))
+
+                    #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
+                    location1 = rand.choices(temporary_locations, weights=[60, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+                    temporary_locations.remove(location1)
+                    location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                    temporary_locations.remove(location2)
+                    location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                else:
+                    #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
+                    location1 = rand.choices(temporary_locations, weights=[0, 999999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                    temporary_locations.remove(location1)
+                    location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                    temporary_locations.remove(location2)
+                    location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
 
             print(f'''
 
@@ -99,17 +108,43 @@ def travel():
             
 
 
+            #HÄR KOLLAS DET HUR OM MAN HAR COE OCH DÄREFTER TAS PENGAR BORT
+            if player.curse_of_eldorado > 0:
+                print_slow(L.eldorado_lost_gold_description(player.curse_of_eldorado), TEST)
 
-            # #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
-            # if player == pangloss:
-            #     print_slow(L.TravelDescription(current_location, True), TEST)
-            # else:
-            #     print_slow(L.TravelDescription(current_location, False), TEST)
+                if player.curse_of_eldorado > 1:
+                    player.gold -= int(ELDORADO_MONEY_BONUS / 3 )
+
+                    print_slow(f"    - You lost {int(ELDORADO_MONEY_BONUS/3)} gold!\n\n", TEST)
+                    sleep(0.5) 
+                elif player.curse_of_eldorado == 1:
+                    player.gold = 0
+
+                    print_slow(f"   - You lost all of your money!\n\n", TEST)
+                    sleep(0.8)
+
+                player.curse_of_eldorado -= 1
+
+
+
+            #HÄR KOLLAS DET OM MAN HAMNAR I EN FÄLLA ELLER INTE
+            trap_chance = rand.randint(1, 1)
+            if trap_chance == 1 and current_location != "Eldorado":
+                trap(current_location)  
+
+            #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
+            if player == pangloss:
+                print_slow(L.TravelDescription(current_location, True), TEST)
+            else:
+                print_slow(L.TravelDescription(current_location, False), TEST)
+
+        
+
 
             if current_location == "Eldorado":
                 #ELDORADO----------------------------------------------------------------------------------------------------------
                 
-                print_slow("\n          Stay                  Leave\n", 0.1)
+                print_slow("\n                     Stay                  Leave\n", 0.1)
                 
                 print_slow("\nChoice: ", 0.18)
 
@@ -128,26 +163,24 @@ You decide to leave, to journey out and take back Kunigunda once and for all!
 You are taken to the outskirts of the deep valley that Eldorado resides in. 
 The "King" offers you riches to help with you quest, and you gladly accept. 
 102 sheep packed full with gold and jewels will accompany you. 
-You leave richer than all of the European kings combined. You say your final goodbyes
-as you see paradise for the last time. You start to wander once more,
-your spirit and pockets bigger than ever.
+You leave richer than all of the European kings combined, but something feels off.
+Final goodbyes are said and you get one last glimpse of paradise. 
+You start to wander once more, your spirit and pockets bigger than ever.
 ''', TEST)
 
                         player.curse_of_eldorado = 3
                         player.gold = ELDORADO_MONEY_BONUS
+                        L.locations.remove("Eldorado")
                         break
                     else:
-                        print_slow("\nLeave or stay, choose:", 0.15)
+                        print_slow("\nLeave or stay, choose: ", 0.15)
                 
 
             elif current_location == "Shop":
                 #SHOP
                 print("")
             else:
-                #HÄR KAN EN FÄLLA SKE OCH SEDAN EN FIGHT------------------------------------------------------------------------
-                trap_chance = rand.randint(1, 1)
-                if trap_chance == 1:
-                    trap(current_location)
+                #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
 
                 fight()
 
@@ -621,12 +654,12 @@ def loot(type):
 
 def trap(location):
     trap_type = rand.choice(["gold", "damage"])
-
     gold_lost = rand.randint(20, 80)
-    player.gold -= gold_lost
 
-    if player.gold == 0 or player.gold - gold_lost < 0:
+    if player.gold == 0 or player.gold - gold_lost <= 0:
         player.gold = 0
+        trap_type = "damage"
+    elif player.curse_of_eldorado > 0:
         trap_type = "damage"
 
     print_slow(L.trap_description(player.name, location, trap_type), TEST)
@@ -635,7 +668,7 @@ def trap(location):
     player.hp -= damage
 
     if trap_type == "gold":
-
+        player.gold -= gold_lost
 
         print_slow(f"   - You lost {gold_lost} gold!  Gold: {player.gold}", TEST)
         print_slow(f"\n   - You took {damage} damage!  HP: {player.hp} / {player.max_hp}\n", TEST)

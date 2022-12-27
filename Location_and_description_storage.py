@@ -255,10 +255,13 @@ def TravelDescription(chosen_location, is_pangloss):
     #FÖR ATT LÄGGA TILL FLER PLATSER, LÄGG TILL I LISTAN LOCATIONS ÖVER, OCH SEDAN KOPIERA EN RAD HÄR
     #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA minst 2 plats_tavel_text OCH 1 plats_travel_description_list.
 
+    returned_location = ""
+
     if chosen_location == locations[locations.index("Shop")]:
         returned_location = rand.choice(shop_travel_description_list)
-    elif chosen_location == locations[locations.index("Eldorado")]:
-        returned_location = rand.choice(eldorado_travel_description_list)
+    elif locations.count("Eldorado") != 0:
+        if chosen_location == locations[locations.index("Eldorado")]:
+            returned_location = rand.choice(eldorado_travel_description_list)
     elif chosen_location == locations[locations.index("Forest")]:
         returned_location = rand.choice(skogen_travel_description_list)
     elif chosen_location == locations[locations.index("Bulgarien")]:
@@ -337,3 +340,37 @@ some of your money falls out of your pocket and into the hole. Unfortunate.
 
     return returned_text
 
+#-----------------------------------------------ELDORADO FÖRLORADE PENGAR TEXT------------------------------------------------------
+
+eldorado_lost_gold_description_1 ='''
+Some of the sheep carrying gold died of starvation and exhaustion while wandering.
+    '''
+
+eldorado_lost_gold_description_2 ='''
+To reach your destination, you had to cross a large body of water, and you saw a merchant
+selling transportation. You negotiated the price of travel with the merchant
+but he managed to haggle you for your money.
+    '''
+
+    
+eldorado_lost_gold_description_3 ='''
+While walking through a small city, a small group of thieves attack you!
+They take as much gold as they can carry.
+    '''
+
+
+eldorado_lost_gold_description_final ='''
+The endless riches burden you, they bring nothing but suffering.
+On your journey you meet and old friend, Paquette, and what seems to be her man, a monk.
+You decide to give away the rest of the gold you got from Eldorado to each of them.
+You also threw away the last of the gold left you got from slaying enemies.
+    '''
+
+eldorado_lost_gold_description_list = [eldorado_lost_gold_description_1, eldorado_lost_gold_description_2, eldorado_lost_gold_description_3]
+    
+
+def eldorado_lost_gold_description(curse_amount):
+    if curse_amount > 1:
+        return rand.choice(eldorado_lost_gold_description_list)
+    elif curse_amount == 1:
+        return eldorado_lost_gold_description_final
