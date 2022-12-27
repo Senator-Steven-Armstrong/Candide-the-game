@@ -21,10 +21,31 @@ shop_travel_description_list = [shop_travel_description1, shop_travel_descriptio
 
 #ELDORADO
 eldorado_travel_description1 = '''
-ooga boooga bo
+As you continue your journey, you walk through a dense forest. While in the forest you find yourself on the
+wrong side of a small river. While trying to cross it you accidentally slip in. You hit your head on some
+rocks and everying becomes black...
+When you wake up the first thing you see is gold. "Am I in heaven?", you wonder. You sit up and look around.
+You seem to be in some sort of palace, it's beautiful, gemstones and riches covering every surface. There are 
+other people in the room with you, and a man with a bigger silhouette enters. The other people respectfully
+greet him. He comes closer, greets you with a smile, and introduces himself as the "King" of Eldorado,
+the mystical country enshrouded in legend.
+You stay there in peace for one month, but soon come to an ultimatum. You can't keep Kunigunda waiting anymore.
+Either you stay, a peaceful life in Eldorado but without the love of your life. Or you leave,
+go to the dark hell that is the rest of the world, but let Kuniganda light it up when you finally save her.
 '''
 eldorado_travel_description2 = '''
-ooga afrika ooga
+You keep on wandering throughout the world, eventually stumbling onto a small river with a rickety boat
+tied up neabry. No one seems to have used the boat for years and your legs ache after all the walking,
+so you decide to take it and ride downstream. The once small forest around you becomes denser, and the river
+even thinner. Eventually you reach what seems to be the end of the river, a tight tunnel. You smash into 
+multiple rocks until one of them breaks your boat. 
+You hit your head on it and everything becomes black...
+You wake up on a small shore, covered in shining gems. Just as you start to awake a small group of people
+closes in and picks you up. You are carried for a while, until eventually stopping inside a great palace.
+A big man on a big chair introduces himself as the "King" of Eldorado, the hidden land of endless riches.
+He happily lets you stay and the locals help you recover, but fate eventually catches up to you one month later.
+You either stay and live happily in Eldorado, without Kunigunda, or you leave,
+conquering the rest of your journey, and eventually the rest of your life with Kunigunda.
 '''
 eldorado_travel_description_list = [eldorado_travel_description1, eldorado_travel_description2]
 

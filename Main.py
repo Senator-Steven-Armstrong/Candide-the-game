@@ -13,6 +13,8 @@ TEST = 0.00000000000000000000000000000000000000000000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
 
+ELDORADO_MONEY_BONUS = 9999999999
+
 total_turns = 0
 
 
@@ -45,6 +47,7 @@ def travel():
         if choice == "1":
             #INVENTORY
             inventory()
+            
             break
         elif choice == "2":
             
@@ -58,14 +61,14 @@ def travel():
                 temporary_locations.pop(L.locations.index(current_location))
 
                 #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-                location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+                location1 = rand.choices(temporary_locations, weights=[60, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
                 temporary_locations.remove(location1)
                 location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                 temporary_locations.remove(location2)
                 location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
             else:
                 #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten
-                location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                location1 = rand.choices(temporary_locations, weights=[0, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                 temporary_locations.remove(location1)
                 location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                 temporary_locations.remove(location2)
@@ -94,25 +97,58 @@ def travel():
                 else:
                     print(f"\n[Please enter correct input; 1. {location1}, 2. {location2}, 3. {location3}]")   
             
-            #HÄR KAN EN FÄLLA SKE------------------------------------------------------------------------
-            trap_chance = rand.randint(1, 1)
-            if trap_chance == 1:
-                trap(current_location)
 
 
-            #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
-            if player == pangloss:
-                print_slow(L.TravelDescription(current_location, True), TEST)
-            else:
-                print_slow(L.TravelDescription(current_location, False), TEST)
 
-            if current_location == "eldorado":
-                #ELDORADO
-                print("eldorado")
-            elif current_location == "shop":
+            # #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
+            # if player == pangloss:
+            #     print_slow(L.TravelDescription(current_location, True), TEST)
+            # else:
+            #     print_slow(L.TravelDescription(current_location, False), TEST)
+
+            if current_location == "Eldorado":
+                #ELDORADO----------------------------------------------------------------------------------------------------------
+                
+                print_slow("\n          Stay                  Leave\n", 0.1)
+                
+                print_slow("\nChoice: ", 0.18)
+
+                while True:
+                    eldorado_ending_choice = input()
+
+                    if eldorado_ending_choice.lower() == "stay":
+                        print("You decide to stay. good ending")
+
+                        break
+                    elif eldorado_ending_choice.lower() == "leave":
+                        
+                        print_slow('''
+You decide to leave, to journey out and take back Kunigunda once and for all!
+
+You are taken to the outskirts of the deep valley that Eldorado resides in. 
+The "King" offers you riches to help with you quest, and you gladly accept. 
+102 sheep packed full with gold and jewels will accompany you. 
+You leave richer than all of the European kings combined. You say your final goodbyes
+as you see paradise for the last time. You start to wander once more,
+your spirit and pockets bigger than ever.
+''', TEST)
+
+                        player.curse_of_eldorado = 3
+                        player.gold = ELDORADO_MONEY_BONUS
+                        break
+                    else:
+                        print_slow("\nLeave or stay, choose:", 0.15)
+                
+
+            elif current_location == "Shop":
                 #SHOP
                 print("")
             else:
+                #HÄR KAN EN FÄLLA SKE OCH SEDAN EN FIGHT------------------------------------------------------------------------
+                trap_chance = rand.randint(1, 1)
+                if trap_chance == 1:
+                    trap(current_location)
+
                 fight()
 
             if total_turns == 10:
@@ -590,6 +626,7 @@ def trap(location):
     player.gold -= gold_lost
 
     if player.gold == 0 or player.gold - gold_lost < 0:
+        player.gold = 0
         trap_type = "damage"
 
     print_slow(L.trap_description(player.name, location, trap_type), TEST)

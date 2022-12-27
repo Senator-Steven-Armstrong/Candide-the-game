@@ -17,6 +17,7 @@ class Player():
     equipped_weapon = I.fists
     equipped_armor = I.empty_armor
     equipped_accessory = I.empty_accessory
+    curse_of_eldorado = 0 #COE FUNGERAR SÅ ATT DEN ÄR 0 TILLS MAN KOMMER TILL ELDORADO, OM MAN LÄMNAR BLIR COE 3, OCH FÖR VARJE RUNDA GÅR DEN NER MED 1 DÄR MAN FÖRLORAR 1/3 AV SINA PENGAR 
     
 
 attack_move_name_1 = "Dropkick"
