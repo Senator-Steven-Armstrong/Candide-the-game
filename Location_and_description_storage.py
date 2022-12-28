@@ -308,28 +308,28 @@ and scraped your knee, poor {player_name}.
     trap_description_2 = f'''
 While crossing a huge field you accidentally stepped
 on an active landmine!
-    '''
+'''
     damage_trap_description_list.append(trap_description_2)
     
     if location == "Lissabon":
         trap_description_3 = f'''
 As you enter Lissabon a violent earthquake erupts
 and you are flunged into the air!
-        '''
+'''
         damage_trap_description_list.append(trap_description_3)
     else:
         trap_description_3 = f'''
 Just as you start to wander a roving band of scammers
 emerge, they manage to convince you to drop some of your money! One of them also
 stabs you with a teeny tiny dagger.
-        '''
+'''
         gold_trap_description_list.append(trap_description_3)
     
     trap_description_4 = f'''
 On your journey to {location}, you walked through a small city.
 Just as you are about to leave you trip over a small crack in the road. You hit your arm and
-some of your money falls out of your pocket and into the hole. Unfortunate.
-    '''
+some of your money fell out of your pocket and into the hole. Unfortunate.
+'''
     gold_trap_description_list.append(trap_description_4)
 
 

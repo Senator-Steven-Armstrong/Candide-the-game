@@ -15,8 +15,11 @@ COMMA_PAUSE_TIME = 0.15
 
 ELDORADO_MONEY_BONUS = 9999999999
 
+current_location = ""
 total_turns = 0
+good_ending = False
 
+game_over = False
 
 
 def start():
@@ -36,6 +39,7 @@ def travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
     #VI MÅSTE RÄKNA HUR MÅNGA RUM MAN HAR VARIT I
     global current_location
+    global total_turns
 
 
     print_slow("\nWould you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
@@ -152,8 +156,26 @@ def travel():
                     eldorado_ending_choice = input()
 
                     if eldorado_ending_choice.lower() == "stay":
-                        print("You decide to stay. good ending")
+                        print_slow('''
+You decide to stay, to leave your old horrid life behind,
+and to live on in the best of all possible worlds, Eldorado.
 
+The "King" embraces you with open arms, You feel a wave of relief, but something
+feels wrong at the same time. 
+Kunigunda is still out there.. Maybe someone else will save her, or maybe fate 
+has other plans for you, perhaps she is saved in another of all possible worlds...
+
+You live the rest of your life in prosperity in the golden land of Eldorado.
+You make friends with many of the locals, and soon adopt their religion. Thinking back
+on your old ways of thinking you can't help but feel as it all has been a lie, as
+the people of Eldorado live so much better with a less restricted religion.
+Eventually the thought of wealth dissappears from your mind, you start a family,
+have kids, and grow old with your loved one's.
+
+This truly is the best of all possible worlds...
+''', TEST)
+
+                        good_ending = True
                         break
                     elif eldorado_ending_choice.lower() == "leave":
                         
@@ -191,6 +213,8 @@ You start to wander once more, your spirit and pockets bigger than ever.
             elif total_turns == 30:
                 print("Bossfight")
             
+            total_turns += 1
+
             break
         else:
             print("\n[Please enter correct input; 1. Inventory, 2. Travel]")
@@ -221,14 +245,27 @@ Gold: {player.gold}
 Debuffs: {player.debuffs}
 
 INVENTORY:''')
-    print(player.shown_inventory)
+    
+    j = 1
+    inventory_row = ""
+    for i in player.shown_inventory:
+        if j-1 == 0 or (j-1) % 3 == 0:
+            inventory_row = i
+
+        if j % 3 != 0:
+            inventory_row = inventory_row + ", " + i
+        elif j % 3 == 0:
+            print("|| " + inventory_row + " ||")
+        j += 1
+        
 
     print(f'''
-
 EQUIPPED ITEMS:
 Weapon: {player.equipped_weapon.name}
 Armor: {player.equipped_armor.name}
 Accessory: {player.equipped_accessory.name}
+
+Countries traveled: {total_turns}
 
 --------------------------------------------------------------------------------------------------------------------------
     ''')
@@ -802,17 +839,48 @@ while True:
 
 intro()
 
-current_location = ""
 
+#TEMPORÄR TILLÄG AV ITEMS
 for i in range(10):
     weapon_choice = rand.choice(I.item_list)
     player.inventory.append(I.create_item(weapon_choice))
 
 
-for i in player.inventory:
-    player.shown_inventory.append(i.name)
-
 
 while True:
 
+    
+    for i in player.inventory:
+        player.shown_inventory.append(i.name)
+
     travel()
+  
+    for i in player.inventory:
+        player.shown_inventory.remove(i.name)
+
+    if player.hp == 0:
+        print_slow("\n[You died]", 0.1)
+        game_over = True
+        break
+    elif good_ending == True:
+        print_slow("\n[Good ending]", 0.1)
+        game_over = True
+        break
+
+print_slow("\nGAME SUMMARY:", 0.05)
+sleep(0.5)
+
+print(f'''
+PLAYER CHARARACTER: {player.name}
+LEVEL: {player.level}
+
+STR: {player.str}
+SPD: {player. spd}
+
+WEAPON: {player.equipped_weapon}
+ARMOR: {player.equipped_armor}
+ACCESSORY: {player.equipped_accessory}
+
+COUNTRIES TRAVERSED: {total_turns}
+''')
+    
