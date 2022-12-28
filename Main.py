@@ -206,11 +206,11 @@ You start to wander once more, your spirit and pockets bigger than ever.
 
                 fight()
 
-            if total_turns == 10:
+            if total_turns == 1:
                 print("Bossfight")
-            elif total_turns == 20:
+            elif total_turns == 2:
                 print("Bossfight")
-            elif total_turns == 30:
+            elif total_turns == 3:
                 print("Bossfight")
             
             total_turns += 1
@@ -246,18 +246,19 @@ Debuffs: {player.debuffs}
 
 INVENTORY:''')
     
+    #PRINTAR INVENTORYN
     j = 1
     inventory_row = ""
     for i in player.shown_inventory:
         if j-1 == 0 or (j-1) % 3 == 0:
             inventory_row = i
-
-        if j % 3 != 0:
-            inventory_row = inventory_row + ", " + i
-        elif j % 3 == 0:
-            print("|| " + inventory_row + " ||")
-        j += 1
+        elif j-1 % 3 != 0:
+            inventory_row = inventory_row + " || " + i
         
+        if j % 3 == 0 or j == len(player.inventory):
+            print("|| " + inventory_row + " ||")
+
+        j += 1
 
     print(f'''
 EQUIPPED ITEMS:
@@ -552,8 +553,11 @@ Pick an equipment to change:
             print("\n[Please enter correct input; 1. Change equipment, 2. Go back]")
         
 
+def enemy_level_multiplier(player_level):
+    multiplier = 1
+    multiplier *= (1.25**player_level-1)
+    return int(multiplier)
     
-
 
 def fight():
     #FIGHT
@@ -568,7 +572,15 @@ def fight():
 
     print_slow(E.fight_begin_description(chosen_enemy), TEST)
 
+    chosen_enemy.max_hp *= enemy_level_multiplier(player.level)
+    chosen_enemy.str *= enemy_level_multiplier(player.level)
+    chosen_enemy.spd *= enemy_level_multiplier(player.level)
+    chosen_enemy.exp_dropped *= enemy_level_multiplier(player.level)
+    chosen_enemy.gold_dropped *= enemy_level_multiplier(player.level)
+
+    
     chosen_enemy.hp = chosen_enemy.max_hp
+
 
     print_slow("\nEnemy stats: ", TEST)
     sleep(PUNCTUATION_PAUSE_TIME)
@@ -629,7 +641,7 @@ SPD: {chosen_enemy.spd}
         player.hp -= enemy_damage
 
         if first_attack_move == "player":
-            print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
+            print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
 
             print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
             if chosen_enemy.hp > 0:
@@ -664,6 +676,12 @@ SPD: {chosen_enemy.spd}
 
     print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
 
+    player.gold += chosen_enemy.gold_dropped
+    print_slow(f"\nThe enemy dropped {chosen_enemy.gold_dropped} gold!", TEST)
+
+    player.exp += chosen_enemy.exp_dropped
+    print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
+
     loot("enemy drop")
 
 def print_slow(str, write_speed):
@@ -693,10 +711,7 @@ def trap(location):
     trap_type = rand.choice(["gold", "damage"])
     gold_lost = rand.randint(20, 80)
 
-    if player.gold == 0 or player.gold - gold_lost <= 0:
-        player.gold = 0
-        trap_type = "damage"
-    elif player.curse_of_eldorado > 0:
+    if player.gold == 0 or player.gold - gold_lost <= 0 or player.curse_of_eldorado > 0:
         trap_type = "damage"
 
     print_slow(L.trap_description(player.name, location, trap_type), TEST)
@@ -705,9 +720,13 @@ def trap(location):
     player.hp -= damage
 
     if trap_type == "gold":
-        player.gold -= gold_lost
+        if player.gold == 0 or player.gold - gold_lost <= 0:
+            player.gold = 0
+            print_slow("You lost the rest of your gold!", TEST)
+        else:
+            player.gold -= gold_lost
+            print_slow(f"   - You lost {gold_lost} gold!  Gold: {player.gold}", TEST)
 
-        print_slow(f"   - You lost {gold_lost} gold!  Gold: {player.gold}", TEST)
         print_slow(f"\n   - You took {damage} damage!  HP: {player.hp} / {player.max_hp}\n", TEST)
 
     elif trap_type == "damage":
@@ -725,13 +744,17 @@ def intro():
 
 # player.level.limit = required EXP to level up, base value = 500 EXP
 def level_up():
-    player.level += 1
+    player.level += 100
     player.level_limit += (player.level_limit*0.5)
-    player.hp = player.hp*1.25
-    player.str = player.str*1.25
-    player.spd = player.spd*1.25
+    player.max_hp = int(player.max_hp*1.25)
+    player.hp = int(player.hp*1.25)
+    player.str = int(player.str*1.25)
+    player.spd = int(player.spd*1.25)
     player.exp = 0
-    E.enemy_levelup()
+
+    print_slow("\nYou leveled up!", TEST)
+    print_slow(f"\n{player.name} level: {player.level-1} --> {player.level}\n", TEST)
+    print_slow(f"\nYou feel your strength increase!\n", TEST)
 
 #Cacambo
 cacambo = P.Player()
@@ -821,6 +844,7 @@ while True:
             print("You chose Pangloss, ha ha ha😬.")
 
         player.level = 1
+        player.exp = 499
         player.hp = player.max_hp
         player.inventory = []
         player.shown_inventory = []
@@ -828,12 +852,6 @@ while True:
         print("\n[Please enter a correct input; 1. Cacambo, 2. Candide, 3. Pangloss]")
     else:
         break
-
-
-# if player.exp >= player.level_limit:
-#     level_up()
-
-# End arguments to call upon functions
 
 
 
@@ -846,9 +864,8 @@ for i in range(10):
     player.inventory.append(I.create_item(weapon_choice))
 
 
-
+#DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:
-
     
     for i in player.inventory:
         player.shown_inventory.append(i.name)
@@ -857,6 +874,10 @@ while True:
   
     for i in player.inventory:
         player.shown_inventory.remove(i.name)
+
+    if player.exp >= player.level_limit:
+        level_up()
+
 
     if player.hp == 0:
         print_slow("\n[You died]", 0.1)

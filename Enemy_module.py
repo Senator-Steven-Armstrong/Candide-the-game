@@ -31,8 +31,6 @@ bulgar = Enemy()
 råtta = Enemy()
 traveler = Enemy()
 
-#TEXTER SOM VISAS NÄR EN FIGHT BÖRJAR
-
 
 def create_enemy(enemy_name):
     # Below are the base stats of enemies that can be encountered and fought in the game
@@ -147,11 +145,3 @@ Enemy threw some pebbles at you!'''
 enemy_list = [bandit, cannibal, långöron, goblin, bulgar, råtta, traveler]
 print(type(bandit))
 
-def enemy_levelup():
-    
-    hp = hp*1.125
-    spd = spd*1.125
-
-    str = str*1.125
-    exp_dropped = exp_dropped*1.125
-    gold_dropped = gold_dropped*1.125

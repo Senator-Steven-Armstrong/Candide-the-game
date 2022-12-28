@@ -58,7 +58,7 @@ You charged up and roundhouse kicked the {enemy_name}!'''
     #DROPKICK
     attack_description_8 = f''' 
 "Woah is that fucking blackface dude?" said {player_name}.
-    {player_name} ate {enemy_name} alive!'''
+{player_name} ate {enemy_name} alive!'''
 
 
     if chosen_attack == attack_move_name_1:
