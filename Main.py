@@ -6,6 +6,7 @@ import Location_and_description_storage as L
 import Enemy_module as E
 import Item_module as I
 import random as rand
+import math
 
 
 
@@ -556,7 +557,7 @@ Pick an equipment to change:
 def enemy_level_multiplier(player_level):
     multiplier = 1
     multiplier *= (1.25**player_level-1)
-    return int(multiplier)
+    return multiplier
     
 
 def fight():
@@ -577,6 +578,12 @@ def fight():
     chosen_enemy.spd *= enemy_level_multiplier(player.level)
     chosen_enemy.exp_dropped *= enemy_level_multiplier(player.level)
     chosen_enemy.gold_dropped *= enemy_level_multiplier(player.level)
+
+    chosen_enemy.max_hp = int(chosen_enemy.str)
+    chosen_enemy.str = int(chosen_enemy.str)
+    chosen_enemy.spd = int(chosen_enemy.spd)
+    chosen_enemy.exp_dropped = int(chosen_enemy.exp_dropped)
+    chosen_enemy.gold_dropped = int(chosen_enemy.gold_dropped)
 
     
     chosen_enemy.hp = chosen_enemy.max_hp
@@ -844,7 +851,7 @@ while True:
             print("You chose Pangloss, ha ha ha😬.")
 
         player.level = 1
-        player.exp = 499
+        player.exp = 0
         player.hp = player.max_hp
         player.inventory = []
         player.shown_inventory = []
@@ -859,16 +866,17 @@ intro()
 
 
 #TEMPORÄR TILLÄG AV ITEMS
-for i in range(10):
-    weapon_choice = rand.choice(I.item_list)
-    player.inventory.append(I.create_item(weapon_choice))
+# for i in range(10):
+#     weapon_choice = rand.choice(I.item_list)
+#     player.inventory.append(I.create_item(weapon_choice))
 
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:
     
-    for i in player.inventory:
-        player.shown_inventory.append(i.name)
+    if len(player.inventory) != 0:
+        for i in player.inventory:
+            player.shown_inventory.append(i.name)
 
     travel()
   

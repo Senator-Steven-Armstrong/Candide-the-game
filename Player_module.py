@@ -28,8 +28,9 @@ attack_move_name_5 = "Roundhouse kick"
 attack_move_name_6 = "Gun"
 attack_move_name_7 = "Cum"
 attack_move_name_8 = "Cannibalism"
+attack_move_name_9 = "Do nothing"
 
-ATTACK_MOVE_NAME_LIST = [attack_move_name_1, attack_move_name_2, attack_move_name_3, attack_move_name_4, attack_move_name_5, attack_move_name_6, attack_move_name_7, attack_move_name_8]
+ATTACK_MOVE_NAME_LIST = [attack_move_name_1, attack_move_name_2, attack_move_name_3, attack_move_name_4, attack_move_name_5, attack_move_name_6, attack_move_name_7, attack_move_name_8, attack_move_name_9]
 
 
 def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name):
@@ -59,6 +60,9 @@ You charged up and roundhouse kicked the {enemy_name}!'''
     attack_description_8 = f''' 
 "Woah is that fucking blackface dude?" said {player_name}.
 {player_name} ate {enemy_name} alive!'''
+    #DO NOTHING
+    attack_description_9 = f'''
+{player_name} just kinda stood there.'''
 
 
     if chosen_attack == attack_move_name_1:
@@ -77,6 +81,8 @@ You charged up and roundhouse kicked the {enemy_name}!'''
         returned_description = attack_description_7
     elif chosen_attack == attack_move_name_8:
         returned_description = attack_description_8
+    elif chosen_attack == attack_move_name_9:
+        returned_description = attack_description_9
     
     return returned_description
 

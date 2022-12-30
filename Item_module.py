@@ -24,8 +24,8 @@ empty_accessory = Item()
 empty_accessory.type = "accessory"
 empty_accessory.name = "None"
 
-item_list=          ["dagger", "bow", "sword", "explosive", "ultra_greatsword", "crusader helm", "leather boots", "philosophy book", "voltaire's pencil"]
-item_rarity_list =  [100,       100,   100,     60,          20,                 100,             100,             100,               100]
+item_list=          ["dagger", "sword", "explosive", "ultra_greatsword", "springfield rifle", "rocket launcher" "crusader helm", "leather boots", "philosophy book", "voltaire's pencil"]
+item_rarity_list =  [100,       100,     60,          20,                 60,                  1099999999,       100,             100,             100,               100]
 
 
 
@@ -41,14 +41,6 @@ def create_item(choice):
         dagger.spd_bonus = rand.randint(5, 6)
         dagger.cost = rand.randint(50,66)
         return dagger
-    elif choice == "bow":
-        bow = Item()
-        bow.type = "weapon"
-        bow.name = "Longbow"
-        bow.str_bonus = rand.randint(5,7)
-        bow.spd_bonus = rand.randint(2,3)
-        bow.cost = rand.randint(76,88)
-        return bow
     elif choice == "sword":
         sword = Item()
         sword.type = "weapon"
@@ -61,7 +53,7 @@ def create_item(choice):
         explosive.type = "weapon"
         explosive.name = "Highly volatile explosive"
         explosive.str_bonus = rand.randint(19, 22)
-        explosive.cost = rand.randint(210,230)
+        explosive.cost = rand.randint(410,460)
         return explosive
     elif choice == "ultra_greatsword":
         ultra_greatsword = Item()
@@ -69,9 +61,23 @@ def create_item(choice):
         ultra_greatsword.name = "Voltaire's Ultra Greatsword"
         ultra_greatsword.str_bonus = rand.randint(25,30)
         ultra_greatsword.spd_bonus = rand.randint(-9, -6)
-        ultra_greatsword.cost = rand.randint(420,480) 
+        ultra_greatsword.cost = rand.randint(620,880) 
         return ultra_greatsword
-    
+    elif choice == "springfield rifle":
+        springfield_rifle = Item()
+        springfield_rifle.type = "weapon"
+        springfield_rifle.name = "M1903 Springfield .30 Cal Rifle"
+        springfield_rifle.str_bonus = rand.randint(12, 18)
+        springfield_rifle.spd_bonus = rand.randint(4, 6)
+        springfield_rifle.cost = rand.randint(280, 340)
+        return springfield_rifle
+    elif choice == "rocket launcher":
+        rocket_launcher = Item()
+        rocket_launcher.type = "weapon"
+        rocket_launcher.name = "1970 US Northrop Corporation; 4 rocket clip M202A1 FLASH incendiary TPA Rocket Launcher"
+        rocket_launcher.str_bonus = rand.randint(42, 60)
+        rocket_launcher.cost = rand.randint(1000, 1200)
+        return rocket_launcher
     #ARMOR-----------------------------------------------------
     elif choice == "crusader helm":
         crusader_helm = Item()
@@ -93,7 +99,7 @@ def create_item(choice):
     elif choice == "philosophy book":
         philosophy_book = Item()
         philosophy_book.type = "accessory"
-        philosophy_book.name = '''Pangloss' "Metaphysiology collection" book'''
+        philosophy_book.name = '''Pangloss`s "Metaphysiology collection" book'''
         philosophy_book.max_hp_bonus = rand.randint(30, 40)
         philosophy_book.str_bonus = rand.randint(-8, -2)
         philosophy_book.spd_bonus = rand.randint(5, 8)
