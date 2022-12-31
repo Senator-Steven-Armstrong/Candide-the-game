@@ -13,6 +13,7 @@ import math
 TEST = 0.00000000000000000000000000000000000000000000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
+SEMICOLON_PAUSE_TIME = 0.6
 
 ELDORADO_MONEY_BONUS = 9999999999
 
@@ -556,18 +557,20 @@ Pick an equipment to change:
 
 def enemy_level_multiplier(player_level):
     multiplier = 1
-    multiplier *= (1.25**player_level-1)
+    multiplier *= (1.25**(player_level-1))
     return multiplier
     
 
 def fight():
     #FIGHT
 
-    temp_enemy_list = [E.bandit, E.cannibal, E.långöron, E.goblin, E.bulgar, E.råtta, E.traveler] #FIXA DET HÄR, VARFÖR ÄNDRAS TEMP MEN OCKSÅ DEN I ENEMY MODULE??? temporär lösning atm
+    temp_enemy_list = E.enemy_list  #[E.bandit, E.cannibal, E.långöron, E.goblin, E.bulgar, E.råtta, E.traveler] #FIXA DET HÄR, VARFÖR ÄNDRAS TEMP MEN OCKSÅ DEN I ENEMY MODULE??? temporär lösning atm
 
 
     #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
     chosen_enemy = temp_enemy_list.pop(temp_enemy_list.index(rand.choices(temp_enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
+
+    chosen_enemy = E.bandit
 
     E.create_enemy(chosen_enemy)
 
@@ -579,7 +582,7 @@ def fight():
     chosen_enemy.exp_dropped *= enemy_level_multiplier(player.level)
     chosen_enemy.gold_dropped *= enemy_level_multiplier(player.level)
 
-    chosen_enemy.max_hp = int(chosen_enemy.str)
+    chosen_enemy.max_hp = int(chosen_enemy.max_hp)
     chosen_enemy.str = int(chosen_enemy.str)
     chosen_enemy.spd = int(chosen_enemy.spd)
     chosen_enemy.exp_dropped = int(chosen_enemy.exp_dropped)
@@ -601,7 +604,7 @@ SPD: {chosen_enemy.spd}
     while player.hp > 0 or chosen_enemy.hp > 0:
 
 
-        temp_player_attack_list = [P.attack_move_name_1, P.attack_move_name_2, P.attack_move_name_3, P.attack_move_name_4, P.attack_move_name_5, P.attack_move_name_6, P.attack_move_name_7, P.attack_move_name_8]
+        temp_player_attack_list = P.ATTACK_MOVE_NAME_LIST
 
         player_damage = rand.randint(player.str - 5, player.str + 5)
         enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
@@ -700,6 +703,8 @@ def print_slow(str, write_speed):
             sleep(PUNCTUATION_PAUSE_TIME)
         elif letter == ",":
             sleep(COMMA_PAUSE_TIME)
+        elif letter == ";":
+            sleep(SEMICOLON_PAUSE_TIME)
 
 def loot(type):
     if type == "enemy drop":
@@ -883,8 +888,9 @@ while True:
     for i in player.inventory:
         player.shown_inventory.remove(i.name)
 
-    if player.exp >= player.level_limit:
-        level_up()
+    if len(player.inventory) != 0:
+        if player.exp >= player.level_limit:
+            level_up()
 
 
     if player.hp == 0:

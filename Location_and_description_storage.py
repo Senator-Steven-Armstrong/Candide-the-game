@@ -262,32 +262,32 @@ def TravelDescription(chosen_location, is_pangloss):
     elif locations.count("Eldorado") != 0:
         if chosen_location == locations[locations.index("Eldorado")]:
             returned_location = rand.choice(eldorado_travel_description_list)
-    elif chosen_location == locations[locations.index("Forest")]:
-        returned_location = rand.choice(skogen_travel_description_list)
-    elif chosen_location == locations[locations.index("Bulgarien")]:
-        returned_location = rand.choice(bulgarien_travel_description_list)
-    elif chosen_location == locations[locations.index("Lissabon")]:
-        if is_pangloss == True:
-            returned_location = rand.choice(lissabon_travel_description_list_pangloss)
-        else:
-            returned_location = rand.choice(lissabon_travel_description_list)
-    elif chosen_location == locations[locations.index("Venedig")]:
-        returned_location =  rand.choice(venedig_travel_description_list)
-    elif chosen_location == locations[locations.index("Turkey")]:
-        returned_location =  rand.choice(turkiet_travel_description_list)
-    elif chosen_location == locations[locations.index("South America")]:
-        returned_location =  rand.choice(sydamerika_travel_description_list) 
-    elif chosen_location == locations[locations.index("Africa")]:
-        returned_location =  rand.choice(afrika_travel_description_list)
-    elif chosen_location == locations[locations.index("England")]:
-        returned_location =  rand.choice(england_travel_description_list) 
-    elif chosen_location == locations[locations.index("The Ocean")]:
-        returned_location =  rand.choice(havet_travel_description_list)
-    elif chosen_location == locations[locations.index("Great field")]:
-        returned_location =  rand.choice(fältet_travel_description_list)
-    elif chosen_location == locations[locations.index("Tibble")]:
-        returned_location = rand.choice(tibble_travel_description_list) 
-    
+        elif chosen_location == locations[locations.index("Forest")]:
+            returned_location = rand.choice(skogen_travel_description_list)
+        elif chosen_location == locations[locations.index("Bulgarien")]:
+            returned_location = rand.choice(bulgarien_travel_description_list)
+        elif chosen_location == locations[locations.index("Lissabon")]:
+            if is_pangloss == True:
+                returned_location = rand.choice(lissabon_travel_description_list_pangloss)
+            else:
+                returned_location = rand.choice(lissabon_travel_description_list)
+        elif chosen_location == locations[locations.index("Venedig")]:
+            returned_location =  rand.choice(venedig_travel_description_list)
+        elif chosen_location == locations[locations.index("Turkey")]:
+            returned_location =  rand.choice(turkiet_travel_description_list)
+        elif chosen_location == locations[locations.index("South America")]:
+            returned_location =  rand.choice(sydamerika_travel_description_list) 
+        elif chosen_location == locations[locations.index("Africa")]:
+            returned_location =  rand.choice(afrika_travel_description_list)
+        elif chosen_location == locations[locations.index("England")]:
+            returned_location =  rand.choice(england_travel_description_list) 
+        elif chosen_location == locations[locations.index("The Ocean")]:
+            returned_location =  rand.choice(havet_travel_description_list)
+        elif chosen_location == locations[locations.index("Great field")]:
+            returned_location =  rand.choice(fältet_travel_description_list)
+        elif chosen_location == locations[locations.index("Tibble")]:
+            returned_location = rand.choice(tibble_travel_description_list) 
+        
     # locations.pop(locations.index(returned_location))
     return returned_location
 
