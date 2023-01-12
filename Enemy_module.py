@@ -31,6 +31,62 @@ bulgar = Enemy()
 råtta = Enemy()
 traveler = Enemy()
 
+#BOSSES
+kunigunda = Enemy()
+kunigunda.name = "Kunigunda, the burned beauty"
+kunigunda.max_hp = 1200
+kunigunda.spd = 60
+kunigunda.str = 70
+
+baronen = Enemy()
+baronen.name = "Baronen, the mad brother"
+baronen.max_hp = 800
+baronen.spd = 45
+baronen.str = 45
+
+pococurante = Enemy()
+pococurante.name = "Lord Pococurante, the dreadful art collector"
+pococurante.max_hp = 600
+pococurante.spd = 10
+pococurante.str = 50
+
+def pococurante_attacks(player_name):
+    
+    boss_attack_1 = '''
+Pococurante winds up his cane behind him, and releases with a huge swing!
+'''
+
+    boss_attack_2 = '''
+Pococurante throws a book at you!
+'''
+
+    boss_attack_3 = '''
+
+'''
+
+    boss_attack_4 = '''
+    
+'''
+
+    boss_attack_5 = '''
+    
+'''
+
+    boss_attack_6 = '''
+    
+'''
+
+    boss_attack_7 = '''
+    
+'''
+
+    boss_attack_8 = '''
+    
+'''
+    boss_attack_list = [boss_attack_1, boss_attack_2, boss_attack_3, boss_attack_4, boss_attack_5, boss_attack_6, boss_attack_7, boss_attack_8]
+    return rand.choice(boss_attack_list)
+    
+
 
 def create_enemy(enemy_name):
     # Below are the base stats of enemies that can be encountered and fought in the game

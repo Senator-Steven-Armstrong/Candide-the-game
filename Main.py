@@ -59,162 +59,167 @@ def travel():
             
             #TRAVEL-------------------------------------------------------------------------------------------------------------
             
-            print_slow("Where would you like to travel?", TEST)
-            sleep(0.5)
-
-            temporary_locations = list(L.locations)
-
-            #ELDORADO KAN BARA BESÖKAS EN GÅNG, OM DEN BESÖKS KOMMER DEN INTE LÄNGRE VARA MED I LISTAN L.Locations OCH DÄRMED KÖRS KODEN:
-            if L.locations.count("Eldorado") == 0:
-                location1 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
-                temporary_locations.remove(location1)
-                location2 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                temporary_locations.remove(location2)
-                location3 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+            if total_turns == 1:
+                bossfight_pococurante()
+            elif total_turns == 3:
+                bossfight_baronen()
+            elif total_turns == 5:
+                bossfight_kunigunda()
             else:
-                if current_location != "":
-                    temporary_locations.pop(L.locations.index(current_location))
 
-                    #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
-                    location1 = rand.choices(temporary_locations, weights=[60, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+                print_slow("Where would you like to travel?", TEST)
+                sleep(0.5)
+
+                temporary_locations = list(L.locations)
+
+                #ELDORADO KAN BARA BESÖKAS EN GÅNG, OM DEN BESÖKS KOMMER DEN INTE LÄNGRE VARA MED I LISTAN L.Locations OCH DÄRMED KÖRS KODEN:
+                if L.locations.count("Eldorado") == 0:
+                    location1 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
                     temporary_locations.remove(location1)
-                    location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                    location2 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                     temporary_locations.remove(location2)
-                    location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                    location3 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                 else:
-                    #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-                    location1 = rand.choices(temporary_locations, weights=[0, 999999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                    temporary_locations.remove(location1)
-                    location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                    temporary_locations.remove(location2)
-                    location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                    if current_location != "":
+                        temporary_locations.pop(L.locations.index(current_location))
 
-            print(f'''
+                        #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
+                        location1 = rand.choices(temporary_locations, weights=[60, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+                        temporary_locations.remove(location1)
+                        location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                        temporary_locations.remove(location2)
+                        location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                    else:
+                        #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
+                        location1 = rand.choices(temporary_locations, weights=[0, 999999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                        temporary_locations.remove(location1)
+                        location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                        temporary_locations.remove(location2)
+                        location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
 
-1: {location1} 
-2: {location2}
-3: {location3}
-            ''')
+                print(f'''
 
+    1: {location1} 
+    2: {location2}
+    3: {location3}
+                ''')
 
-            while True:
-                location_choice = input("Choice: ")
-                
-                if location_choice == "1":
-                    current_location = location1
-                    break
-                elif location_choice == "2":
-                    current_location = location2
-                    break
-                elif location_choice == "3":
-                    current_location = location3
-                    break
-                else:
-                    print(f"\n[Please enter correct input; 1. {location1}, 2. {location2}, 3. {location3}]")   
-            
-
-
-            #HÄR KOLLAS DET HUR OM MAN HAR COE OCH DÄREFTER TAS PENGAR BORT
-            if player.curse_of_eldorado > 0:
-                print_slow(L.eldorado_lost_gold_description(player.curse_of_eldorado), TEST)
-
-                if player.curse_of_eldorado > 1:
-                    player.gold -= int(ELDORADO_MONEY_BONUS / 3 )
-
-                    print_slow(f"    - You lost {int(ELDORADO_MONEY_BONUS/3)} gold!\n\n", TEST)
-                    sleep(0.5) 
-                elif player.curse_of_eldorado == 1:
-                    player.gold = 0
-
-                    print_slow(f"   - You lost all of your money!\n\n", TEST)
-                    sleep(0.8)
-
-                player.curse_of_eldorado -= 1
-
-
-
-            #HÄR KOLLAS DET OM MAN HAMNAR I EN FÄLLA ELLER INTE
-            trap_chance = rand.randint(1, 1)
-            if trap_chance == 1 and current_location != "Eldorado":
-                trap(current_location)  
-
-            #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
-            if player == pangloss:
-                print_slow(L.TravelDescription(current_location, True), TEST)
-            else:
-                print_slow(L.TravelDescription(current_location, False), TEST)
-
-        
-
-
-            if current_location == "Eldorado":
-                #ELDORADO----------------------------------------------------------------------------------------------------------
-                
-                print_slow("\n                     Stay                  Leave\n", 0.1)
-                
-                print_slow("\nChoice: ", 0.18)
 
                 while True:
-                    eldorado_ending_choice = input()
-
-                    if eldorado_ending_choice.lower() == "stay":
-                        print_slow('''
-You decide to stay, to leave your old horrid life behind,
-and to live on in the best of all possible worlds, Eldorado.
-
-The "King" embraces you with open arms, You feel a wave of relief, but something
-feels wrong at the same time. 
-Kunigunda is still out there.. Maybe someone else will save her, or maybe fate 
-has other plans for you, perhaps she is saved in another of all possible worlds...
-
-You live the rest of your life in prosperity in the golden land of Eldorado.
-You make friends with many of the locals, and soon adopt their religion. Thinking back
-on your old ways of thinking you can't help but feel as it all has been a lie, as
-the people of Eldorado live so much better with a less restricted religion.
-Eventually the thought of wealth dissappears from your mind, you start a family,
-have kids, and grow old with your loved one's.
-
-This truly is the best of all possible worlds...
-''', TEST)
-
-                        good_ending = True
+                    location_choice = input("Choice: ")
+                    
+                    if location_choice == "1":
+                        current_location = location1
                         break
-                    elif eldorado_ending_choice.lower() == "leave":
-                        
-                        print_slow('''
-You decide to leave, to journey out and take back Kunigunda once and for all!
-
-You are taken to the outskirts of the deep valley that Eldorado resides in. 
-The "King" offers you riches to help with you quest, and you gladly accept. 
-102 sheep packed full with gold and jewels will accompany you. 
-You leave richer than all of the European kings combined, but something feels off.
-Final goodbyes are said and you get one last glimpse of paradise. 
-You start to wander once more, your spirit and pockets bigger than ever.
-''', TEST)
-
-                        player.curse_of_eldorado = 3
-                        player.gold = ELDORADO_MONEY_BONUS
-                        L.locations.remove("Eldorado")
+                    elif location_choice == "2":
+                        current_location = location2
+                        break
+                    elif location_choice == "3":
+                        current_location = location3
                         break
                     else:
-                        print_slow("\nLeave or stay, choose: ", 0.15)
+                        print(f"\n[Please enter correct input; 1. {location1}, 2. {location2}, 3. {location3}]")   
                 
 
-            elif current_location == "Shop":
-                #SHOP
-                print("")
-            else:
-                #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
 
-                fight()
+                #HÄR KOLLAS DET HUR OM MAN HAR COE OCH DÄREFTER TAS PENGAR BORT
+                if player.curse_of_eldorado > 0:
+                    print_slow(L.eldorado_lost_gold_description(player.curse_of_eldorado), TEST)
 
-            if total_turns == 1:
-                print("Bossfight")
-            elif total_turns == 2:
-                print("Bossfight")
-            elif total_turns == 3:
-                print("Bossfight")
+                    if player.curse_of_eldorado > 1:
+                        player.gold -= int(ELDORADO_MONEY_BONUS / 3 )
+
+                        print_slow(f"    - You lost {int(ELDORADO_MONEY_BONUS/3)} gold!\n\n", TEST)
+                        sleep(0.5) 
+                    elif player.curse_of_eldorado == 1:
+                        player.gold = 0
+
+                        print_slow(f"   - You lost all of your money!\n\n", TEST)
+                        sleep(0.8)
+
+                    player.curse_of_eldorado -= 1
+
+
+
+                #HÄR KOLLAS DET OM MAN HAMNAR I EN FÄLLA ELLER INTE
+                trap_chance = rand.randint(1, 1)
+                if trap_chance == 1 and current_location != "Eldorado":
+                    trap(current_location)  
+
+
+
+                #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
+                if player == pangloss:
+                    print_slow(L.TravelDescription(current_location, True), TEST)
+                else:
+                    print_slow(L.TravelDescription(current_location, False), TEST)
+
             
+
+
+                if current_location == "Eldorado":
+                    #ELDORADO----------------------------------------------------------------------------------------------------------
+                    
+                    print_slow("\n                     Stay                  Leave\n", 0.1)
+                    
+                    print_slow("\nChoice: ", 0.18)
+
+                    while True:
+                        eldorado_ending_choice = input()
+
+                        if eldorado_ending_choice.lower() == "stay":
+                            print_slow('''
+    You decide to stay, to leave your old horrid life behind,
+    and to live on in the best of all possible worlds, Eldorado.
+
+    The "King" embraces you with open arms, You feel a wave of relief, but something
+    feels wrong at the same time. 
+    Kunigunda is still out there.. Maybe someone else will save her, or maybe fate 
+    has other plans for you, perhaps she is saved in another of all possible worlds...
+
+    You live the rest of your life in prosperity in the golden land of Eldorado.
+    You make friends with many of the locals, and soon adopt their religion. Thinking back
+    on your old ways of thinking you can't help but feel as it all has been a lie, as
+    the people of Eldorado live so much better with a less restricted religion.
+    Eventually the thought of wealth dissappears from your mind, you start a family,
+    have kids, and grow old with your loved one's.
+
+    This truly is the best of all possible worlds...
+    ''', TEST)
+
+                            game_over = True
+                            break
+                        elif eldorado_ending_choice.lower() == "leave":
+                            
+                            print_slow('''
+    You decide to leave, to journey out and take back Kunigunda once and for all!
+
+    You are taken to the outskirts of the deep valley that Eldorado resides in. 
+    The "King" offers you riches to help with you quest, and you gladly accept. 
+    102 sheep packed full with gold and jewels will accompany you. 
+    You leave richer than all of the European kings combined, but something feels off.
+    Final goodbyes are said and you get one last glimpse of paradise. 
+    You start to wander once more, your spirit and pockets bigger than ever.
+    ''', TEST)
+
+                            player.curse_of_eldorado = 3
+                            player.gold = ELDORADO_MONEY_BONUS
+                            L.locations.remove("Eldorado")
+                            break
+                        else:
+                            print_slow("\nLeave or stay, choose: ", 0.15)
+                    
+
+                elif current_location == "Shop":
+                    #SHOP
+                    print("")
+                else:
+                    #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
+
+                    fight()
+
+            
+
             total_turns += 1
 
             break
@@ -222,7 +227,124 @@ You start to wander once more, your spirit and pockets bigger than ever.
             print("\n[Please enter correct input; 1. Inventory, 2. Travel]")
 
 
+def bossfight_pococurante():
+    print_slow('''
+During your journey, you graze past Venice. An enormous sense of dread shakes your body.
+The looming sense of negativity and distaste for all that is beautiful drags down your morale.
+It seems to come from a huge mansion at the center of venice, you have to stop it.
 
+Upon reaching the mansion you realize how huge it is, it stretches as far as the eye can see, and you enter.
+Paintings are hung all over the walls and the deeper in the mansion you go, 
+the more books are scattered across the floor. The negative presence becomes stronger, challenging your 
+optimistic attitude, and behind the biggest pile of books you've seen, a huge figure steps out.
+
+He steps closer, mumbling about how unhappy he is. With a slow sigh he pulls out a huge 4 meter long cane, 
+letters seems to magically circle around it. With a booming voice, he presents himself:
+"I am Pococurante, the collector of all art. Your optimism disgusts me.
+How can you not realize that all of this is trash, and the artist that created it are too?!
+Waking me from my slumber like this, how dare you?!"
+
+He slams his cane in the ground, and books and painting start flying around him.
+He points the weapon straight at your heart, just a few millimeters away.
+
+"I will be adding this to my collection."
+''', TEST)
+
+    print_slow(f"{E.pococurante.name} stands before you.", 0.1)
+
+    while player.hp > 0 or E.pococurante.hp > 0:
+
+
+            temp_player_attack_list = P.ATTACK_MOVE_NAME_LIST
+
+            player_damage = rand.randint(player.str - 5, player.str + 5)
+            enemy_damage = rand.randint(E.pococurante.str -5 , E.pococurante.str + 5)
+
+            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
+            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.pococurante.spd, 140, 140], k=1).pop()
+
+            attack_1 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_1)
+            attack_2 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_2)
+            attack_3 = rand.choice(temp_player_attack_list)
+
+            print_slow("What attack will you use?", TEST)
+            print(f'''
+
+        1: {attack_1}
+        2: {attack_2}
+        3: {attack_3}
+            ''')
+
+            while True:
+                while True:
+                    try:
+                        attack_choice = int(input("Choice: "))
+                    except:
+                        print("\n[Please enter a number]")
+                    else:
+                        break
+
+                if attack_choice == 1:
+                    chosen_attack = attack_1
+                    break
+                elif attack_choice == 2:
+                    chosen_attack = attack_2
+                    break
+                elif attack_choice == 3:
+                    chosen_attack = attack_3
+                    break
+                else:
+                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
+
+            E.pococurante.hp -= player_damage
+            player.hp -= enemy_damage
+
+            if first_attack_move == "player":
+                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.pococurante.name), TEST)
+
+                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                if E.pococurante.hp > 0:
+                    print_slow(f"\n   - Enemy health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - Enemy health: 0 / {E.pococurante.max_hp}", TEST)
+                    break
+                
+                print_slow("\n" + E.enemy_attack_description(E.pococurante, player.name), TEST)
+                print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
+                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+
+            elif first_attack_move == "enemy":
+                print_slow(f"\nEnemy struck first!", TEST)
+                print_slow(E.enemy_attack_description(E.pococurante, player.name), TEST)
+                print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
+                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}.\n", TEST)
+                
+                #IF STATEMENT HÄR OM DU DOG ELLER INTE
+
+                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.pococurante.name), TEST)
+                
+                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                if E.pococurante.hp > 0:
+                    print_slow(f"\n   - Enemy health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - Enemy health: 0 / {E.pococurante.max_hp}.", TEST)
+                    break
+
+            sleep(0.8)
+            print("\n")
+
+
+def bossfight_baronen():
+    print_slow('''
+
+    ''', TEST)
+
+def bossfight_kunigunda():
+    print_slow('''
+
+    ''', TEST)
     
 
 
@@ -251,11 +373,11 @@ INVENTORY:''')
     #PRINTAR INVENTORYN
     j = 1
     inventory_row = ""
-    for i in player.shown_inventory:
+    for i in player.inventory:
         if j-1 == 0 or (j-1) % 3 == 0:
-            inventory_row = i
+            inventory_row = i.name
         elif j-1 % 3 != 0:
-            inventory_row = inventory_row + " || " + i
+            inventory_row = inventory_row + " || " + i.name
         
         if j % 3 == 0 or j == len(player.inventory):
             print("|| " + inventory_row + " ||")
@@ -520,7 +642,7 @@ Pick an equipment to change:
                                             print_slow(f"\nYou equipped {player.equipped_accessory.name}.\n", TEST)
                                                                         
                                             
-                                        #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT EN ACCESSORY
+                                        #HÄR LÄGGS NYA STATS PÅ NÄR MAN HAR EQUIPAT EN ACCESSORY
                                         player.max_hp += player.equipped_accessory.max_hp_bonus
                                         player.hp += player.equipped_accessory.hp_bonus
                                         player.str += player.equipped_accessory.str_bonus
@@ -683,6 +805,10 @@ SPD: {chosen_enemy.spd}
 
         sleep(0.8)
         print("\n")
+    
+    if player.hp <= 0:
+        print_slow("You died lol", TEST)
+        game_over == True
 
     print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
 
@@ -716,7 +842,6 @@ def loot(type):
             dropped_weapon = I.create_item(dropped_weapon_index)
             print_slow(f"\nYou picked up {dropped_weapon.name}.\n", TEST)
             player.inventory.append(dropped_weapon)
-            player.shown_inventory.append(dropped_weapon.name)
              
 
 def trap(location):
@@ -772,8 +897,8 @@ def level_up():
 cacambo = P.Player()
 cacambo.name = "Cacambo"
 cacambo.max_hp = 800
-cacambo.str = 60000
-cacambo.spd = 20000
+cacambo.str = 40
+cacambo.spd = 20
 cacambo.gold = 40
 
 #Candide
@@ -859,7 +984,6 @@ while True:
         player.exp = 0
         player.hp = player.max_hp
         player.inventory = []
-        player.shown_inventory = []
     except:
         print("\n[Please enter a correct input; 1. Cacambo, 2. Candide, 3. Pangloss]")
     else:
@@ -870,28 +994,20 @@ while True:
 intro()
 
 
-#TEMPORÄR TILLÄG AV ITEMS
-# for i in range(10):
-#     weapon_choice = rand.choice(I.item_list)
-#     player.inventory.append(I.create_item(weapon_choice))
+# TEMPORÄR TILLÄG AV ITEMS
+for i in range(10):
+    weapon_choice = rand.choice(I.item_list)
+    player.inventory.append(I.create_item(weapon_choice))
 
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:
-    
-    if len(player.inventory) != 0:
-        for i in player.inventory:
-            player.shown_inventory.append(i.name)
 
     travel()
-  
-    for i in player.inventory:
-        player.shown_inventory.remove(i.name)
 
     if len(player.inventory) != 0:
         if player.exp >= player.level_limit:
             level_up()
-
 
     if player.hp == 0:
         print_slow("\n[You died]", 0.1)
@@ -909,8 +1025,9 @@ print(f'''
 PLAYER CHARARACTER: {player.name}
 LEVEL: {player.level}
 
+Max HP: {player.max_hp}
 STR: {player.str}
-SPD: {player. spd}
+SPD: {player.spd}
 
 WEAPON: {player.equipped_weapon}
 ARMOR: {player.equipped_armor}

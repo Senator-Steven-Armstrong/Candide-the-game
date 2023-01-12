@@ -12,7 +12,6 @@ class Player():
     level = 0
     level_limit = 500
     inventory = []
-    shown_inventory = []
     debuffs = []
     equipped_weapon = I.fists
     equipped_armor = I.empty_armor

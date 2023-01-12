@@ -7,13 +7,23 @@ locations=["Shop", "Eldorado", "Forest","Bulgarien","Lissabon","Venedig","Turkey
 
 #SHOP
 shop_travel_description1 = '''
-ooga boooga bo
+You traveled to the legendary IKEA, known for forging The Legendary Smörkniv, constructing the fort of Fredrik
+and their exotic variety of foods such as: Meatballs,
 '''
 shop_travel_description2 = '''
-ooga afrika ooga
+After a long and perilous journey, wandering across the hostile ice lands known as Finland, you find yourself in
+front of a mysterious building, with a partly destroyed sign reading "K-Market Tikkurila, property of Valma Vä-".
+Inside were vast amounts of consumables, mostly whatever edible material the people of these lands can acquire.
+This place could store precious items, but you should leave before the owner returns, for she is beyond you.
 '''
 shop_travel_description3 = '''
-välkommen till afrika uhmmm
+While your local advisor claimed that this place was not far, this journey has felt like an eternity. 
+Just as you are on the verge of giving in to the horribly negative energy of the region known as Täby, 
+you spot a blue and yellow light through the poisonous fog. 
+You muster all of your strength and make it through the magic self-opening doors.
+Then, you are met with a familiar face. It is the same advisor who sent you on this perilous voyage.
+He laughs maniacally, knowing you have spent half a century venturing to this place.
+Finally, he speaks: "Welcome, traveler, to Lidl. I am Kasper, The patient one. What do you wish to purchase?"
 '''
 shop_travel_description_list = [shop_travel_description1, shop_travel_description2, shop_travel_description3]
 
@@ -23,7 +33,7 @@ shop_travel_description_list = [shop_travel_description1, shop_travel_descriptio
 eldorado_travel_description1 = '''
 As you continue your journey, you walk through a dense forest. While in the forest you find yourself on the
 wrong side of a small river. While trying to cross it you accidentally slip in. You hit your head on some
-rocks and everying becomes black...
+rocks and everying turns black...
 When you wake up the first thing you see is gold. "Am I in heaven?", you wonder. You sit up and look around.
 You seem to be in some sort of palace, it's beautiful, gemstones and riches covering every surface. There are 
 other people in the room with you, and a man with a bigger silhouette enters. The other people respectfully
@@ -60,8 +70,8 @@ rays of light shining through. However you quickly find yourself in panic aiagin
 and something jumps out at you. 
 '''
 skogen_travel_description2 = '''
-You decide to wander into a small, nearby forest. It's hard to even call it a forest, it's pretty much just one tree.
-You walk around the forest for while, pretty much just circuling around the single tree until you realize that you
+You decide to enter into a small, nearby forest. It's hard to even call it a forest, it's just one tree.
+You walk around the forest for while, pretty much just circling around the single tree until you realize that you
 are standing in someones backyard. The front door of their house slams open.
 '''
 skogen_travel_description3 = '''
@@ -82,7 +92,6 @@ their entire population. I dont know why you wanted to enter Bulgaria, but here 
 Being kept in a horrible prison cell and starved for years, you evetually make up a plan to escape. 
 The perfect moment revealed itself and you struck, escaping from the cell. The only thing blocking you 
 from freedom is a small creature at the end of the hallway, you decide to take it on.
-
 '''
 bulgarien_travel_description2 = '''
 You decide to walk to Bulgaria. 
@@ -176,13 +185,19 @@ sydamerika_travel_description_list = [sydamerika_travel_description1, sydamerika
 
 #AFRIKA
 afrika_travel_description1 = '''
-ooga boooga bo
+Africa, unlike something you have seen before open savannah, there's not much civilization here, 
+the glazing sun making it hard to focus. The tall grass waving in the dry air. But wait, 
+something is moving in the grass. You walk closer and something  jumps out shocking you. 
 '''
 afrika_travel_description2 = '''
-ooga afrika ooga
+Water, you need to find water. The sun on the clear sky is burning like anything you felt before,
+you see a water hole in the distance. While going to the water you get a strange feeling of being watched. 
+After you get a zip of water you understand why you had that feeling.
 '''
 afrika_travel_description3 = '''
-välkommen till afrika uhmmm
+You entered Africa, it’s beautiful but hot. So many animals, some dangerous.
+ You start to get tired from the strong sun and find shelter under a shadowy tree. 
+ Suddenly coming rustling up the tree, you look up and ohh noo!  
 '''
 afrika_travel_description_list = [afrika_travel_description1, afrika_travel_description2, afrika_travel_description3]
 
@@ -190,13 +205,18 @@ afrika_travel_description_list = [afrika_travel_description1, afrika_travel_desc
 
 #ENGLAND
 england_travel_description1 = '''
-briiiisihs
+You enter the England and decide to enter a place called birmingham, 
+but what you didn't know was that this was the birminghamiest part of birmingham and that is not good, 
+a gang of whiled twats start to close up on you and suddenly from the horde of birmingham folks a threat appears.   
 '''
 england_travel_description2 = '''
-bohowoho
+You see Jack the Ripper walk past a reliced that you now have entered England, 
+a place known for their tea and nice people but walking down a small street something not so nice suddenly appears, ohh ohhhh!
 '''
 england_travel_description3 = '''
-boston tea party i love tea who inveted this kid
+It’s dark, it’s cold, it’s rainy. At least this day can't get any worse, it is England after all. 
+Oh my god, it's England.
+
 '''
 england_travel_description_list = [england_travel_description1, england_travel_description2, england_travel_description3]
 
