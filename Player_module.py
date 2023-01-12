@@ -48,7 +48,7 @@ You took a fast grip around your {player_weapon} and crushed through the enemy's
 Using your {player_weapon}, with a swift strike you split {enemy_name} in two!'''
     #ROUNDHOUSE KICK
     attack_description_5 = f''' 
-You charged up and roundhouse kicked the {enemy_name}!'''
+You charged up and roundhouse kicked {enemy_name}!'''
     #GUN
     attack_description_6 = f''' 
 {player_name} pulled out a gun and shot {enemy_name}!'''

@@ -44,49 +44,65 @@ baronen.max_hp = 800
 baronen.spd = 45
 baronen.str = 45
 
+#POCOCURANTE------------------------------------------------------------------------
 pococurante = Enemy()
-pococurante.name = "Lord Pococurante, the dreadful art collector"
+pococurante.name = "Lord Pococurante"
 pococurante.max_hp = 600
-pococurante.spd = 10
+pococurante.hp = pococurante.max_hp
+pococurante.spd = 20
 pococurante.str = 50
+pococurante.gold_dropped = 400
+pococurante.exp_dropped = 600
 
-def pococurante_attacks(player_name):
+def pococurante_attacks():
     
     boss_attack_1 = '''
-Pococurante winds up his cane behind him, and releases with a huge swing!
-'''
+Pococurante winds up his cane behind him, and releases with a huge swing!'''
 
     boss_attack_2 = '''
-Pococurante throws a book at you!
-'''
+Pococurante threw a book at you!'''
 
     boss_attack_3 = '''
-
-'''
+Pococurante piecres his cane through your heart!'''
 
     boss_attack_4 = '''
-    
-'''
+Pococurante conjuress his magic, letter swerve around his cane and a bright ray
+of bright light blasts out of it! '''
 
     boss_attack_5 = '''
-    
-'''
+Pococurante slams a painting on your head!'''
 
     boss_attack_6 = '''
-    
-'''
+Pococurante slams his cane in the ground, ammasing a beautiful explosion of colors and light!'''
 
     boss_attack_7 = '''
-    
-'''
+Pococurante tells you how meaningless life is and that nothing beautiful can make you happy. '''
 
     boss_attack_8 = '''
-    
-'''
+Pococurante starts spinning around with his cane extended out. It hits you multiple times!'''
     boss_attack_list = [boss_attack_1, boss_attack_2, boss_attack_3, boss_attack_4, boss_attack_5, boss_attack_6, boss_attack_7, boss_attack_8]
     return rand.choice(boss_attack_list)
-    
 
+def pococurante_voice_lines():
+
+    voice_line_chance = rand.randint(1, 3)
+
+    line_1 = '''
+"Put these foolish ambitions to rest."''' 
+    line_2 = '''
+"You will never inspire anyone!"''' 
+    line_3 = '''
+"You will amount to nothing!"''' 
+    line_4 = '''
+"Optimism won't lead to happiness!"''' 
+    line_5 = '''
+"Give up."''' 
+    line_6 = '''
+"Have you even read a book?!"''' 
+    voice_line_list = [line_1, line_2, line_3, line_4, line_5, line_6]
+    
+    if voice_line_chance >= 1:
+        return rand.choice(voice_line_list)
 
 def create_enemy(enemy_name):
     # Below are the base stats of enemies that can be encountered and fought in the game

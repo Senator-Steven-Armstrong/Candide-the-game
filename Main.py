@@ -6,8 +6,7 @@ import Location_and_description_storage as L
 import Enemy_module as E
 import Item_module as I
 import random as rand
-import math
-
+import copy
 
 
 TEST = 0.00000000000000000000000000000000000000000000000000001
@@ -23,7 +22,6 @@ good_ending = False
 
 game_over = False
 
-
 def start():
     startbutton = input("Welcome! Press Y to start, or N to quit.")
     while True:
@@ -36,12 +34,12 @@ def start():
             continue
 
 
-
 def travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
     #VI MÅSTE RÄKNA HUR MÅNGA RUM MAN HAR VARIT I
     global current_location
     global total_turns
+    global game_over
 
 
     print_slow("\nWould you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
@@ -59,18 +57,21 @@ def travel():
             
             #TRAVEL-------------------------------------------------------------------------------------------------------------
             
-            if total_turns == 1:
+            if total_turns == 0:
                 bossfight_pococurante()
+                break
             elif total_turns == 3:
                 bossfight_baronen()
+                break
             elif total_turns == 5:
                 bossfight_kunigunda()
+                break
             else:
 
                 print_slow("Where would you like to travel?", TEST)
                 sleep(0.5)
 
-                temporary_locations = list(L.locations)
+                temporary_locations = copy.deepcopy(L.locations)
 
                 #ELDORADO KAN BARA BESÖKAS EN GÅNG, OM DEN BESÖKS KOMMER DEN INTE LÄNGRE VARA MED I LISTAN L.Locations OCH DÄRMED KÖRS KODEN:
                 if L.locations.count("Eldorado") == 0:
@@ -84,14 +85,14 @@ def travel():
                         temporary_locations.pop(L.locations.index(current_location))
 
                         #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
-                        location1 = rand.choices(temporary_locations, weights=[60, 99999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+                        location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
                         temporary_locations.remove(location1)
                         location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location2)
                         location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                     else:
                         #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-                        location1 = rand.choices(temporary_locations, weights=[0, 999999999, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                        location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location1)
                         location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location2)
@@ -142,92 +143,94 @@ def travel():
 
 
                 #HÄR KOLLAS DET OM MAN HAMNAR I EN FÄLLA ELLER INTE
-                trap_chance = rand.randint(1, 1)
+                trap_chance = rand.randint(1, 5)
                 if trap_chance == 1 and current_location != "Eldorado":
-                    trap(current_location)  
-
-
-
-                #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
-                if player == pangloss:
-                    print_slow(L.TravelDescription(current_location, True), TEST)
-                else:
-                    print_slow(L.TravelDescription(current_location, False), TEST)
-
-            
-
-
-                if current_location == "Eldorado":
-                    #ELDORADO----------------------------------------------------------------------------------------------------------
+                    trap(current_location)
                     
-                    print_slow("\n                     Stay                  Leave\n", 0.1)
-                    
-                    print_slow("\nChoice: ", 0.18)
+                if game_over == False:  
 
-                    while True:
-                        eldorado_ending_choice = input()
+                    #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
+                    if player == pangloss:
+                        print_slow(L.TravelDescription(current_location, True), TEST)
+                    else:
+                        print_slow(L.TravelDescription(current_location, False), TEST)
 
-                        if eldorado_ending_choice.lower() == "stay":
-                            print_slow('''
-    You decide to stay, to leave your old horrid life behind,
-    and to live on in the best of all possible worlds, Eldorado.
+                
 
-    The "King" embraces you with open arms, You feel a wave of relief, but something
-    feels wrong at the same time. 
-    Kunigunda is still out there.. Maybe someone else will save her, or maybe fate 
-    has other plans for you, perhaps she is saved in another of all possible worlds...
 
-    You live the rest of your life in prosperity in the golden land of Eldorado.
-    You make friends with many of the locals, and soon adopt their religion. Thinking back
-    on your old ways of thinking you can't help but feel as it all has been a lie, as
-    the people of Eldorado live so much better with a less restricted religion.
-    Eventually the thought of wealth dissappears from your mind, you start a family,
-    have kids, and grow old with your loved one's.
+                    if current_location == "Eldorado":
+                        #ELDORADO----------------------------------------------------------------------------------------------------------
+                        
+                        print_slow("\n                     Stay                  Leave\n", 0.1)
+                        
+                        print_slow("\nChoice: ", 0.18)
 
-    This truly is the best of all possible worlds...
-    ''', TEST)
+                        while True:
+                            eldorado_ending_choice = input()
 
-                            game_over = True
-                            break
-                        elif eldorado_ending_choice.lower() == "leave":
-                            
-                            print_slow('''
-    You decide to leave, to journey out and take back Kunigunda once and for all!
+                            if eldorado_ending_choice.lower() == "stay":
+                                print_slow('''
+You decide to stay, to leave your old horrid life behind,
+and to live on in the best of all possible worlds, Eldorado.
 
-    You are taken to the outskirts of the deep valley that Eldorado resides in. 
-    The "King" offers you riches to help with you quest, and you gladly accept. 
-    102 sheep packed full with gold and jewels will accompany you. 
-    You leave richer than all of the European kings combined, but something feels off.
-    Final goodbyes are said and you get one last glimpse of paradise. 
-    You start to wander once more, your spirit and pockets bigger than ever.
-    ''', TEST)
+The "King" embraces you with open arms, You feel a wave of relief, but something
+feels wrong at the same time. 
+Kunigunda is still out there.. Maybe someone else will save her, or maybe fate 
+has other plans for you, perhaps she is saved in another of all possible worlds...
 
-                            player.curse_of_eldorado = 3
-                            player.gold = ELDORADO_MONEY_BONUS
-                            L.locations.remove("Eldorado")
-                            break
-                        else:
-                            print_slow("\nLeave or stay, choose: ", 0.15)
-                    
+You live the rest of your life in prosperity in the golden land of Eldorado.
+You make friends with many of the locals, and soon adopt their religion. Thinking back
+on your old ways of thinking you can't help but feel as it all has been a lie, as
+the people of Eldorado live so much better with a less restricted religion.
+Eventually the thought of wealth dissappears from your mind, you start a family,
+have kids, and grow old with your loved one's.
 
-                elif current_location == "Shop":
-                    #SHOP
-                    print("")
-                else:
-                    #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
+This truly is the best of all possible worlds...
+''', TEST)
 
-                    fight()
+                                game_over = True
+                                break
+                            elif eldorado_ending_choice.lower() == "leave":
+                                
+                                print_slow('''
+You decide to leave, to journey out and take back Kunigunda once and for all!
 
-            
+You are taken to the outskirts of the deep valley that Eldorado resides in. 
+The "King" offers you riches to help with you quest, and you gladly accept. 
+102 sheep packed full with gold and jewels will accompany you. 
+You leave richer than all of the European kings combined, but something feels off.
+Final goodbyes are said and you get one last glimpse of paradise. 
+You start to wander once more, your spirit and pockets bigger than ever.
+''', TEST)
 
-            total_turns += 1
+                                player.curse_of_eldorado = 3
+                                player.gold = ELDORADO_MONEY_BONUS
+                                L.locations.remove("Eldorado")
+                                break
+                            else:
+                                print_slow("\nLeave or stay, choose: ", 0.15)
+                        
 
-            break
+                    elif current_location == "Shop":
+                        #SHOP
+                        print("")
+                    else:
+                        #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
+
+                        fight()
+
+                
+
+                    total_turns += 1
+
+                break
         else:
             print("\n[Please enter correct input; 1. Inventory, 2. Travel]")
 
 
+
 def bossfight_pococurante():
+    global game_over
     print_slow('''
 During your journey, you graze past Venice. An enormous sense of dread shakes your body.
 The looming sense of negativity and distaste for all that is beautiful drags down your morale.
@@ -248,15 +251,21 @@ He slams his cane in the ground, and books and painting start flying around him.
 He points the weapon straight at your heart, just a few millimeters away.
 
 "I will be adding this to my collection."
-''', TEST)
+''', 0.02)
 
-    print_slow(f"{E.pococurante.name} stands before you.", 0.1)
+    print_slow(f"\nLord Pococurante, the dreadful art collector stands before you.", 0.1)
+    sleep(PUNCTUATION_PAUSE_TIME)
+    print(f'''
+HP: {E.pococurante.hp} / {E.pococurante.max_hp}
+STR: {E.pococurante.str}
+SPD: {E.pococurante.spd}
+    ''')
+
+    sleep(2)
 
     while player.hp > 0 or E.pococurante.hp > 0:
 
-
-            temp_player_attack_list = P.ATTACK_MOVE_NAME_LIST
-
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
             player_damage = rand.randint(player.str - 5, player.str + 5)
             enemy_damage = rand.randint(E.pococurante.str -5 , E.pococurante.str + 5)
 
@@ -269,12 +278,12 @@ He points the weapon straight at your heart, just a few millimeters away.
             temp_player_attack_list.remove(attack_2)
             attack_3 = rand.choice(temp_player_attack_list)
 
-            print_slow("What attack will you use?", TEST)
+            print_slow("\nWhat attack will you use?", TEST)
             print(f'''
 
-        1: {attack_1}
-        2: {attack_2}
-        3: {attack_3}
+    1: {attack_1}
+    2: {attack_2}
+    3: {attack_3}
             ''')
 
             while True:
@@ -306,34 +315,63 @@ He points the weapon straight at your heart, just a few millimeters away.
 
                 print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
                 if E.pococurante.hp > 0:
-                    print_slow(f"\n   - Enemy health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
+                    print_slow(f"\n   - Pococurante health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
                 else:
-                    print_slow(f"\n   - Enemy health: 0 / {E.pococurante.max_hp}", TEST)
+                    print_slow(f"\n   - Pococurante health: 0 / {E.pococurante.max_hp}", TEST)
                     break
                 
-                print_slow("\n" + E.enemy_attack_description(E.pococurante, player.name), TEST)
-                print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
-                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
-
+                print_slow("\n" + E.pococurante_voice_lines(), TEST)
+                print_slow(E.pococurante_attacks(), TEST)
+                print_slow(f"\n   - Pococurante dealt {enemy_damage} damage!", TEST)
+                if player.hp >= 0:
+                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                    game_over = True
+                    break
             elif first_attack_move == "enemy":
-                print_slow(f"\nEnemy struck first!", TEST)
-                print_slow(E.enemy_attack_description(E.pococurante, player.name), TEST)
-                print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
-                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}.\n", TEST)
+                print_slow(f"Pococurante struck first!", TEST)
+                print_slow("\n" + E.pococurante_voice_lines(), TEST)
+                print_slow(E.pococurante_attacks(), TEST)
+                print_slow(f"\n   - Pococurante dealt {enemy_damage} damage!", TEST)
                 
-                #IF STATEMENT HÄR OM DU DOG ELLER INTE
+                if player.hp >= 0:
+                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
 
-                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.pococurante.name), TEST)
-                
-                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-                if E.pococurante.hp > 0:
-                    print_slow(f"\n   - Enemy health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
+                    print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.pococurante.name), TEST)
+                    
+                    print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                    if E.pococurante.hp > 0:
+                        print_slow(f"\n   - Pococurante health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
+                    else:
+                        print_slow(f"\n   - Pococurante health: 0 / {E.pococurante.max_hp}.", TEST)
+                        break
+                        
                 else:
-                    print_slow(f"\n   - Enemy health: 0 / {E.pococurante.max_hp}.", TEST)
+                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                    game_over = True
                     break
 
-            sleep(0.8)
-            print("\n")
+
+    sleep(1)
+    print("\n")
+
+    if game_over == False:
+        print_slow('''\n"Now I see... Optimism.. Positivity.. Maybe... All of the art wasn't bad...."''', 0.1)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        print_slow(f"\n\nYou have slayn {E.pococurante.name}.\n", 0.04)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        player.gold += E.pococurante.gold_dropped
+        print_slow(f"\nPococurante dropped {E.pococurante.gold_dropped} gold!", TEST)
+
+        player.exp += E.pococurante.exp_dropped
+        print_slow(f"\nYou gained {E.pococurante.exp_dropped} exp!", TEST)
+
+        player.inventory.append(I.pococurante_cane)
+        print_slow(f"\nYou picked up {I.pococurante_cane.name}\n", TEST)
+
 
 
 def bossfight_baronen():
@@ -360,7 +398,7 @@ def inventory():
 PLAYER STATS:
 
 {player.name} level {player.level}
-EXP: {player.exp} / {player.level_limit}
+EXP: {player.exp} / {int(player.level_limit)}
 
 HP: {player.hp} / {player.max_hp}
 STR: {player.str}
@@ -461,6 +499,7 @@ Pick an equipment to change:
 
                             #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
                             if weapon_equip_choice == len(temp_weapon_inventory) + 1:
+                                is_equipped_item = True
                                 break
                             else:
                                 for i in range(len(temp_weapon_inventory)):
@@ -468,7 +507,7 @@ Pick an equipment to change:
                                     if weapon_equip_choice == i + 1:
                                         #HÄR TAS GAMLA WEAPONSTATS BORT
                                         player.max_hp -= player.equipped_weapon.max_hp_bonus
-                                        player.hp -= player.equipped_weapon.hp_bonus
+                                        player.hp -= player.equipped_weapon.max_hp_bonus
                                         player.str -= player.equipped_weapon.str_bonus
                                         player.spd -= player.equipped_weapon.spd_bonus
                                         player.inventory.append(player.equipped_weapon)
@@ -485,7 +524,7 @@ Pick an equipment to change:
                                             
                                         #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT ETT VAPEN
                                         player.max_hp += player.equipped_weapon.max_hp_bonus
-                                        player.hp += player.equipped_weapon.hp_bonus
+                                        player.hp += player.equipped_weapon.max_hp_bonus
                                         player.str += player.equipped_weapon.str_bonus
                                         player.spd += player.equipped_weapon.spd_bonus
 
@@ -540,6 +579,7 @@ Pick an equipment to change:
 
                             #HÄR KOLLAR DEN VILKEN ARMOR MAN EQUIPAR
                             if armor_equip_choice == len(temp_armor_inventory) + 1:
+                                is_equipped_item = True
                                 break
                             else:
                                 for i in range(len(temp_armor_inventory)):
@@ -547,7 +587,7 @@ Pick an equipment to change:
                                     if armor_equip_choice == i + 1:
                                         #HÄR TAS GAMLA armorSTATS BORT
                                         player.max_hp -= player.equipped_armor.max_hp_bonus
-                                        player.hp -= player.equipped_armor.hp_bonus
+                                        player.hp -= player.equipped_armor.max_hp_bonus
                                         player.str -= player.equipped_armor.str_bonus
                                         player.spd -= player.equipped_armor.spd_bonus
                                         player.inventory.append(player.equipped_armor)
@@ -564,7 +604,7 @@ Pick an equipment to change:
                                             
                                         #HÄR LÄGGS NYA  STATS PÅ NÄR MAN HAR EQUIPAT EN ARMORPIECE
                                         player.max_hp += player.equipped_armor.max_hp_bonus
-                                        player.hp += player.equipped_armor.hp_bonus
+                                        player.hp += player.equipped_armor.max_hp_bonus
                                         player.str += player.equipped_armor.str_bonus
                                         player.spd += player.equipped_armor.spd_bonus
 
@@ -620,6 +660,7 @@ Pick an equipment to change:
 
                             #HÄR KOLLAR DEN VILKEN ACCESSORY MAN EQUIPAR
                             if accessory_equip_choice == len(temp_accessory_inventory) + 1:
+                                is_equipped_item = True
                                 break
                             else:
                                 for i in range(len(temp_accessory_inventory)):
@@ -627,7 +668,7 @@ Pick an equipment to change:
                                     if accessory_equip_choice == i + 1:
                                         #HÄR TAS GAMLA accessorySTATS BORT
                                         player.max_hp -= player.equipped_accessory.max_hp_bonus
-                                        player.hp -= player.equipped_accessory.hp_bonus
+                                        player.hp -= player.equipped_accessory.max_hp_bonus
                                         player.str -= player.equipped_accessory.str_bonus
                                         player.spd -= player.equipped_accessory.spd_bonus
                                         player.inventory.append(player.equipped_accessory)
@@ -644,7 +685,7 @@ Pick an equipment to change:
                                             
                                         #HÄR LÄGGS NYA STATS PÅ NÄR MAN HAR EQUIPAT EN ACCESSORY
                                         player.max_hp += player.equipped_accessory.max_hp_bonus
-                                        player.hp += player.equipped_accessory.hp_bonus
+                                        player.hp += player.equipped_accessory.max_hp_bonus
                                         player.str += player.equipped_accessory.str_bonus
                                         player.spd += player.equipped_accessory.spd_bonus
 
@@ -661,7 +702,7 @@ Pick an equipment to change:
                         print_slow("\nNo accessories in inventory to equip\n", TEST)
                         break
                 
-                elif item_change_choice == 4:
+                elif item_change_choice == "4":
                     break
                 else:
                     print("\n[Please enter correct input; 1. Armor, 2. Weapon, 3. Accessory, 4. Exit]")    
@@ -684,10 +725,10 @@ def enemy_level_multiplier(player_level):
     
 
 def fight():
+    global game_over
     #FIGHT
 
-    temp_enemy_list = E.enemy_list  #[E.bandit, E.cannibal, E.långöron, E.goblin, E.bulgar, E.råtta, E.traveler] #FIXA DET HÄR, VARFÖR ÄNDRAS TEMP MEN OCKSÅ DEN I ENEMY MODULE??? temporär lösning atm
-
+    temp_enemy_list = copy.deepcopy(E.enemy_list) 
 
     #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
     chosen_enemy = temp_enemy_list.pop(temp_enemy_list.index(rand.choices(temp_enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
@@ -784,41 +825,48 @@ SPD: {chosen_enemy.spd}
             
             print_slow("\n" + E.enemy_attack_description(chosen_enemy, player.name), TEST)
             print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
-            print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+            if player.hp >= 0:
+                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+            else:
+                print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                game_over = True
+                break
 
         elif first_attack_move == "enemy":
             print_slow(f"\nEnemy struck first!", TEST)
             print_slow(E.enemy_attack_description(chosen_enemy, player.name), TEST)
             print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
-            print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}.\n", TEST)
             
-            #IF STATEMENT HÄR OM DU DOG ELLER INTE
-
-            print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
-            
-            print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-            if chosen_enemy.hp > 0:
-                print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
-            else:
-                print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}.", TEST)
+            if player.hp <= 0:
+                print_slow(f"   - You took {enemy_damage} damage!  HP: 0 / {player.max_hp}\n", TEST)
+                game_over = True
                 break
+            else:
+                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}.\n", TEST)
+
+                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
+                
+                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                if chosen_enemy.hp > 0:
+                    print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}.", TEST)
+                    break
 
         sleep(0.8)
         print("\n")
-    
-    if player.hp <= 0:
-        print_slow("You died lol", TEST)
-        game_over == True
 
-    print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
+    if game_over != True:
 
-    player.gold += chosen_enemy.gold_dropped
-    print_slow(f"\nThe enemy dropped {chosen_enemy.gold_dropped} gold!", TEST)
+        print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
 
-    player.exp += chosen_enemy.exp_dropped
-    print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
+        player.gold += chosen_enemy.gold_dropped
+        print_slow(f"\nThe enemy dropped {chosen_enemy.gold_dropped} gold!", TEST)
 
-    loot("enemy drop")
+        player.exp += chosen_enemy.exp_dropped
+        print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
+
+        loot("enemy drop")
 
 def print_slow(str, write_speed):
     for letter in str:
@@ -845,6 +893,7 @@ def loot(type):
              
 
 def trap(location):
+    global game_over
     trap_type = rand.choice(["gold", "damage"])
     gold_lost = rand.randint(20, 80)
 
@@ -857,18 +906,20 @@ def trap(location):
     player.hp -= damage
 
     if trap_type == "gold":
-        if player.gold == 0 or player.gold - gold_lost <= 0:
+        if player.gold == 0:
+            print_slow("You were broke asf anyways so you didn't lose anything!", TEST)
+        elif player.gold - gold_lost <= 0:
             player.gold = 0
             print_slow("You lost the rest of your gold!", TEST)
         else:
             player.gold -= gold_lost
             print_slow(f"   - You lost {gold_lost} gold!  Gold: {player.gold}", TEST)
 
-        print_slow(f"\n   - You took {damage} damage!  HP: {player.hp} / {player.max_hp}\n", TEST)
-
-    elif trap_type == "damage":
-        
+    if player.hp >= 0:
         print_slow(f"   - You took {damage} damage!  HP: {player.hp} / {player.max_hp}\n", TEST)
+    else:
+        print_slow(f"   - You took {damage} damage!  HP: 0 / {player.max_hp}\n", TEST)
+        game_over = True
     
     sleep(0.8)
 
@@ -878,10 +929,29 @@ def trap(location):
 def intro():
     print(Art.start)
 
+def game_summary():
+    sleep(1)
+    print_slow("\nGAME SUMMARY:", 0.05)
+    sleep(0.5)
+
+    print(f'''
+PLAYER CHARARACTER: {player.name}
+LEVEL: {player.level}
+
+Max HP: {player.max_hp}
+STR: {player.str}
+SPD: {player.spd}
+
+WEAPON: {player.equipped_weapon.name}
+ARMOR: {player.equipped_armor.name}
+ACCESSORY: {player.equipped_accessory.name}
+
+COUNTRIES TRAVERSED: {total_turns}
+    ''')
 
 # player.level.limit = required EXP to level up, base value = 500 EXP
 def level_up():
-    player.level += 100
+    player.level += 1
     player.level_limit += (player.level_limit*0.5)
     player.max_hp = int(player.max_hp*1.25)
     player.hp = int(player.hp*1.25)
@@ -897,8 +967,8 @@ def level_up():
 cacambo = P.Player()
 cacambo.name = "Cacambo"
 cacambo.max_hp = 800
-cacambo.str = 40
-cacambo.spd = 20
+cacambo.str = 40000
+cacambo.spd = 20000
 cacambo.gold = 40
 
 #Candide
@@ -912,9 +982,9 @@ candide.gold = 10
 #Pangloss
 pangloss = P.Player()
 pangloss.name = "Pangloss"
-pangloss.max_hp = 300
+pangloss.max_hp = 1#300
 pangloss.str = 20
-pangloss.spd = 5
+pangloss.spd = 1#5
 pangloss.gold = 1
 
 #------------------------------------------------------HÄR KÖRS HUVUDDELEN AV PROGRAMMET-------------------------------------------------------------------------------------------------------
@@ -1009,30 +1079,11 @@ while True:
         if player.exp >= player.level_limit:
             level_up()
 
-    if player.hp == 0:
-        print_slow("\n[You died]", 0.1)
-        game_over = True
+    if game_over == True:
+        print_slow("\n\n\n\n[You died]", 0.1)
         break
     elif good_ending == True:
-        print_slow("\n[Good ending]", 0.1)
-        game_over = True
+        print_slow("\n\n\n\n[Good ending]", 0.1)
         break
 
-print_slow("\nGAME SUMMARY:", 0.05)
-sleep(0.5)
-
-print(f'''
-PLAYER CHARARACTER: {player.name}
-LEVEL: {player.level}
-
-Max HP: {player.max_hp}
-STR: {player.str}
-SPD: {player.spd}
-
-WEAPON: {player.equipped_weapon}
-ARMOR: {player.equipped_armor}
-ACCESSORY: {player.equipped_accessory}
-
-COUNTRIES TRAVERSED: {total_turns}
-''')
-    
+game_summary()

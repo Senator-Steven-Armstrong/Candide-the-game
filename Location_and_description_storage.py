@@ -185,19 +185,23 @@ sydamerika_travel_description_list = [sydamerika_travel_description1, sydamerika
 
 #AFRIKA
 afrika_travel_description1 = '''
-Africa, unlike something you have seen before open savannah, there's not much civilization here, 
-the glazing sun making it hard to focus. The tall grass waving in the dry air. But wait, 
-something is moving in the grass. You walk closer and something  jumps out shocking you. 
+You decide to wander through Africa, unlike anything you have seen before, 
+it's just an open savannah, and there isn't much civilization here. 
+The gazing sun making it hard to focus. The tall grass becomes tallar and taller, waving in the dry air. But wait, 
+something is moving in the grass. You walk closer and something jumps out, shocking you. 
 '''
 afrika_travel_description2 = '''
-Water, you need to find water. The sun on the clear sky is burning like anything you felt before,
+You walk to the country africa. 
+The savannah stretches for what seems like eternity and it has been days.
+Water, you need to find water. The sun on the clear sky is burning ulike anything you felt before,
 you see a water hole in the distance. While going to the water you get a strange feeling of being watched. 
-After you get a zip of water you understand why you had that feeling.
+After you get a sip of the water you understand why you had that feeling as a figure catches your eye
+in the reflection of the puddle. It's standing right behind you.
 '''
 afrika_travel_description3 = '''
 You entered Africa, it’s beautiful but hot. So many animals, some dangerous.
- You start to get tired from the strong sun and find shelter under a shadowy tree. 
- Suddenly coming rustling up the tree, you look up and ohh noo!  
+You start to get tired from the strong sun and find shelter under a shadowy tree. 
+Suddenly rustling comes from up the tree, you look up and ohh noo!  
 '''
 afrika_travel_description_list = [afrika_travel_description1, afrika_travel_description2, afrika_travel_description3]
 
@@ -210,13 +214,18 @@ but what you didn't know was that this was the birminghamiest part of birmingham
 a gang of whiled twats start to close up on you and suddenly from the horde of birmingham folks a threat appears.   
 '''
 england_travel_description2 = '''
-You see Jack the Ripper walk past a reliced that you now have entered England, 
-a place known for their tea and nice people but walking down a small street something not so nice suddenly appears, ohh ohhhh!
+You decide to enter England. As you walk through the streets you stop by a small bar to have a couple of 
+pints with the lads. You sit down at one of the bar stools as a couple of gentlemen with dapper suits walk in.
+They walk up to you with threatening smirks across their faces, and the bar owner walks down a small hatch
+behind the counter. Then you spot it. One of the lads has a bloody rolling pin in his hand. So you utter:
+"Is that a fucking rolling pin? What are you gonna do, bake me a cake? Sing me a song?"
+He gets aggrevated and begins the fight.
 '''
 england_travel_description3 = '''
-It’s dark, it’s cold, it’s rainy. At least this day can't get any worse, it is England after all. 
-Oh my god, it's England.
-
+You start wandering through england. It's dark, it's cold, it's rainy. 
+At least this day can't get any worse, it is England after all. Oh my god, it's England.
+Suddenly a group of true Brexit Geezers walk up from around the corner and shank you up.
+What seems to be their leader steps forward among the group. He challenges you to a true bri'ish bar brawl.
 '''
 england_travel_description_list = [england_travel_description1, england_travel_description2, england_travel_description3]
 
@@ -238,13 +247,24 @@ havet_travel_description_list = [havet_travel_description1, havet_travel_descrip
 
 #FÄLTET
 fältet_travel_description1 = '''
-wow det är väldigt fint utanför lokes hus
+You see an absolutley massive field in the distance, so you decide to trek across it.
+It's beautiful, the grass is slowly waving in the wind, no clouds in sight, and it seems
+like it has been a nice red sunset ever since you entered. That's when you realize, the sun literally
+hasn't moved for hours, and neither have you. You seem to be shackled in time, and just as you realize it,
+whatever is keeping you frozen walks up behind you, ready to kill you.
 '''
 fältet_travel_description2 = '''
-väldigt fint fält jag älskar detta fält
+You see a small field just outside of a small town you just exited. The journey has been
+long and hard so far, so you sit down for a picnic. It's nice, the grass is soft, the bread
+tastes newly baked, and you see some ants running along the ground. You feel warm and wholesome...
+And then BOOM an enemy appeard!
 '''
 fältet_travel_description3 = '''
-jag har skitiet ner mig
+Grass stretches over the horizon, it's unnaturally tall so you get interested and walk toward it.
+Upon reaching the beginning of the field, the grass stretches an antonishing 6 meters in the air.
+Your'e a bit nervous, but you enter. You quickly get lost, realizing that this was a bad idea, until
+you stumble upon an empty patch without any grass in the shape of a circle.
+You can't help but feel this is a boss arena... but nope there's just a normal enemy in the center.
 '''
 fältet_travel_description_list = [fältet_travel_description1, fältet_travel_description2, fältet_travel_description3]
 
