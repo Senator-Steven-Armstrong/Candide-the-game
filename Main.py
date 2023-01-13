@@ -1,4 +1,4 @@
-import Art
+import Art as A
 from time import sleep
 import sys,time
 import Player_module as P
@@ -7,6 +7,7 @@ import Enemy_module as E
 import Item_module as I
 import random as rand
 import copy
+import winsound
 
 
 TEST = 0.00000000000000000000000000000000000000000000000000001
@@ -57,10 +58,10 @@ def travel():
             
             #TRAVEL-------------------------------------------------------------------------------------------------------------
             
-            if total_turns == 0:
+            if total_turns == 2:
                 bossfight_pococurante()
                 break
-            elif total_turns == 3:
+            elif total_turns == 0:
                 bossfight_baronen()
                 break
             elif total_turns == 5:
@@ -92,7 +93,7 @@ def travel():
                         location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                     else:
                         #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-                        location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                        location1 = rand.choices(temporary_locations, weights=[9999999, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location1)
                         location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location2)
@@ -169,39 +170,13 @@ def travel():
                             eldorado_ending_choice = input()
 
                             if eldorado_ending_choice.lower() == "stay":
-                                print_slow('''
-You decide to stay, to leave your old horrid life behind,
-and to live on in the best of all possible worlds, Eldorado.
-
-The "King" embraces you with open arms, You feel a wave of relief, but something
-feels wrong at the same time. 
-Kunigunda is still out there.. Maybe someone else will save her, or maybe fate 
-has other plans for you, perhaps she is saved in another of all possible worlds...
-
-You live the rest of your life in prosperity in the golden land of Eldorado.
-You make friends with many of the locals, and soon adopt their religion. Thinking back
-on your old ways of thinking you can't help but feel as it all has been a lie, as
-the people of Eldorado live so much better with a less restricted religion.
-Eventually the thought of wealth dissappears from your mind, you start a family,
-have kids, and grow old with your loved one's.
-
-This truly is the best of all possible worlds...
-''', TEST)
+                                print_slow(L.eldorado_stay_description, TEST)
 
                                 game_over = True
                                 break
                             elif eldorado_ending_choice.lower() == "leave":
                                 
-                                print_slow('''
-You decide to leave, to journey out and take back Kunigunda once and for all!
-
-You are taken to the outskirts of the deep valley that Eldorado resides in. 
-The "King" offers you riches to help with you quest, and you gladly accept. 
-102 sheep packed full with gold and jewels will accompany you. 
-You leave richer than all of the European kings combined, but something feels off.
-Final goodbyes are said and you get one last glimpse of paradise. 
-You start to wander once more, your spirit and pockets bigger than ever.
-''', TEST)
+                                print_slow(L.eldorado_leave_description, TEST)
 
                                 player.curse_of_eldorado = 3
                                 player.gold = ELDORADO_MONEY_BONUS
@@ -213,7 +188,15 @@ You start to wander once more, your spirit and pockets bigger than ever.
 
                     elif current_location == "Shop":
                         #SHOP
-                        print("")
+                        print(A.shop)
+                        print("Current gold:", player.gold)
+
+                        
+
+                        print(f'''
+                        You can purchase one of the following three items:
+                        •{I.item_list}
+                        ''')
                     else:
                         #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
 
@@ -231,27 +214,7 @@ You start to wander once more, your spirit and pockets bigger than ever.
 
 def bossfight_pococurante():
     global game_over
-    print_slow('''
-During your journey, you graze past Venice. An enormous sense of dread shakes your body.
-The looming sense of negativity and distaste for all that is beautiful drags down your morale.
-It seems to come from a huge mansion at the center of venice, you have to stop it.
-
-Upon reaching the mansion you realize how huge it is, it stretches as far as the eye can see, and you enter.
-Paintings are hung all over the walls and the deeper in the mansion you go, 
-the more books are scattered across the floor. The negative presence becomes stronger, challenging your 
-optimistic attitude, and behind the biggest pile of books you've seen, a huge figure steps out.
-
-He steps closer, mumbling about how unhappy he is. With a slow sigh he pulls out a huge 4 meter long cane, 
-letters seems to magically circle around it. With a booming voice, he presents himself:
-"I am Pococurante, the collector of all art. Your optimism disgusts me.
-How can you not realize that all of this is trash, and the artist that created it are too?!
-Waking me from my slumber like this, how dare you?!"
-
-He slams his cane in the ground, and books and painting start flying around him.
-He points the weapon straight at your heart, just a few millimeters away.
-
-"I will be adding this to my collection."
-''', 0.02)
+    print_slow(L.pococurante_description, 0.02)
 
     print_slow(f"\nLord Pococurante, the dreadful art collector stands before you.", 0.1)
     sleep(PUNCTUATION_PAUSE_TIME)
@@ -370,14 +333,150 @@ SPD: {E.pococurante.spd}
         print_slow(f"\nYou gained {E.pococurante.exp_dropped} exp!", TEST)
 
         player.inventory.append(I.pococurante_cane)
-        print_slow(f"\nYou picked up {I.pococurante_cane.name}\n", TEST)
+        print_slow(f"\nYou walked up to Pococurante and took {I.pococurante_cane.name}\n", TEST)
 
 
 
 def bossfight_baronen():
-    print_slow('''
+    global game_over
+    print_slow(L.baronen_description, 0.02)
 
-    ''', TEST)
+    print_slow(f"\nBaronen, the mad brother, acrimony of love, baron of Thunder-ten-tronckh, towers over you.", 0.1)
+    sleep(PUNCTUATION_PAUSE_TIME)
+    print(f'''
+HP: {E.baronen.hp} / {E.baronen.max_hp}
+STR: {E.baronen.str}
+SPD: {E.baronen.spd}
+    ''')
+
+    sleep(2)
+
+    player.hp /= 1.5
+    int(player.hp)
+
+    player.max_hp -= player.equipped_weapon.max_hp_bonus
+    player.hp -= player.equipped_weapon.max_hp_bonus
+    player.str -= player.equipped_weapon.str_bonus
+    player.spd -= player.equipped_weapon.spd_bonus
+
+    player.equipped_weapon = I.baronen_knife
+
+    player.max_hp += player.equipped_weapon.max_hp_bonus
+    player.hp += player.equipped_weapon.max_hp_bonus
+    player.str += player.equipped_weapon.str_bonus
+    player.spd += player.equipped_weapon.spd_bonus
+
+    while player.hp > 0 or E.baronen.hp > 0:
+
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
+            player_damage = rand.randint(player.str - 5, player.str + 5)
+            enemy_damage = rand.randint(E.baronen.str -5 , E.baronen.str + 5)
+
+            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
+            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.baronen.spd, 140, 140], k=1).pop()
+
+            attack_1 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_1)
+            attack_2 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_2)
+            attack_3 = rand.choice(temp_player_attack_list)
+
+            print_slow("\nWhat attack will you use?", TEST)
+            print(f'''
+
+    1: {attack_1}
+    2: {attack_2}
+    3: {attack_3}
+            ''')
+
+            while True:
+                while True:
+                    try:
+                        attack_choice = int(input("Choice: "))
+                    except:
+                        print("\n[Please enter a number]")
+                    else:
+                        break
+
+                if attack_choice == 1:
+                    chosen_attack = attack_1
+                    break
+                elif attack_choice == 2:
+                    chosen_attack = attack_2
+                    break
+                elif attack_choice == 3:
+                    chosen_attack = attack_3
+                    break
+                else:
+                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
+
+            E.baronen.hp -= player_damage
+            player.hp -= enemy_damage
+
+            if first_attack_move == "player":
+                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.baronen.name), TEST)
+
+                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                if E.baronen.hp > 0:
+                    print_slow(f"\n   - Baronen health: {E.baronen.hp} / {E.baronen.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - Baronen health: 0 / {E.baronen.max_hp}", TEST)
+                    break
+                
+                print_slow("\n" + E.baronen_voice_lines(), TEST)
+                print_slow(E.baronen_attacks(), TEST)
+                print_slow(f"\n   - Baronen dealt {enemy_damage} damage!", TEST)
+                if player.hp >= 0:
+                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                    game_over = True
+                    break
+            elif first_attack_move == "enemy":
+                print_slow(f"Baronen struck first!", TEST)
+                print_slow("\n" + E.baronen_voice_lines(), TEST)
+                print_slow(E.baronen_attacks(), TEST)
+                print_slow(f"\n   - Baronen dealt {enemy_damage} damage!", TEST)
+                
+                if player.hp >= 0:
+                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+
+                    print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.baronen.name), TEST)
+                    
+                    print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                    if E.baronen.hp > 0:
+                        print_slow(f"\n   - Baronen health: {E.baronen.hp} / {E.baronen.max_hp}", TEST)
+                    else:
+                        print_slow(f"\n   - Baronen health: 0 / {E.baronen.max_hp}.", TEST)
+                        break
+                        
+                else:
+                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                    game_over = True
+                    break
+
+
+    sleep(1)
+    print("\n")
+
+    if game_over == False:
+        print_slow('''\n"Just.. treat.. treat her good... please..."''', 0.1)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        print_slow(f"\n\nYou have slayn {E.baronen.name}.\n", 0.04)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        player.gold += E.baronen.gold_dropped
+        print_slow(f"\nBaronen dropped {E.baronen.gold_dropped} gold!", TEST)
+
+        player.exp += E.baronen.exp_dropped
+        print_slow(f"\nYou gained {E.baronen.exp_dropped} exp!", TEST)
+
+        print_slow(f"\nYou held onto {I.baronen_knife.name}.\n", TEST)
+
+        player.inventory.append(I.baronen_greatsword)
+        print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
+
 
 def bossfight_kunigunda():
     print_slow('''

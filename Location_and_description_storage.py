@@ -3,6 +3,7 @@ import random as rand
 #LISTANS LÄNGD ÄR 12
 locations=["Shop", "Eldorado", "Forest","Bulgarien","Lissabon","Venedig","Turkey","South America","Africa","England","The Ocean","Great field","Tibble"]
 
+
 #TEXTER OCH DESCRIPTIONER OM VAR MAN ÅKER
 
 #SHOP
@@ -129,10 +130,14 @@ This someone pushes through the crowd until eventually putting their hand on you
     '''
 
 lissabon_travel_description2 = '''
-pissabon go brrr
+pissabon
 '''
 lissabon_travel_description3 = '''
-guh inte lissbon buruh
+You enter a large city. Water channels and a large port makes this city seem very intertwined with the ocean.
+Buildings much older than whole countries fill the atmosphere with history. 
+Tall towers and catholic churches seem to touch the sky. However, there is an uneasy feeling in the city.
+The same towers can be seen swaying back and forth during the day. Large holes are found where buildings were the
+day before. The ground seems to be slowly becoming something dangerous. You should probably not linger here.
 '''
 lissabon_travel_description_list = [lissabon_travel_description1, lissabon_travel_description2, lissabon_travel_description3]
 lissabon_travel_description_list_pangloss = [lissabon_travel_description1_pangloss, lissabon_travel_description2, lissabon_travel_description3]
@@ -283,7 +288,7 @@ many moldy walls. You briefly die as the horrid stench covers your lungs, but ar
 It grabs you and you quickly stand up, nachochips crunching below your feet, staring face to face with a hollow husk of a man. 
 '''
 tibble_travel_description3 = '''
-du dog (du gick in i tibble.)
+
 '''
 tibble_travel_description_list = [tibble_travel_description1, tibble_travel_description2, tibble_travel_description3]
 
@@ -380,7 +385,7 @@ some of your money fell out of your pocket and into the hole. Unfortunate.
 
     return returned_text
 
-#-----------------------------------------------ELDORADO FÖRLORADE PENGAR TEXT------------------------------------------------------
+#-----------------------------------------------ELDORADO-TEXTER------------------------------------------------------
 
 eldorado_lost_gold_description_1 ='''
 Some of the sheep carrying gold died of starvation and exhaustion while wandering.
@@ -414,3 +419,94 @@ def eldorado_lost_gold_description(curse_amount):
         return rand.choice(eldorado_lost_gold_description_list)
     elif curse_amount == 1:
         return eldorado_lost_gold_description_final
+
+
+
+eldorado_stay_description = '''
+You decide to stay, to leave your old horrid life behind,
+and to live on in the best of all possible worlds, Eldorado.
+
+The "King" embraces you with open arms, You feel a wave of relief, but something
+feels wrong at the same time. 
+Kunigunda is still out there.. Maybe someone else will save her, or maybe fate 
+has other plans for you, perhaps she is saved in another of all possible worlds...
+
+You live the rest of your life in prosperity in the golden land of Eldorado.
+You make friends with many of the locals, and soon adopt their religion. Thinking back
+on your old ways of thinking you can't help but feel as it all has been a lie, as
+the people of Eldorado live so much better with a less restricted religion.
+Eventually the thought of wealth dissappears from your mind, you start a family,
+have kids, and grow old with your loved one's.
+
+This truly is the best of all possible worlds...
+'''
+
+eldorado_leave_description = '''
+You decide to leave, to journey out and take back Kunigunda once and for all!
+
+You are taken to the outskirts of the deep valley that Eldorado resides in. 
+The "King" offers you riches to help with you quest, and you gladly accept. 
+102 sheep packed full with gold and jewels will accompany you. 
+You leave richer than all of the European kings combined, but something feels off.
+Final goodbyes are said and you get one last glimpse of paradise. 
+You start to wander once more, your spirit and pockets bigger than ever.
+'''
+
+#-------------------------------------------BOSS-DESCRIPTIONS--------------------------------------------------------
+
+pococurante_description = '''
+During your journey, you graze past Venice. An enormous sense of dread shakes your body.
+The looming sense of negativity and distaste for all that is beautiful drags down your morale.
+It seems to come from a huge mansion at the center of venice, you have to stop it.
+
+Upon reaching the mansion you realize how huge it is, it stretches as far as the eye can see, and you enter.
+Paintings are hung all over the walls and the deeper in the mansion you go, 
+the more books are scattered across the floor. The negative presence becomes stronger, challenging your 
+optimistic attitude, and behind the biggest pile of books you've seen, a huge figure steps out.
+
+He steps closer, mumbling about how unhappy he is. With a slow sigh he pulls out a huge 4 meter long cane, 
+letters seems to magically circle around it. With a booming voice, he presents himself:
+"I am Pococurante, the collector of all art. Your optimism disgusts me.
+How can you not realize that all of this is trash, and the artist that created it are too?!
+Waking me from my slumber like this, how dare you?!"
+
+He slams his cane in the ground, and books and painting start flying around him.
+He points the weapon straight at your heart, just a few millimeters away.
+
+"I will be adding this to my collection."
+'''
+
+baronen_description = '''
+While wandering, you pass through Buenos Aires. Your legs felt sore, so you stopped at a small inn.
+It's quite empty, and the atmosphere is dull. You sit down next to an old woman, and you start to converse.
+She tells you about her life and how melancholy her life has been and you can't help but feel bad for her.
+After she's done, you tell her about your journey so far. The old woman picks up on your connection to Baronen,
+and she presents her knowledge about his whereabouts, which is as Colonel of the 
+rebellious Paraguyan Jesuits in a small palace in Paraguay. You leave with your heart aflame, setting out for Baronen.
+
+You reach the palace entrance and the rebel guards force you to drop your weapons before entering.
+
+    -[Equppied weapon removed].
+
+You oblige, and are taken to a tall door in the heart of the building. The guards tell you Baronen has been
+informed of your visit, and they leave you to yourself. The door slowly opens.
+
+At the end of a huge hallway he stands, looking through the the huge windows at the beautiful, purple, star-filled
+sky. As the moonight shimmers he turns around and pierces you with his rage-filled eyes. You stare back.
+
+He start walking toward you slowly, until with a flash dissapearing. You frantically look around, until you
+notice it. You can feel the hilt of the small blade lodged in your stomach pushing against your skin.
+Baronen has a fast grip around it, never having let go his gaze of you. 
+
+    -[Health severly damaged].
+
+The wind behind him catches up, and the gust almost tips you over, but baronen doesn't budge. He speaks:
+"Why would you do this to yourself, to us, to Kunigunda? Why did you have to love her?
+You know i can't allow this. And if you can't hinder yourself, I will have to do it for you."
+
+He lets go of the knife, taking a step back and assuming a calm but dominant pose. The night sky lights the room,
+and a large, curved blade forms in hs hand. It shimmers like the moon.
+You take a fast grip around the knife and with sheer will pull it out. With determination and animosity you
+point the blade at Baronen...
+'''
+

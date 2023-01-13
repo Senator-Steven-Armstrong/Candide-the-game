@@ -34,6 +34,19 @@ pococurante_cane.name = "Pococurante's cane"
 pococurante_cane.str_bonus = 40
 pococurante_cane.max_hp_bonus = 200
 
+baronen_knife = Item()
+baronen_knife.type = "weapon"
+baronen_knife.name = "The knife of the mad brother"
+baronen_knife.spd_bonus = 100
+baronen_knife.str_bonus = 20
+
+baronen_greatsword = Item()
+baronen_greatsword.type = "weapon"
+baronen_greatsword.name = "Moonlight greatsword of animosity"
+baronen_greatsword.str_bonus = 50
+baronen_greatsword.spd_bonus = 40
+baronen_greatsword.max_hp_bonus = 300
+
 def create_item(choice):
 
 

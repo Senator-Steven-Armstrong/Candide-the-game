@@ -33,16 +33,71 @@ traveler = Enemy()
 
 #BOSSES
 kunigunda = Enemy()
-kunigunda.name = "Kunigunda, the burned beauty"
+kunigunda.name = "Kunigunda"
 kunigunda.max_hp = 1200
-kunigunda.spd = 60
-kunigunda.str = 70
+kunigunda.spd = 100
+kunigunda.str = 100
 
+#BARONEN----------------------------------------------------------------------------
 baronen = Enemy()
-baronen.name = "Baronen, the mad brother"
+baronen.name = "Baronen"
 baronen.max_hp = 800
-baronen.spd = 45
-baronen.str = 45
+baronen.hp = baronen.max_hp
+baronen.spd = 200
+baronen.str = 60
+baronen.gold_dropped = 800
+baronen.exp_dropped = 1000
+
+def baronen_attacks():
+    
+    boss_attack_1 = '''
+Baronen swings his blade with incredible speed!'''
+
+    boss_attack_2 = '''
+Baronen dashes towards you, piercing you with the blade!'''
+
+    boss_attack_3 = '''
+Baronen point the blade at the moon and swings it down, shooting out a sharp projectile of light!'''
+
+    boss_attack_4 = '''
+Baronen disappears and reappears behind you, slashing you in the back!'''
+
+    boss_attack_5 = '''
+Baronen throws the blade, its spins in the air and hits you!'''
+
+    boss_attack_6 = '''
+Baronen slams the blade in the ground and starts running toward you, dragging the blade along the floor,
+and then uppercuts you!'''
+
+    boss_attack_7 = '''
+Baronen forms two small moonlight knifes and throws them at you! '''
+
+    boss_attack_8 = '''
+Baronen spins his blade over his head and slices you!'''
+    boss_attack_list = [boss_attack_1, boss_attack_2, boss_attack_3, boss_attack_4, boss_attack_5, boss_attack_6, boss_attack_7, boss_attack_8]
+    return rand.choice(boss_attack_list)
+
+def baronen_voice_lines():
+
+    voice_line_chance = rand.randint(1, 3)
+
+    line_1 = '''
+"Leave her alone!"''' 
+    line_2 = '''
+"You don't deserve her!"''' 
+    line_3 = '''
+"You won't be able to keep up!"''' 
+    line_4 = '''
+"Why did you have to do this? We were a family!"''' 
+    line_5 = '''
+"Give up."''' 
+    line_6 = '''
+"How can you even keep up?!"''' 
+    voice_line_list = [line_1, line_2, line_3, line_4, line_5, line_6]
+    
+    if voice_line_chance >= 1:
+        return rand.choice(voice_line_list)
+
 
 #POCOCURANTE------------------------------------------------------------------------
 pococurante = Enemy()
