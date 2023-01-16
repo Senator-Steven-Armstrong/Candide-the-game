@@ -42,9 +42,9 @@ baronen_knife.name = "The knife of the mad brother"
 baronen_knife.spd_bonus = 100
 baronen_knife.str_bonus = 20
 baronen_knife.effect = "quickstep"
-baronen_knife_effect_text_1 = "The knife vibrates, everything seems to slow down around you.\nA rushing jolt sends you body forward, avoiding the enemy attack, and seemingly stepping through the enemy.\nYou turn around, facing the back of your foe, and stab it in the back!"
-baronen_knife_effect_text_2 = "The knife sends you flying backwards,"
-baronen_knife_effect_text_3 = ""
+baronen_knife_effect_text_1 = "\n\nThe knife vibrates, everything seems to slow down around you.\nA rushing jolt sends you body forward, avoiding the enemy attack, and seemingly stepping through the enemy.\nYou turn around, facing the back of your foe, and stab it in the back!"
+baronen_knife_effect_text_2 = "\n\nThe knife radiates, you feel a rush of speed, jolt backwards and \nin a swift dash stab the enemy before it has a chance to attack!,"
+baronen_knife_effect_text_3 = "\n\nThe knife sends an electric shock through your body and like lightning \nyou zap around the enemy slicing it multiple times without a chance to counter-attack!"
 baronen_knife_effect_text_list = [baronen_knife_effect_text_1, baronen_knife_effect_text_2, baronen_knife_effect_text_3]
 
 def baronen_knife_effect_description():

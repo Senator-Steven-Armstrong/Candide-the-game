@@ -989,14 +989,16 @@ SPD: {chosen_enemy.spd}
             
             player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect)
 
-            if player.equipped_weapon.effect == "quickstep":
-                rand.randint()
+            if player.equipped_weapon.effect == "quickstep" and rand.randint(1, 1) == 1:
                 print_slow(I.baronen_knife_effect_description(), TEST)
-
-            if chosen_enemy.hp > 0:
-                enemy_attack(chosen_enemy)
-            else:
-                break
+                bonus_damage = rand.randint(10, 30)
+                print_slow(f"\n    - You dealt {bonus_damage} damage!")
+                chosen_enemy.hp -= bonus_damage
+            else:                   
+                if chosen_enemy.hp > 0:
+                    enemy_attack(chosen_enemy)
+                else:
+                    break
 
         elif first_attack_move == "enemy":
             print_slow(f"\nEnemy struck first!", TEST)
@@ -1005,6 +1007,8 @@ SPD: {chosen_enemy.spd}
 
             if player.hp > 0:
                 player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect)
+                if chosen_enemy.hp <= 0:
+                    break
             else:
                 game_over = True
                 break
@@ -1264,6 +1268,7 @@ intro()
 #     weapon_choice = rand.choice(I.item_list)
 #     player.inventory.append(I.create_item(weapon_choice))
 
+player.inventory.append(I.baronen_knife)
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:
