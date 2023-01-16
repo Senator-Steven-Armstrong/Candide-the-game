@@ -984,9 +984,14 @@ SPD: {chosen_enemy.spd}
         chosen_enemy.hp -= player_damage
         player.hp -= enemy_damage
 
+        #HÄR SKER SJÄLVA ATTACKERNA----------------------------------------------------------------------------------
         if first_attack_move == "player":
             
             player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect)
+
+            if player.equipped_weapon.effect == "quickstep":
+                rand.randint()
+                print_slow(I.baronen_knife_effect_description(), TEST)
 
             if chosen_enemy.hp > 0:
                 enemy_attack(chosen_enemy)

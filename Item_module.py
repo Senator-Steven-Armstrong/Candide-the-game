@@ -41,7 +41,16 @@ baronen_knife.type = "weapon"
 baronen_knife.name = "The knife of the mad brother"
 baronen_knife.spd_bonus = 100
 baronen_knife.str_bonus = 20
-baronen_knife.effect = "dash"
+baronen_knife.effect = "quickstep"
+baronen_knife_effect_text_1 = "The knife vibrates, everything seems to slow down around you.\nA rushing jolt sends you body forward, avoiding the enemy attack, and seemingly stepping through the enemy.\nYou turn around, facing the back of your foe, and stab it in the back!"
+baronen_knife_effect_text_2 = "The knife sends you flying backwards,"
+baronen_knife_effect_text_3 = ""
+baronen_knife_effect_text_list = [baronen_knife_effect_text_1, baronen_knife_effect_text_2, baronen_knife_effect_text_3]
+
+def baronen_knife_effect_description():
+    return rand.choice(baronen_knife_effect_text_list)
+
+
 
 baronen_greatsword = Item()
 baronen_greatsword.type = "weapon"
