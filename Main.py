@@ -61,7 +61,7 @@ def travel():
             if total_turns == 2:
                 bossfight_pococurante()
                 break
-            elif total_turns == 0:
+            elif total_turns == 4:
                 bossfight_baronen()
                 break
             elif total_turns == 5:
@@ -185,18 +185,85 @@ def travel():
                             else:
                                 print_slow("\nLeave or stay, choose: ", 0.15)
                         
-
+                        
+                    #----------------------------------------------SHOP------------------------------------------------------------
                     elif current_location == "Shop":
-                        #SHOP
+
                         print(A.shop)
                         print("Current gold:", player.gold)
 
-                        
+                        shop_items = copy.deepcopy(I.item_list)
 
-                        print(f'''
-                        You can purchase one of the following three items:
-                        •{I.item_list}
-                        ''')
+                        shop_item_indicator_1 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
+                        shop_item_index_1 = shop_items.index(shop_item_indicator_1)
+                        I.item_rarity_list.pop(shop_item_index_1)
+                        shop_items.remove(shop_item_indicator_1)
+                        shop_item_1 = I.create_item(shop_item_indicator_1)
+
+                        shop_item_indicator_2 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
+                        shop_item_index_2 = shop_items.index(shop_item_indicator_2)
+                        I.item_rarity_list.pop(shop_item_index_2)
+                        shop_items.remove(shop_item_indicator_2)
+                        shop_item_2 = I.create_item(shop_item_indicator_2)
+
+                        shop_item_indicator_3 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
+                        shop_item_index_3 = shop_items.index(shop_item_indicator_3)
+                        I.item_rarity_list.pop(shop_item_index_3)
+                        shop_items.remove(shop_item_indicator_3)
+                        shop_item_3 = I.create_item(shop_item_indicator_3)
+
+                        while True:
+                            sleep(1)
+                            print(f'''
+Thee can purchaseth one of the following three items:
+
+    1.{shop_item_1.name}; {shop_item_1.cost} Gold
+    [HP: {shop_item_1.max_hp_bonus} STR: {shop_item_1.str_bonus} SPD: {shop_item_1.spd_bonus}]
+
+    2.{shop_item_2.name}; {shop_item_2.cost} Gold
+    [HP: {shop_item_2.max_hp_bonus} STR: {shop_item_2.str_bonus} SPD: {shop_item_2.spd_bonus}]
+
+    3.{shop_item_3.name}; {shop_item_3.cost} Gold
+    [HP: {shop_item_3.max_hp_bonus} STR: {shop_item_3.str_bonus} SPD: {shop_item_3.spd_bonus}]
+
+    4. None (go back)
+                            ''')
+
+                            while True:
+                                shop_input = input("Choice: ")
+
+                                if shop_input == "1":
+                                    chosen_item = shop_item_1
+                                    break
+                                elif shop_input == "2":
+                                    chosen_item = shop_item_2
+                                    break
+                                elif shop_input == "3":
+                                    chosen_item = shop_item_3
+                                    break
+                                elif shop_input == "4":
+                                    print_slow("Thee no more brain than stone clotpole sandwich, nev'r cometh backeth!\nYou return to your Adventure.\n", TEST)
+                                    break
+                                else:
+                                    print("\n[Please enter correct input]")
+                                    continue
+                            
+                            if shop_input == "4":
+                                break
+                            elif chosen_item.cost <= player.gold:
+                                player.gold -= chosen_item.cost
+                                print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, desire thee has't a t'rrible day!", TEST)
+                                player.inventory.append(chosen_item)
+                                break
+                            else: 
+                                print_slow("\nThee has't not enow wage! Buyeth something else shall ya, If 't be true thee did get the wage f'r t.", TEST)
+                                continue
+
+                                    
+
+
+
+
                     else:
                         #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
 
@@ -1026,7 +1093,7 @@ def trap(location):
     
 
 def intro():
-    print(Art.start)
+    print(A.start)
 
 def game_summary():
     sleep(1)

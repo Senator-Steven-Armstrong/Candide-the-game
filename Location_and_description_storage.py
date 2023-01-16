@@ -182,7 +182,8 @@ sydamerika_travel_description2 = '''
 amerika fast sämre
 '''
 sydamerika_travel_description3 = '''
-oog sydamerika
+You enter the streets of syd america, gunshots and gang calls everywhere. 
+You meet their old president donald of the trump. but wait it was just a costume ohh noo!
 '''
 sydamerika_travel_description_list = [sydamerika_travel_description1, sydamerika_travel_description2, sydamerika_travel_description3]
 
@@ -238,13 +239,20 @@ england_travel_description_list = [england_travel_description1, england_travel_d
 
 #HAVET
 havet_travel_description1 = '''
-splash splash
+The smell of fresh air, and no land as far the eye can see. 
+The wooden ship that crunches as it rocked back and forth in the big waves of the great sea. 
+You see something ahead of the ship floating in the water,,, and booom you hit it. 
+You relaxed but suddenly something climbed up the ship ohh noo!
 '''
 havet_travel_description2 = '''
-du klev ombord skeppet som en ajousfhiuanfljaof
+You entered a ship, an old one, but in quite the condition for its age. 
+There are lots of different people on the ship from all around the world. 
+But in the crowd you see something that is looking right at you. Ohh NOOO!
 '''
 havet_travel_description3 = '''
-fish
+You enter the open water in a small wooden raft by a local fisherman. 
+As you traveled for a while something started to feel strange. 
+You look around but see nothing but open water, but when you look down in the water looking back at you is a, ohh noo!  
 '''
 havet_travel_description_list = [havet_travel_description1, havet_travel_description2, havet_travel_description3]
 

@@ -9,6 +9,7 @@ class Enemy():
     str = 0
     exp_dropped = 0
     gold_dropped = 0
+    spawndialouge = ""
 
 
 # Kanske dodgeroll / block, och combat kan kanske vara baserad på tur för varje runda eller annars är spd bara till för första rundan som i pokemans 
@@ -170,6 +171,18 @@ def create_enemy(enemy_name):
         bandit.str = rand.randint(5, 15)
         bandit.exp_dropped = rand.randint(100, 150)
         bandit.gold_dropped = rand.randint(40, 70)
+        
+        bandit.spawndialogue_1 = '''
+        Oi, yeou, gimme your money before I gut ya ye filthy scum! London sure is a lovely 
+        '''
+        bandit.spawndialogue_2 = '''
+        I'm terribly sorry but you, one's old bean, aaare ah jolly frightful luverly chap and 
+        deaaarly hope to defeat you, one's old bean, in this combat and be rid of your prescense.
+        '''
+        bandit.spawndialogue_3 = '''
+        Thee th're! cometh h're betimes and giveth me thy wage 
+        bef're i carveth thee with this cankered fusty bodkin!
+        '''
     elif enemy_name == cannibal:
         # Cannibal stats
         cannibal.name = "cannibal"
@@ -178,6 +191,10 @@ def create_enemy(enemy_name):
         cannibal.str = rand.randint(10, 20)
         cannibal.exp_dropped = rand.randint(120, 190)
         cannibal.gold_dropped = rand.randint(10, 30)
+
+        cannibal.spawndialogue_1 = '''
+
+        '''
     elif enemy_name == långöron:
         # Långöron
         långöron.name = "långöron"

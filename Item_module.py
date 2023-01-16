@@ -25,7 +25,7 @@ empty_accessory.type = "accessory"
 empty_accessory.name = "None"
 
 item_list=          ["dagger", "sword", "explosive", "ultra_greatsword", "springfield rifle", "rocket launcher", "crusader helm", "leather boots", "philosophy book", "voltaire's pencil"]
-item_rarity_list =  [100,       100,     60,          20,                 60,                  10,       100,             100,             100,               100]
+item_rarity_list =  [100,       100,     60,          20,                 60,                  10,                100,             100,             100,               100]
 
 #BOSS ITEMS
 pococurante_cane = Item()
