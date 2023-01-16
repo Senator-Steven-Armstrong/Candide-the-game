@@ -8,6 +8,7 @@ class Item:
     name = ""
     type = ""
     cost = 0
+    effect = "none"
 
 #DEFAULT WEAPON ÄR FISTS:
 fists = Item()
@@ -33,18 +34,20 @@ pococurante_cane.type = "weapon"
 pococurante_cane.name = "Pococurante's cane"
 pococurante_cane.str_bonus = 40
 pococurante_cane.max_hp_bonus = 200
+pococurante_cane.effect = "books"
 
 baronen_knife = Item()
 baronen_knife.type = "weapon"
 baronen_knife.name = "The knife of the mad brother"
 baronen_knife.spd_bonus = 100
 baronen_knife.str_bonus = 20
+baronen_knife.effect = "dash"
 
 baronen_greatsword = Item()
 baronen_greatsword.type = "weapon"
 baronen_greatsword.name = "Moonlight greatsword of animosity"
 baronen_greatsword.str_bonus = 50
-baronen_greatsword.spd_bonus = 40
+baronen_greatsword.spd_bonus = 20
 baronen_greatsword.max_hp_bonus = 300
 
 def create_item(choice):
@@ -72,6 +75,7 @@ def create_item(choice):
         explosive.name = "Highly volatile explosive"
         explosive.str_bonus = rand.randint(19, 22)
         explosive.cost = rand.randint(410,460)
+        explosive.effect = "explosion"
         return explosive
     elif choice == "ultra_greatsword":
         ultra_greatsword = Item()
@@ -127,9 +131,10 @@ def create_item(choice):
         pencil = Item()
         pencil.type = "accessory"
         pencil.name = "Voltaire's pencil"
-        pencil.str_bonus = rand.randint(8, 14)
-        pencil.spd_bonus = rand.randint(6, 10)
-        pencil.cost = rand.randint(90, 100)
+        pencil.max_hp_bonus = rand.randint(10, 15)
+        pencil.str_bonus = pencil.max_hp_bonus
+        pencil.spd_bonus = pencil.max_hp_bonus
+        pencil.cost = pencil.max_hp_bonus * 10
         return pencil
         
 

@@ -86,7 +86,7 @@ def travel():
                         temporary_locations.pop(L.locations.index(current_location))
 
                         #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
-                        location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+                        location1 = rand.choices(temporary_locations, weights=[9999999999999, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
                         temporary_locations.remove(location1)
                         location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location2)
@@ -190,7 +190,6 @@ def travel():
                     elif current_location == "Shop":
 
                         print(A.shop)
-                        print("Current gold:", player.gold)
 
                         shop_items = copy.deepcopy(I.item_list)
 
@@ -215,6 +214,8 @@ def travel():
                         while True:
                             sleep(1)
                             print(f'''
+Current gold: {player.gold}
+
 Thee can purchaseth one of the following three items:
 
     1.{shop_item_1.name}; {shop_item_1.cost} Gold
@@ -242,7 +243,7 @@ Thee can purchaseth one of the following three items:
                                     chosen_item = shop_item_3
                                     break
                                 elif shop_input == "4":
-                                    print_slow("Thee no more brain than stone clotpole sandwich, nev'r cometh backeth!\nYou return to your Adventure.\n", TEST)
+                                    print_slow("\nThee no more brain than stone clotpole sandwich, nev'r cometh backeth!\You hastily leave the store.", TEST)
                                     break
                                 else:
                                     print("\n[Please enter correct input]")
@@ -252,14 +253,13 @@ Thee can purchaseth one of the following three items:
                                 break
                             elif chosen_item.cost <= player.gold:
                                 player.gold -= chosen_item.cost
-                                print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, desire thee has't a t'rrible day!", TEST)
+                                print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, desire thee has't a t'rrible day!\n", TEST)
                                 player.inventory.append(chosen_item)
                                 break
                             else: 
                                 print_slow("\nThee has't not enow wage! Buyeth something else shall ya, If 't be true thee did get the wage f'r t.", TEST)
                                 continue
 
-                                    
 
 
 
@@ -575,6 +575,8 @@ Debuffs: {player.debuffs}
 INVENTORY:''')
     
     #PRINTAR INVENTORYN
+    if len(player.inventory) == 0:
+        print("[Empty]")
     j = 1
     inventory_row = ""
     for i in player.inventory:
@@ -702,7 +704,7 @@ Pick an equipment to change:
  
 
                     else:
-                        print_slow("\nNo weapons in inventory to equip\n", TEST)
+                        print_slow("\nNo weapons in inventory to equip.\n", TEST)
                         break
                     
                     
@@ -784,7 +786,7 @@ Pick an equipment to change:
                                 break  
 
                     else:
-                        print_slow("\nNo armorpieces in inventory to equip\n", TEST)
+                        print_slow("\nNo armorpieces in inventory to equip.\n", TEST)
                         break
                     
                     
@@ -865,7 +867,7 @@ Pick an equipment to change:
                                 break  
 
                     else:
-                        print_slow("\nNo accessories in inventory to equip\n", TEST)
+                        print_slow("\nNo accessories in inventory to equip.\n", TEST)
                         break
                 
                 elif item_change_choice == "4":
@@ -889,6 +891,9 @@ def enemy_level_multiplier(player_level):
     multiplier *= (1.25**(player_level-1))
     return multiplier
     
+
+
+#----------------------------------------------------------FIGHT-METHODS---------------------------------------------------------------
 
 def fight():
     global game_over
@@ -980,44 +985,24 @@ SPD: {chosen_enemy.spd}
         player.hp -= enemy_damage
 
         if first_attack_move == "player":
-            print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
-
-            print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-            if chosen_enemy.hp > 0:
-                print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
-            else:
-                print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}", TEST)
-                break
             
-            print_slow("\n" + E.enemy_attack_description(chosen_enemy, player.name), TEST)
-            print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
-            if player.hp >= 0:
-                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+            player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect)
+
+            if chosen_enemy.hp > 0:
+                enemy_attack(chosen_enemy)
             else:
-                print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                game_over = True
                 break
 
         elif first_attack_move == "enemy":
             print_slow(f"\nEnemy struck first!", TEST)
-            print_slow(E.enemy_attack_description(chosen_enemy, player.name), TEST)
-            print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
-            
-            if player.hp <= 0:
-                print_slow(f"   - You took {enemy_damage} damage!  HP: 0 / {player.max_hp}\n", TEST)
+
+            enemy_attack(chosen_enemy)
+
+            if player.hp > 0:
+                player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect)
+            else:
                 game_over = True
                 break
-            else:
-                print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}.\n", TEST)
-
-                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
-                
-                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-                if chosen_enemy.hp > 0:
-                    print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
-                else:
-                    print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}.", TEST)
-                    break
 
         sleep(0.8)
         print("\n")
@@ -1033,6 +1018,45 @@ SPD: {chosen_enemy.spd}
         print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
 
         loot("enemy drop")
+
+
+def player_attack(chosen_attack, chosen_enemy, weapon_effect):
+    player_damage = rand.randint(player.str - 5, player.str + 5)
+    chosen_enemy.hp -= player_damage
+
+    print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
+
+    print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+
+    #EFFECTS
+    if weapon_effect == "explosion":
+        extra_damage = rand.randint(20, 30)
+        print_slow(f"\nThe explosion from the {player.equipped_weapon.name} was big enough to hurt you too!")
+        player.hp -= extra_damage
+        print_slow(f"   - You took {extra_damage} damage!")
+
+    if chosen_enemy.hp > 0:
+        print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
+    else:
+        print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}", TEST)
+
+def enemy_attack(chosen_enemy):
+    global game_over
+
+    enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
+    player.hp -= enemy_damage
+
+    print_slow("\n" + E.enemy_attack_description(chosen_enemy, player.name), TEST)
+    print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
+    if player.hp >= 0:
+        print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+    else:
+        print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+        game_over = True
+
+
+
+#--------------------------------------------------------------------------------------------------------------------------------------
 
 def print_slow(str, write_speed):
     for letter in str:
@@ -1135,7 +1159,7 @@ cacambo.name = "Cacambo"
 cacambo.max_hp = 800
 cacambo.str = 40000
 cacambo.spd = 20000
-cacambo.gold = 40
+cacambo.gold = 40000#40
 
 #Candide
 candide = P.Player()
@@ -1148,7 +1172,7 @@ candide.gold = 10
 #Pangloss
 pangloss = P.Player()
 pangloss.name = "Pangloss"
-pangloss.max_hp = 1#300
+pangloss.max_hp = 1000#300
 pangloss.str = 20
 pangloss.spd = 1#5
 pangloss.gold = 1
@@ -1230,10 +1254,10 @@ while True:
 intro()
 
 
-# TEMPORÄR TILLÄG AV ITEMS
-for i in range(10):
-    weapon_choice = rand.choice(I.item_list)
-    player.inventory.append(I.create_item(weapon_choice))
+# # TEMPORÄR TILLÄG AV ITEMS
+# for i in range(10):
+#     weapon_choice = rand.choice(I.item_list)
+#     player.inventory.append(I.create_item(weapon_choice))
 
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
