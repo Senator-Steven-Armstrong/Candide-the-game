@@ -7,8 +7,9 @@ import Enemy_module as E
 import Item_module as I
 import random as rand
 import copy
-import winsound
+import pygame
 
+pygame.mixer.init()
 
 TEST = 0.00000000000000000000000000000000000000000000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
@@ -1189,7 +1190,10 @@ pangloss.gold = 1
 #------------------------------------------------------HÄR KÖRS HUVUDDELEN AV PROGRAMMET-------------------------------------------------------------------------------------------------------
 
 print_slow("Choose your character!", 0.01)
-sleep(0.5)
+sleep(1)
+
+pygame.mixer.music.load('character_creation_music.mp3')
+pygame.mixer.music.play()
 
 print(f'''
 
