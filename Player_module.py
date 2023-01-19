@@ -1,4 +1,5 @@
 import Item_module as I
+import pygame
 
 class Player():
     
@@ -70,61 +71,46 @@ nothing.sound_effect = ''
 # attack_move_name_8 = "Cannibalism"
 # attack_move_name_9 = "Do nothing"
 
-ATTACK_MOVE_NAME_LIST = [dropkick, words, armor_breaker, cleaver, roundhouse_kick, gun, cum, cannibalism, nothing]
+ATTACK_MOVE_LIST = [dropkick, words, armor_breaker, cleaver, roundhouse_kick, gun, cum, cannibalism, nothing]
 
 
 def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name):
     
     #DROPKICK
-    attack_description_1 = f'''
+    dropkick.description = f'''
 You droppkicked {enemy_name}!'''
     #WORDS
-    attack_description_2 = f''' 
+    words.description = f''' 
 "Candide balls fit in your mouth?" Uttered {player_name}, {enemy_name} is in distraught!'''
     #ARMOR BREAKER
-    attack_description_3 = f''' 
+    armor_breaker.description = f''' 
 You took a fast grip around your {player_weapon} and crushed through the enemy's armor!'''
     #HEAD CLEAVER
-    attack_description_4 = f''' 
+    cleaver.description = f''' 
 Using your {player_weapon}, with a swift strike you split {enemy_name} in two!'''
     #ROUNDHOUSE KICK
-    attack_description_5 = f''' 
+    roundhouse_kick.description = f''' 
 You charged up and roundhouse kicked {enemy_name}!'''
     #GUN
-    attack_description_6 = f''' 
+    gun.description = f''' 
 {player_name} pulled out a gun and shot {enemy_name}!'''
     #CUM
-    attack_description_7 = f''' 
+    cum.description = f''' 
 {player_name} came all over the enemy!'''
-    #DROPKICK
-    attack_description_8 = f''' 
+    #CANNIBALISM
+    cannibalism.description = f''' 
 "Woah is that fucking blackface dude?" said {player_name}.
 {player_name} ate {enemy_name} alive!'''
     #DO NOTHING
-    attack_description_9 = f'''
+    nothing.description = f'''
 {player_name} just kinda stood there.'''
 
-
-    if chosen_attack == attack_move_name_1:
-        returned_description = attack_description_1
-    elif chosen_attack == attack_move_name_2:
-        returned_description = attack_description_2
-    elif chosen_attack == attack_move_name_3:
-        returned_description = attack_description_3
-    elif chosen_attack == attack_move_name_4:
-        returned_description = attack_description_4
-    elif chosen_attack == attack_move_name_5:
-        returned_description = attack_description_5
-    elif chosen_attack == attack_move_name_6:
-        returned_description = attack_description_6
-    elif chosen_attack == attack_move_name_7:
-        returned_description = attack_description_7
-    elif chosen_attack == attack_move_name_8:
-        returned_description = attack_description_8
-    elif chosen_attack == attack_move_name_9:
-        returned_description = attack_description_9
+    for attack in ATTACK_MOVE_LIST:
+        if attack == chosen_attack:
+            pygame.mixer.music.load(attack.sound_effect)
+            pygame.mixer.music.play(0, 1, 0)
+            return chosen_attack.description
     
-    return returned_description
 
 
 

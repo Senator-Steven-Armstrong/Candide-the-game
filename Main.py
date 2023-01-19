@@ -53,8 +53,8 @@ def travel():
     
     while True:
         choice = input("Choice: ")
-        pygame.mixer.music.load(start_music)
-        pygame.mixer.music.play()
+        # pygame.mixer.music.load(UI_sfx)
+        # pygame.mixer.music.play()
         
         if choice == "1":
             #INVENTORY
@@ -65,7 +65,7 @@ def travel():
             
             #TRAVEL-------------------------------------------------------------------------------------------------------------
             
-            if total_turns == 0:
+            if total_turns == 2:
                 bossfight_pococurante()
                 break
             elif total_turns == 4:
@@ -82,7 +82,7 @@ def travel():
                 temporary_locations = copy.deepcopy(L.locations)
 
                 #ELDORADO KAN BARA BESÖKAS EN GÅNG, OM DEN BESÖKS KOMMER DEN INTE LÄNGRE VARA MED I LISTAN L.Locations OCH DÄRMED KÖRS KODEN:
-                if L.locations.count("Eldorado") == 0:
+                if L.locations.count(L.eldorado) == 0:
                     location1 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
                     temporary_locations.remove(location1)
                     location2 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
@@ -108,9 +108,9 @@ def travel():
 
                 print(f'''
 
-    1: {location1} 
-    2: {location2}
-    3: {location3}
+    1: {location1.name} 
+    2: {location2.name}
+    3: {location3.name}
                 ''')
 
 
@@ -674,7 +674,7 @@ SPD: {chosen_enemy.spd}
     while player.hp > 0 or chosen_enemy.hp > 0:
 
 
-        temp_player_attack_list = P.ATTACK_MOVE_NAME_LIST
+        temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
 
         player_damage = rand.randint(player.str - 5, player.str + 5)
         enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
@@ -818,7 +818,7 @@ SPD: {E.pococurante.spd}
 
     while player.hp > 0 or E.pococurante.hp > 0:
 
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
             player_damage = rand.randint(player.str - 5, player.str + 5)
             enemy_damage = rand.randint(E.pococurante.str -5 , E.pococurante.str + 5)
 
@@ -890,7 +890,6 @@ SPD: {E.pococurante.spd}
                     game_over = True
                     break
 
-
     sleep(1)
     print("\n")
 
@@ -942,7 +941,7 @@ SPD: {E.baronen.spd}
 
     while player.hp > 0 or E.baronen.hp > 0:
 
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
             player_damage = rand.randint(player.str - 5, player.str + 5)
             enemy_damage = rand.randint(E.baronen.str -5 , E.baronen.str + 5)
 
