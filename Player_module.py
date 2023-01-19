@@ -106,11 +106,12 @@ You charged up and roundhouse kicked {enemy_name}!'''
 
     for attack in ATTACK_MOVE_LIST:
         if attack.name == chosen_attack.name:
-            try:
-                pygame.mixer.music.load(attack.sound_effect)
-                pygame.mixer.music.play(0, 1, 0)
-            except:
-                return
+            # try:
+            #     pygame.mixer.music.load(attack.sound_effect)
+            #     pygame.mixer.music.play(0, 1, 0)
+            # except:
+            #     pass
+            
             return chosen_attack.description
     
 
