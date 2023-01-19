@@ -61,15 +61,6 @@ nothing.name = "Do nothing"
 nothing.sound_effect = ''
 
 
-# attack_move_name_1 = "Dropkick"
-# attack_move_name_2 = "Words"
-# attack_move_name_3 = "Armor breaker"
-# attack_move_name_4 = "Head cleaver"
-# attack_move_name_5 = "Roundhouse kick"
-# attack_move_name_6 = "Gun"
-# attack_move_name_7 = "Cum"
-# attack_move_name_8 = "Cannibalism"
-# attack_move_name_9 = "Do nothing"
 
 ATTACK_MOVE_LIST = [dropkick, words, armor_breaker, cleaver, roundhouse_kick, gun, cum, cannibalism, nothing]
 
@@ -112,7 +103,7 @@ You charged up and roundhouse kicked {enemy_name}!'''
             # except:
             #     pass
             
-            return chosen_attack.description
+            return attack.description
     
 
 

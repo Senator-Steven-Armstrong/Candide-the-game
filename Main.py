@@ -769,16 +769,16 @@ def player_attack(chosen_attack, chosen_enemy, weapon_effect, enemy_name):
     player_damage = rand.randint(player.str - 5, player.str + 5)
     chosen_enemy.hp -= player_damage
 
-    print(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
+    print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
 
     print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
 
     #EFFECTS
     if weapon_effect == "explosion":
         extra_damage = rand.randint(20, 30)
-        print_slow(f"\nThe explosion from the {player.equipped_weapon.name} was big enough to hurt you too!")
+        print_slow(f"\n\nUsing the {player.equipped_weapon.name} to attack, the explosion from it was big enough to hurt you too!", 0.01)
         player.hp -= extra_damage
-        print_slow(f"   - You took {extra_damage} damage!")
+        print_slow(f"\n   - You took {extra_damage} damage!", 0.01)
 
     if chosen_enemy.hp > 0:
         print_slow(f"\n   - {enemy_name} health: {chosen_enemy.hp} / {chosen_enemy.max_hp}\n", TEST)
@@ -1265,6 +1265,7 @@ intro()
 # for i in range(10):
 #     weapon_choice = rand.choice(I.item_list)
 #     player.inventory.append(I.create_item(weapon_choice))
+player.inventory.append(I.create_item("explosive"))
 
 player.inventory.append(I.baronen_knife)
 

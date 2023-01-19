@@ -82,7 +82,7 @@ def create_item(choice):
         explosive = Item()
         explosive.type = "weapon"
         explosive.name = "Highly volatile explosive"
-        explosive.str_bonus = rand.randint(19, 22)
+        explosive.str_bonus = rand.randint(30, 40)
         explosive.cost = rand.randint(410,460)
         explosive.effect = "explosion"
         return explosive
