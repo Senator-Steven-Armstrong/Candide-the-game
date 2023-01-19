@@ -11,7 +11,7 @@ import pygame
 
 pygame.mixer.init()
 
-TEST = 0.00000000000000000000000000000000000000000000000000001
+TEST = 0.00000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
 SEMICOLON_PAUSE_TIME = 0.6
@@ -59,7 +59,7 @@ def travel():
             
             #TRAVEL-------------------------------------------------------------------------------------------------------------
             
-            if total_turns == 2:
+            if total_turns == 0:
                 bossfight_pococurante()
                 break
             elif total_turns == 4:
@@ -284,6 +284,9 @@ def bossfight_pococurante():
     global game_over
     print_slow(L.pococurante_description, 0.02)
 
+    pygame.mixer.music.load('sounds/pococurante theme.mp3')
+    pygame.mixer.music.play()
+
     print_slow(f"\nLord Pococurante, the dreadful art collector stands before you.", 0.1)
     sleep(PUNCTUATION_PAUSE_TIME)
     print(f'''
@@ -375,7 +378,7 @@ SPD: {E.pococurante.spd}
                     if E.pococurante.hp > 0:
                         print_slow(f"\n   - Pococurante health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
                     else:
-                        print_slow(f"\n   - Pococurante health: 0 / {E.pococurante.max_hp}.", TEST)
+                        print_slow(f"\n   - Pococurante health: 0 / {E.pococurante.max_hp}.\n", TEST)
                         break
                         
                 else:
@@ -1130,6 +1133,7 @@ def intro():
     print(A.start)
 
 def game_summary():
+    
     sleep(1)
     print_slow("\nGAME SUMMARY:", 0.05)
     sleep(0.5)
@@ -1192,7 +1196,7 @@ pangloss.gold = 1
 print_slow("Choose your character!", 0.01)
 sleep(1)
 
-pygame.mixer.music.load('character_creation_music.mp3')
+pygame.mixer.music.load('sounds/character_creation_music.mp3')
 pygame.mixer.music.play()
 
 print(f'''
@@ -1291,3 +1295,5 @@ while True:
         break
 
 game_summary()
+
+input()
