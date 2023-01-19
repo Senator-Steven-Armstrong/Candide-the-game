@@ -674,7 +674,7 @@ SPD: {chosen_enemy.spd}
     while player.hp > 0 or chosen_enemy.hp > 0:
 
 
-        temp_player_attack_list = P.ATTACK_MOVE_NAME_LIST
+        temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
 
         player_damage = rand.randint(player.str - 5, player.str + 5)
         enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
@@ -818,7 +818,7 @@ SPD: {E.pococurante.spd}
 
     while player.hp > 0 or E.pococurante.hp > 0:
 
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
             player_damage = rand.randint(player.str - 5, player.str + 5)
             enemy_damage = rand.randint(E.pococurante.str -5 , E.pococurante.str + 5)
 
@@ -890,7 +890,6 @@ SPD: {E.pococurante.spd}
                     game_over = True
                     break
 
-
     sleep(1)
     print("\n")
 
@@ -942,7 +941,7 @@ SPD: {E.baronen.spd}
 
     while player.hp > 0 or E.baronen.hp > 0:
 
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
             player_damage = rand.randint(player.str - 5, player.str + 5)
             enemy_damage = rand.randint(E.baronen.str -5 , E.baronen.str + 5)
 
