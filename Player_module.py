@@ -18,18 +18,59 @@ class Player():
     equipped_accessory = I.empty_accessory
     curse_of_eldorado = 0 #COE FUNGERAR SÅ ATT DEN ÄR 0 TILLS MAN KOMMER TILL ELDORADO, OM MAN LÄMNAR BLIR COE 3, OCH FÖR VARJE RUNDA GÅR DEN NER MED 1 DÄR MAN FÖRLORAR 1/3 AV SINA PENGAR 
     
+class Attack():
+    name = ""
+    description = ""
+    sound_effect = ''
 
-attack_move_name_1 = "Dropkick"
-attack_move_name_2 = "Words"
-attack_move_name_3 = "Armor breaker"
-attack_move_name_4 = "Head cleaver"
-attack_move_name_5 = "Roundhouse kick"
-attack_move_name_6 = "Gun"
-attack_move_name_7 = "Cum"
-attack_move_name_8 = "Cannibalism"
-attack_move_name_9 = "Do nothing"
+dropkick = Attack()
+dropkick.name = "Dropkick"
+dropkick.sound_effect = ''
 
-ATTACK_MOVE_NAME_LIST = [attack_move_name_1, attack_move_name_2, attack_move_name_3, attack_move_name_4, attack_move_name_5, attack_move_name_6, attack_move_name_7, attack_move_name_8, attack_move_name_9]
+words = Attack()
+words.name = "Words"
+words.sound_effect = ''
+
+armor_breaker = Attack()
+armor_breaker.name = "Armor breaker"
+armor_breaker.sound_effect = ''
+
+cleaver = Attack()
+cleaver.name = "Head cleaver"
+cleaver.sound_effect = ''
+
+roundhouse_kick = Attack()
+roundhouse_kick.name = "Roundhouse kick"
+roundhouse_kick.sound_effect = ''
+
+gun = Attack()
+gun.name = "Gun"
+gun.sound_effect = ''
+
+cum = Attack()
+cum.name = "Cum"
+cum.sound_effect = ''
+
+cannibalism = Attack()
+cannibalism.name = "Cannibalism"
+cannibalism.sound_effect = ''
+
+nothing = Attack()
+nothing.name = "Do nothing"
+nothing.sound_effect = ''
+
+
+# attack_move_name_1 = "Dropkick"
+# attack_move_name_2 = "Words"
+# attack_move_name_3 = "Armor breaker"
+# attack_move_name_4 = "Head cleaver"
+# attack_move_name_5 = "Roundhouse kick"
+# attack_move_name_6 = "Gun"
+# attack_move_name_7 = "Cum"
+# attack_move_name_8 = "Cannibalism"
+# attack_move_name_9 = "Do nothing"
+
+ATTACK_MOVE_NAME_LIST = [dropkick, words, armor_breaker, cleaver, roundhouse_kick, gun, cum, cannibalism, nothing]
 
 
 def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name):

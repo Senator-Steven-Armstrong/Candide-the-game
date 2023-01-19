@@ -11,6 +11,10 @@ import pygame
 
 pygame.mixer.init()
 
+#SOUND EFFECTS
+start_music = 'sounds/pococurante theme.mp3'
+UI_sfx = 'sounds/UI sound effect.mp3'
+
 TEST = 0.00000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
@@ -49,6 +53,8 @@ def travel():
     
     while True:
         choice = input("Choice: ")
+        pygame.mixer.music.load(start_music)
+        pygame.mixer.music.play()
         
         if choice == "1":
             #INVENTORY
@@ -280,280 +286,6 @@ Thee can purchaseth one of the following three items:
 
 
 
-def bossfight_pococurante():
-    global game_over
-    print_slow(L.pococurante_description, 0.02)
-
-    pygame.mixer.music.load('sounds/pococurante theme.mp3')
-    pygame.mixer.music.play()
-
-    print_slow(f"\nLord Pococurante, the dreadful art collector stands before you.", 0.1)
-    sleep(PUNCTUATION_PAUSE_TIME)
-    print(f'''
-HP: {E.pococurante.hp} / {E.pococurante.max_hp}
-STR: {E.pococurante.str}
-SPD: {E.pococurante.spd}
-    ''')
-
-    sleep(2)
-
-    while player.hp > 0 or E.pococurante.hp > 0:
-
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
-            player_damage = rand.randint(player.str - 5, player.str + 5)
-            enemy_damage = rand.randint(E.pococurante.str -5 , E.pococurante.str + 5)
-
-            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
-            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.pococurante.spd, 140, 140], k=1).pop()
-
-            attack_1 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_1)
-            attack_2 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_2)
-            attack_3 = rand.choice(temp_player_attack_list)
-
-            print_slow("\nWhat attack will you use?", TEST)
-            print(f'''
-
-    1: {attack_1}
-    2: {attack_2}
-    3: {attack_3}
-            ''')
-
-            while True:
-                while True:
-                    try:
-                        attack_choice = int(input("Choice: "))
-                    except:
-                        print("\n[Please enter a number]")
-                    else:
-                        break
-
-                if attack_choice == 1:
-                    chosen_attack = attack_1
-                    break
-                elif attack_choice == 2:
-                    chosen_attack = attack_2
-                    break
-                elif attack_choice == 3:
-                    chosen_attack = attack_3
-                    break
-                else:
-                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
-
-            E.pococurante.hp -= player_damage
-            player.hp -= enemy_damage
-
-            if first_attack_move == "player":
-                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.pococurante.name), TEST)
-
-                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-                if E.pococurante.hp > 0:
-                    print_slow(f"\n   - Pococurante health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
-                else:
-                    print_slow(f"\n   - Pococurante health: 0 / {E.pococurante.max_hp}", TEST)
-                    break
-                
-                print_slow("\n" + E.pococurante_voice_lines(), TEST)
-                print_slow(E.pococurante_attacks(), TEST)
-                print_slow(f"\n   - Pococurante dealt {enemy_damage} damage!", TEST)
-                if player.hp >= 0:
-                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
-                else:
-                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                    game_over = True
-                    break
-            elif first_attack_move == "enemy":
-                print_slow(f"Pococurante struck first!", TEST)
-                print_slow("\n" + E.pococurante_voice_lines(), TEST)
-                print_slow(E.pococurante_attacks(), TEST)
-                print_slow(f"\n   - Pococurante dealt {enemy_damage} damage!", TEST)
-                
-                if player.hp >= 0:
-                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
-
-                    print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.pococurante.name), TEST)
-                    
-                    print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-                    if E.pococurante.hp > 0:
-                        print_slow(f"\n   - Pococurante health: {E.pococurante.hp} / {E.pococurante.max_hp}", TEST)
-                    else:
-                        print_slow(f"\n   - Pococurante health: 0 / {E.pococurante.max_hp}.\n", TEST)
-                        break
-                        
-                else:
-                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                    game_over = True
-                    break
-
-
-    sleep(1)
-    print("\n")
-
-    if game_over == False:
-        print_slow('''\n"Now I see... Optimism.. Positivity.. Maybe... All of the art wasn't bad...."''', 0.1)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
-
-        print_slow(f"\n\nYou have slayn {E.pococurante.name}.\n", 0.04)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
-
-        player.gold += E.pococurante.gold_dropped
-        print_slow(f"\nPococurante dropped {E.pococurante.gold_dropped} gold!", TEST)
-
-        player.exp += E.pococurante.exp_dropped
-        print_slow(f"\nYou gained {E.pococurante.exp_dropped} exp!", TEST)
-
-        player.inventory.append(I.pococurante_cane)
-        print_slow(f"\nYou walked up to Pococurante and took {I.pococurante_cane.name}\n", TEST)
-
-
-
-def bossfight_baronen():
-    global game_over
-    print_slow(L.baronen_description, 0.02)
-
-    print_slow(f"\nBaronen, the mad brother, acrimony of love, baron of Thunder-ten-tronckh, towers over you.", 0.1)
-    sleep(PUNCTUATION_PAUSE_TIME)
-    print(f'''
-HP: {E.baronen.hp} / {E.baronen.max_hp}
-STR: {E.baronen.str}
-SPD: {E.baronen.spd}
-    ''')
-
-    sleep(2)
-
-    player.hp /= 1.5
-    int(player.hp)
-
-    player.max_hp -= player.equipped_weapon.max_hp_bonus
-    player.hp -= player.equipped_weapon.max_hp_bonus
-    player.str -= player.equipped_weapon.str_bonus
-    player.spd -= player.equipped_weapon.spd_bonus
-
-    player.equipped_weapon = I.baronen_knife
-
-    player.max_hp += player.equipped_weapon.max_hp_bonus
-    player.hp += player.equipped_weapon.max_hp_bonus
-    player.str += player.equipped_weapon.str_bonus
-    player.spd += player.equipped_weapon.spd_bonus
-
-    while player.hp > 0 or E.baronen.hp > 0:
-
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
-            player_damage = rand.randint(player.str - 5, player.str + 5)
-            enemy_damage = rand.randint(E.baronen.str -5 , E.baronen.str + 5)
-
-            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
-            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.baronen.spd, 140, 140], k=1).pop()
-
-            attack_1 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_1)
-            attack_2 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_2)
-            attack_3 = rand.choice(temp_player_attack_list)
-
-            print_slow("\nWhat attack will you use?", TEST)
-            print(f'''
-
-    1: {attack_1}
-    2: {attack_2}
-    3: {attack_3}
-            ''')
-
-            while True:
-                while True:
-                    try:
-                        attack_choice = int(input("Choice: "))
-                    except:
-                        print("\n[Please enter a number]")
-                    else:
-                        break
-
-                if attack_choice == 1:
-                    chosen_attack = attack_1
-                    break
-                elif attack_choice == 2:
-                    chosen_attack = attack_2
-                    break
-                elif attack_choice == 3:
-                    chosen_attack = attack_3
-                    break
-                else:
-                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
-
-            E.baronen.hp -= player_damage
-            player.hp -= enemy_damage
-
-            if first_attack_move == "player":
-                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.baronen.name), TEST)
-
-                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-                if E.baronen.hp > 0:
-                    print_slow(f"\n   - Baronen health: {E.baronen.hp} / {E.baronen.max_hp}", TEST)
-                else:
-                    print_slow(f"\n   - Baronen health: 0 / {E.baronen.max_hp}", TEST)
-                    break
-                
-                print_slow("\n" + E.baronen_voice_lines(), TEST)
-                print_slow(E.baronen_attacks(), TEST)
-                print_slow(f"\n   - Baronen dealt {enemy_damage} damage!", TEST)
-                if player.hp >= 0:
-                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
-                else:
-                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                    game_over = True
-                    break
-            elif first_attack_move == "enemy":
-                print_slow(f"Baronen struck first!", TEST)
-                print_slow("\n" + E.baronen_voice_lines(), TEST)
-                print_slow(E.baronen_attacks(), TEST)
-                print_slow(f"\n   - Baronen dealt {enemy_damage} damage!", TEST)
-                
-                if player.hp >= 0:
-                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
-
-                    print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.baronen.name), TEST)
-                    
-                    print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
-                    if E.baronen.hp > 0:
-                        print_slow(f"\n   - Baronen health: {E.baronen.hp} / {E.baronen.max_hp}", TEST)
-                    else:
-                        print_slow(f"\n   - Baronen health: 0 / {E.baronen.max_hp}.", TEST)
-                        break
-                        
-                else:
-                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                    game_over = True
-                    break
-
-
-    sleep(1)
-    print("\n")
-
-    if game_over == False:
-        print_slow('''\n"Just.. treat.. treat her good... please..."''', 0.1)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
-
-        print_slow(f"\n\nYou have slayn {E.baronen.name}.\n", 0.04)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
-
-        player.gold += E.baronen.gold_dropped
-        print_slow(f"\nBaronen dropped {E.baronen.gold_dropped} gold!", TEST)
-
-        player.exp += E.baronen.exp_dropped
-        print_slow(f"\nYou gained {E.baronen.exp_dropped} exp!", TEST)
-
-        print_slow(f"\nYou held onto {I.baronen_knife.name}.\n", TEST)
-
-        player.inventory.append(I.baronen_greatsword)
-        print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
-
-
-def bossfight_kunigunda():
-    print_slow('''
-
-    ''', TEST)
-    
 
 
 def inventory():
@@ -991,7 +723,7 @@ SPD: {chosen_enemy.spd}
         #HÄR SKER SJÄLVA ATTACKERNA----------------------------------------------------------------------------------
         if first_attack_move == "player":
             
-            player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect)
+            player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect, "Enemy")
 
             if player.equipped_weapon.effect == "quickstep" and rand.randint(1, 1) == 1:
                 print_slow(I.baronen_knife_effect_description(), TEST)
@@ -1000,17 +732,17 @@ SPD: {chosen_enemy.spd}
                 chosen_enemy.hp -= bonus_damage
             else:                   
                 if chosen_enemy.hp > 0:
-                    enemy_attack(chosen_enemy)
+                    enemy_attack(chosen_enemy, "Enemy")
                 else:
                     break
 
         elif first_attack_move == "enemy":
             print_slow(f"\nEnemy struck first!", TEST)
 
-            enemy_attack(chosen_enemy)
+            enemy_attack(chosen_enemy, "Enemy")
 
             if player.hp > 0:
-                player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect)
+                player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect, "Enemy")
                 if chosen_enemy.hp <= 0:
                     break
             else:
@@ -1033,7 +765,7 @@ SPD: {chosen_enemy.spd}
         loot("enemy drop")
 
 
-def player_attack(chosen_attack, chosen_enemy, weapon_effect):
+def player_attack(chosen_attack, chosen_enemy, weapon_effect, enemy_name):
     player_damage = rand.randint(player.str - 5, player.str + 5)
     chosen_enemy.hp -= player_damage
 
@@ -1049,23 +781,282 @@ def player_attack(chosen_attack, chosen_enemy, weapon_effect):
         print_slow(f"   - You took {extra_damage} damage!")
 
     if chosen_enemy.hp > 0:
-        print_slow(f"\n   - Enemy health: {chosen_enemy.hp} / {chosen_enemy.max_hp}", TEST)
+        print_slow(f"\n   - {enemy_name} health: {chosen_enemy.hp} / {chosen_enemy.max_hp}\n", TEST)
     else:
-        print_slow(f"\n   - Enemy health: 0 / {chosen_enemy.max_hp}", TEST)
+        print_slow(f"\n   - {enemy_name} health: 0 / {chosen_enemy.max_hp}\n", TEST)
 
-def enemy_attack(chosen_enemy):
+def enemy_attack(chosen_enemy, enemy_name):
     global game_over
 
     enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
     player.hp -= enemy_damage
 
     print_slow("\n" + E.enemy_attack_description(chosen_enemy, player.name), TEST)
-    print_slow(f"\n   - Enemy dealt {enemy_damage} damage!", TEST)
+    print_slow(f"\n   - {enemy_name} dealt {enemy_damage} damage!", TEST)
     if player.hp >= 0:
-        print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+        print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}\n", TEST)
     else:
-        print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+        print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}\n", TEST)
         game_over = True
+
+def bossfight_pococurante():
+    global game_over
+    print_slow(L.pococurante_description, 0.02)
+
+    pygame.mixer.music.load('sounds/pococurante theme.mp3')
+    pygame.mixer.music.play()
+
+    print_slow(f"\nLord Pococurante, the dreadful art collector stands before you.", 0.1)
+    sleep(PUNCTUATION_PAUSE_TIME)
+    print(f'''
+HP: {E.pococurante.hp} / {E.pococurante.max_hp}
+STR: {E.pococurante.str}
+SPD: {E.pococurante.spd}
+    ''')
+
+    sleep(2)
+
+    while player.hp > 0 or E.pococurante.hp > 0:
+
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
+            player_damage = rand.randint(player.str - 5, player.str + 5)
+            enemy_damage = rand.randint(E.pococurante.str -5 , E.pococurante.str + 5)
+
+            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
+            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.pococurante.spd, 140, 140], k=1).pop()
+
+            attack_1 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_1)
+            attack_2 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_2)
+            attack_3 = rand.choice(temp_player_attack_list)
+
+            print_slow("\nWhat attack will you use?", TEST)
+            print(f'''
+
+    1: {attack_1}
+    2: {attack_2}
+    3: {attack_3}
+            ''')
+
+            while True:
+                while True:
+                    try:
+                        attack_choice = int(input("Choice: "))
+                    except:
+                        print("\n[Please enter a number]")
+                    else:
+                        break
+
+                if attack_choice == 1:
+                    chosen_attack = attack_1
+                    break
+                elif attack_choice == 2:
+                    chosen_attack = attack_2
+                    break
+                elif attack_choice == 3:
+                    chosen_attack = attack_3
+                    break
+                else:
+                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
+
+            E.pococurante.hp -= player_damage
+            player.hp -= enemy_damage
+
+            if first_attack_move == "player":
+                player_attack(chosen_attack, E.pococurante, player.equipped_weapon.effect, "Pococurante")
+
+                if E.pococurante.hp > 0:
+                    print_slow(E.pococurante_voice_lines(),TEST)
+                    enemy_attack(E.pococurante, "Enemy")
+                else:
+                    break
+                    
+            elif first_attack_move == "enemy":
+                print_slow(f"\nEnemy struck first!", TEST)
+
+                print_slow(E.pococurante_voice_lines(),TEST)
+                enemy_attack(E.pococurante)
+
+                if player.hp > 0:
+                    player_attack(chosen_attack, E.pococurante, player.equipped_weapon.effect)
+                    if E.pococurante.hp <= 0:
+                        break
+                    else:
+                        game_over = True
+                        break
+                else:
+                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                    game_over = True
+                    break
+
+
+    sleep(1)
+    print("\n")
+
+    if game_over == False:
+        print_slow('''\n"Now I see... Optimism.. Positivity.. Maybe... All of the art wasn't bad...."''', 0.1)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        print_slow(f"\n\nYou have slayn {E.pococurante.name}.\n", 0.04)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        player.gold += E.pococurante.gold_dropped
+        print_slow(f"\nPococurante dropped {E.pococurante.gold_dropped} gold!", TEST)
+
+        player.exp += E.pococurante.exp_dropped
+        print_slow(f"\nYou gained {E.pococurante.exp_dropped} exp!", TEST)
+
+        player.inventory.append(I.pococurante_cane)
+        print_slow(f"\nYou walked up to Pococurante and took {I.pococurante_cane.name}\n", TEST)
+
+
+def bossfight_baronen():
+    global game_over
+    print_slow(L.baronen_description, 0.02)
+
+    print_slow(f"\nBaronen, the mad brother, acrimony of love, baron of Thunder-ten-tronckh, towers over you.", 0.1)
+    sleep(PUNCTUATION_PAUSE_TIME)
+    print(f'''
+HP: {E.baronen.hp} / {E.baronen.max_hp}
+STR: {E.baronen.str}
+SPD: {E.baronen.spd}
+    ''')
+
+    sleep(2)
+
+    player.hp /= 1.5
+    int(player.hp)
+
+    player.max_hp -= player.equipped_weapon.max_hp_bonus
+    player.hp -= player.equipped_weapon.max_hp_bonus
+    player.str -= player.equipped_weapon.str_bonus
+    player.spd -= player.equipped_weapon.spd_bonus
+
+    player.equipped_weapon = I.baronen_knife
+
+    player.max_hp += player.equipped_weapon.max_hp_bonus
+    player.hp += player.equipped_weapon.max_hp_bonus
+    player.str += player.equipped_weapon.str_bonus
+    player.spd += player.equipped_weapon.spd_bonus
+
+    while player.hp > 0 or E.baronen.hp > 0:
+
+            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_NAME_LIST)
+            player_damage = rand.randint(player.str - 5, player.str + 5)
+            enemy_damage = rand.randint(E.baronen.str -5 , E.baronen.str + 5)
+
+            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
+            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.baronen.spd, 140, 140], k=1).pop()
+
+            attack_1 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_1)
+            attack_2 = rand.choice(temp_player_attack_list)
+            temp_player_attack_list.remove(attack_2)
+            attack_3 = rand.choice(temp_player_attack_list)
+
+            print_slow("\nWhat attack will you use?", TEST)
+            print(f'''
+
+    1: {attack_1}
+    2: {attack_2}
+    3: {attack_3}
+            ''')
+
+            while True:
+                while True:
+                    try:
+                        attack_choice = int(input("Choice: "))
+                    except:
+                        print("\n[Please enter a number]")
+                    else:
+                        break
+
+                if attack_choice == 1:
+                    chosen_attack = attack_1
+                    break
+                elif attack_choice == 2:
+                    chosen_attack = attack_2
+                    break
+                elif attack_choice == 3:
+                    chosen_attack = attack_3
+                    break
+                else:
+                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
+
+            E.baronen.hp -= player_damage
+            player.hp -= enemy_damage
+
+            if first_attack_move == "player":
+                print_slow(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.baronen.name), TEST)
+
+                print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                if E.baronen.hp > 0:
+                    print_slow(f"\n   - Baronen health: {E.baronen.hp} / {E.baronen.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - Baronen health: 0 / {E.baronen.max_hp}", TEST)
+                    break
+                
+                print_slow("\n" + E.baronen_voice_lines(), TEST)
+                print_slow(E.baronen_attacks(), TEST)
+                print_slow(f"\n   - Baronen dealt {enemy_damage} damage!", TEST)
+                if player.hp >= 0:
+                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+                else:
+                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                    game_over = True
+                    break
+            elif first_attack_move == "enemy":
+                print_slow(f"Baronen struck first!", TEST)
+                print_slow("\n" + E.baronen_voice_lines(), TEST)
+                print_slow(E.baronen_attacks(), TEST)
+                print_slow(f"\n   - Baronen dealt {enemy_damage} damage!", TEST)
+                
+                if player.hp >= 0:
+                    print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}", TEST)
+
+                    print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, E.baronen.name), TEST)
+                    
+                    print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
+                    if E.baronen.hp > 0:
+                        print_slow(f"\n   - Baronen health: {E.baronen.hp} / {E.baronen.max_hp}", TEST)
+                    else:
+                        print_slow(f"\n   - Baronen health: 0 / {E.baronen.max_hp}.", TEST)
+                        break
+                        
+                else:
+                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
+                    game_over = True
+                    break
+
+
+    sleep(1)
+    print("\n")
+
+    if game_over == False:
+        print_slow('''\n"Just.. treat.. treat her good... please..."''', 0.1)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        print_slow(f"\n\nYou have slayn {E.baronen.name}.\n", 0.04)
+        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+
+        player.gold += E.baronen.gold_dropped
+        print_slow(f"\nBaronen dropped {E.baronen.gold_dropped} gold!", TEST)
+
+        player.exp += E.baronen.exp_dropped
+        print_slow(f"\nYou gained {E.baronen.exp_dropped} exp!", TEST)
+
+        print_slow(f"\nYou held onto {I.baronen_knife.name}.\n", TEST)
+
+        player.inventory.append(I.baronen_greatsword)
+        print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
+
+
+def bossfight_kunigunda():
+    print_slow('''
+
+    ''', TEST)
+    
 
 
 
