@@ -13,7 +13,7 @@ pygame.mixer.init()
 
 #SOUND EFFECTS
 start_music = 'sounds/pococurante theme.mp3'
-UI_sfx = 'sounds/UI sound effect.mp3'
+UI_sfx = pygame.mixer.Sound('sounds/UI sound effect.mp3')
 
 TEST = 0.00000000000001
 PUNCTUATION_PAUSE_TIME = 0.4
@@ -53,8 +53,7 @@ def travel():
     
     while True:
         choice = input("Choice: ")
-        # pygame.mixer.music.load(UI_sfx)
-        # pygame.mixer.music.play()
+        pygame.mixer.Sound.play(UI_sfx)
         
         if choice == "1":
             #INVENTORY
@@ -116,6 +115,7 @@ def travel():
 
                 while True:
                     location_choice = input("Choice: ")
+                    pygame.mixer.Sound.play(UI_sfx)
                     
                     if location_choice == "1":
                         current_location = location1
@@ -239,6 +239,7 @@ Thee can purchaseth one of the following three items:
 
                             while True:
                                 shop_input = input("Choice: ")
+                                pygame.mixer.Sound.play(UI_sfx)
 
                                 if shop_input == "1":
                                     chosen_item = shop_item_1
@@ -348,6 +349,7 @@ Countries traveled: {total_turns}
 
     while is_equipped_item == False:    
         inventory_choice = input("Choice: ")
+        pygame.mixer.Sound.play(UI_sfx)
         
         if inventory_choice == "1":
             #CHANGE EQUIPMENT
@@ -364,6 +366,7 @@ Pick an equipment to change:
             while is_equipped_item == False:
 
                 item_change_choice = input("Choice: ")
+                pygame.mixer.Sound.play(UI_sfx)
 
                 if item_change_choice == "1":
                     #ÄNDRAR VAPEN-------------------------------------------------------------------------------------------------------
@@ -396,6 +399,7 @@ Pick an equipment to change:
                             
                                 try:
                                     weapon_equip_choice = int(input("\nChoice: "))
+                                    pygame.mixer.Sound.play(UI_sfx)
                                 except:
                                     print("[Please enter a number]")
                                 else:
@@ -476,6 +480,7 @@ Pick an equipment to change:
                             
                                 try:
                                     armor_equip_choice = int(input("\nChoice: "))
+                                    pygame.mixer.Sound.play(UI_sfx)
                                 except:
                                     print("[Please enter a number]")
                                 else:
@@ -557,6 +562,7 @@ Pick an equipment to change:
                             
                                 try:
                                     accessory_equip_choice = int(input("\nChoice: "))
+                                    pygame.mixer.Sound.play(UI_sfx)
                                 except:
                                     print("[Please enter a number]")
                                 else:
@@ -1186,9 +1192,6 @@ pangloss.gold = 1
 print_slow("Choose your character!", 0.01)
 sleep(1)
 
-pygame.mixer.music.load('sounds/character_creation_music.mp3')
-pygame.mixer.music.play()
-
 print(f'''
 
 1. Cacambo! (Easy)
@@ -1218,6 +1221,7 @@ print(f'''
 while True:
     try:
         player_choice = int(input("Choice: "))
+        pygame.mixer.Sound.play(UI_sfx)
 
         if player_choice == 1: #CACAMBO   
             player = cacambo
@@ -1265,9 +1269,6 @@ intro()
 # for i in range(10):
 #     weapon_choice = rand.choice(I.item_list)
 #     player.inventory.append(I.create_item(weapon_choice))
-player.inventory.append(I.create_item("explosive"))
-
-player.inventory.append(I.baronen_knife)
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:
