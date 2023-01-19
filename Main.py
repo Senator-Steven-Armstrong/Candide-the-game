@@ -691,9 +691,9 @@ SPD: {chosen_enemy.spd}
         print_slow("What attack will you use?", TEST)
         print(f'''
 
-    1: {attack_1}
-    2: {attack_2}
-    3: {attack_3}
+    1: {attack_1.name}
+    2: {attack_2.name}
+    3: {attack_3.name}
         ''')
 
         while True:
@@ -769,7 +769,7 @@ def player_attack(chosen_attack, chosen_enemy, weapon_effect, enemy_name):
     player_damage = rand.randint(player.str - 5, player.str + 5)
     chosen_enemy.hp -= player_damage
 
-    print_slow("\n" + P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
+    print(P.attack_move_description(chosen_attack, player.name, player.equipped_weapon.name, chosen_enemy.name), TEST)
 
     print_slow(f"\n   - You dealt {player_damage} damage!", TEST)
 
@@ -834,9 +834,9 @@ SPD: {E.pococurante.spd}
             print_slow("\nWhat attack will you use?", TEST)
             print(f'''
 
-    1: {attack_1}
-    2: {attack_2}
-    3: {attack_3}
+    1: {attack_1.name}
+    2: {attack_2.name}
+    3: {attack_3.name}
             ''')
 
             while True:
@@ -957,9 +957,9 @@ SPD: {E.baronen.spd}
             print_slow("\nWhat attack will you use?", TEST)
             print(f'''
 
-    1: {attack_1}
-    2: {attack_2}
-    3: {attack_3}
+    1: {attack_1.name}
+    2: {attack_2.name}
+    3: {attack_3.name}
             ''')
 
             while True:

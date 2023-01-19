@@ -264,6 +264,8 @@ You engage in combat with {enemy_name.capitalize()}, lets kill it!
 
     return rand.choice(fight_description_list)
 
+
+
 def enemy_attack_description(chosen_enemy, player_name):
    
     enemy_name = chosen_enemy.name

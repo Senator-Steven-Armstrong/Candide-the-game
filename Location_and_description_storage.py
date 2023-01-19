@@ -347,13 +347,11 @@ def TravelDescription(chosen_location, is_pangloss):
     #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA minst 2 plats_tavel_text OCH 1 plats_travel_description_list.
 
     for location in locations:
-        if is_pangloss == True and location == lissabon:
-            pygame.mixer.music.load(location.music)
-            pygame.mixer.music.play()
+        if is_pangloss == True and chosen_location.name == lissabon.name:
+            play_music(location.music)
             return lissabon.special_description
-        if location == chosen_location:
-            pygame.mixer.music.load(location.music)
-            pygame.mixer.music.play()
+        elif location.name == chosen_location.name:
+            play_music(location.music)
             return rand.choice(location.description_list)
 
 #----------------------------------------------------------FÄLLOR-----------------------------------------------------------------
@@ -530,3 +528,12 @@ You take a fast grip around the knife and with sheer will pull it out. With dete
 point the blade at Baronen...
 '''
 
+#--------------------------------------------------------------MUSIC------------------------------------------------------------
+
+def play_music(music_track):
+    try:
+        pygame.mixer.music.load(music_track)
+        pygame.mixer.music.play()
+    except:
+        return
+    
