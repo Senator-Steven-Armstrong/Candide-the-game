@@ -8,7 +8,9 @@ class Location():
     description_3 = ""
     special_description = ""
     description_list = []
-    possible_enemies = []
+    possible_enemies_desc_1 = []
+    possible_enemies_desc_2 = []
+    possible_enemies_desc_3 = []
     music = ''
 
 
@@ -24,7 +26,7 @@ shop.description_1 = '''
 You traveled to the legendary IKEA, known for forging The Legendary Smörkniv, constructing the fort of Fredrik
 and their exotic variety of foods such as: Meatballs,
 '''
-shop.description_2 = '''
+shop.description_3 = '''
 After a long and perilous journey, wandering across the hostile ice lands known as Finland, you find yourself in
 front of a mysterious building, with a partly destroyed sign reading "K-Market Tikkurila, property of Valma Vä-".
 Inside were vast amounts of consumables, mostly whatever edible material the people of these lands can acquire.
@@ -84,7 +86,7 @@ skogen.description_1 = '''
 You decide to enter a great forest just beyond the horizon. You think nothing of it, but little do you know
 it's part of Rimbo, a deep and crazed hellhole. Upon entering a subtle heat and a disgusting stank fills your
 entire body. It only gets worse, until you find a small opening in the trees. Nothing but beautiful grass with
-rays of light shining through. However you quickly find yourself in panic aiagin as nearby bushes violently shake
+rays of light shining through. However you quickly find yourself in panic again as nearby bushes violently shake
 and something jumps out at you. 
 '''
 skogen.description_2 = '''
@@ -353,6 +355,8 @@ def TravelDescription(chosen_location, is_pangloss):
         elif location.name == chosen_location.name:
             play_music(location.music)
             return rand.choice(location.description_list)
+
+
 
 #----------------------------------------------------------FÄLLOR-----------------------------------------------------------------
 
