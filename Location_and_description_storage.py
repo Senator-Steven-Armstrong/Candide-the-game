@@ -341,9 +341,7 @@ tibble.description_list = [tibble.description_1, tibble.description_2, tibble.de
 #LISTANS LÄNGD ÄR 12#
 locations=[shop, eldorado, skogen, bulgarien, lissabon,venedig,turkiet, sydamerika, afrika, england, havet, fältet, tibble]
 
-
-
-def TravelDescription(chosen_location, is_pangloss):
+def travel_description(chosen_location, is_pangloss):
 
     #FÖR ATT LÄGGA TILL FLER PLATSER, LÄGG TILL I LISTAN LOCATIONS ÖVER, OCH SEDAN KOPIERA EN RAD HÄR
     #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA minst 2 plats_tavel_text OCH 1 plats_travel_description_list.
@@ -356,6 +354,13 @@ def TravelDescription(chosen_location, is_pangloss):
             play_music(location.music)
             return rand.choice(location.description_list)
 
+# def choose_enemy(chosen_location, chosen_description):
+
+#     for location in locations:
+#         if location == chosen_location:
+#             for description in location.description_list:
+#                 if description == chosen_description:
+                    
 
 
 #----------------------------------------------------------FÄLLOR-----------------------------------------------------------------
@@ -541,3 +546,5 @@ def play_music(music_track):
     except:
         return
     
+
+
