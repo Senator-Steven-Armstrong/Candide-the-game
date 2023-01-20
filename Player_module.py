@@ -61,21 +61,11 @@ nothing.name = "Do nothing"
 nothing.sound_effect = ''
 
 
-# attack_move_name_1 = "Dropkick"
-# attack_move_name_2 = "Words"
-# attack_move_name_3 = "Armor breaker"
-# attack_move_name_4 = "Head cleaver"
-# attack_move_name_5 = "Roundhouse kick"
-# attack_move_name_6 = "Gun"
-# attack_move_name_7 = "Cum"
-# attack_move_name_8 = "Cannibalism"
-# attack_move_name_9 = "Do nothing"
 
 ATTACK_MOVE_LIST = [dropkick, words, armor_breaker, cleaver, roundhouse_kick, gun, cum, cannibalism, nothing]
 
 
-def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name):
-    
+def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name): 
     #DROPKICK
     dropkick.description = f'''
 You droppkicked {enemy_name}!'''
@@ -106,10 +96,14 @@ You charged up and roundhouse kicked {enemy_name}!'''
 {player_name} just kinda stood there.'''
 
     for attack in ATTACK_MOVE_LIST:
-        if attack == chosen_attack:
-            pygame.mixer.music.load(attack.sound_effect)
-            pygame.mixer.music.play(0, 1, 0)
-            return chosen_attack.description
+        if attack.name == chosen_attack.name:
+            # try:
+            #     pygame.mixer.music.load(attack.sound_effect)
+            #     pygame.mixer.music.play(0, 1, 0)
+            # except:
+            #     pass
+            
+            return attack.description
     
 
 
