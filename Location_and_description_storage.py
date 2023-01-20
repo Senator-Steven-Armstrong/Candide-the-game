@@ -3,17 +3,12 @@ import pygame
 
 class Location():
     name = ""
-    description_1 = ""
-    description_2 = ""
-    description_3 = ""
-    special_description = ""
     description_list = []
-    possible_enemies_desc_1 = []
-    possible_enemies_desc_2 = []
-    possible_enemies_desc_3 = []
+
+class Description():
     music = ''
-
-
+    description = ""
+    possible_enemies = []
 
 
 
@@ -22,17 +17,21 @@ class Location():
 #SHOP
 shop = Location()
 shop.name = "Shop"
-shop.description_1 = '''
+
+shop1 = Description()
+shop1.description = '''
 You traveled to the legendary IKEA, known for forging The Legendary Smörkniv, constructing the fort of Fredrik
 and their exotic variety of foods such as: Meatballs,
 '''
-shop.description_3 = '''
+shop2 = Description()
+shop2.description = '''
 After a long and perilous journey, wandering across the hostile ice lands known as Finland, you find yourself in
 front of a mysterious building, with a partly destroyed sign reading "K-Market Tikkurila, property of Valma Vä-".
 Inside were vast amounts of consumables, mostly whatever edible material the people of these lands can acquire.
 This place could store precious items, but you should leave before the owner returns, for she is beyond you.
 '''
-shop.description_3 = '''
+shop3 = Description()
+shop3.description = '''
 While your local advisor claimed that this place was not far, this journey has felt like an eternity. 
 Just as you are on the verge of giving in to the horribly negative energy of the region known as Täby, 
 you spot a blue and yellow light through the poisonous fog. 
@@ -41,14 +40,16 @@ Then, you are met with a familiar face. It is the same advisor who sent you on t
 He laughs maniacally, knowing you have spent half a century venturing to this place.
 Finally, he speaks: "Welcome, traveler, to Lidl. I am Kasper, The patient one. What do you wish to purchase?"
 '''
-shop.description_list = [shop.description_1, shop.description_2, shop.description_3]
+shop.description_list = [shop1.description, shop2.description, shop3.description]
 
 
 
 #ELDORADO
 eldorado = Location()
 eldorado.name = "Eldorado"
-eldorado.description_1 = '''
+
+eldorado1 = Description()
+eldorado1.description = '''
 As you continue your journey, you walk through a dense forest. While in the forest you find yourself on the
 wrong side of a small river. While trying to cross it you accidentally slip in. You hit your head on some
 rocks and everying turns black...
@@ -61,7 +62,8 @@ You stay there in peace for one month, but soon come to an ultimatum. You can't 
 Either you stay, a peaceful life in Eldorado but without the love of your life. Or you leave,
 go to the dark hell that is the rest of the world, but let Kuniganda light it up when you finally save her.
 '''
-eldorado.description_2 = '''
+eldorado2 = Description()
+eldorado2.description = '''
 You keep on wandering throughout the world, eventually stumbling onto a small river with a rickety boat
 tied up neabry. No one seems to have used the boat for years and your legs ache after all the walking,
 so you decide to take it and ride downstream. The once small forest around you becomes denser, and the river
@@ -75,64 +77,74 @@ He happily lets you stay and the locals help you recover, but fate eventually ca
 You either stay and live happily in Eldorado, without Kunigunda, or you leave,
 conquering the rest of your journey, and eventually the rest of your life with Kunigunda.
 '''
-eldorado.description_list = [eldorado.description_1, eldorado.description_2]
+eldorado.description_list = [eldorado1.description, eldorado2.description]
 
 
 
 #SKOGEN
 skogen = Location()
 skogen.name = "Forest"
-skogen.description_1 = '''
+
+skogen1 = Description()
+skogen1.description = '''
 You decide to enter a great forest just beyond the horizon. You think nothing of it, but little do you know
 it's part of Rimbo, a deep and crazed hellhole. Upon entering a subtle heat and a disgusting stank fills your
 entire body. It only gets worse, until you find a small opening in the trees. Nothing but beautiful grass with
 rays of light shining through. However you quickly find yourself in panic again as nearby bushes violently shake
 and something jumps out at you. 
 '''
-skogen.description_2 = '''
+skogen2 = Description()
+skogen2.description = '''
 You decide to enter into a small, nearby forest. It's hard to even call it a forest, it's just one tree.
 You walk around the forest for while, pretty much just circling around the single tree until you realize that you
 are standing in someones backyard. The front door of their house slams open.
 '''
-skogen.description_3 = '''
+skogen3 = Description()
+skogen3.description = '''
 You decide to enter a normal-sized forest just a few miles away. Walking through you can't stop thinking about how 
 normal it is. You hear completely normal sounds, and see completely normal animals running around.
 It's so not out of the ordinary that you start to questions yourself, it's uncanny, but in a normal way. Eventually
 a completely normal creature emerges from a brush beside you. You decide to take it on in a normal fight, 
 just like any other.
 '''
-skogen.description_list = [skogen.description_1, skogen.description_2, skogen.description_3]
+skogen.description_list = [skogen1.description, skogen2.description, skogen3.description]
 
 
 
 #BULGARIEN
 bulgarien = Location()
 bulgarien.name = "Bulgaria"
-bulgarien.description_1 = '''
+
+bulgarien1 = Description()
+bulgarien1.description = '''
 You decide to enter Bulgaria, or rather, Bulgaria enters you as you are quickly busted up by 
 their entire population. I dont know why you wanted to enter Bulgaria, but here we are. 
 Being kept in a horrible prison cell and starved for years, you evetually make up a plan to escape. 
 The perfect moment revealed itself and you struck, escaping from the cell. The only thing blocking you 
 from freedom is a small creature at the end of the hallway, you decide to take it on.
 '''
-bulgarien.description_2 = '''
+bulgarien2 = Description()
+bulgarien2.description_2 = '''
 You decide to walk to Bulgaria. 
 '''
-bulgarien.description_3 = '''
+bulgarien3 = Description()
+bulgarien3.description_3 = '''
 You start to wander to the border of Bulgaria. A large wall streches as far as you can see, 
 and smoke rises from the city inside.With fear and some sense of wonder you walk until you find 
 some sort of entrance. You knew the Bulgarians wouldn't let you in easy, so you prepared for a fight. 
 Bulgarian borderguards patrol the entrance. One of them spots, and the armored creature 
 quickly rushes toward you.
 '''
-bulgarien.description_list = [bulgarien.description_1, bulgarien.description_2, bulgarien.description_3]
+bulgarien.description_list = [bulgarien1.description, bulgarien2.description, bulgarien3.description]
 
 
 
 #LISSABON
 lissabon = Location()
 lissabon.name = "Lissabon"
-lissabon.special_description = '''
+
+lissabon1 = Description()
+lissabon1.description = '''
 You decide to enter Lissabon. Pangloss's heresy echoes through the country as he's being hanged once again.
 It was probably a good idea that you didn't pick him at the start of the game. Oh wait you did? 
 You're Pangloss aren't you? Fuck, shit, this is bad. This will dislodge reality from itself, 
@@ -141,45 +153,50 @@ eventually breaking existence as we know it!
 I' m  not in contro--l anymo-r_e, all y ou have t-o do is kil--l the e_n t i-t y  re-siding inside and 
 e-v_e- r--y_t h_i/n-g   w-//i-l_l...
 '''
-
-lissabon.description_1 = '''
+lissabon2 = Description()
+lissabon2.description = '''
 You decide to enter Lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
 It was probably a good idea that you didn't pick him at the start of the game. 
 You follow the sounds of pangloss, eventually walking into a large crowd of people watching 
 'the hanging of Pangloss' for the fifth time this day. You callout for Pangloss, but he can't hear you. 
 However someone else does, and they really don't like Pangloss. 
-This someone pushes through the crowd until eventually putting their hand on your shoulder. 
-    '''
-
-lissabon.description_2 = '''
+This someone pushes through the crowd until eventually putting their hand on your shoulder.
+'''
+lissabon3 = Description()
+lissabon3.description = '''
 pissabon
 '''
-lissabon.description_3 = '''
+lissabon4 = Description()
+lissabon4.description = '''
 You enter a large city. Water channels and a large port makes this city seem very intertwined with the ocean.
 Buildings much older than whole countries fill the atmosphere with history. 
 Tall towers and catholic churches seem to touch the sky. However, there is an uneasy feeling in the city.
 The same towers can be seen swaying back and forth during the day. Large holes are found where buildings were the
 day before. The ground seems to be slowly becoming something dangerous. You should probably not linger here.
 '''
-lissabon.description_list = [lissabon.description_1, lissabon.description_2, lissabon.description_3]
+lissabon.description_list = [lissabon1.description, lissabon2.description, lissabon3.description, lissabon4.description]
 
 
 #VENEDIG
 venedig = Location()
 venedig.name = "Venedig"
-venedig.description_1 = '''
+
+venedig1 = Description()
+venedig1.description = '''
 The smell of fresh pizza leads you to Venedig. Following the smell, you walk into a local resturant. 
 However you are in distraught as you realize there is no kebabpizza. This eternal pain fuels you,
 you stare down the head chef, and with wrath in your veins you jump over the kitchen counter.
 The chef grips his rolling pin with might. It's time.
 '''
-venedig.description_2 = '''
+venedig2 = Description()
+venedig2.description = '''
 pizza pasta put it on my cock
 '''
-venedig.description_3 = '''
+venedig3 = Description()
+venedig3.description = '''
 in lissabon you lissapissabon
 '''
-venedig.description_list = [venedig.description_1, venedig.description_2, venedig.description_3]
+venedig.description_list = [venedig1.description, venedig2.description, venedig3.description]
 
 
 
