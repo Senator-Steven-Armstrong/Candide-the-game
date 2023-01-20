@@ -143,8 +143,8 @@ bulgarien.description_list = [bulgarien1.description, bulgarien2.description, bu
 lissabon = Location()
 lissabon.name = "Lissabon"
 
-lissabon1 = Description()
-lissabon1.description = '''
+lissabon_special = Description()
+lissabon_special.description = '''
 You decide to enter Lissabon. Pangloss's heresy echoes through the country as he's being hanged once again.
 It was probably a good idea that you didn't pick him at the start of the game. Oh wait you did? 
 You're Pangloss aren't you? Fuck, shit, this is bad. This will dislodge reality from itself, 
@@ -153,8 +153,8 @@ eventually breaking existence as we know it!
 I' m  not in contro--l anymo-r_e, all y ou have t-o do is kil--l the e_n t i-t y  re-siding inside and 
 e-v_e- r--y_t h_i/n-g   w-//i-l_l...
 '''
-lissabon2 = Description()
-lissabon2.description = '''
+lissabon1 = Description()
+lissabon1.description = '''
 You decide to enter Lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
 It was probably a good idea that you didn't pick him at the start of the game. 
 You follow the sounds of pangloss, eventually walking into a large crowd of people watching 
@@ -162,19 +162,19 @@ You follow the sounds of pangloss, eventually walking into a large crowd of peop
 However someone else does, and they really don't like Pangloss. 
 This someone pushes through the crowd until eventually putting their hand on your shoulder.
 '''
-lissabon3 = Description()
-lissabon3.description = '''
+lissabon2 = Description()
+lissabon2.description = '''
 pissabon
 '''
-lissabon4 = Description()
-lissabon4.description = '''
+lissabon3 = Description()
+lissabon3.description = '''
 You enter a large city. Water channels and a large port makes this city seem very intertwined with the ocean.
 Buildings much older than whole countries fill the atmosphere with history. 
 Tall towers and catholic churches seem to touch the sky. However, there is an uneasy feeling in the city.
 The same towers can be seen swaying back and forth during the day. Large holes are found where buildings were the
 day before. The ground seems to be slowly becoming something dangerous. You should probably not linger here.
 '''
-lissabon.description_list = [lissabon1.description, lissabon2.description, lissabon3.description, lissabon4.description]
+lissabon.description_list = [lissabon1.description, lissabon2.description, lissabon3.description, lissabon_special.description]
 
 
 #VENEDIG
@@ -203,46 +203,57 @@ venedig.description_list = [venedig1.description, venedig2.description, venedig3
 #TURKIET
 turkiet = Location()
 turkiet.name = "Turkiet"
-turkiet.description_1 = '''
+
+turkiet1 = Description()
+turkiet1.description = '''
 ånej turkemistan igen bar förstikgtg
 '''
-turkiet.description_2 = '''
+turkiet2 = Description()
+turkiet2.description = '''
 turk turk turk turk turk turk turk turk turk dadada
 '''
-turkiet.description_3 = '''
+turkiet3 = Description()
+turkiet3.description = '''
 uhghuhguh uturjitet turkiet go brrr
 '''
-turkiet.description_list = [turkiet.description_1, turkiet.description_2, turkiet.description_3]
+turkiet.description_list = [turkiet1.description, turkiet2.description, turkiet3.description]
 
 
 
 #SYDAMERIKA
 sydamerika = Location()
 sydamerika.name = "South America"
-sydamerika.description_1 =  '''
+
+sydamerika1 = Description()
+sydamerika1.description =  '''
 amerika mer som sydarmieka
 '''
-sydamerika.description_2 = '''
+sydamerika2 = Description()
+sydamerika2.description = '''
 amerika fast sämre
 '''
-sydamerika.description_3 = '''
+sydamerika3 = Description()
+sydamerika.description = '''
 You enter the streets of syd america, gunshots and gang calls everywhere. 
 You meet their old president donald of the trump. but wait it was just a costume ohh noo!
 '''
-sydamerika.description_list = [sydamerika.description_1, sydamerika.description_2, sydamerika.description_3]
+sydamerika.description_list = [sydamerika1.description, sydamerika2.description, sydamerika3.description]
 
 
 
 #AFRIKA
 afrika= Location()
 afrika.name = "Africa"
-afrika.description_1 = '''
+
+afrika1 = Description()
+afrika1.description = '''
 You decide to wander through Africa, unlike anything you have seen before, 
 it's just an open savannah, and there isn't much civilization here. 
 The gazing sun making it hard to focus. The tall grass becomes tallar and taller, waving in the dry air. But wait, 
 something is moving in the grass. You walk closer and something jumps out, shocking you. 
 '''
-afrika.description_2 = '''
+afrika2 = Description()
+afrika2.description = '''
 You walk to the country africa. 
 The savannah stretches for what seems like eternity and it has been days.
 Water, you need to find water. The sun on the clear sky is burning ulike anything you felt before,
@@ -250,24 +261,28 @@ you see a water hole in the distance. While going to the water you get a strange
 After you get a sip of the water you understand why you had that feeling as a figure catches your eye
 in the reflection of the puddle. It's standing right behind you.
 '''
-afrika.description_3 = '''
+afrika3 = Description()
+afrika3.description = '''
 You entered Africa, it’s beautiful but hot. So many animals, some dangerous.
 You start to get tired from the strong sun and find shelter under a shadowy tree. 
 Suddenly rustling comes from up the tree, you look up and ohh noo!  
 '''
-afrika.description_list = [afrika.description_1, afrika.description_2, afrika.description_3]
+afrika.description_list = [afrika1.description, afrika2.description, afrika3.description]
 
 
 
 #ENGLAND
 england = Location()
 england.name = "England"
-england.description_1 = '''
+
+england1 = Description()
+england1.description = '''
 You enter the England and decide to enter a place called birmingham, 
 but what you didn't know was that this was the birminghamiest part of birmingham and that is not good, 
 a gang of whiled twats start to close up on you and suddenly from the horde of birmingham folks a threat appears.   
 '''
-england.description_2 = '''
+england2 = Description()
+england2.description = '''
 You decide to enter England. As you walk through the streets you stop by a small bar to have a couple of 
 pints with the lads. You sit down at one of the bar stools as a couple of gentlemen with dapper suits walk in.
 They walk up to you with threatening smirks across their faces, and the bar owner walks down a small hatch
@@ -275,101 +290,114 @@ behind the counter. Then you spot it. One of the lads has a bloody rolling pin i
 "Is that a fucking rolling pin? What are you gonna do, bake me a cake? Sing me a song?"
 He gets aggrevated and begins the fight.
 '''
-england.description_3 = '''
+england3 = Description()
+england3.description = '''
 You start wandering through england. It's dark, it's cold, it's rainy. 
 At least this day can't get any worse, it is England after all. Oh my god, it's England.
 Suddenly a group of true Brexit Geezers walk up from around the corner and shank you up.
 What seems to be their leader steps forward among the group. He challenges you to a true bri'ish bar brawl.
 '''
-england.description_list = [england.description_1, england.description_2, england.description_3]
+england.description_list = [england1.description, england2.description, england3.description]
 
 
 
 #HAVET
 havet = Location()
 havet.name = "The ocean"
-havet.description_1 = '''
+
+havet1 = Description()
+havet1.description = '''
 The smell of fresh air, and no land as far the eye can see. 
 The wooden ship that crunches as it rocked back and forth in the big waves of the great sea. 
 You see something ahead of the ship floating in the water,,, and booom you hit it. 
 You relaxed but suddenly something climbed up the ship ohh noo!
 '''
-havet.description_2 = '''
+havet2 = Description()
+havet2.description = '''
 You entered a ship, an old one, but in quite the condition for its age. 
 There are lots of different people on the ship from all around the world. 
 But in the crowd you see something that is looking right at you. Ohh NOOO!
 '''
-havet.description_3 = '''
+havet3 = Description()
+havet3.description = '''
 You enter the open water in a small wooden raft by a local fisherman. 
 As you traveled for a while something started to feel strange. 
 You look around but see nothing but open water, but when you look down in the water looking back at you is a, ohh noo!  
 '''
-havet.description_list = [havet.description_1, havet.description_2, havet.description_3]
+havet.description_list = [havet1.description, havet2.description, havet3.description]
 
 
 
 #FÄLTET
 fältet = Location()
 fältet.name = "Great field"
-fältet.description_1 = '''
+
+fältet1 = Description()
+fältet1.description = '''
 You see an absolutley massive field in the distance, so you decide to trek across it.
 It's beautiful, the grass is slowly waving in the wind, no clouds in sight, and it seems
 like it has been a nice red sunset ever since you entered. That's when you realize, the sun literally
 hasn't moved for hours, and neither have you. You seem to be shackled in time, and just as you realize it,
 whatever is keeping you frozen walks up behind you, ready to kill you.
 '''
-fältet.description_2 = '''
+fältet2 = Description()
+fältet2.description = '''
 You see a small field just outside of a small town you just exited. The journey has been
 long and hard so far, so you sit down for a picnic. It's nice, the grass is soft, the bread
 tastes newly baked, and you see some ants running along the ground. You feel warm and wholesome...
 And then BOOM an enemy appeard!
 '''
-fältet.description_3 = '''
+fältet3 = Description()
+fältet3.description = '''
 Grass stretches over the horizon, it's unnaturally tall so you get interested and walk toward it.
 Upon reaching the beginning of the field, the grass stretches an antonishing 6 meters in the air.
 Your'e a bit nervous, but you enter. You quickly get lost, realizing that this was a bad idea, until
 you stumble upon an empty patch without any grass in the shape of a circle.
 You can't help but feel this is a boss arena... but nope there's just a normal enemy in the center.
 '''
-fältet.description_list = [fältet.description_1, fältet.description_2, fältet.description_3]
+fältet.description_list = [fältet1.description, fältet2.description, fältet3.description]
 
 
 
 #TIBBLE
 tibble = Location()
 tibble.name = "Tibble"
-tibble.description_1 = '''
+
+tibble1 = Description()
+tibble1.description = '''
 The broken walls of Tibble tower high above the horizon. With a looming sense of dread,
 you stride through the main entrance. It smells musty, you see shadowy creatures roaming the halls
 presumably teknikelever, and you can barely make out the sunlight peeking through the holes in the walls.
-You pass through a ray of sunlight, briefly blinding you, and you feel a moldy hand grab your head.
+You pass through a ray of sunlight, briefly blinding you, and you feel a moldy hand grab your shoulder.
 '''
-tibble.description_2 = '''
+tibble2 = Description()
+tibble2.description = '''
 You see a small shack a few miles away. Not realizing its Tibble matsal, you bust through one of the
 many moldy walls. You briefly die as the horrid stench covers your lungs, but are quickly dragged back to life by an unknown entity. 
 It grabs you and you quickly stand up, nachochips crunching below your feet, staring face to face with a hollow husk of a man. 
 '''
-tibble.description_3 = '''
+tibble3 = Description()
+tibble3.description = '''
 jkjnjnjnlknlknlk
 '''
-tibble.description_list = [tibble.description_1, tibble.description_2, tibble.description_3]
+tibble.description_list = [tibble1.description, tibble2.description, tibble3.description]
 
 
 #LISTANS LÄNGD ÄR 12#
-locations=[shop, eldorado, skogen, bulgarien, lissabon,venedig,turkiet, sydamerika, afrika, england, havet, fältet, tibble]
+locations=[shop, eldorado, skogen, bulgarien, lissabon, venedig, turkiet, sydamerika, afrika, england, havet, fältet, tibble]
 
 def travel_description(chosen_location, is_pangloss):
 
-    #FÖR ATT LÄGGA TILL FLER PLATSER, LÄGG TILL I LISTAN LOCATIONS ÖVER, OCH SEDAN KOPIERA EN RAD HÄR
-    #OCH BYT UT VÄRDENA MOT RÄTT PLATSNAMN. DU MÅSTE ÄVEN SKAPA minst 2 plats_tavel_text OCH 1 plats_travel_description_list.
-
     for location in locations:
         if is_pangloss == True and chosen_location.name == lissabon.name:
-            play_music(location.music)
-            return lissabon.special_description
+            # play_music(lissabon_special.music)
+            return lissabon_special.description
         elif location.name == chosen_location.name:
-            play_music(location.music)
-            return rand.choice(location.description_list)
+            chosen_description = rand.choice(location.description_list)
+            # play_music(chosen_description.music)
+            return chosen_description
+
+
 
 # def choose_enemy(chosen_location, chosen_description):
 
@@ -554,7 +582,7 @@ You take a fast grip around the knife and with sheer will pull it out. With dete
 point the blade at Baronen...
 '''
 
-#--------------------------------------------------------------MUSIC------------------------------------------------------------
+#-------------------------------------------------------EXTRA------------------------------------------------------------
 
 def play_music(music_track):
     try:

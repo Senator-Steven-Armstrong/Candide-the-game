@@ -15,7 +15,7 @@ pygame.mixer.init()
 start_music = 'sounds/pococurante theme.mp3'
 UI_sfx = pygame.mixer.Sound('sounds/UI sound effect.mp3')
 
-TEST = 0.00000000000001
+TEST = 0.02
 PUNCTUATION_PAUSE_TIME = 0.4
 COMMA_PAUSE_TIME = 0.15
 SEMICOLON_PAUSE_TIME = 0.6
@@ -64,13 +64,13 @@ def travel():
             
             #TRAVEL-------------------------------------------------------------------------------------------------------------
             
-            if total_turns == 2:
+            if total_turns == 3:
                 bossfight_pococurante()
                 break
-            elif total_turns == 4:
+            elif total_turns == 6:
                 bossfight_baronen()
                 break
-            elif total_turns == 5:
+            elif total_turns == 999999:
                 bossfight_kunigunda()
                 break
             else:
@@ -92,14 +92,14 @@ def travel():
                         temporary_locations.pop(L.locations.index(current_location))
 
                         #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
-                        location1 = rand.choices(temporary_locations, weights=[9999999999999, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
+                        location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
                         temporary_locations.remove(location1)
                         location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location2)
                         location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                     else:
                         #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-                        location1 = rand.choices(temporary_locations, weights=[9999999, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                        location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location1)
                         location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                         temporary_locations.remove(location2)
@@ -151,7 +151,7 @@ def travel():
 
 
                 #HÄR KOLLAS DET OM MAN HAMNAR I EN FÄLLA ELLER INTE
-                trap_chance = rand.randint(1, 5)
+                trap_chance = rand.randint(1, 1)
                 if trap_chance == 1 and current_location != "Eldorado":
                     trap(current_location)
                     
@@ -874,7 +874,7 @@ SPD: {E.pococurante.spd}
 
                 if E.pococurante.hp > 0:
                     print_slow(E.pococurante_voice_lines(),TEST)
-                    enemy_attack(E.pococurante, "Enemy")
+                    enemy_attack(E.pococurante, "Pococurante")
                 else:
                     break
                     
@@ -882,10 +882,10 @@ SPD: {E.pococurante.spd}
                 print_slow(f"\nEnemy struck first!", TEST)
 
                 print_slow(E.pococurante_voice_lines(),TEST)
-                enemy_attack(E.pococurante)
+                enemy_attack(E.pococurante, "Pococurante")
 
                 if player.hp > 0:
-                    player_attack(chosen_attack, E.pococurante, player.equipped_weapon.effect)
+                    player_attack(chosen_attack, E.pococurante, player.equipped_weapon.effect, "Pococurante")
                     if E.pococurante.hp <= 0:
                         break
                     else:
@@ -1099,7 +1099,7 @@ def trap(location):
     if player.gold == 0 or player.gold - gold_lost <= 0 or player.curse_of_eldorado > 0:
         trap_type = "damage"
 
-    print_slow(L.trap_description(player.name, location, trap_type), TEST)
+    print_slow(L.trap_description(player.name, location.name, trap_type), TEST)
 
     damage = rand.randint(15, 45)
     player.hp -= damage
