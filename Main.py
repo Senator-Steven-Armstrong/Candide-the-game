@@ -159,9 +159,9 @@ def travel():
 
                     #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
                     if player == pangloss:
-                        print_slow(L.TravelDescription(current_location, True), TEST)
+                        print_slow(L.travel_description(current_location, True), TEST)
                     else:
-                        print_slow(L.TravelDescription(current_location, False), TEST)
+                        print_slow(L.travel_description(current_location, False), TEST)
 
                 
 
