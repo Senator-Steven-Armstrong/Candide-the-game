@@ -145,6 +145,24 @@ def create_item(choice):
         pencil.spd_bonus = pencil.max_hp_bonus
         pencil.cost = pencil.max_hp_bonus * 10
         return pencil
+
+    #HEALING------------------------------------------------------
+    elif choice == "health potion":
+        health_potion = Item()
+        health_potion.type = "healing"
+        health_potion.name = "Health potion"
+        health_potion.hp_bonus = 200
+        return health_potion
+
+    #CONSUMABLE-------------------------------------------------------
+    elif choice == "roids":
+        roids = Item()
+        roids.type = "consumable"
+        roids.name = "Roids"
+        roids.str_bonus = rand.randint(10, 20)
+        roids.spd_bonus = rand.randint(-10, -5)
+        return roids
+
         
 
 

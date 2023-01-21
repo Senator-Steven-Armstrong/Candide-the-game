@@ -11,6 +11,8 @@ import pygame
 
 pygame.mixer.init()
 
+
+
 #SOUND EFFECTS
 start_music = 'sounds/pococurante theme.mp3'
 UI_sfx = pygame.mixer.Sound('sounds/UI sound effect.mp3')
@@ -290,7 +292,7 @@ Thee can purchaseth one of the following three items:
 
 
 def inventory():
-    is_equipped_item = False
+    has_equipped_item = False
 
     print_slow("\nYou opened your backpack.", TEST)
 
@@ -343,11 +345,11 @@ Countries traveled: {total_turns}
     print_slow("\nWhat would you like to do?", TEST)
 
     print('''
-1. Change Equipment
+1. Change Equipment or use items
 2. Go back
         ''')
 
-    while is_equipped_item == False:    
+    while has_equipped_item == False:    
         inventory_choice = input("Choice: ")
         pygame.mixer.Sound.play(UI_sfx)
         
@@ -356,14 +358,16 @@ Countries traveled: {total_turns}
             sleep(0.5)
             
             print('''
-Pick an equipment to change:
+Choose an action:
 1. Weapon
 2. Armor
 3. Accessory
 
-4. Exit inventory
+4. Use items
+
+5. Exit inventory
 ''')    
-            while is_equipped_item == False:
+            while has_equipped_item == False:
 
                 item_change_choice = input("Choice: ")
                 pygame.mixer.Sound.play(UI_sfx)
@@ -393,7 +397,7 @@ Pick an equipment to change:
                             
                         
 
-                        while is_equipped_item == False:
+                        while has_equipped_item == False:
 
                             while True:
                             
@@ -407,7 +411,7 @@ Pick an equipment to change:
 
                             #HÄR KOLLAR DEN VILKET VAPEN MAN EQUIPAR
                             if weapon_equip_choice == len(temp_weapon_inventory) + 1:
-                                is_equipped_item = True
+                                has_equipped_item = True
                                 break
                             else:
                                 for i in range(len(temp_weapon_inventory)):
@@ -436,7 +440,7 @@ Pick an equipment to change:
                                         player.str += player.equipped_weapon.str_bonus
                                         player.spd += player.equipped_weapon.spd_bonus
 
-                                        is_equipped_item = True
+                                        has_equipped_item = True
                                         break
                                     else:
                                         if i == len(temp_weapon_inventory) - 1:
@@ -474,7 +478,7 @@ Pick an equipment to change:
                             
                         
 
-                        while is_equipped_item == False:
+                        while has_equipped_item == False:
 
                             while True:
                             
@@ -488,7 +492,7 @@ Pick an equipment to change:
 
                             #HÄR KOLLAR DEN VILKEN ARMOR MAN EQUIPAR
                             if armor_equip_choice == len(temp_armor_inventory) + 1:
-                                is_equipped_item = True
+                                has_equipped_item = True
                                 break
                             else:
                                 for i in range(len(temp_armor_inventory)):
@@ -517,13 +521,13 @@ Pick an equipment to change:
                                         player.str += player.equipped_armor.str_bonus
                                         player.spd += player.equipped_armor.spd_bonus
 
-                                        is_equipped_item = True
+                                        has_equipped_item = True
                                         break
                                     else:
                                         if i == len(temp_armor_inventory) - 1:
                                             print("[Please choose an armorpiece to equip, or exit inventory]")
 
-                            if is_equipped_item == True:
+                            if has_equipped_item == True:
                                 break  
 
                     else:
@@ -556,7 +560,7 @@ Pick an equipment to change:
                             
                         
 
-                        while is_equipped_item == False:
+                        while has_equipped_item == False:
 
                             while True:
                             
@@ -570,7 +574,7 @@ Pick an equipment to change:
 
                             #HÄR KOLLAR DEN VILKEN ACCESSORY MAN EQUIPAR
                             if accessory_equip_choice == len(temp_accessory_inventory) + 1:
-                                is_equipped_item = True
+                                has_equipped_item = True
                                 break
                             else:
                                 for i in range(len(temp_accessory_inventory)):
@@ -599,13 +603,13 @@ Pick an equipment to change:
                                         player.str += player.equipped_accessory.str_bonus
                                         player.spd += player.equipped_accessory.spd_bonus
 
-                                        is_equipped_item = True
+                                        has_equipped_item = True
                                         break
                                     else:
                                         if i == len(temp_accessory_inventory) - 1:
                                             print("[Please choose an accessory to equip, or exit inventory]")
 
-                            if is_equipped_item == True:
+                            if has_equipped_item == True:
                                 break  
 
                     else:
@@ -613,9 +617,75 @@ Pick an equipment to change:
                         break
                 
                 elif item_change_choice == "4":
+                    temp_item_inventory = []
+                    for i in player.inventory:
+                        if i.type == "consumable" or i.type == "healing":
+                            temp_item_inventory.append(i)
+
+
+
+                    if len(temp_item_inventory) > 0:
+                        print_slow("\nWhich item would you like to use? The effect is permanent, and the item will be lost.\n", TEST)
+
+                        j = 1
+                        for i in temp_item_inventory:
+                            if i.type == "healing":
+                                print(j, ". ", i.name, f"\n[Healed HP: {i.hp_bonus}]\n",sep='')
+                            else:
+                                print(j, ". ", i.name, f"\n[HP: {i.max_hp_bonus}, STR: {i.str_bonus}, SPD: {i.spd_bonus}]\n",sep='')
+                            j += 1
+                            if j-1 == len(temp_item_inventory):
+                                print(j, ". Change nothing / Exit inventory", sep='')
+
+                        
+                        while True:
+                            try:
+                                item_use_choice = int(input("\nChoice: "))
+                                pygame.mixer.Sound.play(UI_sfx)
+                            except:
+                                print("[Please enter a number]")
+                            else:
+                                break
+
+                        if item_use_choice == len(temp_item_inventory) + 1:
+                            break
+                        else:
+                            for i in range(len(temp_item_inventory)):
+                                if item_use_choice == i + 1 and temp_item_inventory[i].type == "consumable":
+                                    print_slow(f"You used {temp_item_inventory[i].name}.\n", TEST)
+
+                                    player.max_hp += temp_item_inventory[i].max_hp_bonus
+                                    player.hp += temp_item_inventory[i].max_hp_bonus
+                                    player.str += temp_item_inventory[i].str_bonus
+                                    player.spd += temp_item_inventory[i].spd_bonus
+
+                                    player.inventory.remove(temp_item_inventory[i])
+
+                                    has_equipped_item = True
+                                    break
+                                elif item_use_choice == i + 1 and temp_item_inventory[i].type == "healing":
+                                    print_slow(f"You used {temp_item_inventory[i].name}, healing {temp_item_inventory[i].hp_bonus}.\n", TEST)
+
+                                    if player.hp + temp_item_inventory[i].hp_bonus > player.max_hp:
+                                        player.hp = player.max_hp
+                                    else:
+                                        player.hp += temp_item_inventory[i].hp_bonus
+
+                                    player.inventory.remove(temp_item_inventory[i])
+
+                                    has_equipped_item = True
+                                    break
+
+                                elif i == len(temp_item_inventory) - 1:
+                                    print("[Please choose an item to use, or exit inventory]")
+                    else:
+                        has_equipped_item = True
+                        print_slow("\nNo consumables in inventory.\n", TEST)
+
+                elif item_change_choice == "5":
                     break
                 else:
-                    print("\n[Please enter correct input; 1. Armor, 2. Weapon, 3. Accessory, 4. Exit]")    
+                    print("\n[Please enter correct input; 1. Armor, 2. Weapon, 3. Accessory, 4. Item, 5. Exit]\n")    
                     
                  
                 
@@ -623,7 +693,7 @@ Pick an equipment to change:
             
 
         elif inventory_choice == "2":
-            break
+            break    
         else:
             print("\n[Please enter correct input; 1. Change equipment, 2. Go back]")
         
@@ -1255,6 +1325,10 @@ while True:
         player.exp = 0
         player.hp = player.max_hp
         player.inventory = []
+
+        player.inventory.append(I.create_item("health potion"))
+        player.inventory.append(I.create_item("roids"))
+
     except:
         print("\n[Please enter a correct input; 1. Cacambo, 2. Candide, 3. Pangloss]")
     else:
