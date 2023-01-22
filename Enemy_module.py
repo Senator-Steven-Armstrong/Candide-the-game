@@ -24,13 +24,12 @@ class Enemy():
 # .exp_dropped = rand.randint()
 # .gold_dropped = rand.randint()
 
-bandit = Enemy()
-cannibal = Enemy()
-långöron = Enemy()
-goblin = Enemy()
-bulgar = Enemy()
-råtta = Enemy()
-traveler = Enemy()
+
+
+
+
+
+
 
 #BOSSES
 kunigunda = Enemy()
@@ -163,8 +162,9 @@ def pococurante_voice_lines():
 def create_enemy(enemy_name):
     # Below are the base stats of enemies that can be encountered and fought in the game
 
-    if enemy_name == bandit:
+    if enemy_name == "bandit":
         # Bandit stats
+        bandit = Enemy()
         bandit.name = "bandit"
         bandit.max_hp = rand.randint(80, 120)
         bandit.spd = rand.randint(5, 15)
@@ -183,8 +183,9 @@ def create_enemy(enemy_name):
         Thee th're! cometh h're betimes and giveth me thy wage 
         bef're i carveth thee with this cankered fusty bodkin!
         '''
-    elif enemy_name == cannibal:
+    elif enemy_name == "cannibal":
         # Cannibal stats
+        cannibal = Enemy()
         cannibal.name = "cannibal"
         cannibal.max_hp = rand.randint(50, 90)
         cannibal.spd = rand.randint(10, 20)
@@ -195,46 +196,59 @@ def create_enemy(enemy_name):
         cannibal.spawndialogue_1 = '''
 
         '''
-    elif enemy_name == långöron:
-        # Långöron
+    elif enemy_name == "långöron":
+        # Långöron    
+        långöron = Enemy()
         långöron.name = "långöron"
         långöron.max_hp = rand.randint(90, 130)
         långöron.spd = rand.randint(15, 25)
         långöron.str = rand.randint(15, 30)
         långöron.exp_dropped = rand.randint(150, 220)
         långöron.gold_dropped = rand.randint(20, 40)
-    elif enemy_name == goblin:
+    elif enemy_name == "goblin":
         # Goblin
+        goblin = Enemy()
         goblin.name = "goblin"
         goblin.max_hp = rand.randint(40, 80)
         goblin.spd = rand.randint(27, 40)
-        goblin.str = rand.randint(4, 10)
+        goblin.str = rand.randint(6, 10)
         goblin.exp_dropped = rand.randint(100, 140)
         goblin.gold_dropped = rand.randint(40, 70)
-    elif enemy_name == bulgar:
+    elif enemy_name == "bulgar":
         # Bulgar
+        bulgar = Enemy()
         bulgar.name = "bulgar"
         bulgar.max_hp = rand.randint(120, 160)
         bulgar.spd = rand.randint(10, 14)
         bulgar.str = rand.randint(25, 32)
         bulgar.exp_dropped = rand.randint(120, 300)
         bulgar.gold_dropped = rand.randint(45, 75)
-    elif enemy_name == råtta:   
+    elif enemy_name == "rat":   
         # Råtta
-        råtta.name = "råtta"
-        råtta.max_hp = rand.randint(1, 50)
-        råtta.spd = rand.randint(20, 30)
-        råtta.str = rand.randint(20, 25)
-        råtta.exp_dropped = rand.randint(40, 100)
-        råtta.gold_dropped = rand.randint(10, 20)
-    elif enemy_name == traveler:
+        rat = Enemy()
+        rat.name = "rat"
+        rat.max_hp = rand.randint(1, 50)
+        rat.spd = rand.randint(20, 30)
+        rat.str = rand.randint(20, 25)
+        rat.exp_dropped = rand.randint(40, 100)
+        rat.gold_dropped = rand.randint(10, 20)
+    elif enemy_name == "traveler":
         # traveler
+        traveler = Enemy()
         traveler.name = "traveler"
         traveler.max_hp = rand.randint(160, 220)
         traveler.spd = rand.randint(5, 10)
         traveler.str = rand.randint(35, 45)
         traveler.exp_dropped = rand.randint(150, 350)
         traveler.gold_dropped = rand.randint(85, 150)
+    elif enemy_name == "chaos entity":
+        chaos_entity = Enemy()
+        chaos_entity.name = "Chaos entity"
+        chaos_entity.max_hp = rand.randint(5, 200)
+        chaos_entity.spd = rand.randint(1, 50)
+        chaos_entity.str = rand.randint(6, 50)
+        chaos_entity.exp_dropped = rand.randint(1, 350)
+        chaos_entity.gold_dropped = rand.randint(1, 150)
 
 def fight_begin_description(chosen_enemy):
 
@@ -287,7 +301,4 @@ Enemy threw some pebbles at you!'''
 
     enemy_attack_list = [enemy_attack_1, enemy_attack_2, enemy_attack_3, enemy_attack_4, enemy_attack_5]
     return rand.choice(enemy_attack_list)
-
-enemy_list = [bandit, cannibal, långöron, goblin, bulgar, råtta, traveler]
-print(type(bandit))
 

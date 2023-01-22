@@ -91,7 +91,7 @@ def travel():
                     location3 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
                 else:
                     if current_location != "":
-                        temporary_locations.pop(L.locations.index(current_location))
+                        temporary_locations.remove(current_location)
 
                         #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
                         location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
@@ -131,7 +131,7 @@ def travel():
                     else:
                         print(f"\n[Please enter correct input; 1. {location1}, 2. {location2}, 3. {location3}]")   
                 
-
+                chosen_description = L.choose_description(current_location)
 
                 #HÄR KOLLAS DET HUR OM MAN HAR COE OCH DÄREFTER TAS PENGAR BORT
                 if player.curse_of_eldorado > 0:
@@ -161,9 +161,10 @@ def travel():
 
                     #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
                     if player == pangloss:
-                        print_slow(L.travel_description(current_location, True), TEST)
+                        # pygame.mixer.music.play(L.lissabon_special.music)
+                        print_slow(L.lissabon_special.description)
                     else:
-                        print_slow(L.travel_description(current_location, False), TEST)
+                        print_slow(chosen_description.description, TEST)
 
                 
 
@@ -277,7 +278,7 @@ Thee can purchaseth one of the following three items:
                     else:
                         #HÄR KAN EN FIGHT SKE------------------------------------------------------------------------
 
-                        fight()
+                        fight(chosen_description)
 
                 
 
@@ -707,16 +708,14 @@ def enemy_level_multiplier(player_level):
 
 #----------------------------------------------------------FIGHT-METHODS---------------------------------------------------------------
 
-def fight():
+def fight(chosen_description):
     global game_over
     #FIGHT
 
-    temp_enemy_list = copy.deepcopy(E.enemy_list) 
+    temp_enemy_list = copy.deepcopy(chosen_description.possible_enemies) 
 
     #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
     chosen_enemy = temp_enemy_list.pop(temp_enemy_list.index(rand.choices(temp_enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
-
-    chosen_enemy = E.bandit
 
     E.create_enemy(chosen_enemy)
 
@@ -793,19 +792,18 @@ SPD: {chosen_enemy.spd}
             else:
                 print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
 
-        chosen_enemy.hp -= player_damage
-        player.hp -= enemy_damage
-
         #HÄR SKER SJÄLVA ATTACKERNA----------------------------------------------------------------------------------
         if first_attack_move == "player":
             
             player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect, "Enemy")
 
-            if player.equipped_weapon.effect == "quickstep" and rand.randint(1, 1) == 1:
+            if player.equipped_weapon.effect == "quickstep" and rand.randint(1, 4) == 1:
                 print_slow(I.baronen_knife_effect_description(), TEST)
                 bonus_damage = rand.randint(10, 30)
-                print_slow(f"\n    - You dealt {bonus_damage} damage!")
+                print_slow(f"\n    - You dealt {bonus_damage} damage!", TEST)
                 chosen_enemy.hp -= bonus_damage
+                if chosen_enemy.hp <= 0:
+                    break
             else:                   
                 if chosen_enemy.hp > 0:
                     enemy_attack(chosen_enemy, "Enemy")
@@ -1343,6 +1341,8 @@ intro()
 # for i in range(10):
 #     weapon_choice = rand.choice(I.item_list)
 #     player.inventory.append(I.create_item(weapon_choice))
+
+player.inventory.append(I.baronen_knife)
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:

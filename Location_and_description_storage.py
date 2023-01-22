@@ -23,6 +23,8 @@ shop1.description = '''
 You traveled to the legendary IKEA, known for forging The Legendary Smörkniv, constructing the fort of Fredrik
 and their exotic variety of foods such as: Meatballs,
 '''
+shop1.music = ''
+
 shop2 = Description()
 shop2.description = '''
 After a long and perilous journey, wandering across the hostile ice lands known as Finland, you find yourself in
@@ -30,6 +32,8 @@ front of a mysterious building, with a partly destroyed sign reading "K-Market T
 Inside were vast amounts of consumables, mostly whatever edible material the people of these lands can acquire.
 This place could store precious items, but you should leave before the owner returns, for she is beyond you.
 '''
+shop2 = ''
+
 shop3 = Description()
 shop3.description = '''
 While your local advisor claimed that this place was not far, this journey has felt like an eternity. 
@@ -40,7 +44,9 @@ Then, you are met with a familiar face. It is the same advisor who sent you on t
 He laughs maniacally, knowing you have spent half a century venturing to this place.
 Finally, he speaks: "Welcome, traveler, to Lidl. I am Kasper, The patient one. What do you wish to purchase?"
 '''
-shop.description_list = [shop1.description, shop2.description, shop3.description]
+shop3 = ''
+
+shop.description_list = [shop1, shop2, shop3]
 
 
 
@@ -62,6 +68,8 @@ You stay there in peace for one month, but soon come to an ultimatum. You can't 
 Either you stay, a peaceful life in Eldorado but without the love of your life. Or you leave,
 go to the dark hell that is the rest of the world, but let Kuniganda light it up when you finally save her.
 '''
+eldorado1.music = ''
+
 eldorado2 = Description()
 eldorado2.description = '''
 You keep on wandering throughout the world, eventually stumbling onto a small river with a rickety boat
@@ -77,7 +85,9 @@ He happily lets you stay and the locals help you recover, but fate eventually ca
 You either stay and live happily in Eldorado, without Kunigunda, or you leave,
 conquering the rest of your journey, and eventually the rest of your life with Kunigunda.
 '''
-eldorado.description_list = [eldorado1.description, eldorado2.description]
+eldorado2.music = ''
+
+eldorado.description_list = [eldorado1, eldorado2]
 
 
 
@@ -93,12 +103,18 @@ entire body. It only gets worse, until you find a small opening in the trees. No
 rays of light shining through. However you quickly find yourself in panic again as nearby bushes violently shake
 and something jumps out at you. 
 '''
+skogen1.music = ''
+skogen1.possible_enemies = ["bandit", "goblin", "rat"]
+
 skogen2 = Description()
 skogen2.description = '''
 You decide to enter into a small, nearby forest. It's hard to even call it a forest, it's just one tree.
 You walk around the forest for while, pretty much just circling around the single tree until you realize that you
 are standing in someones backyard. The front door of their house slams open.
 '''
+skogen2.music = ''
+skogen2.possible_enemies = ["bandit", "goblin", "rat"]
+
 skogen3 = Description()
 skogen3.description = '''
 You decide to enter a normal-sized forest just a few miles away. Walking through you can't stop thinking about how 
@@ -107,7 +123,10 @@ It's so not out of the ordinary that you start to questions yourself, it's uncan
 a completely normal creature emerges from a brush beside you. You decide to take it on in a normal fight, 
 just like any other.
 '''
-skogen.description_list = [skogen1.description, skogen2.description, skogen3.description]
+skogen3.music = ''
+skogen1.possible_enemies = ["bandit", "goblin", "rat"]
+
+skogen.description_list = [skogen1, skogen2, skogen3]
 
 
 
@@ -123,19 +142,28 @@ Being kept in a horrible prison cell and starved for years, you evetually make u
 The perfect moment revealed itself and you struck, escaping from the cell. The only thing blocking you 
 from freedom is a small creature at the end of the hallway, you decide to take it on.
 '''
+bulgarien1.music = ''
+bulgarien1.possible_enemies = ["rat", "goblin", "bulgar"]
+
 bulgarien2 = Description()
-bulgarien2.description_2 = '''
+bulgarien2.description = '''
 You decide to walk to Bulgaria. 
 '''
+bulgarien2.music = ''
+bulgarien2.possible_enemies = []
+
 bulgarien3 = Description()
-bulgarien3.description_3 = '''
+bulgarien3.description = '''
 You start to wander to the border of Bulgaria. A large wall streches as far as you can see, 
 and smoke rises from the city inside.With fear and some sense of wonder you walk until you find 
 some sort of entrance. You knew the Bulgarians wouldn't let you in easy, so you prepared for a fight. 
-Bulgarian borderguards patrol the entrance. One of them spots, and the armored creature 
+Bulgarian borderguards patrol the entrance. One of them spots, and the armored guard 
 quickly rushes toward you.
 '''
-bulgarien.description_list = [bulgarien1.description, bulgarien2.description, bulgarien3.description]
+bulgarien3.music = ''
+bulgarien3.possible_enemies = ["bulgar"]
+
+bulgarien.description_list = [bulgarien1, bulgarien2, bulgarien3]
 
 
 
@@ -153,6 +181,9 @@ eventually breaking existence as we know it!
 I' m  not in contro--l anymo-r_e, all y ou have t-o do is kil--l the e_n t i-t y  re-siding inside and 
 e-v_e- r--y_t h_i/n-g   w-//i-l_l...
 '''
+lissabon_special.music = ''
+lissabon_special.possible_enemies = ["chaos entity"]
+
 lissabon1 = Description()
 lissabon1.description = '''
 You decide to enter Lissabon. Pangloss's heresy echo through the country as he's being hanged once again.
@@ -174,7 +205,7 @@ Tall towers and catholic churches seem to touch the sky. However, there is an un
 The same towers can be seen swaying back and forth during the day. Large holes are found where buildings were the
 day before. The ground seems to be slowly becoming something dangerous. You should probably not linger here.
 '''
-lissabon.description_list = [lissabon1.description, lissabon2.description, lissabon3.description, lissabon_special.description]
+lissabon.description_list = [lissabon1, lissabon2, lissabon3, lissabon_special]
 
 
 #VENEDIG
@@ -196,7 +227,7 @@ venedig3 = Description()
 venedig3.description = '''
 in lissabon you lissapissabon
 '''
-venedig.description_list = [venedig1.description, venedig2.description, venedig3.description]
+venedig.description_list = [venedig1, venedig2, venedig3]
 
 
 
@@ -216,7 +247,7 @@ turkiet3 = Description()
 turkiet3.description = '''
 uhghuhguh uturjitet turkiet go brrr
 '''
-turkiet.description_list = [turkiet1.description, turkiet2.description, turkiet3.description]
+turkiet.description_list = [turkiet1, turkiet2, turkiet3]
 
 
 
@@ -237,7 +268,7 @@ sydamerika.description = '''
 You enter the streets of syd america, gunshots and gang calls everywhere. 
 You meet their old president donald of the trump. but wait it was just a costume ohh noo!
 '''
-sydamerika.description_list = [sydamerika1.description, sydamerika2.description, sydamerika3.description]
+sydamerika.description_list = [sydamerika1, sydamerika2, sydamerika3]
 
 
 
@@ -267,7 +298,7 @@ You entered Africa, it’s beautiful but hot. So many animals, some dangerous.
 You start to get tired from the strong sun and find shelter under a shadowy tree. 
 Suddenly rustling comes from up the tree, you look up and ohh noo!  
 '''
-afrika.description_list = [afrika1.description, afrika2.description, afrika3.description]
+afrika.description_list = [afrika1, afrika2, afrika3]
 
 
 
@@ -297,7 +328,7 @@ At least this day can't get any worse, it is England after all. Oh my god, it's 
 Suddenly a group of true Brexit Geezers walk up from around the corner and shank you up.
 What seems to be their leader steps forward among the group. He challenges you to a true bri'ish bar brawl.
 '''
-england.description_list = [england1.description, england2.description, england3.description]
+england.description_list = [england1, england2, england3]
 
 
 
@@ -324,7 +355,7 @@ You enter the open water in a small wooden raft by a local fisherman.
 As you traveled for a while something started to feel strange. 
 You look around but see nothing but open water, but when you look down in the water looking back at you is a, ohh noo!  
 '''
-havet.description_list = [havet1.description, havet2.description, havet3.description]
+havet.description_list = [havet1, havet2, havet3]
 
 
 
@@ -355,7 +386,7 @@ Your'e a bit nervous, but you enter. You quickly get lost, realizing that this w
 you stumble upon an empty patch without any grass in the shape of a circle.
 You can't help but feel this is a boss arena... but nope there's just a normal enemy in the center.
 '''
-fältet.description_list = [fältet1.description, fältet2.description, fältet3.description]
+fältet.description_list = [fältet1, fältet2, fältet3]
 
 
 
@@ -380,32 +411,20 @@ tibble3 = Description()
 tibble3.description = '''
 jkjnjnjnlknlknlk
 '''
-tibble.description_list = [tibble1.description, tibble2.description, tibble3.description]
+tibble.description_list = [tibble1, tibble2, tibble3]
 
 
 #LISTANS LÄNGD ÄR 12#
 locations=[shop, eldorado, skogen, bulgarien, lissabon, venedig, turkiet, sydamerika, afrika, england, havet, fältet, tibble]
 
-def travel_description(chosen_location, is_pangloss):
+def choose_description(chosen_location, is_pangloss):
 
     for location in locations:
-        if is_pangloss == True and chosen_location.name == lissabon.name:
-            # play_music(lissabon_special.music)
-            return lissabon_special.description
-        elif location.name == chosen_location.name:
+        if location.name == chosen_location.name:
             chosen_description = rand.choice(location.description_list)
             # play_music(chosen_description.music)
             return chosen_description
-
-
-
-# def choose_enemy(chosen_location, chosen_description):
-
-#     for location in locations:
-#         if location == chosen_location:
-#             for description in location.description_list:
-#                 if description == chosen_description:
-                    
+                 
 
 
 #----------------------------------------------------------FÄLLOR-----------------------------------------------------------------
