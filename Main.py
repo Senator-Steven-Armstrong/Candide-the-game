@@ -146,7 +146,7 @@ def travel():
 
 
                 #HÄR KOLLAS DET OM MAN HAMNAR I EN FÄLLA ELLER INTE
-                trap_chance = rand.randint(1, 1)
+                trap_chance = rand.randint(1, 100)
                 if trap_chance == 1 and current_location != "Eldorado":
                     trap(current_location)
                     
@@ -235,12 +235,25 @@ Thee can purchaseth the following items:
                                     print(f"[Healed HP: {item.hp_bonus}]\n")
                                 else:
                                     print(f"[HP: {item.max_hp_bonus} STR: {item.str_bonus} SPD: {item.spd_bonus}]\n")
+
+                                if j == len(available_shop_items):
+                                    print(j+1, " Leave shop", sep="")
+
                                 j += 1
+                            
+                            
 
 
                             while True:
-                                shop_input = input("Choice: ")
-                                pygame.mixer.Sound.play(UI_sfx)
+                                while True:
+                                    try:
+                                        shop_input = int(input("Choice: "))
+                                        pygame.mixer.Sound.play(UI_sfx)
+                                    except:
+                                        print("\n[Please enter a number]\n")
+                                        continue
+                                    else:
+                                        break
 
                                 j = 1
                                 for item in available_shop_items:
@@ -248,10 +261,13 @@ Thee can purchaseth the following items:
                                         chosen_item = item
                                         break
                                     elif shop_input == len(available_shop_items) + 1:
-                                        print_slow("\nThee no more brain than stone clotpole sandwich, nev'r cometh backeth!\nYou hastily leave the store.", TEST)
+                                        print_slow("\nThee no more brain than stone clotpole sandwich, nev'r cometh backeth!\nYou hastily leave the store.\n", TEST)
                                         break
-                                    else:
+                                    elif shop_input < 1 and shop_input > len(available_shop_items):
                                         print("\n[Please enter correct input]")
+                                        continue
+                                    else:
+                                        j += 1
                                         continue
                                 break
                             
@@ -267,9 +283,9 @@ Thee can purchaseth the following items:
                                         player.hp += chosen_item.hp_bonus
                                 else:
                                     player.gold -= chosen_item.cost
-                                    print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, wouldst thee liketh to buyeth something m're?\n", TEST)
                                     player.inventory.append(chosen_item)
                                 available_shop_items.remove(chosen_item)
+                                print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, wouldst thee liketh to buyeth something m're?\n", TEST)
                             else: 
                                 print_slow("\nThee has't not enow wage! Buyeth something else shall ya, If't be true thee did get the wage f'r t.", TEST)
                                 continue

@@ -171,6 +171,7 @@ def create_item(choice):
         calypso.type = "healing"
         calypso.name = "Calypso [Minging]"
         calypso.hp_bonus = 100
+        return calypso
 
     #CONSUMABLE-------------------------------------------------------
     elif choice == "roids":
