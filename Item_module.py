@@ -25,9 +25,6 @@ empty_accessory = Item()
 empty_accessory.type = "accessory"
 empty_accessory.name = "None"
 
-item_list=          ["dagger", "sword", "explosive", "ultra_greatsword", "springfield rifle", "rocket launcher", "crusader helm", "leather boots", "philosophy book", "voltaire's pencil"]
-item_rarity_list =  [100,       100,     60,          20,                 60,                  10,                100,             100,             100,               100]
-
 #BOSS ITEMS
 pococurante_cane = Item()
 pococurante_cane.type = "weapon"
@@ -58,6 +55,12 @@ baronen_greatsword.name = "Moonlight greatsword of animosity"
 baronen_greatsword.str_bonus = 50
 baronen_greatsword.spd_bonus = 20
 baronen_greatsword.max_hp_bonus = 300
+
+
+
+
+item_list=          ["dagger", "sword", "explosive", "ultra_greatsword", "springfield rifle", "rocket launcher", "knight helm", "leather boots", "philosophy book", "voltaire's pencil", "shackles", "health potion", "roids"]
+item_rarity_list =  [100,       100,     60,          20,                 60,                  10,                100,           100,             100,               100,                 100,        80,              80]
 
 def create_item(choice):
 
@@ -110,13 +113,13 @@ def create_item(choice):
         rocket_launcher.cost = rand.randint(1000, 1200)
         return rocket_launcher
     #ARMOR-----------------------------------------------------
-    elif choice == "crusader helm":
-        crusader_helm = Item()
-        crusader_helm.type = "armor"
-        crusader_helm.name = "Crusader helm"
-        crusader_helm.max_hp_bonus = rand.randint(50,70)
-        crusader_helm.cost = rand.randint(70, 80)
-        return crusader_helm
+    elif choice == "knight helm":
+        knight_helm = Item()
+        knight_helm.type = "armor"
+        knight_helm.name = "Knight helm"
+        knight_helm.max_hp_bonus = rand.randint(50,70)
+        knight_helm.cost = rand.randint(70, 80)
+        return knight_helm
     elif choice == "leather boots":
         boots = Item()
         boots.type = "armor"
@@ -125,6 +128,14 @@ def create_item(choice):
         boots.spd_bonus = rand.randint(3, 6)
         boots.cost = rand.randint(60, 70)
         return boots
+    elif choice == "shackles":
+        shackles = Item()
+        shackles.type = "armor"
+        shackles.name = "Prisoner's shackles"
+        shackles.max_hp_bonus = 100
+        shackles.spd_bonus = rand.randint(-12, -2)
+        shackles.cost = rand.randint(20, 60)
+        return shackles
 
     #ACCESSORY------------------------------------------------------
     elif choice == "philosophy book":
@@ -153,6 +164,11 @@ def create_item(choice):
         health_potion.name = "Health potion"
         health_potion.hp_bonus = 200
         return health_potion
+    elif choice == "calypso":
+        calypso = Item()
+        calypso.type = "healing"
+        calypso.name = "Calypso [Minging]"
+        calypso.hp_bonus = 100
 
     #CONSUMABLE-------------------------------------------------------
     elif choice == "roids":

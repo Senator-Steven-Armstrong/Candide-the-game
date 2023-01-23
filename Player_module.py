@@ -74,7 +74,7 @@ You droppkicked {enemy_name}!'''
 "Candide balls fit in your mouth?" Uttered {player_name}, {enemy_name} is in distraught!'''
     #ARMOR BREAKER
     armor_breaker.description = f''' 
-You took a fast grip around your {player_weapon} and crushed through the enemy's armor!'''
+You took a firm grip around your {player_weapon} and crushed through the enemy's armor!'''
     #HEAD CLEAVER
     cleaver.description = f''' 
 Using your {player_weapon}, with a swift strike you split {enemy_name} in two!'''

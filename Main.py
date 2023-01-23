@@ -41,6 +41,18 @@ def start():
             print("Försök igen.")
             continue
 
+def return_location_rarity(temporary_locations, total_turns):
+    rarity_list = []
+    for location in temporary_locations:
+        if total_turns == 0 and location.name == L.eldorado.name:
+            rarity_list.append(0)
+        elif total_turns == 0 and location.name == L.shop.name:
+            rarity_list.append(999999999999999)
+        else:
+            rarity_list.append(location.rarity)
+    return rarity_list
+
+
 
 def travel():
     #HÄR GÖRS EN RESA, FUNKTIONEN SKA VÄLJA ETT STÄLLE OCH VÄLJA EN HÄNDELSE I DET STÄLLET,
@@ -82,30 +94,11 @@ def travel():
 
                 temporary_locations = copy.deepcopy(L.locations)
 
-                #ELDORADO KAN BARA BESÖKAS EN GÅNG, OM DEN BESÖKS KOMMER DEN INTE LÄNGRE VARA MED I LISTAN L.Locations OCH DÄRMED KÖRS KODEN:
-                if L.locations.count(L.eldorado) == 0:
-                    location1 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
-                    temporary_locations.remove(location1)
-                    location2 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                    temporary_locations.remove(location2)
-                    location3 = rand.choices(temporary_locations, weights=[60, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                else:
-                    if current_location != "":
-                        temporary_locations.remove(current_location)
-
-                        #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 60 = shop, 20 = eldorado, 100 = resten 
-                        location1 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()  
-                        temporary_locations.remove(location1)
-                        location2 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                        temporary_locations.remove(location2)
-                        location3 = rand.choices(temporary_locations, weights=[60, 20, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                    else:
-                        #WEIGHTS MÅSTE VARA SAMMA LÄNGD SOM L.locations, 0 = shop, 0 = eldorado, 100 = resten, DET HÄR ÄR BARA FÖR FÖRSTA GÅNGEN TRAVEL() KALLAS
-                        location1 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                        temporary_locations.remove(location1)
-                        location2 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
-                        temporary_locations.remove(location2)
-                        location3 = rand.choices(temporary_locations, weights=[0, 0, 100, 100, 100, 100, 100, 100, 100, 100, 100], k=1).pop()
+                location1 = rand.choices(temporary_locations, weights=return_location_rarity(temporary_locations, total_turns), k=1).pop()  
+                temporary_locations.remove(location1)
+                location2 = rand.choices(temporary_locations, weights=return_location_rarity(temporary_locations, total_turns), k=1).pop()
+                temporary_locations.remove(location2)
+                location3 = rand.choices(temporary_locations, weights=return_location_rarity(temporary_locations, total_turns), k=1).pop()
 
                 print(f'''
 
@@ -159,17 +152,17 @@ def travel():
                     
                 if game_over == False:  
 
-                    #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
-                    if player == pangloss:
-                        # pygame.mixer.music.play(L.lissabon_special.music)
-                        print_slow(L.lissabon_special.description)
-                    else:
-                        print_slow(chosen_description.description, TEST)
+                    # #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
+                    # if player == pangloss:
+                    #     # pygame.mixer.music.play(L.lissabon_special.music)
+                    #     print_slow(L.lissabon_special.description)
+                    # else:
+                    #     print_slow(chosen_description.description, TEST)
 
                 
 
 
-                    if current_location == "Eldorado":
+                    if current_location.name == L.eldorado.name:
                         #ELDORADO----------------------------------------------------------------------------------------------------------
                         
                         print_slow("\n                     Stay                  Leave\n", 0.1)
@@ -197,78 +190,93 @@ def travel():
                         
                         
                     #----------------------------------------------SHOP------------------------------------------------------------
-                    elif current_location == "Shop":
+                    elif current_location.name == L.shop.name:
 
                         print(A.shop)
 
                         shop_items = copy.deepcopy(I.item_list)
+                        available_shop_items = []
 
                         shop_item_indicator_1 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
                         shop_item_index_1 = shop_items.index(shop_item_indicator_1)
                         I.item_rarity_list.pop(shop_item_index_1)
                         shop_items.remove(shop_item_indicator_1)
                         shop_item_1 = I.create_item(shop_item_indicator_1)
+                        available_shop_items.append(shop_item_1)
 
                         shop_item_indicator_2 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
                         shop_item_index_2 = shop_items.index(shop_item_indicator_2)
                         I.item_rarity_list.pop(shop_item_index_2)
                         shop_items.remove(shop_item_indicator_2)
                         shop_item_2 = I.create_item(shop_item_indicator_2)
+                        available_shop_items.append(shop_item_2)
 
                         shop_item_indicator_3 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
                         shop_item_index_3 = shop_items.index(shop_item_indicator_3)
                         I.item_rarity_list.pop(shop_item_index_3)
                         shop_items.remove(shop_item_indicator_3)
                         shop_item_3 = I.create_item(shop_item_indicator_3)
+                        available_shop_items.append(shop_item_3)
+
+                        temp_healing_list = []
+                        for i in I.item_list:
+                            if i.type == "healing":
+                                temp_healing_list.append(i)
+                        
+                        shop_item_4 = rand.choice(temp_healing_list)
+                        available_shop_items.append(shop_item_4)
 
                         while True:
                             sleep(1)
                             print(f'''
 Current gold: {player.gold}
 
-Thee can purchaseth one of the following three items:
+Thee can purchaseth the following items:
+''')
+                            j = 1
+                            for item in available_shop_items:
+                                print(j, item.name, "", sep="")
+                                if j == 4:
+                                    print(f"[Healed HP: {item.hp_bonus}]")
+                                else:
+                                    print(f"[HP: {item.max_hp_bonus} STR: {item.str_bonus} SPD: {item.spd_bonus}]")
+                                j += 1
 
-    1.{shop_item_1.name}; {shop_item_1.cost} Gold
-    [HP: {shop_item_1.max_hp_bonus} STR: {shop_item_1.str_bonus} SPD: {shop_item_1.spd_bonus}]
-
-    2.{shop_item_2.name}; {shop_item_2.cost} Gold
-    [HP: {shop_item_2.max_hp_bonus} STR: {shop_item_2.str_bonus} SPD: {shop_item_2.spd_bonus}]
-
-    3.{shop_item_3.name}; {shop_item_3.cost} Gold
-    [HP: {shop_item_3.max_hp_bonus} STR: {shop_item_3.str_bonus} SPD: {shop_item_3.spd_bonus}]
-
-    4. None (go back)
-                            ''')
 
                             while True:
                                 shop_input = input("Choice: ")
                                 pygame.mixer.Sound.play(UI_sfx)
 
-                                if shop_input == "1":
-                                    chosen_item = shop_item_1
-                                    break
-                                elif shop_input == "2":
-                                    chosen_item = shop_item_2
-                                    break
-                                elif shop_input == "3":
-                                    chosen_item = shop_item_3
-                                    break
-                                elif shop_input == "4":
-                                    print_slow("\nThee no more brain than stone clotpole sandwich, nev'r cometh backeth!\You hastily leave the store.", TEST)
-                                    break
-                                else:
-                                    print("\n[Please enter correct input]")
-                                    continue
+                                j = 1
+                                for item in available_shop_items:
+                                    if shop_input == j:
+                                        chosen_item = item
+                                        break
+                                    elif shop_input == len(available_shop_items) + 1:
+                                        print_slow("\nThee no more brain than stone clotpole sandwich, nev'r cometh backeth!\nYou hastily leave the store.", TEST)
+                                        break
+                                    else:
+                                        print("\n[Please enter correct input]")
+                                        continue
+                                break
                             
-                            if shop_input == "4":
+                            if shop_input == len(available_shop_items) + 1:
                                 break
-                            elif chosen_item.cost <= player.gold:
-                                player.gold -= chosen_item.cost
-                                print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, desire thee has't a t'rrible day!\n", TEST)
-                                player.inventory.append(chosen_item)
-                                break
+
+                            if chosen_item.cost <= player.gold:
+                                if chosen_item.type == "healing":
+                                    print_slow(f"\nYou used {chosen_item.name}, healing {chosen_item.hp_bonus}.", TEST)
+                                    if player.hp + chosen_item.hp_bonus >= player.max_hp:
+                                        player.hp = player.max_hp
+                                    else:
+                                        player.hp += chosen_item.hp_bonus
+                                else:
+                                    player.gold -= chosen_item.cost
+                                    print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, wouldst thee liketh to buyeth something m're?\n", TEST)
+                                    player.inventory.append(chosen_item)
+                                available_shop_items.remove(chosen_item)
                             else: 
-                                print_slow("\nThee has't not enow wage! Buyeth something else shall ya, If 't be true thee did get the wage f'r t.", TEST)
+                                print_slow("\nThee has't not enow wage! Buyeth something else shall ya, If't be true thee did get the wage f'r t.", TEST)
                                 continue
 
 
@@ -1161,9 +1169,6 @@ def trap(location):
     trap_type = rand.choice(["gold", "damage"])
     gold_lost = rand.randint(20, 80)
 
-    if player.gold == 0 or player.gold - gold_lost <= 0 or player.curse_of_eldorado > 0:
-        trap_type = "damage"
-
     print_slow(L.trap_description(player.name, location.name, trap_type), TEST)
 
     damage = rand.randint(15, 45)
@@ -1171,10 +1176,10 @@ def trap(location):
 
     if trap_type == "gold":
         if player.gold == 0:
-            print_slow("You were broke asf anyways so you didn't lose anything!", TEST)
+            print_slow("\nYou were broke asf anyways so you didn't lose anything!", TEST)
         elif player.gold - gold_lost <= 0:
             player.gold = 0
-            print_slow("You lost the rest of your gold!", TEST)
+            print_slow("\nYou lost the rest of your gold!", TEST)
         else:
             player.gold -= gold_lost
             print_slow(f"   - You lost {gold_lost} gold!  Gold: {player.gold}", TEST)

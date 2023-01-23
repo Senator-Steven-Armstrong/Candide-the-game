@@ -4,6 +4,7 @@ import pygame
 class Location():
     name = ""
     description_list = []
+    rarity = 100
 
 class Description():
     music = ''
@@ -17,6 +18,7 @@ class Description():
 #SHOP
 shop = Location()
 shop.name = "Shop"
+shop.rarity = 65
 
 shop1 = Description()
 shop1.description = '''
@@ -53,6 +55,7 @@ shop.description_list = [shop1, shop2, shop3]
 #ELDORADO
 eldorado = Location()
 eldorado.name = "Eldorado"
+eldorado.rarity = 20
 
 eldorado1 = Description()
 eldorado1.description = '''
@@ -675,7 +678,7 @@ sky. As the moonight shimmers he turns around and pierces you with his rage-fill
 
 He start walking toward you slowly, until with a flash dissapearing. You frantically look around, until you
 notice it. You can feel the hilt of the small blade lodged in your stomach pushing against your skin.
-Baronen has a fast grip around it, never having let go his gaze of you. 
+Baronen has a firm grip around it, never having let go his gaze of you. 
 
     -[Health severly damaged].
 
@@ -685,7 +688,7 @@ You know i can't allow this. And if you can't hinder yourself, I will have to do
 
 He lets go of the knife, taking a step back and assuming a calm but dominant pose. The night sky lights the room,
 and a large, curved blade forms in hs hand. It shimmers like the moon.
-You take a fast grip around the knife and with sheer will pull it out. With determination and animosity you
+You take a firm grip around the knife and with sheer will pull it out. With determination and animosity you
 point the blade at Baronen...
 '''
 
