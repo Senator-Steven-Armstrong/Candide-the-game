@@ -62,6 +62,8 @@ baronen_greatsword.max_hp_bonus = 300
 item_list=          ["dagger", "sword", "explosive", "ultra_greatsword", "springfield rifle", "rocket launcher", "knight helm", "leather boots", "philosophy book", "voltaire's pencil", "shackles", "health potion", "roids"]
 item_rarity_list =  [100,       100,     60,          20,                 60,                  10,                100,           100,             100,               100,                 100,        80,              80]
 
+healing_item_list = ["health potion", "calypso"]
+
 def create_item(choice):
 
 

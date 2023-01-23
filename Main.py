@@ -217,13 +217,8 @@ def travel():
                         shop_items.remove(shop_item_indicator_3)
                         shop_item_3 = I.create_item(shop_item_indicator_3)
                         available_shop_items.append(shop_item_3)
-
-                        temp_healing_list = []
-                        for i in I.item_list:
-                            if i.type == "healing":
-                                temp_healing_list.append(i)
                         
-                        shop_item_4 = rand.choice(temp_healing_list)
+                        shop_item_4 = I.create_item(rand.choice(I.healing_item_list))
                         available_shop_items.append(shop_item_4)
 
                         while True:
@@ -235,11 +230,11 @@ Thee can purchaseth the following items:
 ''')
                             j = 1
                             for item in available_shop_items:
-                                print(j, item.name, "", sep="")
-                                if j == 4:
-                                    print(f"[Healed HP: {item.hp_bonus}]")
+                                print(j, ". ", item.name, "", sep="")
+                                if item.type == "healing":
+                                    print(f"[Healed HP: {item.hp_bonus}]\n")
                                 else:
-                                    print(f"[HP: {item.max_hp_bonus} STR: {item.str_bonus} SPD: {item.spd_bonus}]")
+                                    print(f"[HP: {item.max_hp_bonus} STR: {item.str_bonus} SPD: {item.spd_bonus}]\n")
                                 j += 1
 
 
