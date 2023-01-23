@@ -23,7 +23,7 @@ shop1.description = '''
 You traveled to the legendary IKEA, known for forging The Legendary Smörkniv, constructing the fort of Fredrik
 and their exotic variety of foods such as: Meatballs,
 '''
-shop1.music = ''
+shop1.music = 'sounds/shopmusic.mp3'
 
 shop2 = Description()
 shop2.description = '''
@@ -32,7 +32,7 @@ front of a mysterious building, with a partly destroyed sign reading "K-Market T
 Inside were vast amounts of consumables, mostly whatever edible material the people of these lands can acquire.
 This place could store precious items, but you should leave before the owner returns, for she is beyond you.
 '''
-shop2 = ''
+shop2.music = 'sounds/shopmusic.mp3'
 
 shop3 = Description()
 shop3.description = '''
@@ -44,7 +44,7 @@ Then, you are met with a familiar face. It is the same advisor who sent you on t
 He laughs maniacally, knowing you have spent half a century venturing to this place.
 Finally, he speaks: "Welcome, traveler, to Lidl. I am Kasper, The patient one. What do you wish to purchase?"
 '''
-shop3 = ''
+shop3.music = 'sounds/shopmusic.mp3'
 
 shop.description_list = [shop1, shop2, shop3]
 
@@ -103,7 +103,7 @@ entire body. It only gets worse, until you find a small opening in the trees. No
 rays of light shining through. However you quickly find yourself in panic again as nearby bushes violently shake
 and something jumps out at you. 
 '''
-skogen1.music = ''
+skogen1.music = 'sounds/ruins.mp3'
 skogen1.possible_enemies = ["bandit", "goblin", "rat"]
 
 skogen2 = Description()
@@ -112,7 +112,7 @@ You decide to enter into a small, nearby forest. It's hard to even call it a for
 You walk around the forest for while, pretty much just circling around the single tree until you realize that you
 are standing in someones backyard. The front door of their house slams open.
 '''
-skogen2.music = ''
+skogen2.music = 'sounds/ruins.mp3'
 skogen2.possible_enemies = ["bandit", "goblin", "rat"]
 
 skogen3 = Description()
@@ -123,7 +123,7 @@ It's so not out of the ordinary that you start to questions yourself, it's uncan
 a completely normal creature emerges from a brush beside you. You decide to take it on in a normal fight, 
 just like any other.
 '''
-skogen3.music = ''
+skogen3.music = 'sounds/ruins.mp3'
 skogen1.possible_enemies = ["bandit", "goblin", "rat"]
 
 skogen.description_list = [skogen1, skogen2, skogen3]
@@ -142,15 +142,15 @@ Being kept in a horrible prison cell and starved for years, you evetually make u
 The perfect moment revealed itself and you struck, escaping from the cell. The only thing blocking you 
 from freedom is a small creature at the end of the hallway, you decide to take it on.
 '''
-bulgarien1.music = ''
+bulgarien1.music = 'sounds/ruins.mp3'
 bulgarien1.possible_enemies = ["rat", "goblin", "bulgar"]
 
 bulgarien2 = Description()
 bulgarien2.description = '''
 You decide to walk to Bulgaria. 
 '''
-bulgarien2.music = ''
-bulgarien2.possible_enemies = []
+bulgarien2.music = 'sounds/ruins.mp3'
+bulgarien2.possible_enemies = ["goblin"]
 
 bulgarien3 = Description()
 bulgarien3.description = '''
@@ -160,7 +160,7 @@ some sort of entrance. You knew the Bulgarians wouldn't let you in easy, so you 
 Bulgarian borderguards patrol the entrance. One of them spots, and the armored guard 
 quickly rushes toward you.
 '''
-bulgarien3.music = ''
+bulgarien3.music = 'sounds/ruins.mp3'
 bulgarien3.possible_enemies = ["bulgar"]
 
 bulgarien.description_list = [bulgarien1, bulgarien2, bulgarien3]
@@ -181,7 +181,7 @@ eventually breaking existence as we know it!
 I' m  not in contro--l anymo-r_e, all y ou have t-o do is kil--l the e_n t i-t y  re-siding inside and 
 e-v_e- r--y_t h_i/n-g   w-//i-l_l...
 '''
-lissabon_special.music = ''
+lissabon_special.music = 'sounds/ruins.mp3'
 lissabon_special.possible_enemies = ["chaos entity"]
 
 lissabon1 = Description()
@@ -193,18 +193,29 @@ You follow the sounds of pangloss, eventually walking into a large crowd of peop
 However someone else does, and they really don't like Pangloss. 
 This someone pushes through the crowd until eventually putting their hand on your shoulder.
 '''
+lissabon1.music = 'sounds/ruins.mp3'
+lissabon1.possible_enemies = ["goblin", "bandit"]
+
 lissabon2 = Description()
 lissabon2.description = '''
 pissabon
 '''
+lissabon2.music = 'sounds/ruins.mp3'
+lissabon2.possible_enemies = ["goblin"]
+
+
 lissabon3 = Description()
 lissabon3.description = '''
 You enter a large city. Water channels and a large port makes this city seem very intertwined with the ocean.
 Buildings much older than whole countries fill the atmosphere with history. 
 Tall towers and catholic churches seem to touch the sky. However, there is an uneasy feeling in the city.
 The same towers can be seen swaying back and forth during the day. Large holes are found where buildings were the
-day before. The ground seems to be slowly becoming something dangerous. You should probably not linger here.
+day before. The ground seems to be slowly becoming something dangerous. You approach one of them, and a creature
+slowly emerges toward you.
 '''
+lissabon3.music = 'sounds/ruins.mp3'
+lissabon3.possible_enemies = ["chaos entity"]
+
 lissabon.description_list = [lissabon1, lissabon2, lissabon3, lissabon_special]
 
 
@@ -219,14 +230,23 @@ However you are in distraught as you realize there is no kebabpizza. This eterna
 you stare down the head chef, and with wrath in your veins you jump over the kitchen counter.
 The chef grips his rolling pin with might. It's time.
 '''
+venedig1.music = 'sounds/ruins.mp3'
+venedig1.possible_enemies = ["goblin", "chef", "chef"]
+
 venedig2 = Description()
 venedig2.description = '''
 pizza pasta put it on my cock
 '''
+venedig2.music = 'sounds/ruins.mp3'
+venedig2.possible_enemies = ["goblin"]
+
 venedig3 = Description()
 venedig3.description = '''
 in lissabon you lissapissabon
 '''
+venedig3.music = 'sounds/ruins.mp3'
+venedig3.possible_enemies = ["goblin"]
+
 venedig.description_list = [venedig1, venedig2, venedig3]
 
 
@@ -239,14 +259,23 @@ turkiet1 = Description()
 turkiet1.description = '''
 ånej turkemistan igen bar förstikgtg
 '''
+turkiet1.music = 'sounds/ruins.mp3'
+turkiet1.possible_enemies = ''
+
 turkiet2 = Description()
 turkiet2.description = '''
 turk turk turk turk turk turk turk turk turk dadada
 '''
+turkiet2.music = 'sounds/ruins.mp3'
+turkiet2.possible_enemies = ["goblin"]
+
 turkiet3 = Description()
 turkiet3.description = '''
 uhghuhguh uturjitet turkiet go brrr
 '''
+turkiet3.music = 'sounds/ruins.mp3'
+turkiet3.possible_enemies = ["goblin"]
+
 turkiet.description_list = [turkiet1, turkiet2, turkiet3]
 
 
@@ -259,15 +288,23 @@ sydamerika1 = Description()
 sydamerika1.description =  '''
 amerika mer som sydarmieka
 '''
+sydamerika1.music = 'sounds/ruins.mp3'
+sydamerika1.possible_enemies = ["goblin"]
+
 sydamerika2 = Description()
 sydamerika2.description = '''
 amerika fast sämre
 '''
+sydamerika2.music = 'sounds/ruins.mp3'
+sydamerika2.possible_enemies = ["goblin"]
+
 sydamerika3 = Description()
 sydamerika.description = '''
 You enter the streets of syd america, gunshots and gang calls everywhere. 
 You meet their old president donald of the trump. but wait it was just a costume ohh noo!
 '''
+sydamerika3.music = 'sounds/ruins.mp3'
+sydamerika3.possible_enemies = ["goblin"]
 sydamerika.description_list = [sydamerika1, sydamerika2, sydamerika3]
 
 
@@ -283,6 +320,9 @@ it's just an open savannah, and there isn't much civilization here.
 The gazing sun making it hard to focus. The tall grass becomes tallar and taller, waving in the dry air. But wait, 
 something is moving in the grass. You walk closer and something jumps out, shocking you. 
 '''
+afrika1.music = 'sounds/ruins.mp3'
+afrika1.possible_enemies = ["goblin"]
+
 afrika2 = Description()
 afrika2.description = '''
 You walk to the country africa. 
@@ -292,12 +332,18 @@ you see a water hole in the distance. While going to the water you get a strange
 After you get a sip of the water you understand why you had that feeling as a figure catches your eye
 in the reflection of the puddle. It's standing right behind you.
 '''
+afrika2.music = 'sounds/ruins.mp3'
+afrika2.possible_enemies = ["goblin"]
+
 afrika3 = Description()
 afrika3.description = '''
 You entered Africa, it’s beautiful but hot. So many animals, some dangerous.
 You start to get tired from the strong sun and find shelter under a shadowy tree. 
 Suddenly rustling comes from up the tree, you look up and ohh noo!  
 '''
+afrika3.music = 'sounds/ruins.mp3'
+afrika3.possible_enemies = ["goblin"]
+
 afrika.description_list = [afrika1, afrika2, afrika3]
 
 
@@ -312,6 +358,9 @@ You enter the England and decide to enter a place called birmingham,
 but what you didn't know was that this was the birminghamiest part of birmingham and that is not good, 
 a gang of whiled twats start to close up on you and suddenly from the horde of birmingham folks a threat appears.   
 '''
+england1.music = 'sounds/ruins.mp3'
+england1.possible_enemies = ["goblin"]
+
 england2 = Description()
 england2.description = '''
 You decide to enter England. As you walk through the streets you stop by a small bar to have a couple of 
@@ -321,6 +370,9 @@ behind the counter. Then you spot it. One of the lads has a bloody rolling pin i
 "Is that a fucking rolling pin? What are you gonna do, bake me a cake? Sing me a song?"
 He gets aggrevated and begins the fight.
 '''
+england2.music = 'sounds/ruins.mp3'
+england2.possible_enemies = ["goblin"]
+
 england3 = Description()
 england3.description = '''
 You start wandering through england. It's dark, it's cold, it's rainy. 
@@ -328,6 +380,9 @@ At least this day can't get any worse, it is England after all. Oh my god, it's 
 Suddenly a group of true Brexit Geezers walk up from around the corner and shank you up.
 What seems to be their leader steps forward among the group. He challenges you to a true bri'ish bar brawl.
 '''
+england3.music = 'sounds/ruins.mp3'
+england3.possible_enemies = ["goblin"]
+
 england.description_list = [england1, england2, england3]
 
 
@@ -343,18 +398,27 @@ The wooden ship that crunches as it rocked back and forth in the big waves of th
 You see something ahead of the ship floating in the water,,, and booom you hit it. 
 You relaxed but suddenly something climbed up the ship ohh noo!
 '''
+havet1.music = 'sounds/ruins.mp3'
+havet1.possible_enemies = ["goblin"]
+
 havet2 = Description()
 havet2.description = '''
 You entered a ship, an old one, but in quite the condition for its age. 
 There are lots of different people on the ship from all around the world. 
 But in the crowd you see something that is looking right at you. Ohh NOOO!
 '''
+havet2.music = 'sounds/ruins.mp3'
+havet2.possible_enemies = ["goblin"]
+
 havet3 = Description()
 havet3.description = '''
 You enter the open water in a small wooden raft by a local fisherman. 
 As you traveled for a while something started to feel strange. 
 You look around but see nothing but open water, but when you look down in the water looking back at you is a, ohh noo!  
 '''
+havet3.music = 'sounds/ruins.mp3'
+havet3.possible_enemies = ["goblin"]
+
 havet.description_list = [havet1, havet2, havet3]
 
 
@@ -371,6 +435,9 @@ like it has been a nice red sunset ever since you entered. That's when you reali
 hasn't moved for hours, and neither have you. You seem to be shackled in time, and just as you realize it,
 whatever is keeping you frozen walks up behind you, ready to kill you.
 '''
+fältet1.music = 'sounds/ruins.mp3'
+fältet1.possible_enemies = ["goblin"]
+
 fältet2 = Description()
 fältet2.description = '''
 You see a small field just outside of a small town you just exited. The journey has been
@@ -378,6 +445,9 @@ long and hard so far, so you sit down for a picnic. It's nice, the grass is soft
 tastes newly baked, and you see some ants running along the ground. You feel warm and wholesome...
 And then BOOM an enemy appeard!
 '''
+fältet2.music = 'sounds/ruins.mp3'
+fältet2.possible_enemies = ["goblin"]
+
 fältet3 = Description()
 fältet3.description = '''
 Grass stretches over the horizon, it's unnaturally tall so you get interested and walk toward it.
@@ -386,6 +456,9 @@ Your'e a bit nervous, but you enter. You quickly get lost, realizing that this w
 you stumble upon an empty patch without any grass in the shape of a circle.
 You can't help but feel this is a boss arena... but nope there's just a normal enemy in the center.
 '''
+fältet3.music = 'sounds/ruins.mp3'
+fältet3.possible_enemies = ["goblin"]
+
 fältet.description_list = [fältet1, fältet2, fältet3]
 
 
@@ -401,33 +474,44 @@ you stride through the main entrance. It smells musty, you see shadowy creatures
 presumably teknikelever, and you can barely make out the sunlight peeking through the holes in the walls.
 You pass through a ray of sunlight, briefly blinding you, and you feel a moldy hand grab your shoulder.
 '''
+tibble1.music = 'sounds/ruins.mp3'
+tibble1.possible_enemies = ["goblin"]
+
 tibble2 = Description()
 tibble2.description = '''
 You see a small shack a few miles away. Not realizing its Tibble matsal, you bust through one of the
 many moldy walls. You briefly die as the horrid stench covers your lungs, but are quickly dragged back to life by an unknown entity. 
 It grabs you and you quickly stand up, nachochips crunching below your feet, staring face to face with a hollow husk of a man. 
 '''
+tibble2.music = 'sounds/ruins.mp3'
+tibble2.possible_enemies = ["goblin"]
+
 tibble3 = Description()
 tibble3.description = '''
 jkjnjnjnlknlknlk
 '''
+tibble3.music = 'sounds/ruins.mp3'
+tibble3.possible_enemies = ["goblin"]
+
 tibble.description_list = [tibble1, tibble2, tibble3]
 
 
 #LISTANS LÄNGD ÄR 12#
 locations=[shop, eldorado, skogen, bulgarien, lissabon, venedig, turkiet, sydamerika, afrika, england, havet, fältet, tibble]
 
-def choose_description(chosen_location, is_pangloss):
+def choose_description(chosen_location):
 
     for location in locations:
         if location.name == chosen_location.name:
             chosen_description = rand.choice(location.description_list)
-            # play_music(chosen_description.music)
+            play_music(chosen_description.music)
             return chosen_description
                  
 
 
 #----------------------------------------------------------FÄLLOR-----------------------------------------------------------------
+
+
 
 def trap_description(player_name, location, trap_type):
     
@@ -438,13 +522,16 @@ def trap_description(player_name, location, trap_type):
 
     trap_description_1 = f'''On your way to {location}, you tripped on a small rock
 and scraped your knee, poor {player_name}.
-'''
+''' 
+# trap1.music = ''
+
     damage_trap_description_list.append(trap_description_1)
 
     trap_description_2 = f'''
 While crossing a huge field you accidentally stepped
 on an active landmine!
 '''
+# trap2.music = ''
     damage_trap_description_list.append(trap_description_2)
     
     if location == "Lissabon":
@@ -452,6 +539,7 @@ on an active landmine!
 As you enter Lissabon a violent earthquake erupts
 and you are flunged into the air!
 '''
+# trap3.music = ''
         damage_trap_description_list.append(trap_description_3)
     else:
         trap_description_3 = f'''

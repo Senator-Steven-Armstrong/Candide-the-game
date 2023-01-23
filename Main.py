@@ -712,10 +712,7 @@ def fight(chosen_description):
     global game_over
     #FIGHT
 
-    temp_enemy_list = copy.deepcopy(chosen_description.possible_enemies) 
-
-    #WEIGHTS MÅSTE VARA LIKA LÅNG SOM E.Enemy_list, 1Bandit, 2cannibal, 3långöron, 4goblin, 5bulgar, 6råtta, 7traveler,
-    chosen_enemy = temp_enemy_list.pop(temp_enemy_list.index(rand.choices(temp_enemy_list, weights=[100, 100, 90, 110, 70, 100, 50], k=1).pop()))
+    chosen_enemy = rand.choice(chosen_description.possible_enemies)
 
     E.create_enemy(chosen_enemy)
 

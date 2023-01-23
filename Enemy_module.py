@@ -214,6 +214,7 @@ def create_enemy(enemy_name):
         goblin.str = rand.randint(6, 10)
         goblin.exp_dropped = rand.randint(100, 140)
         goblin.gold_dropped = rand.randint(40, 70)
+        goblin
     elif enemy_name == "bulgar":
         # Bulgar
         bulgar = Enemy()
@@ -223,6 +224,7 @@ def create_enemy(enemy_name):
         bulgar.str = rand.randint(25, 32)
         bulgar.exp_dropped = rand.randint(120, 300)
         bulgar.gold_dropped = rand.randint(45, 75)
+        return bulgar
     elif enemy_name == "rat":   
         # Råtta
         rat = Enemy()
@@ -232,6 +234,7 @@ def create_enemy(enemy_name):
         rat.str = rand.randint(20, 25)
         rat.exp_dropped = rand.randint(40, 100)
         rat.gold_dropped = rand.randint(10, 20)
+        return rat
     elif enemy_name == "traveler":
         # traveler
         traveler = Enemy()
@@ -241,6 +244,7 @@ def create_enemy(enemy_name):
         traveler.str = rand.randint(35, 45)
         traveler.exp_dropped = rand.randint(150, 350)
         traveler.gold_dropped = rand.randint(85, 150)
+        return traveler
     elif enemy_name == "chaos entity":
         chaos_entity = Enemy()
         chaos_entity.name = "Chaos entity"
@@ -249,6 +253,16 @@ def create_enemy(enemy_name):
         chaos_entity.str = rand.randint(6, 50)
         chaos_entity.exp_dropped = rand.randint(1, 350)
         chaos_entity.gold_dropped = rand.randint(1, 150)
+        return chaos_entity
+    elif enemy_name == "chef":
+        #Chef
+        chef = Enemy()
+        chef.name = "Pizza chef"
+        chef.max_hp = rand.randint(80, 160)
+        chef.spd = rand.randint(5, 10)
+        chef.str = rand.randint(25, 35)
+        chef.exp_dropped = rand.randint (60, 120)
+        chef.gold_dropped =rand.randint(30, 45)
 
 def fight_begin_description(chosen_enemy):
 

@@ -30,7 +30,7 @@ dropkick.sound_effect = ''
 
 words = Attack()
 words.name = "Words"
-words.sound_effect = ''
+words.sound_effect = 'sounds/dietz nuts.mp3'
 
 armor_breaker = Attack()
 armor_breaker.name = "Armor breaker"
