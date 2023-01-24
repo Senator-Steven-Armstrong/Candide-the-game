@@ -1,6 +1,8 @@
 import Item_module as I
 import pygame
 
+pygame.mixer.init()
+
 class Player():
     
     name = ""
@@ -58,7 +60,7 @@ cannibalism.sound_effect = 'sounds/cannibalism.mp3'
 
 nothing = Attack()
 nothing.name = "Do nothing"
-nothing.sound_effect = ''
+nothing.sound_effect = 'sounds/explosion1.mp3'
 
 
 
@@ -97,12 +99,10 @@ You charged up and roundhouse kicked {enemy_name}!'''
 
     for attack in ATTACK_MOVE_LIST:
         if attack.name == chosen_attack.name:
-            # try:
-            #     pygame.mixer.music.load(attack.sound_effect)
-            #     pygame.mixer.music.play(0, 1, 0)
-            # except:
-            #     pass
-            
+
+            attack_sfx = pygame.mixer.Sound(attack.sound_effect)
+            pygame.mixer.Sound.play(attack_sfx)
+        
             return attack.description
     
 

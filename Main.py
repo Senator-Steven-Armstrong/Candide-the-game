@@ -735,11 +735,13 @@ def fight(chosen_description):
     global game_over
     #FIGHT
 
-    chosen_enemy = rand.choice(chosen_description.possible_enemies)
+    pygame.mixer.music.stop()
 
-    E.create_enemy(chosen_enemy)
+    chosen_enemy_indicator = rand.choice(chosen_description.possible_enemies)
 
-    print_slow(E.fight_begin_description(chosen_enemy), TEST)
+    chosen_enemy = E.create_enemy(chosen_enemy_indicator)
+
+    print_slow(E.fight_begin_description(chosen_enemy.name), TEST)
 
     chosen_enemy.max_hp *= enemy_level_multiplier(player.level)
     chosen_enemy.str *= enemy_level_multiplier(player.level)
@@ -770,9 +772,6 @@ SPD: {chosen_enemy.spd}
 
 
         temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
-
-        player_damage = rand.randint(player.str - 5, player.str + 5)
-        enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
 
         #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
         first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, chosen_enemy.spd, 140, 140], k=1).pop()

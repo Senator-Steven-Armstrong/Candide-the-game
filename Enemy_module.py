@@ -205,6 +205,7 @@ def create_enemy(enemy_name):
         långöron.str = rand.randint(15, 30)
         långöron.exp_dropped = rand.randint(150, 220)
         långöron.gold_dropped = rand.randint(20, 40)
+        return långöron
     elif enemy_name == "goblin":
         # Goblin
         goblin = Enemy()
@@ -215,6 +216,7 @@ def create_enemy(enemy_name):
         goblin.exp_dropped = rand.randint(100, 140)
         goblin.gold_dropped = rand.randint(40, 70)
         goblin
+        return goblin
     elif enemy_name == "bulgar":
         # Bulgar
         bulgar = Enemy()
@@ -263,10 +265,11 @@ def create_enemy(enemy_name):
         chef.str = rand.randint(25, 35)
         chef.exp_dropped = rand.randint (60, 120)
         chef.gold_dropped =rand.randint(30, 45)
+        return chef
 
-def fight_begin_description(chosen_enemy):
+def fight_begin_description(chosen_enemy_name):
 
-    enemy_name = chosen_enemy.name
+    enemy_name = chosen_enemy_name
 
     fight_begins_1 = f'''
 {enemy_name.capitalize()} blocks your way!

@@ -1,6 +1,8 @@
 import random as rand
 import pygame
 
+pygame.mixer.init()
+
 class Location():
     name = ""
     description_list = []
@@ -127,7 +129,7 @@ a completely normal creature emerges from a brush beside you. You decide to take
 just like any other.
 '''
 skogen3.music = 'sounds/ruins.mp3'
-skogen1.possible_enemies = ["bandit", "goblin", "rat"]
+skogen3.possible_enemies = ["bandit", "goblin", "rat"]
 
 skogen.description_list = [skogen1, skogen2, skogen3]
 
@@ -302,7 +304,7 @@ sydamerika2.music = 'sounds/ruins.mp3'
 sydamerika2.possible_enemies = ["goblin"]
 
 sydamerika3 = Description()
-sydamerika.description = '''
+sydamerika3.description = '''
 You enter the streets of syd america, gunshots and gang calls everywhere. 
 You meet their old president donald of the trump. but wait it was just a costume ohh noo!
 '''
