@@ -70,10 +70,10 @@ ATTACK_MOVE_LIST = [dropkick, words, armor_breaker, cleaver, roundhouse_kick, gu
 def attack_move_description(chosen_attack, player_name, player_weapon, enemy_name): 
     #DROPKICK
     dropkick.description = f'''
-You droppkicked {enemy_name}!'''
+Enemy is holding just a conversation. You dropkicked {enemy_name}!'''
     #WORDS
     words.description = f''' 
-"Candide balls fit in your mouth?" Uttered {player_name}, {enemy_name} is in distraught!'''
+"Candide balls fit in your mouth?" {enemy_name} is in distraught!'''
     #ARMOR BREAKER
     armor_breaker.description = f''' 
 You took a firm grip around your {player_weapon} and crushed through the enemy's armor!'''
@@ -82,7 +82,7 @@ You took a firm grip around your {player_weapon} and crushed through the enemy's
 Using your {player_weapon}, with a swift strike you split {enemy_name} in two!'''
     #ROUNDHOUSE KICK
     roundhouse_kick.description = f''' 
-You charged up and roundhouse kicked {enemy_name}!'''
+Enemy is just holding a conversation. You roundhouse kicked {enemy_name}!'''
     #GUN
     gun.description = f''' 
 {player_name} pulled out a gun and shot {enemy_name}!'''
