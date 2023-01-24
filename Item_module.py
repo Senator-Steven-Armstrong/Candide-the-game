@@ -165,12 +165,14 @@ def create_item(choice):
         health_potion.type = "healing"
         health_potion.name = "Health potion"
         health_potion.hp_bonus = 200
+        health_potion.cost = rand.randint(30, 100)
         return health_potion
     elif choice == "calypso":
         calypso = Item()
         calypso.type = "healing"
-        calypso.name = "Calypso [Minging]"
+        calypso.name = "Calypso (Minging)"
         calypso.hp_bonus = 100
+        calypso.cost = rand.randint(20, 80)
         return calypso
 
     #CONSUMABLE-------------------------------------------------------

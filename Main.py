@@ -46,7 +46,7 @@ def return_location_rarity(temporary_locations, total_turns):
     for location in temporary_locations:
         if total_turns == 0 and location.name == L.eldorado.name:
             rarity_list.append(0)
-        elif total_turns == 0 and location.name == L.shop.name:
+        elif location.name == L.shop.name: #total_turns == 0 and
             rarity_list.append(999999999999999)
         else:
             rarity_list.append(location.rarity)
@@ -195,25 +195,26 @@ def travel():
                         print(A.shop)
 
                         shop_items = copy.deepcopy(I.item_list)
+                        temp_rarity_list = copy.deepcopy(I.item_rarity_list)
                         available_shop_items = []
 
-                        shop_item_indicator_1 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
+                        shop_item_indicator_1 = rand.choices(shop_items, temp_rarity_list, k=1).pop()
                         shop_item_index_1 = shop_items.index(shop_item_indicator_1)
-                        I.item_rarity_list.pop(shop_item_index_1)
+                        temp_rarity_list.pop(shop_item_index_1)
                         shop_items.remove(shop_item_indicator_1)
                         shop_item_1 = I.create_item(shop_item_indicator_1)
                         available_shop_items.append(shop_item_1)
 
-                        shop_item_indicator_2 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
+                        shop_item_indicator_2 = rand.choices(shop_items, temp_rarity_list, k=1).pop()
                         shop_item_index_2 = shop_items.index(shop_item_indicator_2)
-                        I.item_rarity_list.pop(shop_item_index_2)
+                        temp_rarity_list.pop(shop_item_index_2)
                         shop_items.remove(shop_item_indicator_2)
                         shop_item_2 = I.create_item(shop_item_indicator_2)
                         available_shop_items.append(shop_item_2)
 
-                        shop_item_indicator_3 = rand.choices(shop_items, I.item_rarity_list, k=1).pop()
+                        shop_item_indicator_3 = rand.choices(shop_items, temp_rarity_list, k=1).pop()
                         shop_item_index_3 = shop_items.index(shop_item_indicator_3)
-                        I.item_rarity_list.pop(shop_item_index_3)
+                        temp_rarity_list.pop(shop_item_index_3)
                         shop_items.remove(shop_item_indicator_3)
                         shop_item_3 = I.create_item(shop_item_indicator_3)
                         available_shop_items.append(shop_item_3)
@@ -230,7 +231,7 @@ Thee can purchaseth the following items:
 ''')
                             j = 1
                             for item in available_shop_items:
-                                print(j, ". ", item.name, "", sep="")
+                                print(j, ". ", item.name, "; ", item.cost, " Gold", sep="")
                                 if item.type == "healing":
                                     print(f"[Healed HP: {item.hp_bonus}]\n")
                                 else:
@@ -243,11 +244,11 @@ Thee can purchaseth the following items:
                             
                             
 
-
+                            j = 1
                             while True:
                                 while True:
                                     try:
-                                        shop_input = int(input("Choice: "))
+                                        shop_input = int(input("\nChoice: "))
                                         pygame.mixer.Sound.play(UI_sfx)
                                     except:
                                         print("\n[Please enter a number]\n")
@@ -255,15 +256,14 @@ Thee can purchaseth the following items:
                                     else:
                                         break
 
-                                j = 1
+                                
                                 for item in available_shop_items:
                                     if shop_input == j:
                                         chosen_item = item
                                         break
                                     elif shop_input == len(available_shop_items) + 1:
-                                        print_slow("\nThee no more brain than stone clotpole sandwich, nev'r cometh backeth!\nYou hastily leave the store.\n", TEST)
                                         break
-                                    elif shop_input < 1 and shop_input > len(available_shop_items):
+                                    elif shop_input < 1 and shop_input < len(available_shop_items):
                                         print("\n[Please enter correct input]")
                                         continue
                                     else:
@@ -271,24 +271,28 @@ Thee can purchaseth the following items:
                                         continue
                                 break
                             
-                            if shop_input == len(available_shop_items) + 1:
+                            if shop_input == len(available_shop_items) + 1 and len(available_shop_items) == 4:
+                                print_slow("\nThee no more brain than stone clotpole sandwich, nev'r cometh backeth!\nYou hastily leave the store.\n", TEST)
+                                break
+                            elif shop_input == len(available_shop_items) + 1 and len(available_shop_items) > 1:
+                                print_slow("\nThanketh thee f'r being a custom'r at mine own st're, seeth thee again lief!\n", TEST)
                                 break
 
+
                             if chosen_item.cost <= player.gold:
-                                if chosen_item.type == "healing":
-                                    print_slow(f"\nYou used {chosen_item.name}, healing {chosen_item.hp_bonus}.", TEST)
-                                    if player.hp + chosen_item.hp_bonus >= player.max_hp:
-                                        player.hp = player.max_hp
-                                    else:
-                                        player.hp += chosen_item.hp_bonus
-                                else:
-                                    player.gold -= chosen_item.cost
-                                    player.inventory.append(chosen_item)
+                                player.gold -= chosen_item.cost
+                                player.inventory.append(chosen_item)
                                 available_shop_items.remove(chosen_item)
-                                print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}, wouldst thee liketh to buyeth something m're?\n", TEST)
+                                print_slow(f"\nThanketh thee f'r purchasing {chosen_item.name}!", TEST)
                             else: 
                                 print_slow("\nThee has't not enow wage! Buyeth something else shall ya, If't be true thee did get the wage f'r t.", TEST)
                                 continue
+
+                            if len(available_shop_items) == 0:
+                                print_slow("\nThee hath bought mine own entire st'rage! I desire we meeteth again at which hour mine own stock is refilled!\n", TEST)
+                                break
+                            else:
+                                print_slow(" Wouldst thee liketh to buyeth something m're?\n", TEST)
 
 
 
@@ -305,7 +309,7 @@ Thee can purchaseth the following items:
 
                 break
         else:
-            print("\n[Please enter correct input; 1. Inventory, 2. Travel]")
+            print("\n[Please enter correct input; 1. Inventory, 2. Travel]") 
 
 
 
