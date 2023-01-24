@@ -26,7 +26,7 @@ class Attack():
 
 dropkick = Attack()
 dropkick.name = "Dropkick"
-dropkick.sound_effect = ''
+dropkick.sound_effect = 'sounds/dropkick.mp3'
 
 words = Attack()
 words.name = "Words"
@@ -34,27 +34,27 @@ words.sound_effect = 'sounds/dietz nuts.mp3'
 
 armor_breaker = Attack()
 armor_breaker.name = "Armor breaker"
-armor_breaker.sound_effect = ''
+armor_breaker.sound_effect = 'sounds/armorbreaker.mp3'
 
 cleaver = Attack()
 cleaver.name = "Head cleaver"
-cleaver.sound_effect = ''
+cleaver.sound_effect = 'sounds/sword-bloody.mp3'
 
 roundhouse_kick = Attack()
 roundhouse_kick.name = "Roundhouse kick"
-roundhouse_kick.sound_effect = ''
+roundhouse_kick.sound_effect = 'sounds/dropkick.mp3'
 
 gun = Attack()
 gun.name = "Gun"
-gun.sound_effect = ''
+gun.sound_effect = 'sounds/gunshot full.mp3'
 
 cum = Attack()
 cum.name = "Cum"
-cum.sound_effect = ''
+cum.sound_effect = 'sounds/ummuhh.mp3'
 
 cannibalism = Attack()
 cannibalism.name = "Cannibalism"
-cannibalism.sound_effect = ''
+cannibalism.sound_effect = 'sounds/cannibalism.mp3'
 
 nothing = Attack()
 nothing.name = "Do nothing"
