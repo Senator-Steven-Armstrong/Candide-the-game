@@ -694,6 +694,10 @@ You take a firm grip around the knife and with sheer will pull it out. With dete
 point the blade at Baronen...
 '''
 
+kunigunda_description = '''
+
+'''
+
 #-------------------------------------------------------EXTRA------------------------------------------------------------
 
 def play_music(music_track):
