@@ -262,21 +262,21 @@ turkiet.name = "Turkiet"
 
 turkiet1 = Description()
 turkiet1.description = '''
-ånej turkemistan igen bar förstikgtg
+ånej turkemistan igen var förstikgtg, Ohhhh noooo!
 '''
 turkiet1.music = 'sounds/ruins.mp3'
 turkiet1.possible_enemies = ''
 
 turkiet2 = Description()
 turkiet2.description = '''
-turk turk turk turk turk turk turk turk turk dadada
+turk turk, turk turk, turk turk turk dadada ohhh nooo
 '''
 turkiet2.music = 'sounds/ruins.mp3'
 turkiet2.possible_enemies = ["goblin"]
 
 turkiet3 = Description()
 turkiet3.description = '''
-uhghuhguh uturjitet turkiet go brrr
+uhghuhguh uturjitet turkiet go brrr   Ohhh nooo
 '''
 turkiet3.music = 'sounds/ruins.mp3'
 turkiet3.possible_enemies = ["goblin"]
@@ -493,7 +493,9 @@ tibble2.possible_enemies = ["goblin"]
 
 tibble3 = Description()
 tibble3.description = '''
-jkjnjnjnlknlknlk
+Tibble gymnasium är en fristående gymnasieskola i Stockholms län. 
+Tibble gymnasium Campus Täby ligger i Täby kommun i Stockholms län. 
+Tibble gymnasium Campus Täby är en gymnasieskola med ca 1600 elever.
 '''
 tibble3.music = 'sounds/ruins.mp3'
 tibble3.possible_enemies = ["goblin"]
@@ -694,8 +696,35 @@ You take a firm grip around the knife and with sheer will pull it out. With dete
 point the blade at Baronen...
 '''
 
-kunigunda_description = '''
+kunigunda_description_intro = '''
+A wave of amazement and love washes over you as you near the borders of Constantinople. Kunigunda must be near.
+You hastily walk towards the source, her love becoming stronger the closer you get. However, as you
+close in on the epicenter, you find it's coming from a mansion that's covered in flame. From
+the scorching inferno a figure slowly emerges, leaning over the highest balcony. It's her.
 
+She calls your name, her once beautiful voice now burned, raspy, like rusty metal sheets grinding against
+each other. Her smooth skin now charred, her eyes dark and empty. Her state reflects her treacherous journey.
+The blaze has devoured her.
+
+Even though her looks are not there anymore, it's still her, so you call back.
+She acknowledges you and proceeds to step over the broken balcony, slowly descending down from it.
+As her feet touches the ground, the earth around around her incinerates, turning from lushous nature
+to coal and slag. She gently walks toward you, pulling a ring from out her beating heart. 
+She stops right in front of you, her sweltering breath meeting yours. She presents the ring,
+holding it out in front of you. Her barren, yet graceful, eyes meet yours. Will you accept? 
+'''
+
+kunigunda_description_marriage = '''
+You slowly take the ring from her grip, and slide it onto your finger. Its smoldering heat
+burns your finger, metling the ring stuck with your finger. It hurts, but she seems happier than
+shes ever been, so you endure. 
+
+Together again you make the journey to a small nearby farm. Along the journey you 
+met up with the friends you made along the way (Off screen). 
+Candide, Kunigunda, Pangloss, Cacambo, Jonas-Olof, Martin, Paquette.. everyone gathers at the farm, picking oranges,
+contemplating life. Pangloss finally comes to the realization that this is, like, the worst of all possible worlds.
+But he's petty asf and doesn't tell anyone. Cacambo gets bored and leaves, setting out to another journey
+around the world.
 '''
 
 #-------------------------------------------------------EXTRA------------------------------------------------------------
