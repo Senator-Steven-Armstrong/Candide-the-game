@@ -8,6 +8,7 @@ import Item_module as I
 import random as rand
 import copy
 import pygame
+import Logbook as Log
 
 pygame.mixer.init()
 
@@ -221,7 +222,7 @@ def travel():
                         
                         shop_item_4 = I.create_item(rand.choice(I.healing_item_list))
                         available_shop_items.append(shop_item_4)
-
+                        Log.shop_encounters = True
                         while True:
                             sleep(1)
                             print(f'''
@@ -388,8 +389,8 @@ Choose an action:
 3. Accessory
 
 4. Use items
-
-5. Exit inventory
+5. Open the Logbook
+6. Exit inventory
 ''')    
             while has_equipped_item == False:
 
@@ -707,9 +708,14 @@ Choose an action:
                         print_slow("\nNo consumables in inventory.\n", TEST)
 
                 elif item_change_choice == "5":
+                    #Logbook-funktion
+                    Log.logbook_menu()
+                    break
+
+                elif item_change_choice == "6":
                     break
                 else:
-                    print("\n[Please enter correct input; 1. Armor, 2. Weapon, 3. Accessory, 4. Item, 5. Exit]\n")    
+                    print("\n[Please enter correct input; 1. Armor, 2. Weapon, 3. Accessory, 4. Item, 5. Logbook, 6. Exit]\n")    
                     
                  
                 
@@ -754,6 +760,7 @@ def fight(chosen_description):
     chosen_enemy.spd = int(chosen_enemy.spd)
     chosen_enemy.exp_dropped = int(chosen_enemy.exp_dropped)
     chosen_enemy.gold_dropped = int(chosen_enemy.gold_dropped)
+    
 
     
     chosen_enemy.hp = chosen_enemy.max_hp
@@ -854,6 +861,8 @@ SPD: {chosen_enemy.spd}
 
         player.exp += chosen_enemy.exp_dropped
         print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
+
+        chosen_enemy.encounters = True
 
         loot("enemy drop")
 
