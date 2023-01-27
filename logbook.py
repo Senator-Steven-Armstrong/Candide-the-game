@@ -114,46 +114,54 @@ def logbook_menu():
             2. Cannibals
             ''')
         
-        if E.långöron_encounters == True:
+        elif E.långöron_encounters == True:
             print('''
             3. The Långöron
             ''')
 
-        if E.traveler_encounters == True:
+        elif E.traveler_encounters == True:
             print('''
             4. Travelers
             ''')
 
-        if E.goblin_encounters == True:
+        elif E.goblin_encounters == True:
             print('''
             5. Goblins
             ''')
 
-        if E.kunigunda_encounters == True:
+        elif E.kunigunda_encounters == True:
             print('''
             6. Kunigunda
             ''')
 
-        if E.baronen_encounters == True:
+        elif E.baronen_encounters == True:
             print('''
             7. Baronen
             ''')
         
-        if E.pococurante_encounters == True:
+        elif E.pococurante_encounters == True:
             print('''
             8. Pococurante
             ''')
 
-        if shop_encounters == True:
+        elif shop_encounters == True:
             print('''
             9. The Shopkeeper
             ''')
+        
+        else:
+            print_slow('''
+            Unfortunately, you are entryless. Please return later when you have aquired entries.
+            ''', TEST)
+            sleep(3)
+            break
 
-        int(input("Select one of the options."))
+
+        int(input("Select one of the options. Write 0 to go back."))
         if input == "1":
             while True:
         
-                print_slow(bandit_lore)
+                print_slow(bandit_lore, TEST)
                 sleep(3)
                 input("Would you like to go back? Y/N")
                 if input == "Y" or input == "y":
@@ -167,7 +175,7 @@ def logbook_menu():
                         continue
 
                 input("Write Y when you are ready to leave.")
-        if input == "2":
+        elif input == "2":
             while True:
             
                 print_slow(cannibal_lore, TEST)
@@ -180,14 +188,14 @@ def logbook_menu():
                     if input == "Y" or input == "y":
                         break
                     else:
-                        print_slow("Try again.")
+                        print_slow("Try again.", TEST)
                         continue
 
                 input("Write Y when you are ready to leave.")
-        if input == "3":
+        elif input == "3":
             while True:
             
-                print_slow(långöron_lore)
+                print_slow(långöron_lore, TEST)
                 sleep(3)
                 input("Would you like to go back? Y/N")
                 if input == "Y" or input == "y":
@@ -201,10 +209,10 @@ def logbook_menu():
                         continue
 
                 input("Write Y when you are ready to leave.")
-        if input == "4":
+        elif input == "4":
             while True:
             
-                print_slow(traveler_lore)
+                print_slow(traveler_lore, TEST)
                 sleep(3)
                 input("Would you like to go back? Y/N")
                 if input == "Y" or input == "y":
@@ -218,7 +226,7 @@ def logbook_menu():
                         continue
 
                 input("Write Y when you are ready to leave.")
-        if input == "5":
+        elif input == "5":
             while True:
 
                 print_slow(goblin_lore, TEST)
@@ -236,66 +244,73 @@ def logbook_menu():
 
                 input("Write Y when you are ready to leave.")
 
-            if input == "6":
-                while True:
-                
-                    print_slow(kunigunda_lore, TEST)
-                    sleep(3)
-                    input("Would you like to go back? Y/N")
+        elif input == "6":
+            while True:
+            
+                print_slow(kunigunda_lore, TEST)
+                sleep(3)
+                input("Would you like to go back? Y/N")
+                if input == "Y" or input == "y":
+                    break
+                elif input == "N" or input == "n":
+                    input("Write Y when you are ready to leave.")
                     if input == "Y" or input == "y":
                         break
-                    elif input == "N" or input == "n":
-                        input("Write Y when you are ready to leave.")
-                        if input == "Y" or input == "y":
-                            break
-                        else:
-                            print_slow("Try again.", TEST)
-                            continue
+                    else:
+                        print_slow("Try again.", TEST)
+                        continue
 
-            if input == "7":
-                while True:
-                
-                    print_slow(baronen_lore, TEST)
-                    sleep(3)
-                    input("Would you like to go back? Y/N")
+        elif input == "7":
+            while True:
+            
+                print_slow(baronen_lore, TEST)
+                sleep(3)
+                input("Would you like to go back? Y/N")
+                if input == "Y" or input == "y":
+                    break
+                elif input == "N" or input == "n":
+                    input("Write Y when you are ready to leave.")
                     if input == "Y" or input == "y":
                         break
-                    elif input == "N" or input == "n":
-                        input("Write Y when you are ready to leave.")
-                        if input == "Y" or input == "y":
-                            break
-                        else:
-                            print_slow("Try again.", TEST)
-                            continue
+                    else:
+                        print_slow("Try again.", TEST)
+                        continue
 
-            if input == "8":
-                while True:
-                
-                    print_slow(pococurante_lore, TEST)
-                    sleep(3)
-                    input("Would you like to go back? Y/N")
+        elif input == "8":
+            while True:
+            
+                print_slow(pococurante_lore, TEST)
+                sleep(3)
+                input("Would you like to go back? Y/N")
+                if input == "Y" or input == "y":
+                    break
+                elif input == "N" or input == "n":
+                    input("Write Y when you are ready to leave.")
                     if input == "Y" or input == "y":
                         break
-                    elif input == "N" or input == "n":
-                        input("Write Y when you are ready to leave.")
-                        if input == "Y" or input == "y":
-                            break
-                        else:
-                            print_slow("Try again.", TEST)
-                            continue
+                    else:
+                        print_slow("Try again.", TEST)
+                        continue
 
-            if input == "9":
-                while True:
-                
-                    print_slow(shopkeeper_lore, TEST)
-                    sleep(3)
-                    input("Would you like to go back? Y/N")
+        elif input == "9":
+            while True:
+            
+                print_slow(shopkeeper_lore, TEST)
+                sleep(3)
+                input("Would you like to go back? Y/N")
+                if input == "Y" or input == "y":
+                    break
+                elif input == "N" or input == "n":
+                    input("Write Y when you are ready to leave.")
                     if input == "Y" or input == "y":
                         break
-                    elif input == "N" or input == "n":
-                        input("Write Y when you are ready to leave.")
-                        if input == "Y" or input == "y":
-                            break
-                        else:
-                            print_slow("Try again.", TEST)
-                            continue
+                    else:
+                        print_slow("Try again.", TEST)
+                        continue
+
+        elif input == "0":
+            break
+
+        else:
+            print_slow("Try again.", TEST)
+            continue
