@@ -19,7 +19,7 @@ start_music = 'sounds/pococurante theme.mp3'
 battle_music = ['sounds/battle_theme_jojo.mp3', 'sounds/battle_theme_rude_buster.mp3']
 idle_music = ['sounds/idle_music_1.mp3']
 
-print_sfx = pygame.mixer.Sound('sounds/rizz_stare.mp3')
+print_sfx = pygame.mixer.Sound('sounds/print_sfx_1.mp3')
 UI_sfx = pygame.mixer.Sound('sounds/UI sound effect.mp3')
 healing_sfx = pygame.mixer.Sound('sounds/healingpotion.mp3')
 
@@ -956,7 +956,7 @@ def print_slow(str, write_speed):
     global print_sfx
     sound_play = 1
     for letter in str:
-        if sound_play % round((4 / write_speed)) == 0:
+        if sound_play % round(4 / (write_speed*40), 0) == 0:
             pygame.mixer.Sound.play(print_sfx)
         sys.stdout.write(letter)
         sys.stdout.flush()
