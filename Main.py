@@ -30,8 +30,11 @@ ELDORADO_MONEY_BONUS = 9999999999
 current_location = ""
 total_turns = 0
 good_ending = False
+true_ending = False
+bad_ending = False
 
 game_over = False
+
 
 print (A.start)
 
@@ -51,8 +54,8 @@ def return_location_rarity(temporary_locations, total_turns):
     for location in temporary_locations:
         if total_turns == 0 and location.name == L.eldorado.name:
             rarity_list.append(0)
-        elif location.name == L.shop.name: #total_turns == 0 and
-            rarity_list.append(999999999999999)
+        elif total_turns == 0 and location.name == L.shop.name:
+            rarity_list.append(0)
         else:
             rarity_list.append(location.rarity)
     return rarity_list
@@ -65,6 +68,7 @@ def travel():
     global current_location
     global total_turns
     global game_over
+    global good_ending
 
     print_slow("\nWould you like to travel, or enter your inventory? \n\n 1. Inventory    2. Travel \n\n", TEST)
 
@@ -156,12 +160,12 @@ def travel():
                     
                 if game_over == False:  
 
-                    # #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
-                    # if player == pangloss:
-                    #     # pygame.mixer.music.play(L.lissabon_special.music)
-                    #     print_slow(L.lissabon_special.description)
-                    # else:
-                    #     print_slow(chosen_description.description, TEST)
+                    #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
+                    if player == pangloss:
+                        # pygame.mixer.music.play(L.lissabon_special.music)
+                        print_slow(L.lissabon_special.description)
+                    else:
+                        print_slow(chosen_description.description, TEST)
 
                 
 
@@ -179,6 +183,7 @@ def travel():
                             if eldorado_ending_choice.lower() == "stay":
                                 print_slow(L.eldorado_stay_description, TEST)
 
+                                good_ending = True
                                 game_over = True
                                 break
                             elif eldorado_ending_choice.lower() == "leave":
@@ -402,33 +407,23 @@ Choose an action:
 
                 if item_change_choice == "1":
                     #ÄNDRAR VAPEN-------------------------------------------------------------------------------------------------------
-                    
                     inventory_item_change("weapon", has_equipped_item)
                     break
-                
                 elif item_change_choice == "2":
                     #ÄNDRAR ARMOR----------------------------------------------------------------------------------------------------
-                 
                     inventory_item_change("armor", has_equipped_item)
                     break
-                
                 elif item_change_choice == "3":
                     #ÄNDRAR ACCESSORY----------------------------------------------------------------------------------------------------
-
                     inventory_item_change("accessory", has_equipped_item)
                     break
-
                 elif item_change_choice == "4":
                     temp_item_inventory = []
                     for i in player.inventory:
                         if i.type == "consumable" or i.type == "healing":
                             temp_item_inventory.append(i)
-
-
-
                     if len(temp_item_inventory) > 0:
                         print_slow("\nWhich item would you like to use? The effect is permanent, and the item will be lost.\n", TEST)
-
                         j = 1
                         for i in temp_item_inventory:
                             if i.type == "healing":
@@ -438,8 +433,6 @@ Choose an action:
                             j += 1
                             if j-1 == len(temp_item_inventory):
                                 print(j, ". Change nothing / Exit inventory", sep='')
-
-                        
                         while True:
                             try:
                                 item_use_choice = int(input("\nChoice: "))
@@ -448,7 +441,6 @@ Choose an action:
                                 print("[Please enter a number]")
                             else:
                                 break
-
                         if item_use_choice == len(temp_item_inventory) + 1:
                             break
                         else:
@@ -642,6 +634,26 @@ SPD: {chosen_enemy.spd}
 ''')
     sleep(2)
 
+    combat_sequence(chosen_enemy, "Enemy")
+
+    sleep(0.8)
+    print("\n")
+
+    if game_over != True:
+
+        print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
+
+        player.gold += chosen_enemy.gold_dropped
+        print_slow(f"\nThe enemy dropped {chosen_enemy.gold_dropped} gold!", TEST)
+
+        player.exp += chosen_enemy.exp_dropped
+        print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
+
+        loot("enemy drop")
+
+def combat_sequence(chosen_enemy, enemy_name):
+    global game_over
+
     while player.hp > 0 or chosen_enemy.hp > 0:
 
 
@@ -688,7 +700,7 @@ SPD: {chosen_enemy.spd}
         #HÄR SKER SJÄLVA ATTACKERNA----------------------------------------------------------------------------------
         if first_attack_move == "player":
             
-            player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect, "Enemy")
+            player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect, enemy_name)
 
             if player.equipped_weapon.effect == "quickstep" and rand.randint(1, 4) == 1:
                 print_slow(I.baronen_knife_effect_description(), TEST)
@@ -699,37 +711,23 @@ SPD: {chosen_enemy.spd}
                     break
             else:                   
                 if chosen_enemy.hp > 0:
-                    enemy_attack(chosen_enemy, "Enemy")
+                    enemy_attack(chosen_enemy, enemy_name)
                 else:
                     break
 
         elif first_attack_move == "enemy":
             print_slow(f"\nEnemy struck first!", TEST)
 
-            enemy_attack(chosen_enemy, "Enemy")
+            enemy_attack(chosen_enemy, enemy_name)
 
             if player.hp > 0:
-                player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect, "Enemy")
+                player_attack(chosen_attack, chosen_enemy, player.equipped_weapon.effect, enemy_name)
                 if chosen_enemy.hp <= 0:
                     break
             else:
                 game_over = True
                 break
 
-        sleep(0.8)
-        print("\n")
-
-    if game_over != True:
-
-        print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
-
-        player.gold += chosen_enemy.gold_dropped
-        print_slow(f"\nThe enemy dropped {chosen_enemy.gold_dropped} gold!", TEST)
-
-        player.exp += chosen_enemy.exp_dropped
-        print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
-
-        loot("enemy drop")
 
 
 def player_attack(chosen_attack, chosen_enemy, weapon_effect, enemy_name):
@@ -745,7 +743,7 @@ def player_attack(chosen_attack, chosen_enemy, weapon_effect, enemy_name):
         extra_damage = rand.randint(20, 30)
         print_slow(f"\n\nUsing the {player.equipped_weapon.name} to attack, the explosion from it was big enough to hurt you too!", 0.01)
         player.hp -= extra_damage
-        print_slow(f"\n   - You took {extra_damage} damage!", 0.01)
+        print_slow(f"\n   - You dealt {extra_damage} damage!\n", 0.01)
 
     if chosen_enemy.hp > 0:
         print_slow(f"\n   - {enemy_name} health: {chosen_enemy.hp} / {chosen_enemy.max_hp}\n", TEST)
@@ -768,7 +766,7 @@ def enemy_attack(chosen_enemy, enemy_name):
 
 def bossfight_pococurante():
     global game_over
-    print_slow(L.pococurante_description, 0.02)
+    # print_slow(L.pococurante_description, 0.02)
 
     pygame.mixer.music.load('sounds/pococurante theme.mp3')
     pygame.mixer.music.play()
@@ -783,79 +781,7 @@ SPD: {E.pococurante.spd}
 
     sleep(2)
 
-    while player.hp > 0 or E.pococurante.hp > 0:
-
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
-            player_damage = rand.randint(player.str - 5, player.str + 5)
-            enemy_damage = rand.randint(E.pococurante.str -5 , E.pococurante.str + 5)
-
-            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
-            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.pococurante.spd, 140, 140], k=1).pop()
-
-            attack_1 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_1)
-            attack_2 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_2)
-            attack_3 = rand.choice(temp_player_attack_list)
-
-            print_slow("\nWhat attack will you use?", TEST)
-            print(f'''
-
-    1: {attack_1.name}
-    2: {attack_2.name}
-    3: {attack_3.name}
-            ''')
-
-            while True:
-                while True:
-                    try:
-                        attack_choice = int(input("Choice: "))
-                    except:
-                        print("\n[Please enter a number]")
-                    else:
-                        break
-
-                if attack_choice == 1:
-                    chosen_attack = attack_1
-                    break
-                elif attack_choice == 2:
-                    chosen_attack = attack_2
-                    break
-                elif attack_choice == 3:
-                    chosen_attack = attack_3
-                    break
-                else:
-                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
-
-            E.pococurante.hp -= player_damage
-            player.hp -= enemy_damage
-
-            if first_attack_move == "player":
-                player_attack(chosen_attack, E.pococurante, player.equipped_weapon.effect, "Pococurante")
-
-                if E.pococurante.hp > 0:
-                    print_slow(E.pococurante_voice_lines(),TEST)
-                    enemy_attack(E.pococurante, "Pococurante")
-                else:
-                    break
-                    
-            elif first_attack_move == "enemy":
-                print_slow(f"\nEnemy struck first!", TEST)
-
-                print_slow(E.pococurante_voice_lines(),TEST)
-                enemy_attack(E.pococurante, "Pococurante")
-
-                if player.hp > 0:
-                    player_attack(chosen_attack, E.pococurante, player.equipped_weapon.effect, "Pococurante")
-                    if E.pococurante.hp <= 0:
-                        break
-                    else:
-                        game_over = True
-                        break
-                else:
-                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                    game_over = True
-                    break
+    combat_sequence(E.pococurante, "Pococurante")
 
     sleep(1)
     print("\n")
@@ -891,6 +817,7 @@ SPD: {E.baronen.spd}
 
     sleep(2)
 
+    #TAR BORT HP OCH VAPEN PÅ GRUND AV VAD SOM HÄNDER I STORYN
     player.hp /= 1.5
     player.hp = round(player.hp)
 
@@ -906,80 +833,7 @@ SPD: {E.baronen.spd}
     player.str += player.equipped_weapon.str_bonus
     player.spd += player.equipped_weapon.spd_bonus
 
-    while player.hp > 0 or E.baronen.hp > 0:
-
-            temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
-            player_damage = rand.randint(player.str - 5, player.str + 5)
-            enemy_damage = rand.randint(E.baronen.str -5 , E.baronen.str + 5)
-
-            #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
-            first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.baronen.spd, 140, 140], k=1).pop()
-
-            attack_1 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_1)
-            attack_2 = rand.choice(temp_player_attack_list)
-            temp_player_attack_list.remove(attack_2)
-            attack_3 = rand.choice(temp_player_attack_list)
-
-            print_slow("\nWhat attack will you use?", TEST)
-            print(f'''
-
-    1: {attack_1.name}
-    2: {attack_2.name}
-    3: {attack_3.name}
-            ''')
-
-            while True:
-                while True:
-                    try:
-                        attack_choice = int(input("Choice: "))
-                    except:
-                        print("\n[Please enter a number]")
-                    else:
-                        break
-
-                if attack_choice == 1:
-                    chosen_attack = attack_1
-                    break
-                elif attack_choice == 2:
-                    chosen_attack = attack_2
-                    break
-                elif attack_choice == 3:
-                    chosen_attack = attack_3
-                    break
-                else:
-                    print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
-
-            E.baronen.hp -= player_damage
-            player.hp -= enemy_damage
-
-            if first_attack_move == "player":
-                player_attack(chosen_attack, E.baronen, player.equipped_weapon.effect, "Baronen")
-
-                if E.baronen.hp > 0:
-                    print_slow(E.baronen_voice_lines(),TEST)
-                    enemy_attack(E.baronen, "Baronen")
-                else:
-                    break
-                    
-            elif first_attack_move == "enemy":
-                print_slow(f"\nEnemy struck first!", TEST)
-
-                print_slow(E.baronen_voice_lines(),TEST)
-                enemy_attack(E.baronen, "Baronen")
-
-                if player.hp > 0:
-                    player_attack(chosen_attack, E.baronen, player.equipped_weapon.effect, "Baronen")
-                    if E.baronen.hp <= 0:
-                        break
-                    else:
-                        game_over = True
-                        break
-                else:
-                    print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                    game_over = True
-                    break
-
+    combat_sequence(E.baronen, "Baronen")
 
     sleep(1)
     print("\n")
@@ -1002,9 +856,10 @@ SPD: {E.baronen.spd}
         player.inventory.append(I.baronen_greatsword)
         print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
 
-
 def bossfight_kunigunda():
     global game_over
+    global true_ending
+    global bad_ending
 
     pygame.mixer.music.stop()
 
@@ -1015,17 +870,22 @@ def bossfight_kunigunda():
     print_slow("                        ", 0.001)
     print_slow("Refuse", 0.4)
     sleep(1)
-    marriage_choice = input("\n\n\nChoice: ")
+
 
     while True:
+        marriage_choice = input("\n\n\nChoice: ")
         if marriage_choice.lower() == "accept":
             #TRUE ENDING------------------------------------------------------------------------------------
-            print_slow("Du fick en STD och dog", 0.6)
-            print (A.end)
+            print_slow(L.kunigunda_description_accept + "\n\n\n", TEST)
+            print_slow("This is truly, the truest of all possible worlds.", 0.2)
 
+            game_over = True
+            true_ending = True
             break
         elif marriage_choice.lower == "refuse":
-            #BAD ENDING - BOSS FIGHT------------------------------------------------------------------------
+            #BAD ENDING - BOSS FIGHT--------------------------------    ----------------------------------------
+
+            # print_slow(L.kunigunda_description_refuse + "\n\n\n", TEST)
 
             print_slow(f"\nYour love ", 0.1)
             sleep(1)
@@ -1034,124 +894,28 @@ def bossfight_kunigunda():
             print_slow(f" stands before you.", 0.1)
             sleep(PUNCTUATION_PAUSE_TIME)
             print(f'''
-        HP: {E.baronen.hp} / {E.baronen.max_hp}
-        STR: {E.baronen.str}
-        SPD: {E.baronen.spd}
+        HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}
+        STR: {E.kunigunda.str}
+        SPD: {E.kunigunda.spd}
             ''')
 
             sleep(2)
 
-            player.hp /= 1.5
-            player.hp = round(player.hp)
-
-            player.max_hp -= player.equipped_weapon.max_hp_bonus
-            player.hp -= player.equipped_weapon.max_hp_bonus
-            player.str -= player.equipped_weapon.str_bonus
-            player.spd -= player.equipped_weapon.spd_bonus
-
-            player.equipped_weapon = I.baronen_knife
-
-            player.max_hp += player.equipped_weapon.max_hp_bonus
-            player.hp += player.equipped_weapon.max_hp_bonus
-            player.str += player.equipped_weapon.str_bonus
-            player.spd += player.equipped_weapon.spd_bonus
-
-            while player.hp > 0 or E.baronen.hp > 0:
-
-                    temp_player_attack_list = copy.deepcopy(P.ATTACK_MOVE_LIST)
-                    player_damage = rand.randint(player.str - 5, player.str + 5)
-                    enemy_damage = rand.randint(E.baronen.str -5 , E.baronen.str + 5)
-
-                    #VÄLJER VEM SOM FÅR ATTACKERA FÖRST
-                    first_attack_move = rand.choices(["player", "enemy", "player", "enemy"], weights=[player.spd, E.baronen.spd, 140, 140], k=1).pop()
-
-                    attack_1 = rand.choice(temp_player_attack_list)
-                    temp_player_attack_list.remove(attack_1)
-                    attack_2 = rand.choice(temp_player_attack_list)
-                    temp_player_attack_list.remove(attack_2)
-                    attack_3 = rand.choice(temp_player_attack_list)
-
-                    print_slow("\nWhat attack will you use?", TEST)
-                    print(f'''
-
-            1: {attack_1.name}
-            2: {attack_2.name}
-            3: {attack_3.name}
-                    ''')
-
-                    while True:
-                        while True:
-                            try:
-                                attack_choice = int(input("Choice: "))
-                            except:
-                                print("\n[Please enter a number]")
-                            else:
-                                break
-
-                        if attack_choice == 1:
-                            chosen_attack = attack_1
-                            break
-                        elif attack_choice == 2:
-                            chosen_attack = attack_2
-                            break
-                        elif attack_choice == 3:
-                            chosen_attack = attack_3
-                            break
-                        else:
-                            print(f"\n[Please enter a valid input; 1. {attack_1}, 2. {attack_2}, 3. {attack_3}]")
-
-                    E.baronen.hp -= player_damage
-                    player.hp -= enemy_damage
-
-                    if first_attack_move == "player":
-                        player_attack(chosen_attack, E.baronen, player.equipped_weapon.effect, "Baronen")
-
-                        if E.baronen.hp > 0:
-                            print_slow(E.baronen_voice_lines(),TEST)
-                            enemy_attack(E.baronen, "Baronen")
-                        else:
-                            break
-                            
-                    elif first_attack_move == "enemy":
-                        print_slow(f"\nEnemy struck first!", TEST)
-
-                        print_slow(E.baronen_voice_lines(),TEST)
-                        enemy_attack(E.baronen, "Baronen")
-
-                        if player.hp > 0:
-                            player_attack(chosen_attack, E.baronen, player.equipped_weapon.effect, "Baronen")
-                            if E.baronen.hp <= 0:
-                                break
-                            else:
-                                game_over = True
-                                break
-                        else:
-                            print_slow(f"\n   - {player.name}'s health: 0 / {player.max_hp}", TEST)
-                            game_over = True
-                            break
-
+            # combat_sequence(E.kunigunda, "Kunigunda")
 
             sleep(1)
             print("\n")
 
-            if game_over == False:
-                print_slow('''\n"Just.. treat.. treat her good... please..."''', 0.1)
-                sleep(PUNCTUATION_PAUSE_TIME*1.5)
+            print_slow()
+            E.kunigunda.hp = 0
+            print(f"Kunigunda HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}")
 
-                print_slow(f"\n\nYou have slayn {E.baronen.name}.\n", 0.04)
-                sleep(PUNCTUATION_PAUSE_TIME*1.5)
+            sleep(1)
 
-                player.gold += E.baronen.gold_dropped
-                print_slow(f"\nBaronen dropped {E.baronen.gold_dropped} gold!", TEST)
+            for i in range(E.kunigunda.hp):
+                E.kunigunda.hp += 1
+                print(f"Kunigunda HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}")
 
-                player.exp += E.baronen.exp_dropped
-                print_slow(f"\nYou gained {E.baronen.exp_dropped} exp!", TEST)
-
-                print_slow(f"\nYou held onto {I.baronen_knife.name}.\n", TEST)
-
-                player.inventory.append(I.baronen_greatsword)
-                print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
-            
             break
         else:
             print_slow("\n\nMake your choice.", 0.25)
@@ -1372,11 +1136,18 @@ while True:
             level_up()
 
     if game_over == True:
-        print_slow("\n\n\n\n[You died]", 0.1)
-        break
-    elif good_ending == True:
-        print_slow("\n\n\n\n[Good ending]", 0.1)
-        break
+        if good_ending == True:
+            print_slow("\n\n\n\n[Good ending]", 0.1)
+            break
+        elif true_ending == True:
+            print_slow("\n\n\n\n[True ending]", 0.1)
+            break
+        elif bad_ending == True:
+            print_slow("\n\n\n\n[True ending]", 0.1)
+            break
+        else:
+            print_slow("\n\n\n\n[You died]", 0.1)
+            break
 
 game_summary()
 
