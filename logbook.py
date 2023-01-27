@@ -97,20 +97,19 @@ def logbook_menu():
         Welcome to the logbook! Surely you have met others on this long journey of yours, 
         whether they are friends or foes. Once you have met (often killed) these fellows, 
         you will unlock a logbook entry here giving information about them. Good luck!
-        ''')
+        ''', TEST)
 
         sleep(3)
 
         print_slow('''
         These are the entrys you have unlocked:
-        ''')
+        ''', TEST)
 
         if E.bandit.encounters == True:
             print('''
             1. Bandits
             ''')
-
-        if E.cannibal.encounters == True:
+        elif E.cannibal.encounters == True:
             print('''
             2. Cannibals
             ''')
@@ -164,14 +163,14 @@ def logbook_menu():
                     if input == "Y" or input == "y":
                         break
                     else:
-                        print_slow("Try again.")
+                        print_slow("Try again.", TEST)
                         continue
 
                 input("Write Y when you are ready to leave.")
         if input == "2":
             while True:
             
-                print_slow(cannibal_lore)
+                print_slow(cannibal_lore, TEST)
                 sleep(3)
                 input("Would you like to go back? Y/N")
                 if input == "Y" or input == "y":
@@ -198,7 +197,7 @@ def logbook_menu():
                     if input == "Y" or input == "y":
                         break
                     else:
-                        print_slow("Try again.")
+                        print_slow("Try again.", TEST)
                         continue
 
                 input("Write Y when you are ready to leave.")
@@ -215,14 +214,14 @@ def logbook_menu():
                     if input == "Y" or input == "y":
                         break
                     else:
-                        print_slow("Try again.")
+                        print_slow("Try again.", TEST)
                         continue
 
                 input("Write Y when you are ready to leave.")
         if input == "5":
             while True:
 
-                print_slow(goblin_lore)
+                print_slow(goblin_lore, TEST)
                 sleep(3)
                 input("Would you like to go back? Y/N")
                 if input == "Y" or input == "y":
@@ -232,7 +231,7 @@ def logbook_menu():
                     if input == "Y" or input == "y":
                         break
                     else:
-                        print_slow("Try again.")
+                        print_slow("Try again.", TEST)
                         continue
 
                 input("Write Y when you are ready to leave.")
@@ -240,7 +239,7 @@ def logbook_menu():
             if input == "6":
                 while True:
                 
-                    print_slow(kunigunda_lore)
+                    print_slow(kunigunda_lore, TEST)
                     sleep(3)
                     input("Would you like to go back? Y/N")
                     if input == "Y" or input == "y":
@@ -250,13 +249,13 @@ def logbook_menu():
                         if input == "Y" or input == "y":
                             break
                         else:
-                            print_slow("Try again.")
+                            print_slow("Try again.", TEST)
                             continue
 
             if input == "7":
                 while True:
                 
-                    print_slow(baronen_lore)
+                    print_slow(baronen_lore, TEST)
                     sleep(3)
                     input("Would you like to go back? Y/N")
                     if input == "Y" or input == "y":
@@ -266,13 +265,13 @@ def logbook_menu():
                         if input == "Y" or input == "y":
                             break
                         else:
-                            print_slow("Try again.")
+                            print_slow("Try again.", TEST)
                             continue
 
             if input == "8":
                 while True:
                 
-                    print_slow(pococurante_lore)
+                    print_slow(pococurante_lore, TEST)
                     sleep(3)
                     input("Would you like to go back? Y/N")
                     if input == "Y" or input == "y":
@@ -282,13 +281,13 @@ def logbook_menu():
                         if input == "Y" or input == "y":
                             break
                         else:
-                            print_slow("Try again.")
+                            print_slow("Try again.", TEST)
                             continue
 
             if input == "9":
                 while True:
                 
-                    print_slow(shopkeeper_lore)
+                    print_slow(shopkeeper_lore, TEST)
                     sleep(3)
                     input("Would you like to go back? Y/N")
                     if input == "Y" or input == "y":
@@ -298,5 +297,5 @@ def logbook_menu():
                         if input == "Y" or input == "y":
                             break
                         else:
-                            print_slow("Try again.")
+                            print_slow("Try again.", TEST)
                             continue

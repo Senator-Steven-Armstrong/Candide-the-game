@@ -8,7 +8,7 @@ import Item_module as I
 import random as rand
 import copy
 import pygame
-import Logbook as Log
+import logbook as Log
 
 pygame.mixer.init()
 
