@@ -99,6 +99,15 @@ Fair travels!
 
         print_slow('''
 These are the entrys you have:
+1. Bandits
+2. Cannibals
+3. The Långöron
+4. The Travelers
+5. Goblins
+6. Kunigunda
+7. Baronen
+8. Pococurante
+9. The Shopkeeper
 ''', TEST)
 
         int(input("Select one of the options. Write 0 to go back."))
