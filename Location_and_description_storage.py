@@ -711,10 +711,11 @@ She acknowledges you and proceeds to step over the broken balcony, slowly descen
 As her feet touches the ground, the earth around around her incinerates, turning from lushous nature
 to coal and slag. She gently walks toward you, pulling a ring from out her beating heart. 
 She stops right in front of you, her sweltering breath meeting yours. She presents the ring,
-holding it out in front of you. Her barren, yet graceful, eyes meet yours. Will you accept? 
+holding it out in front of you, and her flames seem to die down a bit. 
+Her barren, yet graceful, eyes meet yours. Will you accept? 
 '''
 
-kunigunda_description_marriage = '''
+kunigunda_description_accept = '''
 You slowly take the ring from her grip, and slide it onto your finger. Its smoldering heat
 burns your finger, metling the ring stuck with your finger. It hurts, but she seems happier than
 shes ever been, so you endure. 
@@ -724,7 +725,16 @@ met up with the friends you made along the way (Off screen).
 Candide, Kunigunda, Pangloss, Cacambo, Jonas-Olof, Martin, Paquette.. everyone gathers at the farm, picking oranges,
 contemplating life. Pangloss finally comes to the realization that this is, like, the worst of all possible worlds.
 But he's petty asf and doesn't tell anyone. Cacambo gets bored and leaves, setting out to another journey
-around the world.
+around the world. Candide ate Kunigundas ass and later died from an STD.
+'''
+
+kunigunda_description_refuse = '''
+You refuse the ring. Kunigunda looks at you with despair, and the small flame still in her
+heart has now extinguished. The ring melts in an instant, and her flames are awakened anew.
+The heat pushes you back, but Kunigunda doesn't let you out of her range.
+
+All of your choices has led up to this moment, as well as your mistakes.
+It's time to amount.
 '''
 
 #-------------------------------------------------------EXTRA------------------------------------------------------------
