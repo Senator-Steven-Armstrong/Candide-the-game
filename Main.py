@@ -882,7 +882,7 @@ def bossfight_kunigunda():
             game_over = True
             true_ending = True
             break
-        elif marriage_choice.lower == "refuse":
+        elif marriage_choice.lower() == "refuse":
             #BAD ENDING - BOSS FIGHT--------------------------------    ----------------------------------------
 
             # print_slow(L.kunigunda_description_refuse + "\n\n\n", TEST)
@@ -894,27 +894,33 @@ def bossfight_kunigunda():
             print_slow(f" stands before you.", 0.1)
             sleep(PUNCTUATION_PAUSE_TIME)
             print(f'''
-        HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}
-        STR: {E.kunigunda.str}
-        SPD: {E.kunigunda.spd}
+HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}
+STR: {E.kunigunda.str}
+SPD: {E.kunigunda.spd}
             ''')
 
-            sleep(2)
+            # sleep(2)
 
             # combat_sequence(E.kunigunda, "Kunigunda")
 
-            sleep(1)
+
             print("\n")
 
-            print_slow()
             E.kunigunda.hp = 0
             print(f"Kunigunda HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}")
 
-            sleep(1)
+            pygame.mixer.music.load('sounds/kunigunda_second_phase.mp3')
+            pygame.mixer.music.play(-1, 0, 0)
 
-            for i in range(E.kunigunda.hp):
+            sleep(3.8)
+
+            for i in range(E.kunigunda.max_hp):
+                sleep(0.01)
                 E.kunigunda.hp += 1
                 print(f"Kunigunda HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}")
+                i+=1
+
+            sleep(5)
 
             break
         else:

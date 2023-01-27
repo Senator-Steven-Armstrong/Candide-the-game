@@ -161,7 +161,7 @@ kunigunda.name = "Kunigunda"
 
 #PHASE 1
 kunigunda.max_hp = 1000
-kunigunda.hp = pococurante.max_hp
+kunigunda.hp = kunigunda.max_hp
 kunigunda.spd = 20
 kunigunda.str = 50
 kunigunda.gold_dropped = 400
