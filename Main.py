@@ -19,7 +19,9 @@ start_music = 'sounds/pococurante theme.mp3'
 battle_music = ['sounds/battle_theme_jojo.mp3', 'sounds/battle_theme_rude_buster.mp3']
 idle_music = ['sounds/idle_music_1.mp3']
 
+print_sfx = pygame.mixer.Sound('sounds/rizz_stare.mp3')
 UI_sfx = pygame.mixer.Sound('sounds/UI sound effect.mp3')
+healing_sfx = pygame.mixer.Sound('sounds/healingpotion.mp3')
 
 TEST = 0.02
 PUNCTUATION_PAUSE_TIME = 0.4
@@ -458,6 +460,7 @@ Choose an action:
                                     has_equipped_item = True
                                     break
                                 elif item_use_choice == i + 1 and temp_item_inventory[i].type == "healing":
+                                    pygame.mixer.Sound.play(healing_sfx)
                                     print_slow(f"You used {temp_item_inventory[i].name}, healing {temp_item_inventory[i].hp_bonus}.\n", TEST)
 
                                     if player.hp + temp_item_inventory[i].hp_bonus > player.max_hp:
@@ -466,6 +469,8 @@ Choose an action:
                                         player.hp += temp_item_inventory[i].hp_bonus
 
                                     player.inventory.remove(temp_item_inventory[i])
+
+                                    
 
                                     has_equipped_item = True
                                     break
@@ -883,7 +888,7 @@ def bossfight_kunigunda():
     pygame.mixer.music.stop()
 
     #INTRO------------------------------------------------------------------------------
-    # print_slow(L.kunigunda_description_intro, 0.02)
+    print_slow(L.kunigunda_description_intro, 0.08)
     print_slow("\n                      ", 0.001)
     print_slow("Accept", 0.4)
     print_slow("                        ", 0.001)
@@ -944,12 +949,15 @@ SPD: {E.kunigunda.spd}
             break
         else:
             print_slow("\n\nMake your choice.", 0.25)
-
     
 #--------------------------------------------------------------------------------------------------------------------------------------
 
 def print_slow(str, write_speed):
+    global print_sfx
+    sound_play = 1
     for letter in str:
+        if sound_play % round((4 / write_speed)) == 0:
+            pygame.mixer.Sound.play(print_sfx)
         sys.stdout.write(letter)
         sys.stdout.flush()
         time.sleep(write_speed)
@@ -959,6 +967,7 @@ def print_slow(str, write_speed):
             sleep(COMMA_PAUSE_TIME)
         elif letter == ";":
             sleep(SEMICOLON_PAUSE_TIME)
+        sound_play += 1
 
 def loot(type):
     if type == "enemy drop":
@@ -971,7 +980,6 @@ def loot(type):
             print_slow(f"\nYou picked up {dropped_weapon.name}.\n", TEST)
             player.inventory.append(dropped_weapon)
              
-
 def trap(location):
     global game_over
     trap_type = rand.choice(["gold", "damage"])
@@ -1000,7 +1008,6 @@ def trap(location):
     
     sleep(0.8)
 
-
 def game_summary():
     
     sleep(1)
@@ -1022,7 +1029,6 @@ ACCESSORY: {player.equipped_accessory.name}
 COUNTRIES TRAVERSED: {total_turns}
     ''')
 
-# player.level.limit = required EXP to level up, base value = 500 EXP
 def level_up():
     player.level += 1
     player.level_limit += (player.level_limit*0.5)
