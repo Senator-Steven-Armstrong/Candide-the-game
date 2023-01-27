@@ -19,7 +19,7 @@ start_music = 'sounds/pococurante theme.mp3'
 battle_music = ['sounds/battle_theme_jojo.mp3', 'sounds/battle_theme_rude_buster.mp3']
 idle_music = ['sounds/idle_music_1.mp3']
 
-print_sfx = pygame.mixer.Sound('sounds/print_sfx_1.mp3')
+print_sfx = pygame.mixer.Sound('sounds/print_sfx_2.mp3')
 UI_sfx = pygame.mixer.Sound('sounds/UI sound effect.mp3')
 healing_sfx = pygame.mixer.Sound('sounds/healingpotion.mp3')
 
