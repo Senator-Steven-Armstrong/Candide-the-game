@@ -233,7 +233,6 @@ def travel():
                         
                         shop_item_4 = I.create_item(rand.choice(I.healing_item_list))
                         available_shop_items.append(shop_item_4)
-                        Log.shop_encounters = True
                         while True:
                             sleep(1)
                             print(f'''
@@ -483,7 +482,6 @@ Choose an action:
                         print_slow("\nNo consumables in inventory.\n", TEST)
 
                 elif item_change_choice == "5":
-                    #Logbook-funktion
                     Log.logbook_menu()
                     break
 
@@ -752,8 +750,6 @@ def combat_sequence(chosen_enemy, enemy_name):
 
         player.exp += chosen_enemy.exp_dropped
         print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
-
-        chosen_enemy.encounters = True
 
         loot("enemy drop")
 

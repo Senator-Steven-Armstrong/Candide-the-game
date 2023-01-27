@@ -9,7 +9,6 @@ class Enemy():
     str = 0
     exp_dropped = 0
     gold_dropped = 0
-    encounters = False
     spawndialouge = ""
 
 
