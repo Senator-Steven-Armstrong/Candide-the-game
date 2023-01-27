@@ -95,7 +95,7 @@ def travel():
             elif total_turns == 6:
                 bossfight_baronen()
                 break
-            elif total_turns == 0:
+            elif total_turns == 9:
                 bossfight_kunigunda()
                 break
             else:
@@ -164,9 +164,10 @@ def travel():
                 if game_over == False:  
 
                     #HÄR SKRIVS BESKRIVNINGEN AV SIN RESA UT
-                    if player == pangloss:
-                        # pygame.mixer.music.play(L.lissabon_special.music)
-                        print_slow(L.lissabon_special.description)
+                    if player == pangloss and chosen_description == L.lissabon1:
+                
+                        pygame.mixer.music.play(L.lissabon_special.music)
+                        print_slow(L.lissabon_special.description, TEST)
                     else:
                         print_slow(chosen_description.description, TEST)
 
@@ -741,18 +742,6 @@ def combat_sequence(chosen_enemy, enemy_name):
         sleep(0.8)
         print("\n")
 
-    if game_over != True:
-
-        print_slow(f"\n\n{chosen_enemy.name} died!\n", TEST)
-
-        player.gold += chosen_enemy.gold_dropped
-        print_slow(f"\nThe enemy dropped {chosen_enemy.gold_dropped} gold!", TEST)
-
-        player.exp += chosen_enemy.exp_dropped
-        print_slow(f"\nYou gained {chosen_enemy.exp_dropped} exp!\n", TEST)
-
-        loot("enemy drop")
-
 
 def player_attack(chosen_attack, chosen_enemy, weapon_effect, enemy_name):
     player_damage = rand.randint(player.str - 5, player.str + 5)
@@ -790,7 +779,8 @@ def enemy_attack(chosen_enemy, enemy_name):
 
 def bossfight_pococurante():
     global game_over
-    # print_slow(L.pococurante_description, 0.02)
+    global total_turns
+    print_slow(L.pococurante_description, 0.02)
 
     pygame.mixer.music.load('sounds/pococurante theme.mp3')
     pygame.mixer.music.play()
@@ -826,9 +816,12 @@ SPD: {E.pococurante.spd}
         player.inventory.append(I.pococurante_cane)
         print_slow(f"\nYou walked up to Pococurante's body and took '{I.pococurante_cane.name}'.\n", TEST)
 
+    total_turns += 1
+
 
 def bossfight_baronen():
     global game_over
+    global total_turns
     print_slow(L.baronen_description, 0.02)
 
     print_slow(f"\nBaronen, the mad brother, acrimony of love, baron of Thunder-ten-tronckh, towers over you.", 0.1)
@@ -880,6 +873,8 @@ SPD: {E.baronen.spd}
         player.inventory.append(I.baronen_greatsword)
         print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
 
+        total_turns += 1
+
 def bossfight_kunigunda():
     global game_over
     global true_ending
@@ -888,7 +883,7 @@ def bossfight_kunigunda():
     pygame.mixer.music.stop()
 
     #INTRO------------------------------------------------------------------------------
-    print_slow(L.kunigunda_description_intro, 0.08)
+    # print_slow(L.kunigunda_description_intro, 0.08)
     print_slow("\n                      ", 0.001)
     print_slow("Accept", 0.4)
     print_slow("                        ", 0.001)
@@ -956,7 +951,7 @@ def print_slow(str, write_speed):
     global print_sfx
     sound_play = 1
     for letter in str:
-        if sound_play % round(4 / (write_speed*40), 0) == 0:
+        if sound_play % 4 == 0: #round(4 / (write_speed*40), 0) == 0:
             pygame.mixer.Sound.play(print_sfx)
         sys.stdout.write(letter)
         sys.stdout.flush()
@@ -1061,10 +1056,10 @@ candide.gold = 10
 #Pangloss
 pangloss = P.Player()
 pangloss.name = "Pangloss"
-pangloss.max_hp = 1000#300
+pangloss.max_hp = 350
 pangloss.str = 20
-pangloss.spd = 1#5
-pangloss.gold = 1
+pangloss.spd = 5
+pangloss.gold = 0
 
 #------------------------------------------------------HÄR KÖRS HUVUDDELEN AV PROGRAMMET-------------------------------------------------------------------------------------------------------
 
@@ -1148,12 +1143,12 @@ while True:
 
 
 
-# TEMPORÄR TILLÄG AV ITEMS
-for i in range(10):
-    weapon_choice = rand.choice(I.item_list)
-    player.inventory.append(I.create_item(weapon_choice))
+# # TEMPORÄR TILLÄG AV ITEMS
+# for i in range(10):
+#     weapon_choice = rand.choice(I.item_list)
+#     player.inventory.append(I.create_item(weapon_choice))
 
-player.inventory.append(I.baronen_knife)
+# player.inventory.append(I.baronen_knife)
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:
