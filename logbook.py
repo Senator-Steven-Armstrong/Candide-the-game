@@ -87,75 +87,21 @@ We have asked him several times how he manages to obtain these items, but he alw
 laughs it off saying 'I have my ways'.
 '''
 
-shop_encounters = False
-#entries_list=[E.bandit_encounters, E.cannibal_encounters, E.långöron_encounters, E.traveler_encounters, E.goblin_encounters, E.kunigunda_encounters, E.baronen_encounters, E.pococurante_encounters, shop_encounters]
 
 # Function to use the logbook menu
 def logbook_menu():
     while True:
         print_slow('''
-        Welcome to the logbook! Surely you have met others on this long journey of yours, 
-        whether they are friends or foes. Once you have met (often killed) these fellows, 
-        you will unlock a logbook entry here giving information about them. Good luck!
-        ''', TEST)
+Welcome to the logbook! Surely you have met others on this long journey of yours, 
+whether they are friends or foes. Here, you can read logbook entrys giving information about them. 
+Fair travels!
+''', TEST)
 
         sleep(3)
 
         print_slow('''
-        These are the entrys you have unlocked:
-        ''', TEST)
-
-        if E.bandit.encounters == True:
-            print('''
-            1. Bandits
-            ''')
-        elif E.cannibal.encounters == True:
-            print('''
-            2. Cannibals
-            ''')
-        
-        elif E.långöron_encounters == True:
-            print('''
-            3. The Långöron
-            ''')
-
-        elif E.traveler_encounters == True:
-            print('''
-            4. Travelers
-            ''')
-
-        elif E.goblin_encounters == True:
-            print('''
-            5. Goblins
-            ''')
-
-        elif E.kunigunda_encounters == True:
-            print('''
-            6. Kunigunda
-            ''')
-
-        elif E.baronen_encounters == True:
-            print('''
-            7. Baronen
-            ''')
-        
-        elif E.pococurante_encounters == True:
-            print('''
-            8. Pococurante
-            ''')
-
-        elif shop_encounters == True:
-            print('''
-            9. The Shopkeeper
-            ''')
-        
-        else:
-            print_slow('''
-            Unfortunately, you are entryless. Please return later when you have aquired entries.
-            ''', TEST)
-            sleep(3)
-            break
-
+These are the entrys you have:
+''', TEST)
 
         int(input("Select one of the options. Write 0 to go back."))
         if input == "1":
