@@ -1,7 +1,5 @@
 from time import sleep
 import sys,time
-import Enemy_module as E
-import random as rand
 
 TEST = 0.02
 PUNCTUATION_PAUSE_TIME = 0.4
