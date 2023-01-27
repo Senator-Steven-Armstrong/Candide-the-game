@@ -503,7 +503,7 @@ tibble3.possible_enemies = ["goblin"]
 tibble.description_list = [tibble1, tibble2, tibble3]
 
 
-#LISTANS LÄNGD ÄR 12#
+#LISTANS LÄNGD ÄR 12
 locations=[shop, eldorado, skogen, bulgarien, lissabon, venedig, turkiet, sydamerika, afrika, england, havet, fältet, tibble]
 
 def choose_description(chosen_location):

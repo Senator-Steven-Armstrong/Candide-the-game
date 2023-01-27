@@ -9,6 +9,7 @@ class Enemy():
     str = 0
     exp_dropped = 0
     gold_dropped = 0
+    encounters = False
     spawndialouge = ""
 
 
@@ -282,6 +283,7 @@ def create_enemy(enemy_name):
         långöron.str = rand.randint(15, 30)
         långöron.exp_dropped = rand.randint(150, 220)
         långöron.gold_dropped = rand.randint(20, 40)
+
         return långöron
     elif enemy_name == "goblin":
         # Goblin
