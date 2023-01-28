@@ -152,7 +152,7 @@ bulgarien1.possible_enemies = ["rat", "goblin", "bulgar"]
 
 bulgarien2 = Description()
 bulgarien2.description = '''
-You decide to walk to Bulgaria. 
+[Placeholder story text]
 '''
 bulgarien2.music = 'sounds/ruins.mp3'
 bulgarien2.possible_enemies = ["goblin"]
@@ -203,7 +203,7 @@ lissabon1.possible_enemies = ["goblin", "bandit"]
 
 lissabon2 = Description()
 lissabon2.description = '''
-pissabon
+[Placeholder story text]
 '''
 lissabon2.music = 'sounds/ruins.mp3'
 lissabon2.possible_enemies = ["goblin"]
@@ -240,14 +240,14 @@ venedig1.possible_enemies = ["goblin", "chef", "chef"]
 
 venedig2 = Description()
 venedig2.description = '''
-pizza pasta put it on my cock
+[Placeholder story text]
 '''
 venedig2.music = 'sounds/ruins.mp3'
 venedig2.possible_enemies = ["goblin"]
 
 venedig3 = Description()
 venedig3.description = '''
-in lissabon you lissapissabon
+[Placeholder story text]
 '''
 venedig3.music = 'sounds/ruins.mp3'
 venedig3.possible_enemies = ["goblin"]
@@ -262,21 +262,21 @@ turkiet.name = "Turkiet"
 
 turkiet1 = Description()
 turkiet1.description = '''
-ånej turkemistan igen var förstikgtg, Ohhhh noooo!
+[Placeholder story text]
 '''
 turkiet1.music = 'sounds/ruins.mp3'
 turkiet1.possible_enemies = ''
 
 turkiet2 = Description()
 turkiet2.description = '''
-turk turk, turk turk, turk turk turk dadada ohhh nooo
+[Placeholder story text]
 '''
 turkiet2.music = 'sounds/ruins.mp3'
 turkiet2.possible_enemies = ["goblin"]
 
 turkiet3 = Description()
 turkiet3.description = '''
-uhghuhguh uturjitet turkiet go brrr   Ohhh nooo
+[Placeholder story text]
 '''
 turkiet3.music = 'sounds/ruins.mp3'
 turkiet3.possible_enemies = ["goblin"]
@@ -291,14 +291,14 @@ sydamerika.name = "South America"
 
 sydamerika1 = Description()
 sydamerika1.description =  '''
-amerika mer som sydarmieka
+[Placeholder story text]
 '''
 sydamerika1.music = 'sounds/ruins.mp3'
 sydamerika1.possible_enemies = ["goblin"]
 
 sydamerika2 = Description()
 sydamerika2.description = '''
-amerika fast sämre
+[Placeholder story text]
 '''
 sydamerika2.music = 'sounds/ruins.mp3'
 sydamerika2.possible_enemies = ["goblin"]
