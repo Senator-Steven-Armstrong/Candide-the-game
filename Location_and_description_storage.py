@@ -767,7 +767,8 @@ To make things happen in the game you are given choices, such as the following:
 2. travel
 
 To make any of these choices, simply type the letter or number to the left of the option.
-So for example to travel, you would type 2 and then press enter.
+So for example to travel, you would type 2 and then press enter. In some cases you will have
+to type out full words, but it will be clear when you have to do that.
 
 The actual game works by traveling, at which point you can enter one of three locaion.
 Thereafter an enemy will attack you. In the fight you will be given three choices of attacks.
@@ -794,7 +795,7 @@ steps in. He glances at you both and then furiously stomps toward you.
 
 However just as he is about to reach you a sword swings beside him and just barely misses his head.
 You all turn around to find that Bulgarer has filled the castle halls. They take a firm grip around you
-and Baronen, draggin and then evetually throwing you out of the castle which has now been destroyed and
+and Baronen, dragging and then eventually throwing you out of the castle which has now been destroyed and
 engulfed in flame.
 
 You and Baronen look on in despair, until you catch a glimpse of Kunigunda. She is tied up on horseback

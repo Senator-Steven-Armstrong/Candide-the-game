@@ -9,12 +9,6 @@ class Enemy():
     str = 0
     exp_dropped = 0
     gold_dropped = 0
-    spawndialouge = ""
-
-
-# Kanske dodgeroll / block, och combat kan kanske vara baserad på tur för varje runda eller annars är spd bara till för första rundan som i pokemans 
-
-
 
 # OUTLINE
 # variable = Enemy()
@@ -29,19 +23,17 @@ class Enemy():
 
 
 
-
-
 #BOSSES
 
 #BARONEN----------------------------------------------------------------------------
 baronen = Enemy()
 baronen.name = "Baronen"
-baronen.max_hp = 800
+baronen.max_hp = 450
 baronen.hp = baronen.max_hp
 baronen.spd = 200
 baronen.str = 60
 baronen.gold_dropped = 800
-baronen.exp_dropped = 1000
+baronen.exp_dropped = 5000
 
 def baronen_attacks():
     
@@ -97,12 +89,12 @@ def baronen_voice_lines():
 #POCOCURANTE------------------------------------------------------------------------
 pococurante = Enemy()
 pococurante.name = "Lord Pococurante"
-pococurante.max_hp = 600
+pococurante.max_hp = 400
 pococurante.hp = pococurante.max_hp
 pococurante.spd = 20
 pococurante.str = 50
 pococurante.gold_dropped = 400
-pococurante.exp_dropped = 600
+pococurante.exp_dropped = 1000
 
 def pococurante_attacks():
     
@@ -160,7 +152,7 @@ kunigunda = Enemy()
 kunigunda.name = "Kunigunda"
 
 #PHASE 1
-kunigunda.max_hp = 1000
+kunigunda.max_hp = 700
 kunigunda.hp = kunigunda.max_hp
 kunigunda.spd = 40
 kunigunda.str = 60
@@ -217,7 +209,7 @@ def kunigunda_voice_lines_phase_1():
 #PHASE 2
 kunigunda_2 = Enemy()
 kunigunda_2.name = "???"
-kunigunda_2.max_hp = 1500
+kunigunda_2.max_hp = 1000
 kunigunda_2.str = 60
 kunigunda_2.spd = 90
 kunigunda_2.hp = 0
@@ -285,18 +277,7 @@ def create_enemy(enemy_name):
         bandit.str = rand.randint(5, 15)
         bandit.exp_dropped = rand.randint(100, 150)
         bandit.gold_dropped = rand.randint(40, 70)
-        
-        bandit.spawndialogue_1 = '''
-        Oi, yeou, gimme your money before I gut ya ye filthy scum! London sure is a lovely 
-        '''
-        bandit.spawndialogue_2 = '''
-        I'm terribly sorry but you, one's old bean, aaare ah jolly frightful luverly chap and 
-        deaaarly hope to defeat you, one's old bean, in this combat and be rid of your prescense.
-        '''
-        bandit.spawndialogue_3 = '''
-        Thee th're! cometh h're betimes and giveth me thy wage 
-        bef're i carveth thee with this cankered fusty bodkin!
-        '''
+
     elif enemy_name == "cannibal":
         # Cannibal stats
         cannibal = Enemy()
@@ -306,10 +287,7 @@ def create_enemy(enemy_name):
         cannibal.str = rand.randint(10, 20)
         cannibal.exp_dropped = rand.randint(120, 190)
         cannibal.gold_dropped = rand.randint(10, 30)
-
-        cannibal.spawndialogue_1 = '''
-
-        '''
+        return cannibal
     elif enemy_name == "långöron":
         # Långöron    
         långöron = Enemy()
@@ -319,7 +297,6 @@ def create_enemy(enemy_name):
         långöron.str = rand.randint(15, 30)
         långöron.exp_dropped = rand.randint(150, 220)
         långöron.gold_dropped = rand.randint(20, 40)
-
         return långöron
     elif enemy_name == "goblin":
         # Goblin
@@ -328,7 +305,7 @@ def create_enemy(enemy_name):
         goblin.max_hp = rand.randint(40, 80)
         goblin.spd = rand.randint(27, 40)
         goblin.str = rand.randint(6, 10)
-        goblin.exp_dropped = rand.randint(100, 140)
+        goblin.exp_dropped = rand.randint(200, 280)
         goblin.gold_dropped = rand.randint(40, 70)
         goblin
         return goblin

@@ -384,9 +384,9 @@ INVENTORY:''')
     j = 1
     inventory_row = ""
     for i in player.inventory:
-        if j-1 == 0 or (j-1) % 3 == 0:
+        if j-1 == 0 and i.name != "None" or (j-1) % 3 == 0 and i.name != "None":
             inventory_row = i.name
-        elif j-1 % 3 != 0:
+        elif j-1 % 3 != 0 and i.name != "None":
             inventory_row = inventory_row + " || " + i.name
         
         if j % 3 == 0 or j == len(player.inventory):
@@ -1151,11 +1151,10 @@ def level_up():
     player.hp = int(player.hp*1.25)
     player.str = int(player.str*1.25)
     player.spd = int(player.spd*1.25)
-    player.exp = 0
 
     print_slow("\nYou leveled up!", TEST)
     print_slow(f"\n{player.name} level: {player.level-1} --> {player.level}\n", TEST)
-    print_slow(f"\nYou feel your strength increase!\n", TEST)
+    print_slow(f"\nYou feel your abilties get stronger!\n", TEST)
 
 #Cacambo
 cacambo = P.Player()
@@ -1278,9 +1277,13 @@ while True:
     pygame.mixer.music.play(-1, 0, 5)
     travel()
 
-    if len(player.inventory) != 0:
+
+    while True:
         if player.exp >= player.level_limit:
             level_up()
+        else:
+            player.exp = 0
+            break
 
     if game_over == True:
         if good_ending == True:
