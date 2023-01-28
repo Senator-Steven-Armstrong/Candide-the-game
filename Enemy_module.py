@@ -162,78 +162,115 @@ kunigunda.name = "Kunigunda"
 #PHASE 1
 kunigunda.max_hp = 1000
 kunigunda.hp = kunigunda.max_hp
-kunigunda.spd = 20
-kunigunda.str = 50
-kunigunda.gold_dropped = 400
-kunigunda.exp_dropped = 600
+kunigunda.spd = 40
+kunigunda.str = 60
 
-#PHASE 2
-# kunigunda.max_hp = 1000
-# kunigunda.hp = pococurante.max_hp
-# kunigunda.spd = 20
-# kunigunda.str = 50
-# kunigunda.gold_dropped = 400
-# kunigunda.exp_dropped = 600
-
-#PHASE 3
-# kunigunda = Enemy()
-# kunigunda.name = "Lord Pococurante"
-# kunigunda.max_hp = 1000
-# kunigunda.hp = pococurante.max_hp
-# kunigunda.spd = 20
-# kunigunda.str = 50
-# kunigunda.gold_dropped = 400
-# kunigunda.exp_dropped = 600
-
-def kunigunda_attacks():
+def kunigunda_attacks_phase_1():
     
     boss_attack_1 = '''
-Pococurante winds up his cane behind him, and releases with a huge swing!'''
+Kunigunda combusts, creating an explosion around her!'''
 
     boss_attack_2 = '''
-Pococurante threw a book at you!'''
+Kunigunda scratches you!'''
 
     boss_attack_3 = '''
-Pococurante piecres his cane through your heart!'''
+Kunigunda launches flames at you!'''
 
     boss_attack_4 = '''
-Pococurante conjuress his magic, letter swerve around his cane and a bright ray
-of bright light blasts out of it! '''
+Kunigunda swirls her hand around her, creating a tornado of fire! The heat is too much to handle!'''
 
     boss_attack_5 = '''
-Pococurante slams a painting on your head!'''
+Kunigunda instantaneously appears in front of you, just her body her is enough to enflame you!'''
 
     boss_attack_6 = '''
-Pococurante slams his cane in the ground, ammasing a beautiful explosion of colors and light!'''
+Kunigunda blows a kiss toward you, it's very hot! Literally!'''
 
     boss_attack_7 = '''
-Pococurante tells you how meaningless life is and that nothing beautiful can make you happy. '''
+Kunigunda hurls burning slag towards you!'''
 
     boss_attack_8 = '''
-Pococurante starts spinning around with his cane extended out. It hits you multiple times!'''
+Kunigunda tells you how much you have broken her heart, it's very sad!'''
     boss_attack_list = [boss_attack_1, boss_attack_2, boss_attack_3, boss_attack_4, boss_attack_5, boss_attack_6, boss_attack_7, boss_attack_8]
     return rand.choice(boss_attack_list)
 
-def kunigunda_voice_lines():
+def kunigunda_voice_lines_phase_1():
 
     voice_line_chance = rand.randint(1, 3)
 
     line_1 = '''
-"Put these foolish ambitions to rest."''' 
+"We could still make this work!"''' 
     line_2 = '''
-"You will never inspire anyone!"''' 
+"Why won't you love me anymore?"''' 
     line_3 = '''
-"You will amount to nothing!"''' 
+"This is you, not me right?"''' 
     line_4 = '''
-"Optimism won't lead to happiness!"''' 
+"We were meant to be together!"''' 
     line_5 = '''
-"Give up."''' 
+"Please just give me another chance!"''' 
     line_6 = '''
-"Have you even read a book?!"''' 
+"I'm not that ugly am I?"''' 
     voice_line_list = [line_1, line_2, line_3, line_4, line_5, line_6]
     
     if voice_line_chance >= 1:
         return rand.choice(voice_line_list)
+
+#PHASE 2
+kunigunda_2 = Enemy()
+kunigunda_2.name = "???"
+kunigunda_2.max_hp = 1500
+kunigunda_2.str = 60
+kunigunda_2.spd = 90
+kunigunda_2.hp = 0
+
+def kunigunda_attacks_phase_2():
+    
+    boss_attack_1 = '''
+The enitity enswirls you in black flames.'''
+
+    boss_attack_2 = '''
+??? flings you into the void, crushing you with immense gravitational force.'''
+
+    boss_attack_3 = '''
+??? stares into your soul, it hurts.'''
+
+    boss_attack_4 = '''
+Dark roots sprout from under you, stabbing your lower body!'''
+
+    boss_attack_5 = '''
+The entity launches a dark ball of energy toward you!'''
+
+    boss_attack_6 = '''
+The entity deletes the ground under you from existance, you fall until you hit the bottom!'''
+
+    boss_attack_7 = '''
+??? forms a dark spear from under it's tendrils, and then hurls it toward you!'''
+
+    boss_attack_8 = '''
+You are lifted into the air, and then flunged back into the ground!'''
+    boss_attack_list = [boss_attack_1, boss_attack_2, boss_attack_3, boss_attack_4, boss_attack_5, boss_attack_6, boss_attack_7, boss_attack_8]
+    return rand.choice(boss_attack_list)
+
+def kunigunda_voice_lines_phase_2():
+
+    voice_line_chance = rand.randint(1, 3)
+
+    line_1 = '''
+"..."''' 
+    line_2 = '''
+"W-e  c/ou'ld st*ll.. ma(ke t)his w{or?k !"''' 
+    line_3 = '''
+"Ca¤& ndi`de..."''' 
+    line_4 = '''
+"&(!"#(=(!?"''' 
+    line_5 = '''
+"Lo(v?e.. Y/#ou..."''' 
+    line_6 = '''
+"...?"''' 
+    voice_line_list = [line_1, line_2, line_3, line_4, line_5, line_6]
+    
+    if voice_line_chance >= 1:
+        return rand.choice(voice_line_list)
+
 
 
 def create_enemy(enemy_name):

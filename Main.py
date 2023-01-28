@@ -38,19 +38,46 @@ bad_ending = False
 
 game_over = False
 
-
-print (A.start)
-
 def start():
-    startbutton = input("Welcome! Press Y to start, or N to quit.")
-    while True:
-        if startbutton == "Y" or "y":
-            break
-        elif startbutton == "N" or "n":
-            raise SystemExit(0)
-        else:
-            print("Försök igen.")
-            continue
+
+    print("\n\n\n")
+    sleep(0.6)
+
+    is_exiting = False
+    for line in A.start:
+        print(line)
+        sleep(0.08)
+    sleep(0.6)
+
+    while is_exiting == False:
+        print('''
+1. Start
+2. Start (No intro cutscene)
+3. Quick tutorial
+4. Exit
+''')
+
+        while True:
+            start_choice = input("Choice: ")
+            if start_choice == "1":
+                print(A.castle)
+                sleep(0.2)
+                print_slow(L.intro_description, TEST)
+                is_exiting = True
+                break
+            elif start_choice == "2":
+                is_exiting = True
+                break
+            elif start_choice == "3":
+                #Tutorial
+                print_slow(L.tutorial_description, TEST)
+                sleep(0.8)
+                break
+            elif start_choice == "4":
+                quit()
+            else:
+                print("\n[Enter correct input by pressing either 1, 2, 3, or 4. Then press enter]\n")
+    
 
 def return_location_rarity(temporary_locations, total_turns):
     rarity_list = []
@@ -92,7 +119,7 @@ def travel():
             if total_turns == 3:
                 bossfight_pococurante()
                 break
-            elif total_turns == 6:
+            elif total_turns == 0:
                 bossfight_baronen()
                 break
             elif total_turns == 9:
@@ -185,6 +212,8 @@ def travel():
                             eldorado_ending_choice = input()
 
                             if eldorado_ending_choice.lower() == "stay":
+                                pygame.mixer.music.load('sounds/ruinds.mp3')
+                                pygame.mixer.music.play()
                                 print_slow(L.eldorado_stay_description, TEST)
 
                                 good_ending = True
@@ -722,6 +751,7 @@ def combat_sequence(chosen_enemy, enemy_name):
                     break
             else:                   
                 if chosen_enemy.hp > 0:
+                    print_boss_voice_lines(chosen_enemy)
                     enemy_attack(chosen_enemy, enemy_name)
                 else:
                     break
@@ -729,6 +759,7 @@ def combat_sequence(chosen_enemy, enemy_name):
         elif first_attack_move == "enemy":
             print_slow(f"\nEnemy struck first!", TEST)
 
+            print_boss_voice_lines(chosen_enemy)
             enemy_attack(chosen_enemy, enemy_name)
 
             if player.hp > 0:
@@ -741,6 +772,17 @@ def combat_sequence(chosen_enemy, enemy_name):
 
         sleep(0.8)
         print("\n")
+
+def print_boss_voice_lines(enemy):
+    if enemy == E.pococurante:
+        print_slow(E.pococurante_voice_lines(), TEST)
+    elif enemy == E.baronen:
+        print_slow(E.baronen_voice_lines(), TEST)
+    elif enemy == E.kunigunda:
+        print_slow(E.kunigunda_voice_lines_phase_1(), TEST)
+    elif enemy == E.kunigunda_2:
+        print_slow(E.kunigunda_voice_lines_phase_2(), TEST)
+    
 
 
 def player_attack(chosen_attack, chosen_enemy, weapon_effect, enemy_name):
@@ -769,7 +811,16 @@ def enemy_attack(chosen_enemy, enemy_name):
     enemy_damage = rand.randint(chosen_enemy.str -5 , chosen_enemy.str + 5)
     player.hp -= enemy_damage
 
-    print_slow("\n" + E.enemy_attack_description(chosen_enemy, player.name), TEST)
+    if chosen_enemy == E.pococurante:
+        print_slow(E.pococurante_attacks(), TEST)
+    elif chosen_enemy == E.baronen:
+        print_slow(E.baronen_attacks(), TEST)
+    elif chosen_enemy == E.kunigunda:
+        print_slow(E.kunigunda_attacks_phase_1(), TEST)
+    elif chosen_enemy == E.kunigunda_2:
+        print_slow(E.kunigunda_attacks_phase_2(), TEST)
+    else:
+        print_slow("\n" + E.enemy_attack_description(chosen_enemy, player.name), TEST)
     print_slow(f"\n   - {enemy_name} dealt {enemy_damage} damage!", TEST)
     if player.hp >= 0:
         print_slow(f"\n   - {player.name}'s health: {player.hp} / {player.max_hp}\n", TEST)
@@ -780,6 +831,7 @@ def enemy_attack(chosen_enemy, enemy_name):
 def bossfight_pococurante():
     global game_over
     global total_turns
+    pygame.mixer.music.stop()
     print_slow(L.pococurante_description, 0.02)
 
     pygame.mixer.music.load('sounds/pococurante theme.mp3')
@@ -797,24 +849,29 @@ SPD: {E.pococurante.spd}
 
     combat_sequence(E.pococurante, "Pococurante")
 
-    sleep(1)
-    print("\n")
+    if player.hp <= 0:
+        game_over = True
+    else:
+        sleep(1)
+        print("\n")
 
-    if game_over == False:
-        print_slow('''\n"Now I see... Optimism.. Positivity.. Maybe... All of the art wasn't bad...."''', 0.1)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+        pygame.mixer.music.stop()
 
-        print_slow(f"\n\nYou have slayn {E.pococurante.name}.\n", 0.04)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+        if game_over == False:
+            print_slow('''\n"Now I see... Optimism.. Positivity.. Maybe... All of the art wasn't bad...."''', 0.1)
+            sleep(PUNCTUATION_PAUSE_TIME*1.5)
 
-        player.gold += E.pococurante.gold_dropped
-        print_slow(f"\nPococurante dropped {E.pococurante.gold_dropped} gold!", TEST)
+            print_slow(f"\n\nYou have slayn {E.pococurante.name}.\n", 0.04)
+            sleep(PUNCTUATION_PAUSE_TIME*1.5)
 
-        player.exp += E.pococurante.exp_dropped
-        print_slow(f"\nYou gained {E.pococurante.exp_dropped} exp!", TEST)
+            player.gold += E.pococurante.gold_dropped
+            print_slow(f"\nPococurante dropped {E.pococurante.gold_dropped} gold!", TEST)
 
-        player.inventory.append(I.pococurante_cane)
-        print_slow(f"\nYou walked up to Pococurante's body and took '{I.pococurante_cane.name}'.\n", TEST)
+            player.exp += E.pococurante.exp_dropped
+            print_slow(f"\nYou gained {E.pococurante.exp_dropped} exp!", TEST)
+
+            player.inventory.append(I.pococurante_cane)
+            print_slow(f"\nYou walked up to Pococurante's body and took '{I.pococurante_cane.name}'.\n", TEST)
 
     total_turns += 1
 
@@ -822,7 +879,11 @@ SPD: {E.pococurante.spd}
 def bossfight_baronen():
     global game_over
     global total_turns
+    pygame.mixer.music.stop()
     print_slow(L.baronen_description, 0.02)
+
+    pygame.mixer.music.load('sounds/baronen_theme.mp3')
+    pygame.mixer.music.play()
 
     print_slow(f"\nBaronen, the mad brother, acrimony of love, baron of Thunder-ten-tronckh, towers over you.", 0.1)
     sleep(PUNCTUATION_PAUSE_TIME)
@@ -835,7 +896,7 @@ SPD: {E.baronen.spd}
     sleep(2)
 
     #TAR BORT HP OCH VAPEN PÅ GRUND AV VAD SOM HÄNDER I STORYN
-    player.hp /= 1.5
+    player.hp /= 1.4
     player.hp = round(player.hp)
 
     player.max_hp -= player.equipped_weapon.max_hp_bonus
@@ -852,28 +913,34 @@ SPD: {E.baronen.spd}
 
     combat_sequence(E.baronen, "Baronen")
 
-    sleep(1)
-    print("\n")
+    if player.hp <= 0:
+        game_over = True
+    else:
 
-    if game_over == False:
-        print_slow('''\n"Just.. treat.. treat her good... please..."''', 0.1)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+        sleep(1)
+        print("\n")
 
-        print_slow(f"\n\nYou have slayn {E.baronen.name}.\n", 0.04)
-        sleep(PUNCTUATION_PAUSE_TIME*1.5)
+        pygame.mixer.music.stop()
 
-        player.gold += E.baronen.gold_dropped
-        print_slow(f"\nBaronen dropped {E.baronen.gold_dropped} gold!", TEST)
+        if game_over == False:
+            print_slow('''\n"Just.. treat.. treat her good... please..."''', 0.1)
+            sleep(PUNCTUATION_PAUSE_TIME*1.5)
 
-        player.exp += E.baronen.exp_dropped
-        print_slow(f"\nYou gained {E.baronen.exp_dropped} exp!", TEST)
+            print_slow(f"\n\nYou have slayn {E.baronen.name}.\n", 0.04)
+            sleep(PUNCTUATION_PAUSE_TIME*1.5)
 
-        print_slow(f"\nYou held onto {I.baronen_knife.name}.\n", TEST)
+            player.gold += E.baronen.gold_dropped
+            print_slow(f"\nBaronen dropped {E.baronen.gold_dropped} gold!", TEST)
 
-        player.inventory.append(I.baronen_greatsword)
-        print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
+            player.exp += E.baronen.exp_dropped
+            print_slow(f"\nYou gained {E.baronen.exp_dropped} exp!", TEST)
 
-        total_turns += 1
+            print_slow(f"\nYou held onto {I.baronen_knife.name}.\n", TEST)
+
+            player.inventory.append(I.baronen_greatsword)
+            print_slow(f"\nFrom the corpse of Baronen, you took {I.baronen_greatsword.name}.\n", TEST)
+
+            total_turns += 1
 
 def bossfight_kunigunda():
     global game_over
@@ -883,7 +950,7 @@ def bossfight_kunigunda():
     pygame.mixer.music.stop()
 
     #INTRO------------------------------------------------------------------------------
-    # print_slow(L.kunigunda_description_intro, 0.08)
+    # print_slow(L.kunigunda_description_intro, TEST)
     print_slow("\n                      ", 0.001)
     print_slow("Accept", 0.4)
     print_slow("                        ", 0.001)
@@ -895,6 +962,8 @@ def bossfight_kunigunda():
         marriage_choice = input("\n\n\nChoice: ")
         if marriage_choice.lower() == "accept":
             #TRUE ENDING------------------------------------------------------------------------------------
+            pygame.mixer.music.load('sounds/true ending.mp3')
+            pygame.mixer.music.play()
             print_slow(L.kunigunda_description_accept + "\n\n\n", TEST)
             print_slow("This is truly, the truest of all possible worlds.", 0.2)
 
@@ -904,7 +973,10 @@ def bossfight_kunigunda():
         elif marriage_choice.lower() == "refuse":
             #BAD ENDING - BOSS FIGHT--------------------------------    ----------------------------------------
 
-            # print_slow(L.kunigunda_description_refuse + "\n\n\n", TEST)
+            pygame.mixer.music.load('sounds/kunigunda theme.mp3')
+            pygame.mixer.music.play(-1, 0, 0)
+
+            print_slow(L.kunigunda_description_refuse + "\n\n\n", TEST)
 
             print_slow(f"\nYour love ", 0.1)
             sleep(1)
@@ -918,30 +990,64 @@ STR: {E.kunigunda.str}
 SPD: {E.kunigunda.spd}
             ''')
 
-            # sleep(2)
+            sleep(2)
 
-            # combat_sequence(E.kunigunda, "Kunigunda")
+            combat_sequence(E.kunigunda, "Kunigunda")
 
+            if player.hp <= 0:
+                game_over = True
+                break
+            else:
+                print("\n")
+                pygame.mixer.music.stop()
+                print_slow(L.kunigunda_description_revive,TEST)
 
-            print("\n")
+                pygame.mixer.music.load('sounds/kunigunda_second_phase.mp3')
+                pygame.mixer.music.play(-1, 0, 0)
 
-            E.kunigunda.hp = 0
-            print(f"Kunigunda HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}")
+                print(f"\n\n\nKunigunda HP: 0 / {E.kunigunda.max_hp}")
+                sleep(3.6)
 
-            pygame.mixer.music.load('sounds/kunigunda_second_phase.mp3')
-            pygame.mixer.music.play(-1, 0, 0)
+                for i in range(E.kunigunda_2.max_hp):
+                    sleep(0.008)
+                    E.kunigunda_2.hp += 1
+                    print(f"Kunigunda HP: {E.kunigunda_2.hp} / {E.kunigunda_2.max_hp}")
+                    i+=1
 
-            sleep(3.8)
+                sleep(1)
+                print_slow("\n\n??? remains.", 0.3)
 
-            for i in range(E.kunigunda.max_hp):
-                sleep(0.01)
-                E.kunigunda.hp += 1
-                print(f"Kunigunda HP: {E.kunigunda.hp} / {E.kunigunda.max_hp}")
-                i+=1
+                sleep(0.8)
+                print(A.entity)
 
-            sleep(5)
+                sleep(1)
+                print(f'''
 
-            break
+{E.kunigunda_2.name} stats:
+
+HP: {E.kunigunda_2.hp} / {E.kunigunda_2.max_hp}
+STR: {E.kunigunda_2.str}
+SPD: {E.kunigunda_2.spd}
+                ''')
+
+                sleep(2)
+
+                combat_sequence(E.kunigunda_2, "???")
+
+                if player.hp <= 0:
+                    game_over = True
+                    break
+                else:
+                    
+
+                    pygame.mixer.music.load('sounds/kunigunda death.mp3')
+                    pygame.mixer.music.play()
+
+                    print_slow(L.kunigunda_description_death, TEST)
+                    game_over = True
+                    bad_ending = True
+
+                    break
         else:
             print_slow("\n\nMake your choice.", 0.25)
     
@@ -950,8 +1056,21 @@ SPD: {E.kunigunda.spd}
 def print_slow(str, write_speed):
     global print_sfx
     sound_play = 1
+    sound_speed = 3
+
+    if write_speed < 0.001:
+        sound_speed = 30
+    elif write_speed < 0.005:
+        sound_speed = 5
+    elif write_speed < 0.02:
+        sound_speed = 3
+    elif write_speed < 0.08:
+        sound_speed = 2 
+    else:
+        sound_speed = 1
+
     for letter in str:
-        if sound_play % 4 == 0: #round(4 / (write_speed*40), 0) == 0:
+        if sound_play % sound_speed == 0:
             pygame.mixer.Sound.play(print_sfx)
         sys.stdout.write(letter)
         sys.stdout.flush()
@@ -963,6 +1082,7 @@ def print_slow(str, write_speed):
         elif letter == ";":
             sleep(SEMICOLON_PAUSE_TIME)
         sound_play += 1
+
 
 def loot(type):
     if type == "enemy drop":
@@ -1043,12 +1163,12 @@ cacambo.name = "Cacambo"
 cacambo.max_hp = 800
 cacambo.str = 40000
 cacambo.spd = 20000
-cacambo.gold = 40000#40
+cacambo.gold = 40000
 
 #Candide
 candide = P.Player()
 candide.name = "Candide"
-candide.max_hp = 500
+candide.max_hp = 600
 candide.str = 35
 candide.spd = 15
 candide.gold = 10
@@ -1056,33 +1176,36 @@ candide.gold = 10
 #Pangloss
 pangloss = P.Player()
 pangloss.name = "Pangloss"
-pangloss.max_hp = 350
+pangloss.max_hp = 450
 pangloss.str = 20
 pangloss.spd = 5
 pangloss.gold = 0
 
 #------------------------------------------------------HÄR KÖRS HUVUDDELEN AV PROGRAMMET-------------------------------------------------------------------------------------------------------
 
-print_slow("Choose your character!", 0.01)
+start()
+
+sleep(0.6)
+print_slow("Who will be the one to deliver the kiss?", 0.01)
 sleep(1)
 
 print(f'''
 
-1. Cacambo! (Easy)
+1. Cacambo! [Difficulty easy]
     HP  :  {cacambo.max_hp}
     STR :  {cacambo.str}
     SPD :  {cacambo.spd}
     Gold:  {cacambo.gold}
 
 
-2. Candide! (Medium)
+2. Candide! [Difficulty medium]
     HP  :   {candide.max_hp}
     STR :   {candide.str}
     SPD :   {candide.spd}
     Gold:   {candide.gold}
 
 
-3. Pangloss! (Hard) 
+3. Pangloss! [Difficulty hard] 
     HP  :  {pangloss.max_hp}
     STR :  {pangloss.str}
     SPD :  {pangloss.spd}
@@ -1105,7 +1228,11 @@ while True:
             player.spd = cacambo.spd
             player.gold = cacambo.gold
             player.exp = cacambo.exp
-            print("You chose Cacambo, good choice!")
+            print("\nYou chose Cacambo!\n")
+            sleep(0.8)
+            print("\n\n" + A.gigachad + "\n\n")
+            sleep(0.8)
+            print_slow("Cacambo sets out on the journey!", TEST)
         elif player_choice == 2: #CANDIDE
             player = candide
             player.name = candide.name
@@ -1114,7 +1241,11 @@ while True:
             player.spd = candide.spd
             player.gold = candide.gold
             player.exp = candide.exp
-            print("You chose Candide, good luck!")
+            print("\nYou chose Candide!\n")
+            sleep(0.8)
+            print("\n\n" + A.candide + "\n\n")
+            sleep(0.8)
+            print_slow("Candide sets out on the journey!", TEST)
         elif player_choice == 3: #PANGLOSS
             player = pangloss
             player.name = pangloss.name
@@ -1123,32 +1254,22 @@ while True:
             player.spd = pangloss.spd
             player.gold = pangloss.gold
             player.exp = pangloss.exp
-            print("You chose Pangloss, ha ha ha😬.")
+            print("\nYou chose Pangloss! Good luck lol\n")
+            sleep(0.8)
+            print("\n\n" + A.pangloss + "\n\n")
+            sleep(0.8)
+            print_slow("Pangloss instantly contracted syphilis! He sets out on the journey anyways!", TEST)
 
         player.level = 1
         player.exp = 0
         player.hp = player.max_hp
         player.inventory = []
 
-        player.inventory.append(I.create_item("health potion"))
-        player.inventory.append(I.create_item("roids"))
-
     except:
         print("\n[Please enter a correct input; 1. Cacambo, 2. Candide, 3. Pangloss]")
     else:
         break
 
-
-
-
-
-
-# # TEMPORÄR TILLÄG AV ITEMS
-# for i in range(10):
-#     weapon_choice = rand.choice(I.item_list)
-#     player.inventory.append(I.create_item(weapon_choice))
-
-# player.inventory.append(I.baronen_knife)
 
 #DEN STÖRRE SPELLOOPEN----------------------------------------------------------------
 while True:
@@ -1169,9 +1290,11 @@ while True:
             print_slow("\n\n\n\n[True ending]", 0.1)
             break
         elif bad_ending == True:
-            print_slow("\n\n\n\n[True ending]", 0.1)
+            print_slow("\n\n\n\n[Bad ending]", 0.1)
             break
         else:
+            pygame.mixer.music.load('sounds/you died.mp3')
+            pygame.mixer.music.play()
             print_slow("\n\n\n\n[You died]", 0.1)
             break
 

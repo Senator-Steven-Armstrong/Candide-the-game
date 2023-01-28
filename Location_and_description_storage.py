@@ -737,6 +737,72 @@ All of your choices has led up to this moment, as well as your mistakes.
 It's time to amount.
 '''
 
+kunigunda_description_revive = '''
+In the heat-filled battle, you managed to win. It hurts you to her Kunigunda like this.
+You never meant for this to happen. Her lifeless corpse lies on the ground, still
+hot to the touch. But wait... It seems to be becoming hotter and hotter.
+Her body lifts from the ground and a black flame envelopes her.
+The flames have her completely covered and you can't see anything.
+That's when you hear it..
+'''
+
+kunigunda_description_death = '''
+That was it. She's dead. It's over.
+Your entire journey thus far has been for her, the beautiful woman now a burned corpse on the ground,
+her flame completely silent.
+You rethink your choices, why did you not accept? It was still her deep down inside after all.
+Now, you have nothing left. You did what you came here to do. And now you have nowhere to go with anyone.
+
+
+
+This is truly the worst of all possible worlds.
+'''
+
+
+tutorial_description = '''
+Candide the game is a text based game, meaning it will take inputs from your keyboard only.
+To make things happen in the game you are given choices, such as the following:
+
+1. inventory
+2. travel
+
+To make any of these choices, simply type the letter or number to the left of the option.
+So for example to travel, you would type 2 and then press enter.
+
+The actual game works by traveling, at which point you can enter one of three locaion.
+Thereafter an enemy will attack you. In the fight you will be given three choices of attacks.
+Choose one to deal some damage and the enemy will deal some back.
+
+You and all enemies have three stats:
+HP, meaning health points, is you characters health, if it reaches 0 you die and it's game over.
+STR, meaning strength, is your characters damage, the more strength the more damage you deal.
+SPD, meaning speed, is your ability to attack first in combat.
+You also have gold which you could use at the shop, and exp that you may level up with.
+
+Now go out there and equip items, slay goblins, and reach your true love!
+'''
+
+intro_description = '''
+It's a beautiful day in germany and especially in the castle Thunder-ten-tronckh where you reside.
+But today is special, for today is when you will finally kiss and expose your love to Kunigunda,
+the most beautiful maiden in all of candide-land!
+
+You strut down the castle halls until you find her, you recite in your head what you wrote last night,
+and then proceed to enter the room. You make eye contact for a while then muster up the courage to tell
+her how you feel. Her cheeks turn red but and just as you lean in for the kiss her brother, Baronen,
+steps in. He glances at you both and then furiously stomps toward you.
+
+However just as he is about to reach you a sword swings beside him and just barely misses his head.
+You all turn around to find that Bulgarer has filled the castle halls. They take a firm grip around you
+and Baronen, draggin and then evetually throwing you out of the castle which has now been destroyed and
+engulfed in flame.
+
+You and Baronen look on in despair, until you catch a glimpse of Kunigunda. She is tied up on horseback
+and is being taken away by the Bulgarer. You exchange an angry look with Baronen as you set out on
+your journey to find and take back Kunigunda, so you can deliver her the kiss.
+
+'''
+
 #-------------------------------------------------------EXTRA------------------------------------------------------------
 
 def play_music(music_track):
