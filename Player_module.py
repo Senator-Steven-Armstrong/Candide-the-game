@@ -91,7 +91,7 @@ Enemy is just holding a conversation. You roundhouse kicked {enemy_name}!'''
 {player_name} came all over the enemy!'''
     #CANNIBALISM
     cannibalism.description = f''' 
-"Woah is that fucking blackface dude?" said {player_name}.
+"Woah is that ###### blackface dude?" said {player_name}.
 {player_name} ate {enemy_name} alive!'''
     #DO NOTHING
     nothing.description = f'''
