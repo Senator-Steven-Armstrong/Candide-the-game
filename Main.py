@@ -119,10 +119,10 @@ def travel():
             if total_turns == 3:
                 bossfight_pococurante()
                 break
-            elif total_turns == 0:
+            elif total_turns == 7:
                 bossfight_baronen()
                 break
-            elif total_turns == 9:
+            elif total_turns == 10:
                 bossfight_kunigunda()
                 break
             else:
